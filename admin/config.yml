@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: kevinhawkinsdesign/juneteenthbarcelona  # ← change
+  name: git-gateway
   branch: main
 
 media_folder: images
