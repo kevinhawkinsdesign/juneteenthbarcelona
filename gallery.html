@@ -212,12 +212,12 @@ async function loadGallery() {
     // Show placeholder images if no JSON
     const grid = document.getElementById('gallery-grid');
     const placeholders = [
-      { src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80', caption: 'Community' },
-      { src: 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=600&q=80', caption: 'Barcelona' },
+      { src: 'https://images.unsplash.com/photo-9cx4-QowgLc?w=600&q=80', caption: 'Community' },
+      { src: 'https://images.pexels.com/photos/763934/pexels-photo-763934.jpeg?w=600&q=80', caption: 'Barcelona' },
       { src: 'https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=600&q=80', caption: 'Celebration' },
       { src: 'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=600&q=80', caption: 'Barcelona' },
-      { src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80', caption: 'Community' },
-      { src: 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=400&q=80', caption: 'Barcelona' },
+      { src: 'https://images.unsplash.com/photo-9cx4-QowgLc?w=400&q=80', caption: 'Community' },
+      { src: 'https://images.pexels.com/photos/763934/pexels-photo-763934.jpeg?w=400&q=80', caption: 'Barcelona' },
     ];
     grid.innerHTML = placeholders.map(p => `
       <div class="gallery-item" data-src="${p.src}" data-caption="${p.caption}">

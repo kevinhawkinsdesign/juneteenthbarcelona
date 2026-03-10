@@ -11,8 +11,15 @@
   padding-top: var(--nav-h);
   border-bottom: 1px solid var(--border);
   padding-bottom: 0;
+  position: relative;
+  overflow: hidden;
 }
-.contact-hero-inner { padding: 5rem 5vw 4rem; }
+.contact-hero-bg {
+  position: absolute; inset: 0;
+  background: url('https://images.unsplash.com/photo-1573164574511-73c773193279?q=80&w=2669&auto=format&fit=crop') center/cover no-repeat;
+  opacity: 0.12;
+}
+.contact-hero-inner { padding: 5rem 5vw 4rem; position: relative; z-index: 1; }
 .page-h1 {
   font-family: 'Syne', sans-serif; font-weight: 800;
   font-size: clamp(3rem, 7vw, 6rem);
@@ -106,6 +113,7 @@
 
 <!-- HERO -->
 <div class="contact-hero">
+  <div class="contact-hero-bg"></div>
   <div class="contact-hero-inner">
     <div class="section-tag">Get Involved</div>
     <h1 class="page-h1">Let's build<br>this <em>together.</em></h1>
