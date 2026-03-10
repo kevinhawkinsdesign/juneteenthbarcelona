@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: kevinhawkinsdesign/juneteenthbarcelona  # ← change this
+  repo: kevinhawkinsdesign/juneteenthbarcelona  # ← change
   branch: main
 
 media_folder: images
