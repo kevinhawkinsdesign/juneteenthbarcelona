@@ -3,653 +3,280 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Juneteenth Barcelona — June 20, 2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<title>Juneteenth Barcelona</title>
+<link rel="stylesheet" href="shared.css">
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  :root {
-    --red:       #C8102E;
-    --gold:      #D4920A;
-    --green:     #00693A;
-    --black:     #0D0D0D;
-    --off-white: #F7F4EF;
-    --mid:       #6B6B6B;
-    --border:    rgba(13,13,13,0.1);
-  }
-  html { scroll-behavior: smooth; }
-  body { background: var(--off-white); color: var(--black); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+/* ── HERO ── */
+.hero {
+  position: relative; min-height: 100vh;
+  display: grid; grid-template-rows: 1fr auto;
+  padding-top: var(--nav-h);
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: url('https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=1920&q=80') center/cover no-repeat;
+}
+.hero-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(13,13,13,0.88) 0%, rgba(13,13,13,0.4) 50%, rgba(13,13,13,0.15) 100%);
+}
+.hero-body {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 0 5vw 5rem;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-size: 0.68rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1.5rem;
+  opacity: 0; animation: fadeUp 0.7s 0.1s forwards;
+}
+.hero-eyebrow::before { content: ''; width: 20px; height: 1.5px; background: var(--gold); display: inline-block; }
+.hero-h1 {
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: clamp(3.8rem, 10vw, 9.5rem);
+  line-height: 0.88; letter-spacing: -0.03em; color: white;
+  opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+}
+.hero-h1 em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; }
+.hero-footer {
+  position: relative; z-index: 1;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  padding: 2rem 5vw 4rem; flex-wrap: wrap; gap: 2rem;
+  opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+}
+.hero-desc { font-size: 1rem; line-height: 1.75; color: rgba(255,255,255,0.58); max-width: 420px; }
+.hero-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.hero-scroll {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 6px;
+  opacity: 0; animation: fadeUp 1s 0.8s forwards;
+}
+.hero-scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent); }
+.hero-scroll-label { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.4rem 5vw;
-    background: rgba(247,244,239,0.93);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border);
-    transition: box-shadow 0.3s;
-  }
-  .nav-logo { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
-  .nav-logo-text { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.04em; color: var(--black); }
-  .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
-  .nav-links a { color: var(--black); text-decoration: none; font-size: 0.82rem; font-weight: 500; opacity: 0.55; transition: opacity 0.2s; }
-  .nav-links a:hover { opacity: 1; }
-  .nav-cta { background: var(--black) !important; color: var(--off-white) !important; padding: 0.55rem 1.4rem !important; opacity: 1 !important; font-size: 0.78rem !important; transition: background 0.2s !important; }
-  .nav-cta:hover { background: var(--red) !important; }
+/* ── INTRO ── */
+.intro {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--border);
+}
+.intro-left {
+  padding: 7rem 5vw;
+  border-right: 1px solid var(--border);
+}
+.intro-title {
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 1.8rem;
+}
+.intro-title em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; }
+.intro-body { font-size: 0.97rem; line-height: 1.85; color: rgba(13,13,13,0.6); max-width: 400px; }
+.intro-body p + p { margin-top: 1.2rem; }
+.intro-link { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 2rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1.5px solid var(--black); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+.intro-link:hover { color: var(--red); border-color: var(--red); }
 
-  /* HERO */
-  .hero {
-    position: relative; min-height: 100vh;
-    display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 0 5vw 6rem; overflow: hidden;
-  }
-  .hero-img {
-    position: absolute; inset: 0;
-    background: url('https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=1920&q=80') center/cover no-repeat;
-  }
-  .hero-img::after {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(13,13,13,0.92) 0%, rgba(13,13,13,0.5) 40%, rgba(13,13,13,0.2) 100%);
-  }
-  .hero-content { position: relative; z-index: 1; max-width: 900px; }
-  .hero-eyebrow {
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 1.8rem;
-    opacity: 0; animation: fadeUp 0.8s 0.1s forwards;
-  }
-  .hero-eyebrow::before { content: ''; display: inline-block; width: 24px; height: 2px; background: var(--gold); }
-  .hero-h1 {
-    font-family: 'Syne', sans-serif; font-weight: 800;
-    font-size: clamp(4rem, 10vw, 9rem);
-    line-height: 0.88; letter-spacing: -0.03em; color: white;
-    opacity: 0; animation: fadeUp 0.9s 0.25s forwards;
-  }
-  .hero-h1 .serif { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; }
-  .hero-bottom {
-    display: flex; justify-content: space-between; align-items: flex-end;
-    margin-top: 3.5rem; flex-wrap: wrap; gap: 2rem;
-    opacity: 0; animation: fadeUp 0.9s 0.5s forwards;
-    position: relative; z-index: 1;
-  }
-  .hero-desc { font-size: 1rem; line-height: 1.75; color: rgba(255,255,255,0.62); max-width: 460px; }
-  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; flex-shrink: 0; }
-  .btn { display: inline-block; padding: 0.85rem 2rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: all 0.22s; border: none; cursor: pointer; }
-  .btn-white { background: white; color: var(--black); }
-  .btn-white:hover { background: var(--gold); color: white; }
-  .btn-outline { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.35); }
-  .btn-outline:hover { border-color: white; }
+.intro-right {
+  background: var(--black); color: var(--off-white);
+  padding: 7rem 5vw;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.intro-right .section-tag { color: rgba(246,243,238,0.3); }
+.intro-quote {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(1.4rem, 2.5vw, 2.1rem); line-height: 1.4;
+  color: var(--off-white); margin: 2.5rem 0; max-width: 480px;
+}
+.intro-quote span { color: var(--gold); }
+.intro-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; padding-top: 2.5rem; border-top: 1px solid rgba(246,243,238,0.08); }
+.stat-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2.4rem; line-height: 1; color: white; }
+.stat-num sup { font-size: 0.5em; color: var(--gold); }
+.stat-label { font-size: 0.68rem; letter-spacing: 0.06em; color: rgba(246,243,238,0.38); margin-top: 0.3rem; line-height: 1.4; }
 
-  /* TICKER */
-  .ticker { background: var(--red); overflow: hidden; padding: 0.75rem 0; white-space: nowrap; }
-  .ticker-track { display: inline-flex; animation: ticker 30s linear infinite; }
-  .ticker-track span { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; color: white; padding: 0 2rem; }
-  .ticker-track .sep { color: rgba(255,255,255,0.35); }
+/* ── PAGES NAV ── */
+.pages-nav {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--border);
+}
+.page-nav-item {
+  padding: 3.5rem 3vw;
+  border-right: 1px solid var(--border);
+  text-decoration: none;
+  display: flex; flex-direction: column; justify-content: space-between;
+  min-height: 200px;
+  transition: background 0.25s;
+  position: relative; overflow: hidden;
+}
+.page-nav-item:last-child { border-right: none; }
+.page-nav-item:hover { background: var(--black); }
+.page-nav-item:hover .pni-title { color: white; }
+.page-nav-item:hover .pni-arrow { color: var(--gold); }
+.page-nav-item:hover .pni-label { color: rgba(246,243,238,0.35); }
+.pni-label { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--mid); margin-bottom: auto; }
+.pni-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.2rem, 2vw, 1.8rem); line-height: 1.1; color: var(--black); margin-top: 2rem; transition: color 0.25s; }
+.pni-arrow { font-size: 1.5rem; color: var(--mid); margin-top: 1rem; transition: color 0.25s; }
 
-  /* SHARED */
-  .section-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--mid); margin-bottom: 1.5rem; }
-  .section-tag::before { content: ''; display: inline-block; width: 18px; height: 1.5px; background: currentColor; }
-
-  /* WHAT IS */
-  .what-is { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); min-height: 600px; }
-  .what-is-left { padding: 7rem 5vw; display: flex; flex-direction: column; justify-content: center; }
-  .what-is-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 2rem; }
-  .what-is-title .serif { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; }
-  .what-is-body { font-size: 0.95rem; line-height: 1.82; color: rgba(13,13,13,0.62); max-width: 420px; }
-  .what-is-body p + p { margin-top: 1.2rem; }
-  .what-is-img {
-    position: relative; overflow: hidden;
-    background: url('https://images.unsplash.com/photo-1583422409516-2895a77efded?w=768&q=80') center/cover no-repeat;
-  }
-  .what-is-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,13,13,0.5) 0%, transparent 50%); }
-  .what-is-img-caption { position: absolute; bottom: 2rem; left: 2rem; right: 2rem; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
-
-  /* BCN HISTORY */
-  .bcn-history { border-top: 1px solid var(--border); display: grid; grid-template-columns: 5fr 7fr; }
-  .bcn-img {
-    position: relative; overflow: hidden; min-height: 500px;
-    background: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=768&q=80') center/cover no-repeat;
-  }
-  .bcn-img-overlay { position: absolute; inset: 0; background: rgba(13,13,13,0.15); }
-  .bcn-text { padding: 7rem 5vw; display: flex; flex-direction: column; justify-content: center; }
-  .bcn-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); line-height: 1.1; letter-spacing: -0.02em; margin: 1rem 0 2rem; }
-  .bcn-body { font-size: 0.98rem; line-height: 1.85; color: rgba(13,13,13,0.66); }
-  .bcn-body p + p { margin-top: 1.4rem; }
-  .bcn-body strong { color: var(--black); font-weight: 600; }
-
-  /* PULL QUOTE */
-  .pull-quote { background: var(--black); padding: 6rem 5vw; text-align: center; }
-  .pull-quote blockquote { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(1.5rem, 3vw, 2.5rem); line-height: 1.4; color: var(--off-white); max-width: 820px; margin: 0 auto; }
-  .pull-quote blockquote span { color: var(--gold); }
-  .pull-quote cite { display: block; margin-top: 2rem; font-style: normal; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(247,244,239,0.3); }
-
-  /* ANNOUNCEMENTS */
-  .announcements-section { padding: 7rem 5vw; border-top: 1px solid var(--border); }
-  .announcements-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
-  .announcements-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.8rem); line-height: 1; letter-spacing: -0.02em; margin-top: 0.5rem; }
-  .announcement-list { display: flex; flex-direction: column; }
-  .announcement-item { display: grid; grid-template-columns: 120px 1fr; gap: 3rem; padding: 2rem 0; border-top: 1px solid var(--border); transition: background 0.2s; }
-  .announcement-item:last-child { border-bottom: 1px solid var(--border); }
-  .ann-date { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); padding-top: 0.2rem; }
-  .ann-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.4rem; }
-  .ann-summary { font-size: 0.88rem; line-height: 1.65; color: rgba(13,13,13,0.6); }
-  .no-announcements { font-size: 0.9rem; color: var(--mid); padding: 2rem 0; border-top: 1px solid var(--border); }
-
-  /* EVENT */
-  .event-section { border-top: 1px solid var(--border); }
-  .event-hero {
-    position: relative; height: 50vh; min-height: 360px; overflow: hidden;
-    background: url('https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=1920&q=80') center 30%/cover no-repeat;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .event-hero::after { content: ''; position: absolute; inset: 0; background: rgba(13,13,13,0.7); }
-  .event-hero-text { position: relative; z-index: 1; text-align: center; color: white; }
-  .event-hero-text .section-tag { color: rgba(255,255,255,0.4); justify-content: center; display: flex; }
-  .event-hero-date { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(3rem, 8vw, 7rem); line-height: 0.9; letter-spacing: -0.03em; margin-top: 0.5rem; }
-  .event-hero-date .accent { color: var(--gold); }
-
-  .event-details { background: var(--black); color: var(--off-white); padding: 6rem 5vw; }
-  .event-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(247,244,239,0.07); border: 1px solid rgba(247,244,239,0.07); margin-top: 3rem; }
-  .event-cell { background: var(--black); padding: 2.8rem 2.5rem; transition: background 0.2s; }
-  .event-cell:hover { background: #161616; }
-  .detail-icon { font-size: 1.4rem; margin-bottom: 1.2rem; display: block; }
-  .detail-label { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(247,244,239,0.28); margin-bottom: 0.6rem; }
-  .detail-value { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.15rem; color: var(--off-white); line-height: 1.2; }
-  .detail-sub { font-size: 0.78rem; color: rgba(247,244,239,0.42); margin-top: 0.5rem; line-height: 1.6; }
-  .detail-sub a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(212,146,10,0.3); }
-  .detail-sub a:hover { border-color: var(--gold); }
-
-  /* SCHEDULE */
-  .schedule-section { background: var(--black); padding: 0 5vw 6rem; }
-  .schedule-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; color: var(--off-white); margin-bottom: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(247,244,239,0.1); }
-  .schedule-list { display: flex; flex-direction: column; }
-  .schedule-item { display: grid; grid-template-columns: 100px 1fr; gap: 2rem; padding: 1.5rem 0; border-bottom: 1px solid rgba(247,244,239,0.07); }
-  .schedule-time { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem; color: var(--gold); padding-top: 0.1rem; }
-  .schedule-activity { font-size: 0.95rem; color: var(--off-white); line-height: 1.5; }
-  .schedule-desc { font-size: 0.8rem; color: rgba(247,244,239,0.45); margin-top: 0.25rem; }
-  .schedule-empty { font-size: 0.85rem; color: rgba(247,244,239,0.3); padding: 1.5rem 0; font-style: italic; }
-
-  .register-banner { background: var(--red); padding: 3.5rem 5vw; display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap; margin-top: 3rem; }
-  .register-text { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.4rem, 3vw, 2.4rem); color: white; line-height: 1.1; }
-  .register-sub { font-size: 0.82rem; color: rgba(255,255,255,0.6); margin-top: 0.4rem; }
-  .btn-register { background: white; color: var(--red); padding: 1rem 2.5rem; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; border: none; cursor: pointer; white-space: nowrap; text-decoration: none; display: inline-block; transition: background 0.2s, color 0.2s; }
-  .btn-register:hover { background: var(--black); color: white; }
-  .btn-register-hidden { display: none; }
-
-  /* GALLERY */
-  .gallery-section { padding: 7rem 5vw; border-top: 1px solid var(--border); }
-  .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 3rem; }
-  .gallery-item { aspect-ratio: 1; overflow: hidden; position: relative; background: #ddd; }
-  .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; display: block; }
-  .gallery-item:hover img { transform: scale(1.04); }
-  .gallery-item:first-child { grid-column: span 2; aspect-ratio: 2/1; }
-  .gallery-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 1rem; background: linear-gradient(to top, rgba(0,0,0,0.6), transparent); font-size: 0.72rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.8); text-transform: uppercase; opacity: 0; transition: opacity 0.3s; }
-  .gallery-item:hover .gallery-caption { opacity: 1; }
-  .gallery-empty { font-size: 0.9rem; color: var(--mid); padding: 2rem 0; }
-
-  /* COMMITTEE */
-  .committee { padding: 8rem 5vw; border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1fr; gap: 7rem; align-items: center; }
-  .committee-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.05; letter-spacing: -0.02em; margin: 1rem 0 1.5rem; }
-  .committee-body { font-size: 0.95rem; line-height: 1.8; color: rgba(13,13,13,0.62); margin-bottom: 2.5rem; }
-  .goal-list { list-style: none; }
-  .goal-list li { display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.4rem 0; border-top: 1px solid var(--border); font-size: 0.9rem; color: rgba(13,13,13,0.7); line-height: 1.65; }
-  .goal-list li:last-child { border-bottom: 1px solid var(--border); }
-  .goal-num { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; color: var(--red); flex-shrink: 0; padding-top: 0.15rem; min-width: 22px; }
-  .flag-panel { display: flex; flex-direction: column; gap: 1px; }
-  .flag-img { flex: 1; min-height: 260px; background: linear-gradient(to bottom, var(--red) 33.3%, var(--black) 33.3%, var(--black) 66.6%, var(--green) 66.6%); display: flex; align-items: center; justify-content: center; }
-  .flag-star { font-size: 4rem; }
-  .flag-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
-  .flag-stat { background: var(--off-white); padding: 1.8rem 1.5rem; text-align: center; }
-  .flag-stat-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2rem; color: var(--black); line-height: 1; }
-  .flag-stat-num sup { font-size: 0.5em; color: var(--red); }
-  .flag-stat-label { font-size: 0.68rem; letter-spacing: 0.06em; color: var(--mid); margin-top: 0.3rem; line-height: 1.4; }
-
-  /* CONTACT */
-  .contact-strip { background: var(--off-white); border-top: 1px solid var(--border); padding: 5rem 5vw; display: flex; justify-content: space-between; align-items: center; gap: 3rem; flex-wrap: wrap; }
-  .contact-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.5rem, 3vw, 2.5rem); letter-spacing: -0.02em; }
-  .contact-sub { font-size: 0.85rem; color: var(--mid); margin-top: 0.4rem; }
-  .contact-email { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--red); text-decoration: none; border-bottom: 2px solid var(--red); transition: color 0.2s, border-color 0.2s; }
-  .contact-email:hover { color: var(--black); border-color: var(--black); }
-
-  /* FOOTER */
-  footer { background: var(--black); color: var(--off-white); padding: 5rem 5vw 3rem; }
-  .footer-top { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 4rem; border-bottom: 1px solid rgba(247,244,239,0.08); gap: 4rem; flex-wrap: wrap; }
-  .footer-logo-wrap { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1rem; }
-  .footer-logo-text { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.04em; }
-  .footer-tagline { font-size: 0.8rem; color: rgba(247,244,239,0.3); line-height: 1.65; max-width: 220px; }
-  .footer-nav { display: flex; gap: 5rem; flex-wrap: wrap; }
-  .footer-col h5 { font-size: 0.62rem; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(247,244,239,0.28); margin-bottom: 1.2rem; }
-  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-  .footer-col a { color: rgba(247,244,239,0.5); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
-  .footer-col a:hover { color: var(--off-white); }
-  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 2.5rem; flex-wrap: wrap; gap: 1rem; }
-  .footer-bottom p { font-size: 0.7rem; color: rgba(247,244,244,0.18); }
-  .flag-dots { display: flex; gap: 5px; }
-  .flag-dot { width: 8px; height: 8px; border-radius: 50%; }
-  .social-links { display: flex; gap: 1.5rem; }
-  .social-links a { color: rgba(247,244,239,0.35); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
-  .social-links a:hover { color: var(--gold); }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    .nav-links { display: none; }
-    .what-is { grid-template-columns: 1fr; }
-    .what-is-img { height: 380px; }
-    .bcn-history { grid-template-columns: 1fr; }
-    .bcn-img { height: 320px; min-height: unset; }
-    .event-grid { grid-template-columns: 1fr; }
-    .gallery-grid { grid-template-columns: 1fr 1fr; }
-    .gallery-item:first-child { grid-column: span 2; }
-    .committee { grid-template-columns: 1fr; gap: 3rem; }
-    .flag-panel { display: none; }
-    .footer-nav { gap: 3rem; }
-    .contact-strip { flex-direction: column; align-items: flex-start; }
-    .announcement-item { grid-template-columns: 1fr; gap: 0.5rem; }
-  }
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .intro { grid-template-columns: 1fr; }
+  .intro-left { border-right: none; border-bottom: 1px solid var(--border); padding: 5rem 5vw; }
+  .intro-right { padding: 5rem 5vw; }
+  .intro-stats { grid-template-columns: 1fr 1fr; }
+  .pages-nav { grid-template-columns: 1fr 1fr; }
+  .page-nav-item { min-height: 160px; }
+  .page-nav-item:nth-child(2) { border-right: none; }
+  .hero-h1 { font-size: clamp(3rem, 12vw, 6rem); }
+}
 </style>
 </head>
 <body>
 
-<nav id="nav">
-  <a href="#" class="nav-logo">
-    <svg width="30" height="30" viewBox="0 0 30 30"><rect width="30" height="10" fill="#C8102E"/><rect y="10" width="30" height="10" fill="#0D0D0D"/><rect y="20" width="30" height="10" fill="#00693A"/><circle cx="15" cy="15" r="5" fill="none" stroke="#FFB800" stroke-width="1.5"/><circle cx="15" cy="15" r="2" fill="#FFB800"/></svg>
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg width="28" height="28" viewBox="0 0 28 28"><rect width="28" height="9.3" fill="#C8102E"/><rect y="9.3" width="28" height="9.3" fill="#0D0D0D"/><rect y="18.6" width="28" height="9.4" fill="#00693A"/><circle cx="14" cy="14" r="4.5" fill="none" stroke="#C8920A" stroke-width="1.5"/><circle cx="14" cy="14" r="1.8" fill="#C8920A"/></svg>
     <span class="nav-logo-text">Juneteenth Barcelona</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#what-is">What Is Juneteenth</a></li>
-    <li><a href="#event">The Event</a></li>
-    <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#committee">About Us</a></li>
-    <li><a href="#contact" id="nav-contact" class="nav-cta">Get Involved</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="event.html">Event</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="nav-cta">Get Involved</a></li>
   </ul>
+  <div class="nav-mobile-toggle"><span></span><span></span><span></span></div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-img"></div>
-  <div class="hero-content">
-    <div class="hero-eyebrow" id="hero-eyebrow">Barcelona · June 20, 2026</div>
-    <h1 class="hero-h1">June<span class="serif">teenth</span><br>Bar<span class="serif">ce</span>lona</h1>
+  <div class="hero-bg"></div>
+  <div class="hero-body">
+    <div class="hero-eyebrow">Barcelona · June 20, 2026</div>
+    <h1 class="hero-h1">June<em>teenth</em><br>Bar<em>ce</em>lona</h1>
   </div>
-  <div class="hero-bottom">
-    <p class="hero-desc" id="hero-desc">Explore the crossroads of people, ideas, and power through the lens of the African diaspora. Join us in Barcelona to honor liberation, celebrate Black culture, and build community together.</p>
+  <div class="hero-footer">
+    <p class="hero-desc">Explore the crossroads of people, ideas, and power through the lens of the African diaspora.</p>
     <div class="hero-ctas">
-      <a href="#event" class="btn btn-white">See the Event</a>
-      <a href="#what-is" class="btn btn-outline">Learn More</a>
+      <a href="event.html" class="btn btn-white">See the Event</a>
+      <a href="about.html" class="btn btn-outline-light">About Us</a>
     </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span class="hero-scroll-label">Scroll</span>
   </div>
 </section>
 
 <!-- TICKER -->
 <div class="ticker">
-  <div class="ticker-track" id="ticker-track">
-    <span>Celebrate Freedom</span><span class="sep">✦</span>
-    <span id="ticker-date">June 20, 2026</span><span class="sep">✦</span>
-    <span>Barcelona, España</span><span class="sep">✦</span>
-    <span>African Diaspora</span><span class="sep">✦</span>
-    <span id="ticker-venue">La Fábrica · Poblenou</span><span class="sep">✦</span>
-    <span>Community · Culture · Liberation</span><span class="sep">✦</span>
-    <span>Celebrate Freedom</span><span class="sep">✦</span>
-    <span id="ticker-date2">June 20, 2026</span><span class="sep">✦</span>
-    <span>Barcelona, España</span><span class="sep">✦</span>
-    <span>African Diaspora</span><span class="sep">✦</span>
-    <span id="ticker-venue2">La Fábrica · Poblenou</span><span class="sep">✦</span>
-    <span>Community · Culture · Liberation</span><span class="sep">✦</span>
+  <div class="ticker-track">
+    <span>Celebrate Freedom</span><span class="sep">✦</span><span>June 20, 2026</span><span class="sep">✦</span><span>Barcelona, España</span><span class="sep">✦</span><span>African Diaspora</span><span class="sep">✦</span><span>La Fábrica · Poblenou</span><span class="sep">✦</span><span>Community · Culture · Liberation</span><span class="sep">✦</span>
+    <span>Celebrate Freedom</span><span class="sep">✦</span><span>June 20, 2026</span><span class="sep">✦</span><span>Barcelona, España</span><span class="sep">✦</span><span>African Diaspora</span><span class="sep">✦</span><span>La Fábrica · Poblenou</span><span class="sep">✦</span><span>Community · Culture · Liberation</span><span class="sep">✦</span>
   </div>
 </div>
 
-<!-- WHAT IS JUNETEENTH -->
-<section class="what-is" id="what-is">
-  <div class="what-is-left reveal">
+<!-- INTRO -->
+<section class="intro">
+  <div class="intro-left reveal">
     <div class="section-tag">What Is Juneteenth</div>
-    <h2 class="what-is-title">A Day of<br><span class="serif">Liberation</span><br>&amp; Heritage</h2>
-    <div class="what-is-body">
-      <p>Juneteenth commemorates June 19, 1865 — the day enslaved people in Texas learned from Union troops that the Civil War had ended and they were free, two and a half years after the Emancipation Proclamation.</p>
-      <p>Black people in Texas were already resisting slavery from within but were unaware the war had ended. Celebrations abroad use the day to recognize liberation, and to celebrate the culture, achievements, and interconnectedness of the African diaspora.</p>
-      <p>As the population of Black Americans grows in Barcelona, celebrating Juneteenth provides a new opportunity for the community to ground itself, increase visibility, and become better connected within Barcelona's African diaspora and the city as a whole.</p>
+    <h2 class="intro-title">A Day of<br><em>Liberation</em><br>&amp; Heritage</h2>
+    <div class="intro-body">
+      <p>Juneteenth commemorates June 19, 1865 — the day enslaved people in Texas learned they were free, two and a half years after the Emancipation Proclamation.</p>
+      <p>In Barcelona, we honor this history, celebrate Black culture, and build bridges across the African diaspora living in and visiting the city.</p>
     </div>
+    <a href="about.html" class="intro-link">Our story →</a>
   </div>
-  <div class="what-is-img reveal">
-    <div class="what-is-img-overlay"></div>
-    <div class="what-is-img-caption">Barcelona · African Diaspora</div>
-  </div>
-</section>
-
-<!-- BARCELONA HISTORY -->
-<section class="bcn-history" id="about">
-  <div class="bcn-img reveal"><div class="bcn-img-overlay"></div></div>
-  <div class="bcn-text reveal">
-    <div class="section-tag">The Place to Be</div>
-    <h2 class="bcn-title">Why Barcelona?</h2>
-    <div class="bcn-body">
-      <p>Barcelona is often celebrated for modernist architecture and Mediterranean beauty. But it was also <strong>shaped by deep, complex ties to the African diaspora</strong> that stretch far beyond its borders. As a major Mediterranean port, Barcelona has long been a crossroads of people, ideas, and power.</p>
-      <p>From the medieval period through the rise of the Spanish empire, the city was entangled in transatlantic trade networks that included the trafficking and enslavement of Africans, and the wealth extracted from Black labor in the Caribbean and the Americas. These connections helped finance Barcelona's growth, even as Black lives and contributions were erased from its story.</p>
-      <p>The Juneteenth Barcelona committee invites you to see Barcelona differently — not just as a European capital, but as a city meaningfully connected to and influenced by the African diaspora. We recognize Barcelona as an important, functional node in Black history.</p>
-    </div>
-  </div>
-</section>
-
-<!-- PULL QUOTE -->
-<div class="pull-quote reveal">
-  <blockquote>"By walking these streets with intention, we honor stories that have been cast aside and the people who were forgotten. We uplift the ideals of liberation and <span>pay respect to those who fought — and continue to fight — for freedom.</span>"</blockquote>
-  <cite>— Juneteenth Barcelona Committee</cite>
-</div>
-
-<!-- ANNOUNCEMENTS -->
-<section class="announcements-section" id="announcements">
-  <div class="announcements-header reveal">
+  <div class="intro-right reveal">
     <div>
-      <div class="section-tag">Latest</div>
-      <h2 class="announcements-title">Announcements</h2>
+      <div class="section-tag light">Barcelona</div>
+      <blockquote class="intro-quote">"A city meaningfully connected to the African diaspora — <span>whose stories deserve to be told.</span>"</blockquote>
     </div>
-  </div>
-  <div class="announcement-list reveal" id="announcement-list">
-    <p class="no-announcements">No announcements yet — check back soon.</p>
+    <div class="intro-stats">
+      <div><div class="stat-num">1865<sup>→</sup></div><div class="stat-label">Year of emancipation in the United States</div></div>
+      <div><div class="stat-num">12<sup>+</sup></div><div class="stat-label">Volunteers on the organizing committee</div></div>
+      <div><div class="stat-num">3</div><div class="stat-label">Languages: EN · ES · CA</div></div>
+    </div>
   </div>
 </section>
 
-<!-- EVENT -->
-<section class="event-section" id="event">
-  <div class="event-hero">
-    <div class="event-hero-text">
-      <div class="section-tag">The Event · 2026</div>
-      <div class="event-hero-date" id="event-hero-date">Friday<br>June <span class="accent">20</span></div>
-    </div>
-  </div>
-  <div class="event-details">
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:2rem;">
-      <div>
-        <div class="section-tag" style="color:rgba(247,244,239,0.3)">Location &amp; Details</div>
-        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.5rem,3vw,2.5rem);letter-spacing:-0.02em;color:var(--off-white);" id="event-venue-title">La Fábrica &amp; Co,<br>El Poblenou</div>
-      </div>
-      <a href="#contact" class="btn btn-white" id="event-register-btn">Register Interest →</a>
-    </div>
-    <div class="event-grid reveal">
-      <div class="event-cell">
-        <span class="detail-icon">📅</span>
-        <div class="detail-label">Date</div>
-        <div class="detail-value" id="event-date">Friday, June 20, 2026</div>
-        <div class="detail-sub">Program and schedule below. Contact us to stay informed.</div>
-      </div>
-      <div class="event-cell">
-        <span class="detail-icon">📍</span>
-        <div class="detail-label">Venue</div>
-        <div class="detail-value" id="event-venue-name">La Fábrica &amp; Co</div>
-        <div class="detail-sub" id="event-venue-address">Doctor Trueta, 191, 08005 Barcelona — El Poblenou · <a id="event-venue-link" href="https://lafabrica-co.com/en/event-spaces/" target="_blank">View venue →</a></div>
-      </div>
-      <div class="event-cell">
-        <span class="detail-icon">🏛️</span>
-        <div class="detail-label">About the Space</div>
-        <div class="detail-value">Designed to Connect</div>
-        <div class="detail-sub">Courtyard, Rooftop Terrace, Txoko Room, and Community Room — thoughtfully designed spaces in one of Barcelona's most creative neighborhoods, minutes from the beach.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SCHEDULE -->
-  <div class="schedule-section reveal" id="schedule-section">
-    <div style="padding-bottom:1rem;">
-      <div class="section-tag" style="color:rgba(247,244,239,0.3)">Program</div>
-      <div class="schedule-title">Schedule</div>
-    </div>
-    <div class="schedule-list" id="schedule-list">
-      <p class="schedule-empty">Full schedule coming soon.</p>
-    </div>
-  </div>
-
-  <div class="register-banner">
+<!-- PAGES NAV -->
+<div class="pages-nav">
+  <a href="about.html" class="page-nav-item reveal">
+    <span class="pni-label">01 — Learn</span>
     <div>
-      <div class="register-text">Be Part of the Celebration</div>
-      <div class="register-sub">Reach out to volunteer, perform, or sponsor.</div>
+      <div class="pni-title">About &amp;<br>Committee</div>
+      <div class="pni-arrow">→</div>
     </div>
-    <a id="register-cta" href="#contact" class="btn-register">Contact Us</a>
-  </div>
-</section>
-
-<!-- GALLERY -->
-<section class="gallery-section" id="gallery">
-  <div class="reveal">
-    <div class="section-tag">Gallery</div>
-    <h2 class="announcements-title">Photos</h2>
-  </div>
-  <div class="gallery-grid reveal" id="gallery-grid">
-    <p class="gallery-empty">Photos coming soon.</p>
-  </div>
-</section>
-
-<!-- COMMITTEE -->
-<section class="committee" id="committee">
-  <div class="reveal">
-    <div class="section-tag">Who We Are</div>
-    <h2 class="committee-title">The Juneteenth<br>Committee</h2>
-    <p class="committee-body">Juneteenth Barcelona has an organizing committee of a dozen volunteers dedicated to bringing this celebration to life each year. We are Black Americans, members of the African diaspora, and allies living in Barcelona — united by a shared purpose.</p>
-    <ul class="goal-list">
-      <li><span class="goal-num">01</span><span>Connect and inspire Barcelona's African diaspora, creating meaningful space for encounter and belonging.</span></li>
-      <li><span class="goal-num">02</span><span>Raise our visibility in the city — honoring Black history and culture, and the stories that have been cast aside.</span></li>
-      <li><span class="goal-num">03</span><span>Support our common liberation, uplifting the ideals of freedom and recognizing Barcelona as a meaningful node in Black history.</span></li>
-    </ul>
-  </div>
-  <div class="flag-panel reveal">
-    <div class="flag-img"><span class="flag-star">⭐</span></div>
-    <div class="flag-stat-row">
-      <div class="flag-stat"><div class="flag-stat-num">12<sup>+</sup></div><div class="flag-stat-label">Committee volunteers</div></div>
-      <div class="flag-stat"><div class="flag-stat-num">3</div><div class="flag-stat-label">Languages: EN · ES · CA</div></div>
-      <div class="flag-stat"><div class="flag-stat-num">1<sup>day</sup></div><div class="flag-stat-label">Of freedom &amp; joy</div></div>
+  </a>
+  <a href="event.html" class="page-nav-item reveal">
+    <span class="pni-label">02 — Attend</span>
+    <div>
+      <div class="pni-title">Event &amp;<br>Schedule</div>
+      <div class="pni-arrow">→</div>
     </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<div class="contact-strip" id="contact">
-  <div class="reveal">
-    <h3 class="contact-title">Get Involved</h3>
-    <p class="contact-sub">Volunteer, sponsor, perform, or simply attend — all are welcome.</p>
-  </div>
-  <a href="#" class="contact-email reveal" id="contact-email">barcelona@juneteenth.es</a>
+  </a>
+  <a href="gallery.html" class="page-nav-item reveal">
+    <span class="pni-label">03 — Explore</span>
+    <div>
+      <div class="pni-title">Photo<br>Gallery</div>
+      <div class="pni-arrow">→</div>
+    </div>
+  </a>
+  <a href="contact.html" class="page-nav-item reveal">
+    <span class="pni-label">04 — Connect</span>
+    <div>
+      <div class="pni-title">Contact &amp;<br>RSVP</div>
+      <div class="pni-arrow">→</div>
+    </div>
+  </a>
 </div>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-top">
-    <div>
+    <div class="footer-brand">
       <div class="footer-logo-wrap">
-        <svg width="28" height="28" viewBox="0 0 30 30"><rect width="30" height="10" fill="#C8102E"/><rect y="10" width="30" height="10" fill="#0D0D0D"/><rect y="20" width="30" height="10" fill="#00693A"/><circle cx="15" cy="15" r="5" fill="none" stroke="#FFB800" stroke-width="1.5"/><circle cx="15" cy="15" r="2" fill="#FFB800"/></svg>
+        <svg width="24" height="24" viewBox="0 0 28 28"><rect width="28" height="9.3" fill="#C8102E"/><rect y="9.3" width="28" height="9.3" fill="#0D0D0D"/><rect y="18.6" width="28" height="9.4" fill="#00693A"/><circle cx="14" cy="14" r="4.5" fill="none" stroke="#C8920A" stroke-width="1.5"/><circle cx="14" cy="14" r="1.8" fill="#C8920A"/></svg>
         <span class="footer-logo-text">Juneteenth Barcelona</span>
       </div>
-      <p class="footer-tagline" id="footer-tagline">Celebrating Black freedom, heritage, and community in Barcelona.</p>
+      <p class="footer-tagline">Celebrating Black freedom, heritage, and community in Barcelona.</p>
     </div>
-    <div class="footer-nav">
-      <div class="footer-col">
-        <h5>Navigate</h5>
-        <ul>
-          <li><a href="#what-is">What Is Juneteenth</a></li>
-          <li><a href="#about">Why Barcelona</a></li>
-          <li><a href="#event">The Event</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#committee">About the Committee</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h5>Languages</h5>
-        <ul>
-          <li><a href="#">English</a></li>
-          <li><a href="#">Español</a></li>
-          <li><a href="#">Català</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h5>Contact</h5>
-        <ul>
-          <li><a href="#" id="footer-email">barcelona@juneteenth.es</a></li>
-          <li><a href="https://lafabrica-co.com/en/event-spaces/" target="_blank" id="footer-venue">La Fábrica &amp; Co, Poblenou</a></li>
-          <li><a href="#" id="footer-social-ig" style="display:none">Instagram</a></li>
-          <li><a href="#" id="footer-social-fb" style="display:none">Facebook</a></li>
-        </ul>
-      </div>
+    <div class="footer-col">
+      <h5>Pages</h5>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="event.html">The Event</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Languages</h5>
+      <ul>
+        <li><a href="#">English</a></li>
+        <li><a href="#">Español</a></li>
+        <li><a href="#">Català</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="mailto:barcelona@juneteenth.es">barcelona@juneteenth.es</a></li>
+        <li><a href="https://lafabrica-co.com/en/event-spaces/" target="_blank">La Fábrica &amp; Co</a></li>
+        <li><a href="contact.html">Volunteer / Sponsor</a></li>
+      </ul>
     </div>
   </div>
   <div class="footer-bottom">
     <p>© 2026 Juneteenth Barcelona. Organized by volunteers with love.</p>
-    <div class="flag-dots">
-      <div class="flag-dot" style="background:var(--red)"></div>
-      <div class="flag-dot" style="background:#444"></div>
-      <div class="flag-dot" style="background:var(--green)"></div>
+    <div class="footer-flag">
+      <span style="background:var(--red)"></span>
+      <span style="background:#333"></span>
+      <span style="background:var(--green)"></span>
     </div>
   </div>
 </footer>
 
-<script>
-// ── Load CMS data from JSON files ──────────────────────────────
-async function loadData() {
-  try {
-    const [eventRes, settingsRes, galleryRes, announcementsRes] = await Promise.allSettled([
-      fetch('/_data/event.json'),
-      fetch('/_data/settings.json'),
-      fetch('/_data/gallery.json'),
-      fetch('/_data/announcements/')
-    ]);
-
-    if (eventRes.status === 'fulfilled' && eventRes.value.ok) {
-      const event = await eventRes.value.json();
-      applyEventData(event);
-    }
-    if (settingsRes.status === 'fulfilled' && settingsRes.value.ok) {
-      const settings = await settingsRes.value.json();
-      applySettings(settings);
-    }
-    if (galleryRes.status === 'fulfilled' && galleryRes.value.ok) {
-      const gallery = await galleryRes.value.json();
-      applyGallery(gallery);
-    }
-  } catch(e) {
-    // Falls back gracefully to default HTML content
-  }
-}
-
-function applyEventData(event) {
-  if (event.date) {
-    document.getElementById('event-date').textContent = event.date;
-    // Parse date for hero display
-    const parts = event.date.match(/(\w+),?\s+(\w+)\s+(\d+)/);
-    if (parts) {
-      document.getElementById('event-hero-date').innerHTML =
-        parts[1] + '<br>' + parts[2] + ' <span class="accent">' + parts[3] + '</span>';
-    }
-    document.getElementById('ticker-date').textContent = event.date;
-    document.getElementById('ticker-date2').textContent = event.date;
-    document.getElementById('hero-eyebrow').textContent = 'Barcelona · ' + event.date;
-  }
-  if (event.venue_name) {
-    document.getElementById('event-venue-name').textContent = event.venue_name;
-    document.getElementById('event-venue-title').innerHTML = event.venue_name + ',<br>El Poblenou';
-    document.getElementById('ticker-venue').textContent = event.venue_name + ' · Poblenou';
-    document.getElementById('ticker-venue2').textContent = event.venue_name + ' · Poblenou';
-    document.getElementById('footer-venue').textContent = event.venue_name + ', Poblenou';
-  }
-  if (event.venue_address) {
-    const addrEl = document.getElementById('event-venue-address');
-    const link = document.getElementById('event-venue-link');
-    addrEl.textContent = event.venue_address + ' · ';
-    if (link) {
-      link.href = event.venue_url || '#';
-      addrEl.appendChild(link);
-    }
-  }
-  if (event.register_url) {
-    const btn = document.getElementById('event-register-btn');
-    const cta = document.getElementById('register-cta');
-    btn.href = event.register_url;
-    btn.textContent = 'Get Tickets →';
-    cta.href = event.register_url;
-    cta.textContent = 'Get Tickets';
-  }
-  // Schedule
-  if (event.schedule && event.schedule.length > 0) {
-    const list = document.getElementById('schedule-list');
-    list.innerHTML = event.schedule.map(item => `
-      <div class="schedule-item">
-        <div class="schedule-time">${item.time}</div>
-        <div>
-          <div class="schedule-activity">${item.activity}</div>
-          ${item.description ? `<div class="schedule-desc">${item.description}</div>` : ''}
-        </div>
-      </div>
-    `).join('');
-  }
-}
-
-function applySettings(settings) {
-  if (settings.hero_description) {
-    document.getElementById('hero-desc').textContent = settings.hero_description;
-  }
-  if (settings.email) {
-    const email = settings.email;
-    document.getElementById('contact-email').href = 'mailto:' + email;
-    document.getElementById('contact-email').textContent = email;
-    document.getElementById('footer-email').href = 'mailto:' + email;
-    document.getElementById('footer-email').textContent = email;
-    document.getElementById('nav-contact').href = 'mailto:' + email;
-  }
-  if (settings.tagline) {
-    document.getElementById('footer-tagline').textContent = settings.tagline;
-  }
-  if (settings.instagram) {
-    const el = document.getElementById('footer-social-ig');
-    el.href = settings.instagram; el.style.display = '';
-  }
-  if (settings.facebook) {
-    const el = document.getElementById('footer-social-fb');
-    el.href = settings.facebook; el.style.display = '';
-  }
-}
-
-function applyGallery(gallery) {
-  if (!gallery.photos || gallery.photos.length === 0) return;
-  const grid = document.getElementById('gallery-grid');
-  grid.innerHTML = gallery.photos.map(photo => `
-    <div class="gallery-item">
-      <img src="${photo.image}" alt="${photo.alt || ''}" loading="lazy">
-      ${photo.caption ? `<div class="gallery-caption">${photo.caption}</div>` : ''}
-    </div>
-  `).join('');
-}
-
-// ── Scroll reveal ──────────────────────────────────────────────
-const reveals = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), i * 70);
-      io.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.08 });
-reveals.forEach(el => io.observe(el));
-
-// ── Nav shadow ─────────────────────────────────────────────────
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').style.boxShadow =
-    window.scrollY > 40 ? '0 1px 20px rgba(0,0,0,0.07)' : 'none';
-});
-
-// ── Netlify Identity redirect ──────────────────────────────────
-if (window.netlifyIdentity) {
-  window.netlifyIdentity.on('init', user => {
-    if (!user) {
-      window.netlifyIdentity.on('login', () => { document.location.href = '/admin/'; });
-    }
-  });
-}
-
-loadData();
-</script>
+<script src="shared.js"></script>
 </body>
 </html>

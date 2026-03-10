@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — Juneteenth Barcelona</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+.page-top {
+  padding-top: var(--nav-h);
+  border-bottom: 1px solid var(--border);
+}
+.page-top-inner {
+  padding: 5rem 5vw 4rem;
+  display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2rem;
+}
+.page-h1 {
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 0.9; letter-spacing: -0.03em;
+  opacity: 0; animation: fadeUp 0.8s 0.1s forwards;
+}
+.page-h1 em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; }
+.page-desc {
+  font-size: 0.97rem; line-height: 1.75; color: rgba(13,13,13,0.58);
+  max-width: 380px;
+  opacity: 0; animation: fadeUp 0.8s 0.25s forwards;
+}
+
+/* ── GALLERY GRID ── */
+.gallery-section { padding: 4rem 5vw 6rem; }
+.gallery-grid {
+  columns: 3; column-gap: 12px;
+}
+.gallery-item {
+  break-inside: avoid;
+  margin-bottom: 12px;
+  position: relative; overflow: hidden;
+  display: block; cursor: zoom-in;
+}
+.gallery-item img {
+  width: 100%; display: block;
+  transition: transform 0.45s ease;
+}
+.gallery-item:hover img { transform: scale(1.03); }
+.gallery-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(13,13,13,0.65) 0%, transparent 50%);
+  opacity: 0; transition: opacity 0.3s;
+  display: flex; align-items: flex-end; padding: 1.2rem;
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-caption { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.85); }
+
+/* ── EMPTY STATE ── */
+.gallery-empty {
+  padding: 6rem 5vw; text-align: center;
+  border: 2px dashed var(--border);
+}
+.gallery-empty h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; margin-bottom: 0.75rem; }
+.gallery-empty p { font-size: 0.88rem; color: var(--mid); }
+
+/* ── LIGHTBOX ── */
+.lightbox {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(13,13,13,0.95);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.lightbox.open { opacity: 1; pointer-events: all; }
+.lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; }
+.lightbox-close {
+  position: absolute; top: 2rem; right: 2rem;
+  background: none; border: none; color: white; font-size: 2rem;
+  cursor: pointer; line-height: 1; opacity: 0.6; transition: opacity 0.2s;
+}
+.lightbox-close:hover { opacity: 1; }
+.lightbox-caption {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ── UPLOAD CTA ── */
+.upload-cta { background: var(--black); padding: 5rem 5vw; display: flex; justify-content: space-between; align-items: center; gap: 3rem; flex-wrap: wrap; }
+.upload-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.5rem, 3vw, 2.5rem); color: white; letter-spacing: -0.02em; }
+.upload-sub { font-size: 0.85rem; color: rgba(246,243,238,0.45); margin-top: 0.4rem; }
+
+@media (max-width: 768px) {
+  .gallery-grid { columns: 2; }
+  .upload-cta { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+  .gallery-grid { columns: 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg width="28" height="28" viewBox="0 0 28 28"><rect width="28" height="9.3" fill="#C8102E"/><rect y="9.3" width="28" height="9.3" fill="#0D0D0D"/><rect y="18.6" width="28" height="9.4" fill="#00693A"/><circle cx="14" cy="14" r="4.5" fill="none" stroke="#C8920A" stroke-width="1.5"/><circle cx="14" cy="14" r="1.8" fill="#C8920A"/></svg>
+    <span class="nav-logo-text">Juneteenth Barcelona</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="event.html">Event</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="nav-cta">Get Involved</a></li>
+  </ul>
+  <div class="nav-mobile-toggle"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE TOP -->
+<div class="page-top">
+  <div class="page-top-inner">
+    <div>
+      <div class="section-tag">Gallery</div>
+      <h1 class="page-h1">Photo<br><em>Archive</em></h1>
+    </div>
+    <p class="page-desc">Images from Juneteenth Barcelona celebrations. Add photos via the CMS admin panel — they'll appear here automatically.</p>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<section class="gallery-section">
+  <div class="gallery-grid reveal" id="gallery-grid">
+    <!-- Populated by JS from gallery.json, or shows placeholder images -->
+  </div>
+  <div class="gallery-empty reveal" id="gallery-empty" style="display:none">
+    <h3>Photos coming soon</h3>
+    <p>Add photos in the <a href="/admin" style="color:var(--red)">CMS admin panel</a> and they'll appear here.</p>
+  </div>
+</section>
+
+<!-- UPLOAD CTA -->
+<div class="upload-cta reveal">
+  <div>
+    <div class="upload-title">Have photos to share?</div>
+    <div class="upload-sub">Committee members can upload photos via the admin panel.</div>
+  </div>
+  <a href="/admin" class="btn btn-white">Open CMS →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-wrap">
+        <svg width="24" height="24" viewBox="0 0 28 28"><rect width="28" height="9.3" fill="#C8102E"/><rect y="9.3" width="28" height="9.3" fill="#0D0D0D"/><rect y="18.6" width="28" height="9.4" fill="#00693A"/><circle cx="14" cy="14" r="4.5" fill="none" stroke="#C8920A" stroke-width="1.5"/><circle cx="14" cy="14" r="1.8" fill="#C8920A"/></svg>
+        <span class="footer-logo-text">Juneteenth Barcelona</span>
+      </div>
+      <p class="footer-tagline">Celebrating Black freedom, heritage, and community in Barcelona.</p>
+    </div>
+    <div class="footer-col"><h5>Pages</h5><ul><li><a href="about.html">About Us</a></li><li><a href="event.html">The Event</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="footer-col"><h5>Languages</h5><ul><li><a href="#">English</a></li><li><a href="#">Español</a></li><li><a href="#">Català</a></li></ul></div>
+    <div class="footer-col"><h5>Contact</h5><ul><li><a href="mailto:barcelona@juneteenth.es">barcelona@juneteenth.es</a></li><li><a href="https://lafabrica-co.com/en/event-spaces/" target="_blank">La Fábrica &amp; Co</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Juneteenth Barcelona. Organized by volunteers with love.</p>
+    <div class="footer-flag"><span style="background:var(--red)"></span><span style="background:#333"></span><span style="background:var(--green)"></span></div>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightbox-close">✕</button>
+  <img id="lightbox-img" src="" alt="">
+  <div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+
+<script src="shared.js"></script>
+<script>
+// Load gallery from JSON
+async function loadGallery() {
+  try {
+    const res = await fetch('/_data/gallery.json');
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    const photos = data.photos || [];
+    const grid = document.getElementById('gallery-grid');
+    const empty = document.getElementById('gallery-empty');
+    if (photos.length === 0) {
+      grid.style.display = 'none';
+      empty.style.display = 'block';
+      return;
+    }
+    grid.innerHTML = photos.map(p => `
+      <div class="gallery-item" data-src="${p.image}" data-caption="${p.caption || ''}">
+        <img src="${p.image}" alt="${p.alt || p.caption || ''}" loading="lazy">
+        <div class="gallery-overlay"><span class="gallery-caption">${p.caption || ''}</span></div>
+      </div>
+    `).join('');
+    attachLightbox();
+  } catch {
+    // Show placeholder images if no JSON
+    const grid = document.getElementById('gallery-grid');
+    const placeholders = [
+      { src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80', caption: 'Community' },
+      { src: 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=600&q=80', caption: 'Barcelona' },
+      { src: 'https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=600&q=80', caption: 'Celebration' },
+      { src: 'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=600&q=80', caption: 'Barcelona' },
+      { src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80', caption: 'Community' },
+      { src: 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=400&q=80', caption: 'Barcelona' },
+    ];
+    grid.innerHTML = placeholders.map(p => `
+      <div class="gallery-item" data-src="${p.src}" data-caption="${p.caption}">
+        <img src="${p.src}" alt="${p.caption}" loading="lazy">
+        <div class="gallery-overlay"><span class="gallery-caption">${p.caption}</span></div>
+      </div>
+    `).join('');
+    attachLightbox();
+  }
+}
+
+function attachLightbox() {
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  const lbCap = document.getElementById('lightbox-caption');
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('click', () => {
+      lbImg.src = item.dataset.src;
+      lbCap.textContent = item.dataset.caption || '';
+      lb.classList.add('open');
+    });
+  });
+  document.getElementById('lightbox-close').addEventListener('click', () => lb.classList.remove('open'));
+  lb.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('open'); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+}
+
+loadGallery();
+</script>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Juneteenth Barcelona</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ── PAGE HERO ── */
+.page-hero {
+  padding-top: var(--nav-h);
+  padding-bottom: 0;
+  border-bottom: 1px solid var(--border);
+}
+.page-hero-inner {
+  padding: 5rem 5vw 4rem;
+  display: flex; flex-direction: column;
+  max-width: 900px;
+}
+.page-hero-h1 {
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  line-height: 0.92; letter-spacing: -0.03em; color: var(--black);
+  margin-top: 1rem; margin-bottom: 3rem;
+  opacity: 0; animation: fadeUp 0.8s 0.15s forwards;
+}
+.page-hero-h1 em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; }
+.page-hero-desc {
+  font-size: clamp(1rem, 1.5vw, 1.15rem); line-height: 1.78;
+  color: rgba(13,13,13,0.62); max-width: 600px;
+  opacity: 0; animation: fadeUp 0.8s 0.3s forwards;
+}
+
+/* ── FULL BLEED IMAGE ── */
+.full-img {
+  width: 100%; height: 55vh; min-height: 380px;
+  object-fit: cover; display: block;
+  filter: grayscale(15%);
+}
+
+/* ── MISSION ── */
+.mission {
+  display: grid; grid-template-columns: 2fr 3fr;
+  border-top: 1px solid var(--border);
+  gap: 0;
+}
+.mission-left { padding: 6rem 5vw; border-right: 1px solid var(--border); }
+.mission-label { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.5rem, 2.5vw, 2.2rem); line-height: 1.1; letter-spacing: -0.02em; margin-top: 1rem; }
+.mission-right { padding: 6rem 5vw; }
+.mission-text { font-size: 1.05rem; line-height: 1.9; color: rgba(13,13,13,0.68); }
+.mission-text p + p { margin-top: 1.5rem; }
+.mission-text strong { color: var(--black); font-weight: 600; }
+
+/* ── STORY (black bg) ── */
+.story {
+  background: var(--black); color: var(--off-white);
+  padding: 7rem 5vw;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6rem; align-items: start;
+}
+.story-left {}
+.story-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.05; letter-spacing: -0.025em; margin-top: 1rem; color: var(--off-white); }
+.story-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; margin-top: 3rem; filter: grayscale(20%); }
+.story-right { padding-top: 2.5rem; }
+.story-body { font-size: 0.97rem; line-height: 1.88; color: rgba(246,243,238,0.62); }
+.story-body p + p { margin-top: 1.4rem; }
+.story-body strong { color: var(--off-white); font-weight: 500; }
+
+/* ── GOALS ── */
+.goals { padding: 7rem 5vw; border-top: 1px solid var(--border); }
+.goals-header { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; margin-bottom: 4rem; align-items: end; }
+.goals-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2rem, 3vw, 2.8rem); line-height: 1.05; letter-spacing: -0.025em; margin-top: 0.5rem; }
+.goals-intro { font-size: 0.97rem; line-height: 1.8; color: rgba(13,13,13,0.6); }
+.goals-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.goal-card { background: var(--off-white); padding: 3rem 2.5rem; }
+.goal-card-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 3rem; line-height: 1; color: var(--red); opacity: 0.25; margin-bottom: 1.5rem; }
+.goal-card-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.8rem; }
+.goal-card-body { font-size: 0.88rem; line-height: 1.75; color: rgba(13,13,13,0.6); }
+
+/* ── COMMITTEE ── */
+.committee-section { padding: 7rem 5vw; border-top: 1px solid var(--border); background: var(--off-white); }
+.committee-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; flex-wrap: wrap; gap: 1.5rem; }
+.committee-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2rem, 3vw, 2.8rem); line-height: 1; letter-spacing: -0.025em; margin-top: 0.5rem; }
+.committee-sub { font-size: 0.9rem; color: rgba(13,13,13,0.55); max-width: 360px; line-height: 1.7; }
+.team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5rem; }
+.team-member {}
+.team-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; background: #ddd; display: block; filter: grayscale(10%); margin-bottom: 1rem; transition: filter 0.3s; }
+.team-member:hover .team-photo { filter: grayscale(0%); }
+.team-photo-placeholder { width: 100%; aspect-ratio: 3/4; background: linear-gradient(135deg, #e8e4dc 0%, #d4cfc5 100%); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+.team-photo-placeholder span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2rem; color: rgba(13,13,13,0.15); }
+.team-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.02em; }
+.team-role { font-size: 0.78rem; color: var(--mid); margin-top: 0.2rem; }
+
+/* ── CONSTELLATION (volunteers list) ── */
+.constellation { padding: 6rem 5vw; border-top: 1px solid var(--border); }
+.constellation-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.5rem, 2.5vw, 2.2rem); letter-spacing: -0.02em; margin: 0.5rem 0 2.5rem; }
+.constellation-sub { font-size: 0.9rem; color: rgba(13,13,13,0.55); max-width: 500px; line-height: 1.7; margin-bottom: 3rem; }
+.constellation-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--border); border-left: 1px solid var(--border); }
+.constellation-item { padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); }
+.constellation-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.03em; }
+.constellation-role { font-size: 0.72rem; color: var(--mid); margin-top: 0.15rem; }
+
+/* ── CTA BAND ── */
+.cta-band { background: var(--red); padding: 5rem 5vw; display: flex; justify-content: space-between; align-items: center; gap: 3rem; flex-wrap: wrap; }
+.cta-band-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3.5vw, 3rem); color: white; line-height: 1; letter-spacing: -0.02em; }
+.cta-band-sub { font-size: 0.88rem; color: rgba(255,255,255,0.6); margin-top: 0.5rem; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .mission { grid-template-columns: 1fr; }
+  .mission-left { border-right: none; border-bottom: 1px solid var(--border); }
+  .story { grid-template-columns: 1fr; gap: 3rem; }
+  .goals-header { grid-template-columns: 1fr; gap: 1.5rem; }
+  .goals-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr 1fr; }
+  .constellation-grid { grid-template-columns: 1fr 1fr; }
+  .cta-band { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+  .team-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .constellation-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg width="28" height="28" viewBox="0 0 28 28"><rect width="28" height="9.3" fill="#C8102E"/><rect y="9.3" width="28" height="9.3" fill="#0D0D0D"/><rect y="18.6" width="28" height="9.4" fill="#00693A"/><circle cx="14" cy="14" r="4.5" fill="none" stroke="#C8920A" stroke-width="1.5"/><circle cx="14" cy="14" r="1.8" fill="#C8920A"/></svg>
+    <span class="nav-logo-text">Juneteenth Barcelona</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="event.html">Event</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="nav-cta">Get Involved</a></li>
+  </ul>
+  <div class="nav-mobile-toggle"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="section-tag">About Us</div>
+    <h1 class="page-hero-h1">Building a future<br>of <em>belonging</em><br>for all.</h1>
+    <p class="page-hero-desc">Juneteenth Barcelona is an organizing committee of volunteers dedicated to connecting and inspiring Barcelona's African diaspora — and to raising our collective visibility in the city.</p>
+  </div>
+</section>
+
+<!-- FULL BLEED IMAGE -->
+<img class="full-img" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1920&q=80" alt="Community gathering">
+
+<!-- MISSION -->
+<section class="mission">
+  <div class="mission-left reveal">
+    <div class="section-tag">Our Mission</div>
+    <div class="mission-label">Why we<br>do this.</div>
+  </div>
+  <div class="mission-right reveal">
+    <div class="mission-text">
+      <p>At Juneteenth Barcelona, we believe that the African diaspora in Barcelona deserves a space to gather, celebrate, and be seen. Our mission is to honor the history of Black liberation while building a living, breathing community in one of Europe's most vibrant cities.</p>
+      <p>Barcelona is often celebrated for its modernist architecture and Mediterranean beauty. But it was also <strong>shaped by deep, complex ties to the African diaspora</strong> that stretch far beyond its borders. As a major Mediterranean port, it was entangled in transatlantic trade networks that included the trafficking and enslavement of Africans.</p>
+      <p>We invite you to see Barcelona differently — not just as a European capital, but as a city meaningfully connected to and influenced by the African diaspora. By walking these streets with intention, we honor stories that have been cast aside and the people who were forgotten.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story">
+  <div class="story-left reveal">
+    <div class="section-tag light">Our Story</div>
+    <h2 class="story-title">Rooted in community. Grown from purpose.</h2>
+    <img class="story-img" src="https://images.unsplash.com/photo-1583422409516-2895a77efded?w=768&q=80" alt="Barcelona">
+  </div>
+  <div class="story-right reveal">
+    <div class="story-body">
+      <p>As the population of Black Americans and African diaspora communities has grown in Barcelona, the need for a shared cultural moment has grown with it. Juneteenth provides that anchor — a day to ground ourselves, increase our visibility, and become better connected with the broader city.</p>
+      <p>Given the concerted efforts to erase and repress knowledge of Black history and culture globally, Black Americans and diaspora members abroad have a vested interest and <strong>responsibility to continue the traditions and remembrances of Juneteenth</strong> in their adopted communities.</p>
+      <p>Our committee of volunteers — from across the diaspora, from the US, the Caribbean, Africa, and beyond — organizes each year with three goals: to connect, to make visible, and to liberate. We also recognize Barcelona as an important, functional node in Black history, as opposed to a romanticized symbolic ideal.</p>
+      <p>We uplift the ideals of liberation and honor the people who fought — and continue to fight — to secure and maintain freedom for everyone.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GOALS -->
+<section class="goals">
+  <div class="goals-header reveal">
+    <div>
+      <div class="section-tag">Three Goals</div>
+      <h2 class="goals-title">What we're<br>here to do.</h2>
+    </div>
+    <p class="goals-intro">Everything we do flows from three commitments we made when we started this committee.</p>
+  </div>
+  <div class="goals-grid reveal">
+    <div class="goal-card">
+      <div class="goal-card-num">01</div>
+      <div class="goal-card-title">Connect &amp; Inspire</div>
+      <p class="goal-card-body">Connect and inspire Barcelona's African diaspora, creating meaningful space for encounter, collaboration, and belonging across cultures and backgrounds.</p>
+    </div>
+    <div class="goal-card">
+      <div class="goal-card-num">02</div>
+      <div class="goal-card-title">Raise Visibility</div>
+      <p class="goal-card-body">Raise our visibility in the city — honoring Black history and culture in Barcelona, and the stories that have been marginalized or cast aside in the telling of the city's story.</p>
+    </div>
+    <div class="goal-card">
+      <div class="goal-card-num">03</div>
+      <div class="goal-card-title">Support Liberation</div>
+      <p class="goal-card-body">Support our common liberation, uplifting the ideals of freedom for all people and recognizing Barcelona as a meaningful, functional node in Black history — not a romanticized ideal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMMITTEE -->
+<section class="committee-section">
+  <div class="committee-header reveal">
+    <div>
+      <div class="section-tag">The Team</div>
+      <h2 class="committee-title">Our committee</h2>
+    </div>
+    <p class="committee-sub">A dozen volunteers united by a shared belief that Black culture and history deserve to be celebrated, seen, and honored in Barcelona.</p>
+  </div>
+  <div class="team-grid reveal">
+    <div class="team-member">
+      <div class="team-photo-placeholder"><span>JB</span></div>
+      <div class="team-name">Committee Lead</div>
+      <div class="team-role">Organizer</div>
+    </div>
+    <div class="team-member">
+      <div class="team-photo-placeholder"><span>JB</span></div>
+      <div class="team-name">Events Lead</div>
+      <div class="team-role">Programming</div>
+    </div>
+    <div class="team-member">
+      <div class="team-photo-placeholder"><span>JB</span></div>
+      <div class="team-name">Community Lead</div>
+      <div class="team-role">Outreach</div>
+    </div>
+    <div class="team-member">
+      <div class="team-photo-placeholder"><span>JB</span></div>
+      <div class="team-name">Creative Lead</div>
+      <div class="team-role">Design &amp; Brand</div>
+    </div>
+  </div>
+  <p style="font-size:0.8rem;color:var(--mid);margin-top:2rem;font-style:italic;">Add your team members via the CMS admin panel.</p>
+</section>
+
+<!-- CONSTELLATION -->
+<section class="constellation reveal">
+  <div class="section-tag">Our Network</div>
+  <h2 class="constellation-title">The Juneteenth Barcelona constellation</h2>
+  <p class="constellation-sub">Our work is built across disciplines and backgrounds — a network of collaborators, volunteers, and community partners. Want to get involved? <a href="contact.html" style="color:var(--black);border-bottom:1px solid var(--black);">Reach out.</a></p>
+  <div class="constellation-grid">
+    <div class="constellation-item"><div class="constellation-name">Volunteer Coordinator</div><div class="constellation-role">Logistics &amp; Operations</div></div>
+    <div class="constellation-item"><div class="constellation-name">Communications Lead</div><div class="constellation-role">Press &amp; Social Media</div></div>
+    <div class="constellation-item"><div class="constellation-name">Art Director</div><div class="constellation-role">Visual Identity</div></div>
+    <div class="constellation-item"><div class="constellation-name">Music Curator</div><div class="constellation-role">Programming</div></div>
+    <div class="constellation-item"><div class="constellation-name">Community Partner</div><div class="constellation-role">African Diaspora BCN</div></div>
+    <div class="constellation-item"><div class="constellation-name">Photographer</div><div class="constellation-role">Documentation</div></div>
+    <div class="constellation-item"><div class="constellation-name">Sponsor Relations</div><div class="constellation-role">Partnerships</div></div>
+    <div class="constellation-item"><div class="constellation-name">Venue Liaison</div><div class="constellation-role">La Fábrica &amp; Co</div></div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band reveal">
+  <div>
+    <div class="cta-band-title">Join the committee.</div>
+    <div class="cta-band-sub">We're always looking for passionate volunteers to help make Juneteenth Barcelona happen.</div>
+  </div>
+  <a href="contact.html" class="btn btn-white">Get in Touch</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-wrap">
+        <svg width="24" height="24" viewBox="0 0 28 28"><rect width="28" height="9.3" fill="#C8102E"/><rect y="9.3" width="28" height="9.3" fill="#0D0D0D"/><rect y="18.6" width="28" height="9.4" fill="#00693A"/><circle cx="14" cy="14" r="4.5" fill="none" stroke="#C8920A" stroke-width="1.5"/><circle cx="14" cy="14" r="1.8" fill="#C8920A"/></svg>
+        <span class="footer-logo-text">Juneteenth Barcelona</span>
+      </div>
+      <p class="footer-tagline">Celebrating Black freedom, heritage, and community in Barcelona.</p>
+    </div>
+    <div class="footer-col"><h5>Pages</h5><ul><li><a href="about.html">About Us</a></li><li><a href="event.html">The Event</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="footer-col"><h5>Languages</h5><ul><li><a href="#">English</a></li><li><a href="#">Español</a></li><li><a href="#">Català</a></li></ul></div>
+    <div class="footer-col"><h5>Contact</h5><ul><li><a href="mailto:barcelona@juneteenth.es">barcelona@juneteenth.es</a></li><li><a href="https://lafabrica-co.com/en/event-spaces/" target="_blank">La Fábrica &amp; Co</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Juneteenth Barcelona. Organized by volunteers with love.</p>
+    <div class="footer-flag"><span style="background:var(--red)"></span><span style="background:#333"></span><span style="background:var(--green)"></span></div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+</body>
+</html>

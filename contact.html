@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Juneteenth Barcelona</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ── HERO ── */
+.contact-hero {
+  padding-top: var(--nav-h);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0;
+}
+.contact-hero-inner { padding: 5rem 5vw 4rem; }
+.page-h1 {
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 0.9; letter-spacing: -0.03em; margin-top: 1rem;
+  opacity: 0; animation: fadeUp 0.8s 0.1s forwards;
+}
+.page-h1 em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; }
+
+/* ── MAIN LAYOUT ── */
+.contact-layout {
+  display: grid; grid-template-columns: 5fr 7fr;
+  border-top: 1px solid var(--border);
+  min-height: 70vh;
+}
+
+/* ── INFO SIDE ── */
+.contact-info { padding: 5rem 5vw; border-right: 1px solid var(--border); }
+.info-block { margin-bottom: 3.5rem; }
+.info-label { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--mid); margin-bottom: 0.6rem; }
+.info-value { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; color: var(--black); line-height: 1.4; }
+.info-value a { color: var(--red); text-decoration: none; border-bottom: 1px solid rgba(200,16,46,0.25); transition: border-color 0.2s; }
+.info-value a:hover { border-color: var(--red); }
+.info-sub { font-size: 0.8rem; color: var(--mid); margin-top: 0.3rem; line-height: 1.6; }
+
+.ways-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; margin-bottom: 1.5rem; }
+.ways-list { list-style: none; display: flex; flex-direction: column; gap: 0; }
+.ways-list li { display: flex; align-items: flex-start; gap: 1rem; padding: 1.1rem 0; border-top: 1px solid var(--border); font-size: 0.88rem; color: rgba(13,13,13,0.68); line-height: 1.55; }
+.ways-list li:last-child { border-bottom: 1px solid var(--border); }
+.ways-num { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.65rem; color: var(--red); flex-shrink: 0; padding-top: 0.15rem; min-width: 18px; }
+
+/* ── FORM SIDE ── */
+.contact-form-wrap { padding: 5rem 5vw; background: var(--off-white); }
+.form-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.5rem); letter-spacing: -0.025em; margin: 0.5rem 0 2.5rem; }
+.contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid); }
+.form-input, .form-select, .form-textarea {
+  padding: 0.85rem 1rem;
+  background: white; border: 1.5px solid var(--border);
+  font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--black);
+  outline: none; transition: border-color 0.2s;
+  -webkit-appearance: none; appearance: none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--black); }
+.form-textarea { resize: vertical; min-height: 140px; }
+.form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23767676' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; cursor: pointer; }
+.form-submit { background: var(--black); color: white; padding: 1rem 2.5rem; border: none; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.22s; align-self: flex-start; }
+.form-submit:hover { background: var(--red); }
+.form-success { display: none; padding: 2rem; background: #f0faf5; border: 1.5px solid #00693A; font-size: 0.95rem; color: var(--green); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .contact-layout { grid-template-columns: 1fr; }
+  .contact-info { border-right: none; border-bottom: 1px solid var(--border); }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg width="28" height="28" viewBox="0 0 28 28"><rect width="28" height="9.3" fill="#C8102E"/><rect y="9.3" width="28" height="9.3" fill="#0D0D0D"/><rect y="18.6" width="28" height="9.4" fill="#00693A"/><circle cx="14" cy="14" r="4.5" fill="none" stroke="#C8920A" stroke-width="1.5"/><circle cx="14" cy="14" r="1.8" fill="#C8920A"/></svg>
+    <span class="nav-logo-text">Juneteenth Barcelona</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="event.html">Event</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="nav-cta">Get Involved</a></li>
+  </ul>
+  <div class="nav-mobile-toggle"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<div class="contact-hero">
+  <div class="contact-hero-inner">
+    <div class="section-tag">Get Involved</div>
+    <h1 class="page-h1">Let's build<br>this <em>together.</em></h1>
+  </div>
+</div>
+
+<!-- CONTACT LAYOUT -->
+<div class="contact-layout">
+
+  <!-- INFO -->
+  <div class="contact-info reveal">
+    <div class="info-block">
+      <div class="info-label">Email</div>
+      <div class="info-value"><a href="mailto:barcelona@juneteenth.es">barcelona@juneteenth.es</a></div>
+      <div class="info-sub">We aim to respond within 48 hours.</div>
+    </div>
+    <div class="info-block">
+      <div class="info-label">Event Venue</div>
+      <div class="info-value">La Fábrica &amp; Co<br>Doctor Trueta, 191<br>08005 Barcelona</div>
+      <div class="info-sub">El Poblenou, Barcelona</div>
+    </div>
+    <div class="info-block">
+      <div class="info-label">Event Date</div>
+      <div class="info-value">Friday, June 20, 2026</div>
+      <div class="info-sub">Doors &amp; schedule TBC.</div>
+    </div>
+    <div class="info-block">
+      <div class="ways-title">Ways to get involved</div>
+      <ul class="ways-list">
+        <li><span class="ways-num">01</span><span><strong>Volunteer</strong> — Join the organizing committee and help make the event happen.</span></li>
+        <li><span class="ways-num">02</span><span><strong>Perform</strong> — Musicians, speakers, poets, and artists welcome.</span></li>
+        <li><span class="ways-num">03</span><span><strong>Sponsor</strong> — Support the event and connect with Barcelona's African diaspora.</span></li>
+        <li><span class="ways-num">04</span><span><strong>Attend</strong> — Register your interest and be the first to get tickets.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="contact-form-wrap reveal">
+    <div class="section-tag">Send a message</div>
+    <h2 class="form-title">Get in touch</h2>
+
+    <div class="form-success" id="form-success">
+      ✓ Thank you! We'll be in touch soon.
+    </div>
+
+    <form class="contact-form" id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact">
+      <input type="hidden" name="bot-field" style="display:none">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="name">Full Name</label>
+          <input class="form-input" type="text" id="name" name="name" required placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-input" type="email" id="email" name="email" required placeholder="your@email.com">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="interest">I want to...</label>
+        <select class="form-select" id="interest" name="interest">
+          <option value="">Select an option</option>
+          <option value="attend">Attend the event</option>
+          <option value="volunteer">Volunteer</option>
+          <option value="perform">Perform / Speak</option>
+          <option value="sponsor">Sponsor</option>
+          <option value="press">Press / Media inquiry</option>
+          <option value="other">Something else</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="message">Message</label>
+        <textarea class="form-textarea" id="message" name="message" placeholder="Tell us more..."></textarea>
+      </div>
+
+      <button type="submit" class="form-submit">Send Message →</button>
+    </form>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-wrap">
+        <svg width="24" height="24" viewBox="0 0 28 28"><rect width="28" height="9.3" fill="#C8102E"/><rect y="9.3" width="28" height="9.3" fill="#0D0D0D"/><rect y="18.6" width="28" height="9.4" fill="#00693A"/><circle cx="14" cy="14" r="4.5" fill="none" stroke="#C8920A" stroke-width="1.5"/><circle cx="14" cy="14" r="1.8" fill="#C8920A"/></svg>
+        <span class="footer-logo-text">Juneteenth Barcelona</span>
+      </div>
+      <p class="footer-tagline">Celebrating Black freedom, heritage, and community in Barcelona.</p>
+    </div>
+    <div class="footer-col"><h5>Pages</h5><ul><li><a href="about.html">About Us</a></li><li><a href="event.html">The Event</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="footer-col"><h5>Languages</h5><ul><li><a href="#">English</a></li><li><a href="#">Español</a></li><li><a href="#">Català</a></li></ul></div>
+    <div class="footer-col"><h5>Contact</h5><ul><li><a href="mailto:barcelona@juneteenth.es">barcelona@juneteenth.es</a></li><li><a href="https://lafabrica-co.com/en/event-spaces/" target="_blank">La Fábrica &amp; Co</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Juneteenth Barcelona. Organized by volunteers with love.</p>
+    <div class="footer-flag"><span style="background:var(--red)"></span><span style="background:#333"></span><span style="background:var(--green)"></span></div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+// Netlify form with JS success state
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const data = new FormData(form);
+  try {
+    await fetch('/', { method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, body: new URLSearchParams(data).toString() });
+    form.style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  } catch {
+    alert('There was an error. Please email us directly at barcelona@juneteenth.es');
+  }
+});
+</script>
+</body>
+</html>
