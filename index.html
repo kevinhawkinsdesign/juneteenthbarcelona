@@ -140,11 +140,25 @@
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
     <li><a href="event.html">Event</a></li>
-    <li><a href="gallery.html">Gallery</a></li>
+    <li class="nav-gallery-link"><a href="gallery.html">Gallery</a></li>
     <li><a href="contact.html">Contact</a></li>
     <li><a href="contact.html" class="nav-cta">Get Involved</a></li>
   </ul>
-  <div class="nav-mobile-toggle"><span></span><span></span><span></span></div>
+  <div class="nav-right">
+    <div class="lang-picker">
+      <button class="lang-trigger" aria-label="Select language">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="lang-current">EN</span>
+        <span class="lang-caret">▾</span>
+      </button>
+      <div class="lang-dropdown">
+        <button class="lang-option" data-lang="en">English</button>
+        <button class="lang-option" data-lang="es">Español</button>
+        <button class="lang-option" data-lang="ca">Català</button>
+      </div>
+    </div>
+    <div class="nav-mobile-toggle"><span></span><span></span><span></span></div>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -155,7 +169,7 @@
     <h1 class="hero-h1">June<em>teenth</em><br>Bar<em>ce</em>lona</h1>
   </div>
   <div class="hero-footer">
-    <p class="hero-desc">Explore the crossroads of people, ideas, and power through the lens of the African diaspora.</p>
+    <p class="hero-desc">A day of unity and celebration for the African diaspora.</p>
     <div class="hero-ctas">
       <a href="event.html" class="btn btn-white">See the Event</a>
       <a href="about.html" class="btn btn-outline-light">About Us</a>
@@ -250,14 +264,7 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
-    <div class="footer-col">
-      <h5>Languages</h5>
-      <ul>
-        <li><a href="#">English</a></li>
-        <li><a href="#">Español</a></li>
-        <li><a href="#">Català</a></li>
-      </ul>
-    </div>
+
     <div class="footer-col">
       <h5>Contact</h5>
       <ul>
@@ -278,5 +285,8 @@
 </footer>
 
 <script src="shared.js"></script>
+<!-- Google Translate (hidden widget) -->
+<div id="google_translate_element"></div>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

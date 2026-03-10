@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: YOUR-GITHUB-USERNAME/juneteenthbarcelona  # ← change this
   branch: main
 
 media_folder: images
@@ -72,3 +73,8 @@ collections:
           - { label: "Contact Email", name: email, widget: string }
           - { label: "Instagram URL", name: instagram, widget: string, required: false }
           - { label: "Facebook URL", name: facebook, widget: string, required: false }
+          - label: "Show Gallery in Navigation"
+            name: show_gallery_nav
+            widget: boolean
+            default: false
+            hint: "Toggle to show or hide the Gallery link in the site navigation. Turn on when you have photos to display."
