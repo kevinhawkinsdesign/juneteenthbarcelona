@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <meta name="theme-color" content="#00693A">
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BJuneteenth Monthly — a recurring gathering for the Black diaspora in Barcelona. Next event: Chicken & Waffles Brunch, Sunday April 19, 2026.">
+  <meta name="keywords" content="BJuneteenth Monthly, Black diaspora Barcelona, Juneteenth Barcelona 2026, African diaspora Barcelona meetup">
+  <meta property="og:title" content="BJuneteenth Monthly — April 19, 2026">
+  <meta property="og:description" content="Chicken & Waffles Brunch | BJuneteenth Info Day. Sunday, April 19 · 12:00 PM – 4:30 PM · Carrer de Mallorca 41, Barcelona.">
+  <meta property="og:image" content="https://dancing-lebkuchen-8348db.netlify.app/images/barcelona-hero.jpg">
+  <meta property="og:url" content="https://dancing-lebkuchen-8348db.netlify.app/monthly-events.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BJuneteenth Monthly — April 19, 2026">
+  <meta name="twitter:description" content="Chicken & Waffles Brunch | BJuneteenth Info Day. Sunday, April 19 · Carrer de Mallorca 41, Barcelona.">
+  <link rel="canonical" href="https://dancing-lebkuchen-8348db.netlify.app/monthly-events.html">
+<title>Monthly Events — Juneteenth Barcelona</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ── PAGE HERO ── */
+.page-hero {
+  padding-top: var(--nav-h);
+  background: var(--black);
+  color: var(--off-white);
+  position: relative; overflow: hidden;
+  min-height: 52vh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.page-hero-bg {
+  position: absolute; inset: 0;
+  background: url('images/barcelona-skyline.jpg') center/cover no-repeat;
+  opacity: 0.12;
+}
+.page-hero-inner {
+  position: relative; z-index: 1;
+  padding: 4rem 5vw 5rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: end;
+}
+.page-hero-left {}
+.page-hero-h1 {
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  line-height: 0.9; letter-spacing: -0.03em; color: white;
+  margin-top: 1rem; margin-bottom: 0;
+  opacity: 0; animation: fadeUp 0.8s 0.15s forwards;
+}
+.page-hero-right {
+  padding-bottom: 0.5rem;
+  opacity: 0; animation: fadeUp 0.8s 0.3s forwards;
+}
+.page-hero-tagline {
+  font-size: clamp(0.9rem, 1.4vw, 1.05rem); line-height: 1.75;
+  color: rgba(246,243,238,0.6); max-width: 420px;
+  margin-bottom: 2rem;
+}
+.series-pill {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(246,243,238,0.08); border: 1px solid rgba(246,243,238,0.15);
+  padding: 0.4rem 1rem;
+  font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(246,243,238,0.5); margin-bottom: 1.5rem;
+}
+
+/* ── FEATURED EVENT ── */
+.featured-event {
+  border-top: 1px solid var(--border);
+  background: var(--green);
+  color: var(--off-white);
+}
+.featured-inner {
+  display: grid; grid-template-columns: 340px 1fr;
+}
+.featured-poster {
+  position: relative; overflow: hidden;
+  min-height: 420px;
+}
+.featured-poster img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.featured-body {
+  padding: 4rem 5vw;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.featured-tag { color: rgba(246,243,238,0.4); }
+.featured-title {
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  line-height: 1.05; letter-spacing: -0.025em; color: white;
+  margin: 0.5rem 0 2rem;
+}
+.featured-meta {
+  display: flex; flex-direction: column; gap: 0.9rem;
+  margin-bottom: 2.5rem;
+}
+.meta-row {
+  display: flex; align-items: flex-start; gap: 1rem;
+  font-size: 0.88rem; color: rgba(246,243,238,0.7);
+}
+.meta-row strong {
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  color: white; font-size: 0.78rem; letter-spacing: 0.06em;
+  text-transform: uppercase; min-width: 60px;
+}
+.featured-desc {
+  font-size: 0.95rem; line-height: 1.82;
+  color: rgba(246,243,238,0.65); max-width: 560px;
+  margin-bottom: 2.5rem;
+}
+.food-by {
+  font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(246,243,238,0.35); margin-bottom: 2rem;
+}
+.food-by span { color: rgba(246,243,238,0.7); }
+.featured-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+/* ── TICKETS ── */
+.tickets-section {
+  border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr 1fr;
+}
+.ticket-card {
+  padding: 4rem 5vw;
+  border-right: 1px solid var(--border);
+}
+.ticket-card:last-child { border-right: none; }
+.ticket-price {
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1; letter-spacing: -0.03em; color: var(--black);
+  margin: 0.75rem 0 1rem;
+}
+.ticket-price.free { color: var(--green); }
+.ticket-name {
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: 1rem; letter-spacing: 0.02em; margin-bottom: 0.5rem;
+}
+.ticket-desc {
+  font-size: 0.88rem; line-height: 1.75;
+  color: rgba(13,13,13,0.6); margin-bottom: 2rem; max-width: 340px;
+}
+
+/* ── MENU ── */
+.menu-section {
+  border-top: 1px solid var(--border);
+  background: var(--black); color: var(--off-white);
+}
+.menu-inner {
+  display: grid; grid-template-columns: 1fr 2fr;
+}
+.menu-left {
+  padding: 6rem 5vw;
+  border-right: 1px solid rgba(246,243,238,0.06);
+}
+.menu-title {
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  line-height: 1.05; letter-spacing: -0.025em;
+  color: white; margin: 0.5rem 0 1.5rem;
+}
+.menu-sub {
+  font-size: 0.88rem; line-height: 1.75;
+  color: rgba(246,243,238,0.45);
+}
+.menu-right {
+  padding: 6rem 5vw;
+  display: flex; flex-direction: column; gap: 0;
+}
+.menu-item {
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(246,243,238,0.07);
+  display: grid; grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+}
+.menu-item:first-child { border-top: 1px solid rgba(246,243,238,0.07); }
+.menu-item-name {
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold); padding-top: 0.15rem;
+}
+.menu-item-body {
+  font-size: 0.9rem; line-height: 1.78;
+  color: rgba(246,243,238,0.58);
+}
+
+/* ── SERIES INFO BAND ── */
+.series-band {
+  border-top: 1px solid var(--border);
+  background: var(--red);
+  padding: 5rem 5vw;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 3rem; flex-wrap: wrap;
+}
+.series-band-title {
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  color: white; line-height: 1; letter-spacing: -0.02em;
+}
+.series-band-sub {
+  font-size: 0.88rem; color: rgba(255,255,255,0.6); margin-top: 0.6rem;
+  max-width: 440px; line-height: 1.65;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .page-hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .featured-inner { grid-template-columns: 1fr; }
+  .featured-poster { min-height: 300px; }
+  .tickets-section { grid-template-columns: 1fr; }
+  .ticket-card { border-right: none; border-bottom: 1px solid var(--border); }
+  .ticket-card:last-child { border-bottom: none; }
+  .menu-inner { grid-template-columns: 1fr; }
+  .menu-left { border-right: none; border-bottom: 1px solid rgba(246,243,238,0.07); padding: 5rem 5vw 4rem; }
+  .menu-item { grid-template-columns: 1fr; gap: 0.5rem; }
+  .series-band { flex-direction: column; align-items: flex-start; }
+}
+
+/* ── SKIP TO CONTENT ── */
+.skip-link {
+  position: absolute; top: -100%; left: 1rem;
+  background: var(--black); color: white;
+  padding: 0.6rem 1.2rem; font-size: 0.82rem; font-weight: 600;
+  text-decoration: none; z-index: 9999; transition: top 0.2s;
+}
+.skip-link:focus { top: 1rem; }
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- NAV -->
+<nav aria-label="Main navigation" role="navigation">
+  <a href="index.html" class="nav-logo">
+    <img src="https://seekflag.com/wp-content/uploads/2022/01/Juneteenth-01-1.png" alt="Juneteenth flag" style="height:22px;width:auto;display:block;">
+    <span class="nav-logo-text">Juneteenth BCN</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="event.html">Event</a></li>
+    <li><a href="monthly-events.html">Monthly</a></li>
+    <li><a href="walking-tour/index.html">Walking Tour</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-picker">
+      <button class="lang-trigger" aria-label="Select language">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="lang-current">EN</span>
+        <span class="lang-caret">▾</span>
+      </button>
+      <div class="lang-dropdown" role="menu" aria-label="Language options">
+        <button class="lang-option" role="menuitem" data-lang="en">English</button>
+        <button class="lang-option" role="menuitem" data-lang="es">Español</button>
+        <button class="lang-option" role="menuitem" data-lang="ca">Català</button>
+      </div>
+    </div>
+    <button class="nav-mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<main id="main-content">
+
+<!-- HERO -->
+<section class="page-hero" aria-label="Page header">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-left">
+      <div class="series-pill">Monthly Series · On the 19th</div>
+      <h1 class="page-hero-h1">BJuneteenth<br>Monthly</h1>
+    </div>
+    <div class="page-hero-right">
+      <div class="section-tag light">About the Series</div>
+      <p class="page-hero-tagline">A monthly gathering for the Black diaspora in Barcelona — building community and momentum ahead of Juneteenth Barcelona 2026 on June 20.</p>
+      <a href="https://luma.com/0dn16jez" target="_blank" rel="noopener noreferrer" class="btn btn-white">RSVP for April 19 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED EVENT -->
+<section class="featured-event reveal" aria-label="Next event">
+  <div class="featured-inner">
+    <div class="featured-poster">
+      <img src="https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=800,height=800/event-covers/uc/e4652c3c-7b60-48f2-9010-41e7d76c10d1.png"
+           alt="BJuneteenth April event poster">
+    </div>
+    <div class="featured-body">
+      <div>
+        <div class="section-tag featured-tag">Next Event · April 2026</div>
+        <h2 class="featured-title">Chicken &amp; Waffles Brunch<br>BJuneteenth Info Day</h2>
+        <div class="featured-meta">
+          <div class="meta-row">
+            <strong>Date</strong>
+            <span>Sunday, April 19, 2026</span>
+          </div>
+          <div class="meta-row">
+            <strong>Time</strong>
+            <span>12:00 PM – 4:30 PM</span>
+          </div>
+          <div class="meta-row">
+            <strong>Where</strong>
+            <span>Supper Club · Carrer de Mallorca 41, Barcelona</span>
+          </div>
+        </div>
+        <p class="featured-desc">Join us on Sunday, April 19 at a home Supper Club to gather, have brunch, drink, and share a nice Sunday together. Come hungry for more than just food! This is your chance to connect, share stories, and raise attention to Juneteenth and the Community Cookout we are planning for June 20, 2026.</p>
+        <div class="food-by">Food by <span>Flippin' Birds</span></div>
+      </div>
+      <div class="featured-ctas">
+        <a href="https://luma.com/0dn16jez" target="_blank" rel="noopener noreferrer" class="btn btn-white">RSVP on Luma →</a>
+        <a href="#tickets" class="btn btn-outline-light">See tickets</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKETS -->
+<section class="tickets-section reveal" id="tickets" aria-label="Ticket options">
+  <div class="ticket-card">
+    <div class="section-tag">Option 01</div>
+    <div class="ticket-name">RSVP + Brunch</div>
+    <div class="ticket-price">€25</div>
+    <p class="ticket-desc">Wings, chicken &amp; waffle sandwich, plantains, and 2 glasses of champagne. Food by Flippin' Birds.</p>
+    <a href="https://luma.com/0dn16jez" target="_blank" rel="noopener noreferrer" class="btn btn-dark">Book Brunch Ticket →</a>
+  </div>
+  <div class="ticket-card">
+    <div class="section-tag">Option 02</div>
+    <div class="ticket-name">RSVP — No Brunch</div>
+    <div class="ticket-price free">Free</div>
+    <p class="ticket-desc">Join us without the brunch. Drinks can be purchased in-person. Food must be pre-ordered via the brunch ticket option.</p>
+    <a href="https://luma.com/0dn16jez" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Book Free Spot →</a>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section reveal" aria-label="Brunch menu">
+  <div class="menu-inner">
+    <div class="menu-left">
+      <div class="section-tag light">Brunch Menu</div>
+      <h2 class="menu-title">What's<br>on the<br>table.</h2>
+      <p class="menu-sub">Food by Flippin' Birds. Brunch ticket holders only. Champagne included.</p>
+    </div>
+    <div class="menu-right">
+      <div class="menu-item">
+        <div class="menu-item-name">Champagne</div>
+        <div class="menu-item-body">Two glasses of champagne included with your brunch ticket. Cheers.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-name">The Hot Chick</div>
+        <div class="menu-item-body">Our signature offering. Fluffy waffles, boneless &amp; skinless fried chicken marinated in a special spice blend and buttermilk brine for 48 hours, fried sweet plantains, a slice of butter, hot sauce and maple syrup.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-name">The Side Chicks</div>
+        <div class="menu-item-body">Whole chicken wings marinated in our special spice blend and buttermilk brine for 48 hours. Skin-on and bone-in. Served with hot sauce.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-name">Plantains</div>
+        <div class="menu-item-body">The ultimate sweet and hearty comfort food. Ripe plantains fried to perfection.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERIES BAND -->
+<div class="series-band reveal">
+  <div>
+    <div class="series-band-title">Every 19th.<br>Until June 20.</div>
+    <p class="series-band-sub">BJuneteenth Monthly takes place on the 19th of each month, building up to Juneteenth Barcelona 2026 — our major community cookout on June 20.</p>
+  </div>
+  <a href="event.html" class="btn btn-white">About the June 20 Event →</a>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer role="contentinfo" aria-label="Site footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-wrap">
+        <img src="https://seekflag.com/wp-content/uploads/2022/01/Juneteenth-01-1.png" alt="Juneteenth flag" style="height:16px;width:auto;display:block;">
+        <span class="footer-logo-text">Juneteenth Barcelona</span>
+      </div>
+      <p class="footer-tagline">Celebrating Black freedom, heritage, and community in Barcelona.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Pages</h5>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="event.html">The Event</a></li>
+        <li><a href="monthly-events.html">Monthly Events</a></li>
+        <li><a href="walking-tour/index.html">Walking Tour</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="mailto:barcelona@juneteenth.es">barcelona@juneteenth.es</a></li>
+        <li><a href="contact.html">Volunteer / Sponsor</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Juneteenth Barcelona. Organized by volunteers with love.</p>
+    <div class="footer-flag">
+      <span style="background:var(--red)"></span>
+      <span style="background:#333"></span>
+      <span style="background:var(--green)"></span>
+    </div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<!-- Google Translate (hidden widget) -->
+<div id="google_translate_element"></div>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
