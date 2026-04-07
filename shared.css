@@ -100,6 +100,36 @@ footer {
 .ticker-track span { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: white; padding: 0 2rem; }
 .ticker-track .sep { color: rgba(255,255,255,0.3); }
 
+/* ── WALKING TOUR IMAGES ── */
+.stop-img {
+  width: 100%; aspect-ratio: 16/9; object-fit: cover;
+  display: block; margin: 1.5rem 0 0.4rem;
+  filter: grayscale(12%); transition: filter 0.3s;
+}
+.stop-img:hover { filter: grayscale(0%); }
+.stop-img-portrait {
+  float: right; width: 200px; aspect-ratio: 3/4;
+  object-fit: cover; object-position: top;
+  margin: 0 0 1.2rem 2rem;
+  filter: grayscale(12%); transition: filter 0.3s;
+}
+.stop-img-portrait:hover { filter: grayscale(0%); }
+.stop-img-pair {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 8px; margin: 1.5rem 0 0.4rem;
+}
+.stop-img-pair img { width: 100%; aspect-ratio: 4/3; object-fit: cover; filter: grayscale(12%); }
+.img-credit {
+  font-size: 0.68rem; color: var(--mid);
+  margin-bottom: 1.5rem; line-height: 1.5;
+}
+.img-credit a { color: var(--mid); border-bottom: 1px solid var(--border); text-decoration: none; }
+.img-credit a:hover { color: var(--black); }
+@media (max-width: 600px) {
+  .stop-img-portrait { float: none; width: 100%; aspect-ratio: 16/9; margin: 1rem 0; }
+  .stop-img-pair { grid-template-columns: 1fr; }
+}
+
 /* ── REVEAL ── */
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
