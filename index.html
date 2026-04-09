@@ -223,6 +223,37 @@
   .hero-h1 { font-size: clamp(3rem, 12vw, 6rem); }
 }
 
+/* ── PARTNERS MARQUEE ── */
+.partners-marquee {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: #fff;
+  overflow: hidden;
+  padding: 1.2rem 0;
+}
+.partners-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 32s linear infinite;
+}
+.partners-marquee-track:hover { animation-play-state: paused; }
+.partners-marquee-item {
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 2.5rem;
+  border-right: 1px solid var(--border);
+  height: 60px; flex-shrink: 0;
+}
+.partners-marquee-item img {
+  max-height: 40px; max-width: 120px;
+  width: auto; height: auto; object-fit: contain;
+  filter: grayscale(30%); opacity: 0.85; transition: filter 0.2s, opacity 0.2s;
+}
+.partners-marquee-item:hover img { filter: grayscale(0%); opacity: 1; }
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 /* ── MAIN EVENT SECTION ── */
 .walking-tour-section {
   border-top: 1px solid var(--border);
@@ -457,6 +488,35 @@
     </div>
   </div>
 </section>
+
+<!-- PARTNERS MARQUEE -->
+<div class="partners-marquee">
+  <div class="partners-marquee-track">
+    <div class="partners-marquee-item"><img src="images/partners/Blacklining Forum podcast logo.png" alt="Blacklining Forum Podcast"></div>
+    <div class="partners-marquee-item"><img src="images/partners/ReFresh Strategies.png" alt="ReFresh Strategies"></div>
+    <div class="partners-marquee-item"><img src="images/partners/barcelona-relocation.png" alt="Barcelona Relocation"></div>
+    <div class="partners-marquee-item"><img src="images/partners/empowherment.png" alt="Empowherment"></div>
+    <div class="partners-marquee-item"><img src="images/partners/flippin-birds.png" alt="Flippin Birds"></div>
+    <div class="partners-marquee-item"><img src="images/partners/island-abrod.jpg" alt="Island Abroad"></div>
+    <div class="partners-marquee-item"><img src="images/partners/orange-peel.jpg" alt="Orange Peel"></div>
+    <div class="partners-marquee-item"><img src="images/partners/sanaa.png" alt="Sanaa"></div>
+    <div class="partners-marquee-item"><img src="images/partners/the-station.png" alt="The Station"></div>
+    <div class="partners-marquee-item"><img src="images/partners/tudys.png" alt="Tudys"></div>
+    <div class="partners-marquee-item"><img src="images/partners/wekafore.png" alt="Wekafore"></div>
+    <!-- duplicate set for seamless loop -->
+    <div class="partners-marquee-item"><img src="images/partners/Blacklining Forum podcast logo.png" alt="Blacklining Forum Podcast"></div>
+    <div class="partners-marquee-item"><img src="images/partners/ReFresh Strategies.png" alt="ReFresh Strategies"></div>
+    <div class="partners-marquee-item"><img src="images/partners/barcelona-relocation.png" alt="Barcelona Relocation"></div>
+    <div class="partners-marquee-item"><img src="images/partners/empowherment.png" alt="Empowherment"></div>
+    <div class="partners-marquee-item"><img src="images/partners/flippin-birds.png" alt="Flippin Birds"></div>
+    <div class="partners-marquee-item"><img src="images/partners/island-abrod.jpg" alt="Island Abroad"></div>
+    <div class="partners-marquee-item"><img src="images/partners/orange-peel.jpg" alt="Orange Peel"></div>
+    <div class="partners-marquee-item"><img src="images/partners/sanaa.png" alt="Sanaa"></div>
+    <div class="partners-marquee-item"><img src="images/partners/the-station.png" alt="The Station"></div>
+    <div class="partners-marquee-item"><img src="images/partners/tudys.png" alt="Tudys"></div>
+    <div class="partners-marquee-item"><img src="images/partners/wekafore.png" alt="Wekafore"></div>
+  </div>
+</div>
 
 <!-- PAGES NAV -->
 <div class="pages-nav">
