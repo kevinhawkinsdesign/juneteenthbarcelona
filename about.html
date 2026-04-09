@@ -123,10 +123,11 @@
 .constellation { padding: 6rem 5vw; border-top: 1px solid var(--border); }
 .constellation-title { font-family: 'Inter', sans-serif; font-weight: 800; font-size: clamp(1.5rem, 2.5vw, 2.2rem); letter-spacing: -0.02em; margin: 0.5rem 0 2.5rem; }
 .constellation-sub { font-size: 0.9rem; color: rgba(13,13,13,0.55); max-width: 500px; line-height: 1.7; margin-bottom: 3rem; }
-.constellation-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--border); border-left: 1px solid var(--border); }
-.constellation-item { padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); }
-.constellation-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.03em; }
-.constellation-role { font-size: 0.72rem; color: var(--mid); margin-top: 0.15rem; }
+.partners-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.partner-item { display: flex; align-items: center; justify-content: center; padding: 1.5rem; background: #f8f6f2; border: 1px solid var(--border); min-height: 100px; transition: box-shadow 0.2s; }
+.partner-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+.partner-item img { max-width: 100%; max-height: 70px; width: auto; height: auto; object-fit: contain; filter: grayscale(20%); transition: filter 0.2s; }
+.partner-item:hover img { filter: grayscale(0%); }
 
 /* ── CTA BAND ── */
 .cta-band { background: var(--red); padding: 5rem 5vw; display: flex; justify-content: space-between; align-items: center; gap: 3rem; flex-wrap: wrap; }
@@ -141,12 +142,12 @@
   .goals-header { grid-template-columns: 1fr; gap: 1.5rem; }
   .goals-grid { grid-template-columns: 1fr; }
   .team-grid { grid-template-columns: 1fr 1fr; }
-  .constellation-grid { grid-template-columns: 1fr 1fr; }
+  .partners-grid { grid-template-columns: 1fr 1fr; }
   .cta-band { flex-direction: column; align-items: flex-start; }
 }
 @media (max-width: 480px) {
   .team-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .constellation-grid { grid-template-columns: 1fr 1fr; }
+  .partners-grid { grid-template-columns: 1fr 1fr; }
 }
 
 /* ── SKIP TO CONTENT (accessibility) ── */
@@ -370,16 +371,19 @@
 <section class="constellation reveal">
   <div class="section-tag">Our Network</div>
   <h2 class="constellation-title">The Juneteenth Barcelona constellation</h2>
-  <p class="constellation-sub">Our work is built across disciplines and backgrounds — a network of collaborators, volunteers, and community partners. Want to get involved? <a href="contact.html" style="color:var(--black);border-bottom:1px solid var(--black);">Reach out.</a></p>
-  <div class="constellation-grid">
-    <div class="constellation-item"><div class="constellation-name">Volunteer Coordinator</div><div class="constellation-role">Logistics &amp; Operations</div></div>
-    <div class="constellation-item"><div class="constellation-name">Communications Lead</div><div class="constellation-role">Press &amp; Social Media</div></div>
-    <div class="constellation-item"><div class="constellation-name">Art Director</div><div class="constellation-role">Visual Identity</div></div>
-    <div class="constellation-item"><div class="constellation-name">Music Curator</div><div class="constellation-role">Programming</div></div>
-    <div class="constellation-item"><div class="constellation-name">Community Partner</div><div class="constellation-role">African Diaspora BCN</div></div>
-    <div class="constellation-item"><div class="constellation-name">Photographer</div><div class="constellation-role">Documentation</div></div>
-    <div class="constellation-item"><div class="constellation-name">Sponsor Relations</div><div class="constellation-role">Partnerships</div></div>
-    <div class="constellation-item"><div class="constellation-name">Venue Liaison</div><div class="constellation-role">La Fábrica &amp; Co</div></div>
+  <p class="constellation-sub">Our work is built across disciplines and backgrounds — a network of collaborators, community partners, and supporters. Want to get involved? <a href="contact.html" style="color:var(--black);border-bottom:1px solid var(--black);">Reach out.</a></p>
+  <div class="partners-grid">
+    <div class="partner-item"><img src="images/partners/Blacklining Forum podcast logo.png" alt="Blacklining Forum Podcast"></div>
+    <div class="partner-item"><img src="images/partners/ReFresh Strategies.png" alt="ReFresh Strategies"></div>
+    <div class="partner-item"><img src="images/partners/barcelona-relocation.png" alt="Barcelona Relocation"></div>
+    <div class="partner-item"><img src="images/partners/empowherment.png" alt="Empowherment"></div>
+    <div class="partner-item"><img src="images/partners/flippin-birds.png" alt="Flippin Birds"></div>
+    <div class="partner-item"><img src="images/partners/island-abrod.jpg" alt="Island Abroad"></div>
+    <div class="partner-item"><img src="images/partners/orange-peel.jpg" alt="Orange Peel"></div>
+    <div class="partner-item"><img src="images/partners/sanaa.png" alt="Sanaa"></div>
+    <div class="partner-item"><img src="images/partners/the-station.png" alt="The Station"></div>
+    <div class="partner-item"><img src="images/partners/tudys.png" alt="Tudys"></div>
+    <div class="partner-item"><img src="images/partners/wekafore.png" alt="Wekafore"></div>
   </div>
 </section>
 
