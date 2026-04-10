@@ -8,6 +8,12 @@
     X-Content-Type-Options = "nosniff"
 
 [[redirects]]
+  from = "https://dancing-lebkuchen-8348db.netlify.app/*"
+  to = "https://juneteenth.es/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/admin"
   to = "/admin/index.html"
   status = 200
