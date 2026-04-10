@@ -132,10 +132,10 @@
 <div class="page-top">
   <div class="page-top-inner">
     <div>
-      <div class="section-tag">Gallery</div>
-      <h1 class="page-h1">Photo<br>Archive</h1>
+      <div class="section-tag" data-cms="gallery_tag">Gallery</div>
+      <h1 class="page-h1" data-cms="gallery_title">Photo<br>Archive</h1>
     </div>
-    <p class="page-desc">Images from Juneteenth Barcelona celebrations. Add photos via the CMS admin panel — they'll appear here automatically.</p>
+    <p class="page-desc" data-cms="gallery_desc">Images from Juneteenth Barcelona celebrations. Add photos via the CMS admin panel — they'll appear here automatically.</p>
   </div>
 </div>
 
@@ -153,8 +153,8 @@
 <!-- UPLOAD CTA -->
 <div class="upload-cta reveal">
   <div>
-    <div class="upload-title">Have photos to share?</div>
-    <div class="upload-sub">Committee members can upload photos via the admin panel.</div>
+    <div class="upload-title" data-cms="upload_title">Have photos to share?</div>
+    <div class="upload-sub" data-cms="upload_sub">Committee members can upload photos via the admin panel.</div>
   </div>
   <a href="/admin" class="btn btn-white">Open CMS →</a>
 </div>
@@ -187,6 +187,7 @@
 </div>
 
 <script src="shared.js"></script>
+<script>loadPageContent('/_data/pages/gallery.json');</script>
 <script>
 // Load gallery from JSON
 async function loadGallery() {
