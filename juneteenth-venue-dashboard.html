@@ -577,10 +577,10 @@
                 color: '#C8102E',
                 baseRental: 1200,
                 baseCapacity: 150,
-                totalArea: 340,
+                totalArea: 380,
                 standingArea: 200,
                 diningArea: 80,
-                artMarketArea: 40,
+                artMarketArea: 80,
                 stagingArea: 30,
                 rentalHours: '10:00 AM – 10:00 PM (12 hours)',
                 hourlyRate: '€100/hour',
@@ -618,7 +618,7 @@
                     'Sound System (included)': 0,
                     'Furniture Rental': 0
                 },
-                equipment: ['Professional sound system (included)', 'Stage', 'Professional lighting (included)', 'Security staff (included)', 'Bar operations', 'Kitchen', 'Catering service available'],
+                equipment: ['Professional sound system (included)', 'Stage', 'Professional lighting (included)', 'Security staff (included)', 'Bar operations', 'Central kitchen (60m² vendor support)', 'Catering service available'],
                 strengths: ['Black-owned partnership', 'Professional turn-key infrastructure', '3-zone configuration', 'Sound & security INCLUDED', 'Open until 2 AM for extended celebration', 'No policy ambiguity'],
                 warnings: ['Higher hourly rate (€190/hr)', 'Catering may limit external vendors', 'Extended hours add cost but allow late-night celebration']
             }
@@ -672,7 +672,7 @@
                 const areas = [
                     { name: 'Live Performance Stage', size: venue.stagingArea, color: '#FFB703' },
                     { name: 'Dance Floor (100 guests)', size: venue.standingArea, color: '#FB5607' },
-                    { name: 'Art Market (20 vendors)', size: venue.artMarketArea, color: '#8338EC' },
+                    { name: venueKey === 'carretes47' ? 'Art Market & Vendor Booth Prep' : 'Art Market + Central Kitchen (20 vendors)', size: venue.artMarketArea, color: '#8338EC' },
                     { name: 'Dining & Seating', size: venue.diningArea, color: '#3A86FF' }
                 ];
                 
