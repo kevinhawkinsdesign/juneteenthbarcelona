@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Juneteenth Venue OS</title>
+<title>Juneteenth Venue Decision OS</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -15,11 +15,7 @@ background:#0b0f19;
 color:#e5e7eb;
 }
 
-.container{
-max-width:1100px;
-margin:auto;
-padding:16px;
-}
+.container{max-width:1100px;margin:auto;padding:16px}
 
 .card{
 background:rgba(255,255,255,0.04);
@@ -31,49 +27,45 @@ margin-top:12px;
 
 h1{font-size:20px;margin:0}
 
-.grid{
-display:grid;
-grid-template-columns:1fr;
-gap:10px;
-}
-
-@media(min-width:768px){
-.grid{grid-template-columns:1fr 1fr}
-}
-
-.venueImg{
-width:100%;
-height:200px;
-object-fit:cover;
-border-radius:12px;
-cursor:pointer;
-transition:0.2s;
-}
-
-.venueImg:hover{transform:scale(1.02)}
-
-.small{
-font-size:12px;
-color:#94a3b8;
-margin-top:6px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.badge{
-font-size:11px;
-padding:4px 8px;
-border:1px solid #334155;
-border-radius:999px;
-color:#93c5fd;
-}
-
-.kpi{font-size:18px;font-weight:800}
+.grid{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:768px){.grid{grid-template-columns:1fr 1fr}}
 
 input[type=range]{width:100%}
 
-/* MODAL */
+.kpi{font-size:18px;font-weight:800}
+
+table{
+width:100%;
+border-collapse:collapse;
+font-size:12px;
+}
+
+td,th{
+padding:8px;
+border-bottom:1px solid rgba(255,255,255,0.1);
+text-align:left;
+}
+
+th{color:#93c5fd}
+
+.green{color:#4ade80}
+.red{color:#f87171}
+
+img{
+width:100%;
+border-radius:12px;
+cursor:pointer;
+}
+
+.small{font-size:11px;color:#94a3b8}
+
+.badge{
+font-size:10px;
+padding:3px 6px;
+border:1px solid #334155;
+border-radius:999px;
+}
+
 .modal{
 display:none;
 position:fixed;
@@ -81,44 +73,16 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.95);
+background:black;
 z-index:999;
 align-items:center;
 justify-content:center;
 flex-direction:column;
 }
 
-.modal img{
-max-width:90%;
-max-height:80%;
-border-radius:12px;
-}
+.modal img{max-width:90%;max-height:80%}
 
-.nav{
-margin-top:10px;
-display:flex;
-gap:10px;
-}
-
-button{
-padding:8px 12px;
-border-radius:8px;
-border:none;
-background:#1f2937;
-color:white;
-cursor:pointer;
-}
-
-button:hover{background:#334155}
-
-.hint{
-font-size:11px;
-color:#94a3b8;
-margin-top:6px;
-display:flex;
-align-items:center;
-gap:6px;
-}
+button{padding:8px 12px;border-radius:8px;border:none}
 
 </style>
 </head>
@@ -127,165 +91,152 @@ gap:6px;
 
 <div class="container">
 
-<h1>🎟 Juneteenth Venue Decision OS</h1>
+<h1>🎟 Venue Decision OS</h1>
 
+<!-- SLIDERS -->
 <div class="card">
-<h3>🎛 Controls</h3>
+<h3>🎛 Controls (live values shown)</h3>
 
-<div>Carretes Ticket</div>
-<input id="carPrice" type="range" min="8" max="12" value="10" oninput="updateModel()">
+<div>Carretes Ticket (€8–12)</div>
+<input id="carPrice" type="range" min="8" max="12" value="10" oninput="update()">
 <div class="kpi" id="carPriceLabel"></div>
 
-<div>Roots Early</div>
-<input id="rootEarly" type="range" min="8" max="12" value="10" oninput="updateModel()">
+<div>Roots Early (€8–12)</div>
+<input id="rootEarly" type="range" min="8" max="12" value="10" oninput="update()">
+<div class="kpi" id="rootEarlyLabel"></div>
 
-<div>Roots Late</div>
-<input id="rootLate" type="range" min="12" max="20" value="15" oninput="updateModel()">
+<div>Roots Late (€12–20)</div>
+<input id="rootLate" type="range" min="12" max="20" value="15" oninput="update()">
+<div class="kpi" id="rootLateLabel"></div>
 
-<div>Sponsorship</div>
-<input id="sponsor" type="range" min="0" max="5000" value="300" oninput="updateModel()">
+<div>Sponsorship (€0–5000)</div>
+<input id="sponsor" type="range" min="0" max="5000" value="300" oninput="update()">
+<div class="kpi" id="sponsorLabel"></div>
+
 </div>
 
-<div class="card" id="financials"></div>
+<!-- FINANCIAL -->
+<div class="card" id="financial"></div>
+
+<!-- PRESSURE -->
 <div class="card" id="pressure"></div>
+
+<!-- COMPARISON TABLE -->
+<div class="card">
+<h3>📊 Full Venue Comparison</h3>
+
+<table>
+<tr>
+<th>Feature</th>
+<th>Carretes 47</th>
+<th>Roots</th>
+</tr>
+
+<tr><td>Location</td><td>El Raval</td><td>Poblenou</td></tr>
+<tr><td>Hours</td><td>10:00–22:00</td><td>10:00–02:00</td></tr>
+<tr><td>Kitchen</td><td>Mini kitchen</td><td>Commercial + 3 prep zones</td></tr>
+<tr><td>Bathrooms</td><td>2</td><td>6</td></tr>
+<tr><td>Sound</td><td>Rental (€400)</td><td>Included</td></tr>
+<tr><td>Security</td><td>€800 required</td><td>Included</td></tr>
+<tr><td>Cleaning</td><td>€300</td><td>€300</td></tr>
+<tr><td>Furniture</td><td>€300</td><td>Included</td></tr>
+<tr><td>Food setup</td><td>Booths (80m²)</td><td>Kitchen + bar service</td></tr>
+<tr><td>Capacity feel</td><td>Compact / intimate</td><td>Large / open flow</td></tr>
+</table>
+
+</div>
 
 <!-- VENUES -->
 <div class="card">
-
-<h3>🖼 Venues (tap cover to open gallery)</h3>
+<h3>🖼 Venues (click image)</h3>
 
 <div class="grid">
-
-<!-- CARRETES -->
 <div>
-<img class="venueImg" src="/images/carretes47/IMG_7272.jpeg" onclick="openGallery('carretes',0)"/>
-<div class="small">
-<div>📍 Carretes 47 — El Raval</div>
-<div class="badge">📸 Tap for gallery</div>
-</div>
+<img src="/images/carretes47/IMG_7276.jpeg" onclick="openImg(this.src)">
+<div class="small">📍 Carretes 47 <span class="badge">tap</span></div>
 </div>
 
-<!-- ROOTS -->
 <div>
-<img class="venueImg" src="/images/roots/IMG_7237.jpeg" onclick="openGallery('roots',0)"/>
-<div class="small">
-<div>📍 Roots — Poblenou</div>
-<div class="badge">📸 Tap for gallery</div>
+<img src="/images/roots/IMG_7238.jpeg" onclick="openImg(this.src)">
+<div class="small">📍 Roots <span class="badge">tap</span></div>
 </div>
 </div>
 
-</div>
 </div>
 
 </div>
 
 <!-- MODAL -->
-<div class="modal" id="modal">
+<div class="modal" id="modal" onclick="closeImg()">
 <img id="modalImg"/>
-<div class="nav">
-<button onclick="prevImg()">⬅ Prev</button>
-<button onclick="closeModal()">Close</button>
-<button onclick="nextImg()">Next ➡</button>
-</div>
 </div>
 
 <script>
 
-const oversell = 1.35;
-const noShow = 0.85;
+function val(id){return +document.getElementById(id).value}
 
-let galleries = {
-carretes: Array.from({length:9}, (_,i)=>`/images/carretes47/IMG_${7272+i}.jpeg`),
-roots: Array.from({length:30}, (_,i)=>`/images/roots/IMG_${7237+i}.jpeg`)
-};
+function update(){
 
-let currentGallery = [];
-let currentIndex = 0;
+document.getElementById("carPriceLabel").innerText = "€"+val("carPrice");
+document.getElementById("rootEarlyLabel").innerText = "€"+val("rootEarly");
+document.getElementById("rootLateLabel").innerText = "€"+val("rootLate");
+document.getElementById("sponsorLabel").innerText = "€"+val("sponsor");
 
-function openGallery(type,index){
-currentGallery = galleries[type];
-currentIndex = index;
-document.getElementById("modal").style.display="flex";
-document.getElementById("modalImg").src=currentGallery[currentIndex];
-}
+let carDemand = 150*1.35*0.85;
+let rootDemand = 200*1.35*0.85;
 
-function closeModal(){
-document.getElementById("modal").style.display="none";
-}
+let rootAvg = (val("rootEarly")+val("rootLate"))/2;
 
-function nextImg(){
-currentIndex = (currentIndex+1)%currentGallery.length;
-document.getElementById("modalImg").src=currentGallery[currentIndex];
-}
+let carRevenue = carDemand*val("carPrice");
+let rootRevenue = rootDemand*rootAvg + rootDemand*2.5;
 
-function prevImg(){
-currentIndex = (currentIndex-1+currentGallery.length)%currentGallery.length;
-document.getElementById("modalImg").src=currentGallery[currentIndex];
-}
+let carCost = 3000+1800;
+let rootCost = 3200+300;
 
-function demand(cap){
-return cap * oversell * noShow;
-}
+let carProfit = carRevenue+val("sponsor")-carCost;
+let rootProfit = rootRevenue+val("sponsor")-rootCost;
 
-function updateModel(){
+document.getElementById("financial").innerHTML = `
+<h3>📊 Financial Output</h3>
 
-let carPrice = +document.getElementById("carPrice").value;
-let rootEarly = +document.getElementById("rootEarly").value;
-let rootLate = +document.getElementById("rootLate").value;
-let sponsor = +document.getElementById("sponsor").value;
-
-/* DEMAND */
-let carDemand = demand(150);
-let rootDemand = demand(200);
-
-let rootAvg = (rootEarly + rootLate)/2;
-
-let carRevenue = carDemand * carPrice;
-let rootRevenue = (rootDemand * rootAvg) + (rootDemand*2.5);
-
-let carCost = 3000 + 1800;
-let rootCost = 3200 + 300;
-
-let carProfit = carRevenue + sponsor - carCost;
-let rootProfit = rootRevenue + sponsor - rootCost;
-
-document.getElementById("financials").innerHTML = `
-<h3>📊 Financials</h3>
 <div class="grid">
-
 <div>
 <b>Carretes</b>
-<div>€${Math.round(carRevenue)} revenue</div>
-<div class="${carProfit>0?'green':'red'}">€${Math.round(carProfit)} profit</div>
+<div>Revenue €${Math.round(carRevenue)}</div>
+<div class="${carProfit>=0?'green':'red'}">Profit €${Math.round(carProfit)}</div>
 </div>
 
 <div>
 <b>Roots</b>
-<div>€${Math.round(rootRevenue)} revenue</div>
-<div class="${rootProfit>0?'green':'red'}">€${Math.round(rootProfit)} profit</div>
+<div>Revenue €${Math.round(rootRevenue)}</div>
+<div class="${rootProfit>=0?'green':'red'}">Profit €${Math.round(rootProfit)}</div>
 </div>
-
 </div>
 `;
+
+let carP = carDemand/150;
+let rootP = rootDemand/200;
 
 document.getElementById("pressure").innerHTML = `
 <h3>📈 Sellout Pressure</h3>
+
 <div class="grid">
-
-<div>
-Carretes: ${(carDemand/150).toFixed(2)}x
-</div>
-
-<div>
-Roots: ${(rootDemand/200).toFixed(2)}x
-</div>
-
+<div>Carretes: ${carP.toFixed(2)}x</div>
+<div>Roots: ${rootP.toFixed(2)}x</div>
 </div>
 `;
-
 }
 
-updateModel();
+function openImg(src){
+document.getElementById("modal").style.display="flex";
+document.getElementById("modalImg").src=src;
+}
+
+function closeImg(){
+document.getElementById("modal").style.display="none";
+}
+
+update();
 
 </script>
 
