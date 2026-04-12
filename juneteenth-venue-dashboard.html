@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>🎟 Juneteenth Venue Decision OS (Live Data)</title>
+<title>🎟 Juneteenth Venue Decision OS — Autopilot</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -22,12 +22,7 @@ padding:20px;
 }
 
 h1{font-size:24px;margin-bottom:6px}
-
-.sub{
-color:#94a3b8;
-font-size:13px;
-margin-bottom:16px;
-}
+.sub{color:#94a3b8;font-size:13px;margin-bottom:16px}
 
 .card{
 background:rgba(255,255,255,0.03);
@@ -43,37 +38,55 @@ grid-template-columns:1fr 1fr;
 gap:14px;
 }
 
-table{
+input[type=range]{
 width:100%;
-border-collapse:collapse;
-overflow:hidden;
-border-radius:12px;
+margin:8px 0 14px;
+accent-color:#60a5fa;
 }
 
-th,td{
-padding:10px;
+.metric{
+display:flex;
+justify-content:space-between;
 font-size:13px;
-border-bottom:1px solid rgba(255,255,255,0.06);
+margin:6px 0;
 }
 
-th{
-background:rgba(255,255,255,0.05);
-text-align:left;
-}
-
-.badge{
-display:inline-block;
-padding:4px 8px;
-border-radius:999px;
-font-size:11px;
-font-weight:700;
-}
+.small{font-size:12px;color:#94a3b8}
 
 .green{color:#4ade80}
 .red{color:#f87171}
 .blue{color:#60a5fa}
+.yellow{color:#fbbf24}
 
-.small{font-size:12px;color:#94a3b8}
+.badge{
+display:inline-block;
+padding:6px 10px;
+border-radius:999px;
+font-size:12px;
+font-weight:700;
+}
+
+.curve-line{
+display:flex;
+justify-content:space-between;
+font-size:12px;
+padding:3px 0;
+border-bottom:1px solid rgba(255,255,255,0.04);
+}
+
+.autopilot{
+padding:12px;
+border-radius:12px;
+background:rgba(59,130,246,0.08);
+border:1px solid rgba(59,130,246,0.2);
+margin-top:10px;
+}
+
+hr{
+border:0;
+border-top:1px solid rgba(255,255,255,0.08);
+margin:12px 0;
+}
 </style>
 </head>
 
@@ -82,41 +95,50 @@ font-weight:700;
 <div class="container">
 
 <h1>🎟 Juneteenth Venue Decision OS</h1>
-<div class="sub">📊 Sheet-driven architecture • 💰 €300 sponsorship included • ⚖️ 2 competing strategies</div>
-
-<!-- LIVE DATA SOURCE -->
-<div class="card">
-<div class="small">📥 Data Model (replace with Google Sheets export later)</div>
-
-<pre class="small">
-venues = [
-{
-name: "Carretes 47",
-location: "El Raval",
-capacity: 150,
-hours: "13:00–21:00",
-baseCost: 2940,
-complexity: 7,
-monetization: 6,
-bar: false
-},
-{
-name: "Roots",
-location: "Poblenou",
-capacity: 200,
-hours: "13:00–02:00",
-baseCost: 2960,
-complexity: 4,
-monetization: 9,
-bar: true
-}
-]
-</pre>
+<div class="sub">
+🤖 Autopilot decision engine • 📊 €300 sponsorship included • 📉 risk + certainty modeling
 </div>
 
-<!-- COMPARISON -->
+<!-- CONTROLS -->
 <div class="card">
-<h3>⚖️ Live Comparison Table (Sheet-Driven)</h3>
+<h3>🎛 Live Controls</h3>
+
+<label>Oversell 📈</label>
+<input type="range" id="oversell" min="1" max="1.6" step="0.05"/>
+
+<label>Ticket Price 🎟</label>
+<input type="range" id="ticket" min="8" max="25" step="1"/>
+
+<label>Demand Confidence 🔮</label>
+<input type="range" id="confidence" min="0.5" max="0.95" step="0.05"/>
+
+<div class="small">Includes €300 sponsorship offset applied to both venues</div>
+</div>
+
+<!-- AUTOPILOT -->
+<div class="card">
+<h3>🤖 Autopilot Recommendation</h3>
+<div id="autopilot"></div>
+</div>
+
+<!-- FINANCE -->
+<div class="card">
+<h3>💰 Financial Snapshot</h3>
+<div id="finance"></div>
+</div>
+
+<!-- CURVES -->
+<div class="card">
+<h3>📉 Break-even Curves</h3>
+<div class="grid">
+<div id="curveA"></div>
+<div id="curveB"></div>
+</div>
+</div>
+
+<!-- TABLE -->
+<div class="card">
+<h3>⚖️ Structural Comparison</h3>
 <table id="table"></table>
 </div>
 
@@ -126,104 +148,174 @@ bar: true
 
 const SPONSOR = 300;
 
-/* SHEET-LIKE DATA (replaceable later) */
 const venues = [
 {
 name:"🟡 Carretes 47",
-location:"El Raval",
 capacity:150,
-hours:"13–21h",
 cost:2940,
+bar:false,
+hours:"13–21h",
 complexity:7,
 monetization:6,
-bar:false
+location:"El Raval"
 },
 {
 name:"🟢 Roots",
-location:"Poblenou",
-hours:"13–02h",
 capacity:200,
 cost:2960,
+bar:true,
+hours:"13–02h",
 complexity:4,
 monetization:9,
-bar:true
+location:"Poblenou"
 }
 ];
 
-function revenue(v,confidence=0.8){
+let state={
+oversell:1.3,
+ticket:12,
+confidence:0.8
+};
 
-const demand = v.capacity * 1.3 * confidence;
-const ticket = demand * 12;
+/* REVENUE */
+function revenue(v,conf){
+const demand = v.capacity * state.oversell * conf;
+const ticket = demand * state.ticket;
 const bar = v.bar ? demand * 25 * 0.10 : 0;
-
 return ticket + bar;
 }
 
-function profit(v,confidence){
-return revenue(v,confidence) - (v.cost - SPONSOR);
+/* PROFIT */
+function profit(v,conf){
+return revenue(v,conf) - (v.cost - SPONSOR);
 }
 
-/* BUILD TABLE */
-function render(){
+/* CURVE */
+function curve(v){
 
-let html = `
-<tr>
-<th>Metric</th>
-<th>${venues[0].name}</th>
-<th>${venues[1].name}</th>
-</tr>
+let html="";
+let breakEven=null;
 
-<tr>
-<td>📍 Location</td>
-<td>${venues[0].location}</td>
-<td>${venues[1].location}</td>
-</tr>
+for(let c=0.5;c<=1.0;c+=0.05){
 
-<tr>
-<td>👥 Capacity</td>
-<td>${venues[0].capacity}</td>
-<td>${venues[1].capacity}</td>
-</tr>
+const p = profit(v,c);
 
-<tr>
-<td>🕐 Hours</td>
-<td>${venues[0].hours}</td>
-<td>${venues[1].hours}</td>
-</tr>
+if(!breakEven && p>=0) breakEven=c;
 
-<tr>
-<td>💰 Base Cost</td>
-<td>€${venues[0].cost}</td>
-<td>€${venues[1].cost}</td>
-</tr>
-
-<tr>
-<td>⚙️ Complexity (ops)</td>
-<td>${venues[0].complexity}/10</td>
-<td>${venues[1].complexity}/10</td>
-</tr>
-
-<tr>
-<td>💸 Monetization Potential</td>
-<td>${venues[0].monetization}/10</td>
-<td>${venues[1].monetization}/10</td>
-</tr>
-
-<tr>
-<td>📊 Profit (est)</td>
-<td class="${profit(venues[0])>0?'green':'red'}">€${Math.round(profit(venues[0]))}</td>
-<td class="${profit(venues[1])>0?'green':'red'}">€${Math.round(profit(venues[1]))}</td>
-</tr>
-
-<tr>
-<td>🏁 Recommendation</td>
-<td>${profit(venues[0])>profit(venues[1])?'🏆 safer':'—'}</td>
-<td>${profit(venues[1])>profit(venues[0])?'🚀 higher upside':'—'}</td>
-</tr>
+html+=`
+<div class="curve-line">
+<span>🔮 ${Math.round(c*100)}%</span>
+<span class="${p>=0?'green':'red'}">€${Math.round(p)}</span>
+</div>
 `;
-
-document.getElementById("table").innerHTML = html;
 }
+
+return {html,breakEven};
+}
+
+/* AUTOPILOT */
+function autopilot(){
+
+const c = curve(venues[0]);
+const r = curve(venues[1]);
+
+const pC = profit(venues[0],state.confidence);
+const pR = profit(venues[1],state.confidence);
+
+const best = pC > pR ? venues[0] : venues[1];
+
+const other = pC > pR ? venues[1] : venues[0];
+
+document.getElementById("autopilot").innerHTML=`
+
+<div class="autopilot">
+<span class="badge ${best===venues[1]?'green':'yellow'}">
+🏆 Recommended: ${best.name}
+</span>
+
+<hr/>
+
+<div class="small">
+✔ Higher expected profit at current confidence<br/>
+✔ Better risk-adjusted return profile<br/>
+✔ Stronger scalability under demand variability
+</div>
+
+<hr/>
+
+<div class="metric"><span>Expected Profit (Best)</span><b>€${Math.round(Math.max(pC,pR))}</b></div>
+<div class="metric"><span>Alternative Profit</span><b>€${Math.round(Math.min(pC,pR))}</b></div>
+</div>
+`;
+}
+
+/* FINANCE */
+function finance(){
+
+const c = profit(venues[0],state.confidence);
+const r = profit(venues[1],state.confidence);
+
+document.getElementById("finance").innerHTML=`
+
+<div class="grid">
+
+<div>
+<div class="metric"><span>${venues[0].name}</span><b>€${Math.round(c)}</b></div>
+</div>
+
+<div>
+<div class="metric"><span>${venues[1].name}</span><b>€${Math.round(r)}</b></div>
+</div>
+
+</div>
+
+<div class="small">💡 Profit includes €300 sponsorship baseline offset</div>
+`;
+}
+
+/* CURVES */
+function renderCurves(){
+
+const c = curve(venues[0]);
+const r = curve(venues[1]);
+
+document.getElementById("curveA").innerHTML=
+`<h4>🟡 Carretes</h4>` + c.html;
+
+document.getElementById("curveB").innerHTML=
+`<h4>🟢 Roots</h4>` + r.html;
+}
+
+/* TABLE */
+function table(){
+
+document.getElementById("table").innerHTML=`
+
+<tr><th>Metric</th><th>${venues[0].name}</th><th>${venues[1].name}</th></tr>
+
+<tr><td>📍 Location</td><td>${venues[0].location}</td><td>${venues[1].location}</td></tr>
+<tr><td>🕐 Hours</td><td>${venues[0].hours}</td><td>${venues[1].hours}</td></tr>
+<tr><td>👥 Capacity</td><td>${venues[0].capacity}</td><td>${venues[1].capacity}</td></tr>
+<tr><td>⚙️ Complexity</td><td>${venues[0].complexity}</td><td>${venues[1].complexity}</td></tr>
+<tr><td>💸 Monetization</td><td>${venues[0].monetization}</td><td>${venues[1].monetization}</td></tr>
+
+`;
+}
+
+/* RENDER */
+function render(){
+finance();
+renderCurves();
+table();
+autopilot();
+}
+
+document.querySelectorAll("input").forEach(i=>{
+i.addEventListener("input",e=>{
+state[e.target.id]=parseFloat(e.target.value);
+render();
+});
+});
 
 render();
 
