@@ -4,79 +4,89 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>Juneteenth Barcelona 2026 – Venue Decision</title>
+<title>Juneteenth Barcelona 2026 – Venue OS</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
     --bg:#0b0f19;
-    --card:#111827;
     --line:rgba(255,255,255,.08);
     --text:#e5e7eb;
     --muted:#94a3b8;
     --green:#22c55e;
-    --red:#ef4444;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-    font-family:Inter,system-ui;
+    font-family:Inter;
     background:radial-gradient(circle at top,#111827,#0b0f19);
     color:var(--text);
 }
 
-/* HERO */
-.hero{
-    padding:3.5rem 1.5rem 1.5rem;
+/* HEADER */
+.header{
     text-align:center;
+    padding:2.5rem 1rem 1rem;
 }
 
-.hero h1{
-    font-size:2.3rem;
-    font-weight:800;
+.header h1{font-size:2.2rem;font-weight:800;}
+.header p{color:var(--muted);margin-top:.5rem;}
+
+/* TABS */
+.tabs{
+    display:flex;
+    justify-content:center;
+    gap:.5rem;
+    margin:1rem 0;
 }
 
-.hero p{
-    color:var(--muted);
-    margin-top:.5rem;
+.tab{
+    padding:.45rem .8rem;
+    border:1px solid var(--line);
+    border-radius:999px;
+    cursor:pointer;
+    font-size:.85rem;
 }
 
-/* CONTAINER */
+.tab.active{
+    border-color:white;
+}
+
+/* LAYOUT */
 .container{
     max-width:1100px;
     margin:0 auto;
-    padding:1.5rem;
+    padding:1rem;
+}
+
+/* CONFIG PANEL */
+.config{
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:1rem;
+    margin-bottom:1rem;
+}
+
+.slider{
+    width:100%;
 }
 
 /* WINNER */
 .winner{
+    padding:1rem;
     border:1px solid var(--line);
+    border-radius:14px;
+    margin-bottom:1rem;
     background:rgba(34,197,94,.08);
-    border-radius:16px;
-    padding:1.2rem;
-    margin-bottom:1.5rem;
-}
-
-.winner h2{
-    font-size:1.1rem;
-}
-
-.badge{
-    display:inline-block;
-    margin-top:.5rem;
-    font-size:.75rem;
-    color:#86efac;
 }
 
 /* GRID */
 .grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:1.5rem;
+    gap:1rem;
 }
 
 @media(max-width:900px){
@@ -86,40 +96,28 @@ body{
 /* CARD */
 .card{
     border:1px solid var(--line);
-    background:rgba(255,255,255,.03);
-    border-radius:18px;
+    border-radius:14px;
     overflow:hidden;
 }
 
-.header{
-    padding:1.25rem;
+.header-card{
+    padding:1rem;
     font-weight:800;
-    font-size:1.2rem;
-}
-
-.meta{
-    color:var(--muted);
-    font-size:.85rem;
-    margin-top:.3rem;
 }
 
 /* CAROUSEL */
 .carousel{
     display:flex;
     overflow-x:auto;
-    scroll-snap-type:x mandatory;
     gap:6px;
     padding:6px;
 }
 
 .carousel img{
-    width:100%;
-    max-width:320px;
-    height:180px;
+    width:240px;
+    height:140px;
     object-fit:cover;
-    border-radius:12px;
-    scroll-snap-align:center;
-    flex:0 0 auto;
+    border-radius:10px;
 }
 
 /* METRICS */
@@ -127,141 +125,224 @@ body{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     border-top:1px solid var(--line);
-    border-bottom:1px solid var(--line);
 }
 
 .metric{
     text-align:center;
+    padding:.75rem;
+}
+
+/* EXPLAINER */
+.explainer{
+    border:1px solid var(--line);
+    border-radius:14px;
     padding:1rem;
-}
-
-.metric b{
-    display:block;
-    font-size:1.1rem;
-}
-
-.metric span{
-    font-size:.75rem;
-    color:var(--muted);
-}
-
-/* INSIGHT */
-.body{
-    padding:1rem 1.25rem;
-}
-
-.insight{
-    font-size:.9rem;
+    margin-top:1rem;
     color:var(--muted);
     line-height:1.5;
 }
 
-/* BUTTON */
-button{
-    margin-top:.75rem;
-    background:none;
+/* PITCH */
+.pitch{
     border:1px solid var(--line);
-    color:var(--text);
-    padding:.4rem .7rem;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:.8rem;
+    border-radius:14px;
+    padding:1rem;
+    background:rgba(255,255,255,.03);
 }
 
-button:hover{
-    border-color:#fff;
+.pitch h3{
+    margin-bottom:.5rem;
 }
 </style>
 </head>
 
 <body>
 
-<div class="hero">
-    <h1>Venue Decision</h1>
-    <p>Juneteenth Barcelona 2026 — Final comparison</p>
+<div class="header">
+<h1>Venue Decision OS</h1>
+<p>Juneteenth Barcelona 2026</p>
+</div>
+
+<div class="tabs">
+<div class="tab active" onclick="setTab('decision')">Decision</div>
+<div class="tab" onclick="setTab('media')">Media</div>
+<div class="tab" onclick="setTab('stakeholders')">Stakeholders</div>
+<div class="tab" onclick="setTab('pitch')">Sponsor Pitch</div>
 </div>
 
 <div class="container">
 
-<div class="winner" id="winner"></div>
-
-<div class="grid" id="app"></div>
+<div id="config"></div>
+<div id="winner"></div>
+<div id="app"></div>
 
 </div>
 
 <script>
-const venues = [
+
+let tab="decision";
+
+let weights={
+cost:0.4,
+exp:0.3,
+ops:0.2,
+night:0.1
+};
+
+const venues=[
 {
 name:"Carretes 47",
 color:"#ef4444",
 folder:"/images/carreres47/IMG_",
 range:[7272,7280],
+base:8.1,
 cost:2940,
-cap:150,
-area:340,
-score:8.1,
-insight:"Stronger aesthetic + lower production cost, but requires external sound + security + earlier cutoff."
+cap:150
 },
 {
 name:"Roots Gastro Club",
 color:"#22c55e",
 folder:"/images/roots/IMG_",
 range:[7237,7266],
+base:9.1,
 cost:2960,
-cap:200,
-area:650,
-score:9.1,
-insight:"Best operationally: kitchen, sound, lighting + late license included. Higher base cost but lower friction."
+cap:200
 }
 ];
 
-function images(v){
-let html="";
-for(let i=v.range[0]; i<=v.range[1]; i++){
-html+=`<img src="${v.folder}${i}.jpeg" />`;
+function score(v){
+return (
+(v.base*0.4*weights.exp) +
+((10-(v.cost/500))*weights.cost) +
+(v.cap/200*10*weights.ops) +
+(v.base*weights.night)
+).toFixed(2);
 }
-return html;
+
+function winner(){
+return venues.reduce((a,b)=>score(a)>score(b)?a:b);
+}
+
+function images(v){
+let h="";
+for(let i=v.range[0];i<=v.range[1];i++){
+h+=`<img src="${v.folder}${i}.jpeg"/>`;
+}
+return h;
+}
+
+/* AI EXPLAINER (RULE-BASED) */
+function explain(w){
+if(w.name.includes("Roots")){
+return "Roots wins due to operational completeness: integrated kitchen, sound, lighting, and extended license reduce production friction and risk. This makes it structurally more reliable for large-scale programming and late-night flow.";
+}else{
+return "Carretes wins on cost efficiency and spatial flexibility, but requires additional production infrastructure (sound, security, kitchen logistics), increasing execution complexity.";
+}
+}
+
+function renderConfig(){
+return `
+<div class="config">
+<b>Live Weight Controls</b><br/><br/>
+
+Cost <input class="slider" type="range" min="0" max="1" step="0.1" value="${weights.cost}" onchange="updateWeight('cost',this.value)"/><br/>
+Experience <input class="slider" type="range" min="0" max="1" step="0.1" value="${weights.exp}" onchange="updateWeight('exp',this.value)"/><br/>
+Operations <input class="slider" type="range" min="0" max="1" step="0.1" value="${weights.ops}" onchange="updateWeight('ops',this.value)"/><br/>
+Night Flow <input class="slider" type="range" min="0" max="1" step="0.1" value="${weights.night}" onchange="updateWeight('night',this.value)"/>
+</div>
+`;
 }
 
 function render(){
-const winner = venues.reduce((a,b)=>a.score>b.score?a:b);
+const w=winner();
+
+document.getElementById("config").innerHTML=renderConfig();
 
 document.getElementById("winner").innerHTML=`
-<h2>🏆 Recommended: ${winner.name}</h2>
-<div class="badge">Highest overall execution score (${winner.score})</div>
-<div style="margin-top:.5rem;color:var(--muted);font-size:.9rem">${winner.insight}</div>
+<div class="winner">
+🏆 <b>Recommended: ${w.name}</b><br/>
+<span style="color:var(--muted)">Score ${score(w)}</span>
+
+<div class="explainer">
+<b>Decision Insight</b><br/>
+${explain(w)}
+</div>
+</div>
 `;
 
-document.getElementById("app").innerHTML=venues.map(v=>`
+if(tab==="decision"){
+document.getElementById("app").innerHTML=`
+<div class="grid">
+${venues.map(v=>`
 <div class="card">
 
-<div class="header" style="color:${v.color}">
+<div class="header-card" style="color:${v.color}">
 ${v.name}
-<div class="meta">Score: ${v.score} · €${v.cost} · ${v.cap} guests · ${v.area}m²</div>
-</div>
-
-<div class="carousel">
-${images(v)}
 </div>
 
 <div class="metrics">
-<div class="metric"><b>€${v.cost}</b><span>Cost</span></div>
-<div class="metric"><b>${v.cap}</b><span>Capacity</span></div>
-<div class="metric"><b>${v.area}</b><span>Area</span></div>
-</div>
-
-<div class="body">
-<div class="insight">${v.insight}</div>
-<button onclick="alert('Score = execution readiness + infrastructure + guest experience')">
-Why this score?
-</button>
+<div class="metric">€${v.cost}<br/><small>Cost</small></div>
+<div class="metric">${v.cap}<br/><small>Cap</small></div>
+<div class="metric">${score(v)}<br/><small>Score</small></div>
 </div>
 
 </div>
-`).join("");
+`).join("")}
+</div>
+`;
+}
+
+if(tab==="media"){
+document.getElementById("app").innerHTML=`
+<div class="grid">
+${venues.map(v=>`
+<div class="card">
+<div class="header-card">${v.name}</div>
+<div class="carousel">${images(v)}</div>
+</div>
+`).join("")}
+</div>
+`;
+}
+
+if(tab==="pitch"){
+document.getElementById("app").innerHTML=`
+<div class="pitch">
+<h3>Juneteenth Barcelona 2026</h3>
+<p>
+A culturally significant large-scale experience combining music, art, food, and community.
+</p>
+
+<br/>
+
+<b>Audience:</b> 150–200 guests<br/>
+<b>Format:</b> Day → Night cultural progression<br/>
+<b>Programming:</b> Live music, DJ sets, food vendors, art market<br/>
+
+<br/>
+
+<b>Why it matters:</b>
+This event positions Barcelona as a global cultural node for diasporic creative expression, combining immersive hospitality and nightlife programming.
+</div>
+`;
+}
+
+}
+
+function updateWeight(k,v){
+weights[k]=parseFloat(v);
+render();
+}
+
+function setTab(t){
+tab=t;
+document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+event.target.classList.add("active");
+render();
 }
 
 render();
+
 </script>
 
 </body>
