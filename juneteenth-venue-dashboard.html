@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>🎟 Juneteenth Venue OS — Mobile Boardroom</title>
+<title>🎟 Juneteenth Venue OS</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -15,17 +15,30 @@ background:linear-gradient(180deg,#0b0f19,#070a12);
 color:#e5e7eb;
 }
 
+/* CORE LAYOUT */
 .container{
-max-width:1100px;
+max-width:1200px;
 margin:auto;
 padding:14px;
 }
 
-/* HEAD */
-h1{font-size:22px;margin-bottom:6px}
-.sub{color:#94a3b8;font-size:12px;margin-bottom:14px}
+/* TYPOGRAPHY RESPONSIVE */
+h1{
+font-size:clamp(18px,4vw,26px);
+margin-bottom:6px;
+}
 
-/* CARDS */
+h3{
+font-size:clamp(14px,3.5vw,18px);
+}
+
+.sub{
+color:#94a3b8;
+font-size:clamp(11px,2.5vw,13px);
+margin-bottom:14px;
+}
+
+/* CARD */
 .card{
 background:rgba(255,255,255,0.03);
 border:1px solid rgba(255,255,255,0.08);
@@ -34,7 +47,7 @@ padding:14px;
 margin-top:12px;
 }
 
-/* MOBILE GRID FIX */
+/* GRID RESPONSIVE */
 .grid{
 display:grid;
 grid-template-columns:1fr;
@@ -45,23 +58,12 @@ gap:10px;
 .grid{grid-template-columns:1fr 1fr;}
 }
 
+/* SLIDERS TOUCH FRIENDLY */
 input[type=range]{
 width:100%;
-margin:10px 0 18px;
+margin:12px 0 18px;
 accent-color:#60a5fa;
 }
-
-/* METRICS */
-.metric{
-display:flex;
-justify-content:space-between;
-font-size:13px;
-margin:6px 0;
-}
-
-/* COLORS */
-.green{color:#4ade80}
-.red{color:#f87171}
 
 /* VENUE CARDS */
 .venueGrid{
@@ -86,6 +88,8 @@ background:rgba(255,255,255,0.03);
 width:100%;
 height:200px;
 object-fit:cover;
+max-width:100%;
+display:block;
 }
 
 .venueBody{padding:12px}
@@ -104,7 +108,32 @@ background:#111827;
 color:#cbd5e1;
 }
 
-/* MODAL */
+/* TABLE RESPONSIVE FIX (CRITICAL) */
+.tableWrap{
+overflow-x:auto;
+-webkit-overflow-scrolling:touch;
+}
+
+table{
+width:100%;
+min-width:700px;
+border-collapse:collapse;
+font-size:12px;
+}
+
+td,th{
+padding:10px;
+border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+/* KPI */
+.kpi{
+font-size:18px;
+font-weight:800;
+margin-top:6px;
+}
+
+/* MODAL SAFE MOBILE */
 .modal{
 position:fixed;
 inset:0;
@@ -113,7 +142,7 @@ display:none;
 align-items:center;
 justify-content:center;
 z-index:999;
-padding:10px;
+padding:12px;
 }
 
 .modal img{
@@ -142,14 +171,10 @@ color:white;
 font-size:12px;
 }
 
-/* BIG KPI MOBILE FRIENDLY */
-.kpi{
-font-size:18px;
-font-weight:800;
-margin-top:6px;
-}
-
 .small{font-size:12px;color:#94a3b8}
+
+.green{color:#4ade80}
+.red{color:#f87171}
 
 </style>
 </head>
@@ -158,12 +183,12 @@ margin-top:6px;
 
 <div class="container">
 
-<h1>🎟 Juneteenth Venue OS</h1>
-<div class="sub">Mobile-first break-even + sponsorship + ticket + bar revenue model</div>
+<h1>🎟 Juneteenth Venue Decision OS</h1>
+<div class="sub">Fully responsive financial + venue + sponsorship + bar revenue system</div>
 
-<!-- CONTROLS -->
+<!-- INPUTS -->
 <div class="card">
-<h3>🎛 Inputs</h3>
+<h3>🎛 Live Inputs</h3>
 
 <label>Oversell 📈</label>
 <input type="range" id="oversell" min="1" max="1.6" step="0.05"/>
@@ -181,33 +206,74 @@ margin-top:6px;
 <div id="gap"></div>
 </div>
 
+<!-- EXEC SUMMARY -->
+<div class="card">
+<h3>🧠 Executive Summary</h3>
+<div class="grid">
+
+<div>
+<div>🟡 Carretes</div>
+<div class="kpi">Lower cost base</div>
+<div class="small">Higher sponsorship dependency</div>
+</div>
+
+<div>
+<div>🟢 Roots</div>
+<div class="kpi">Revenue enhanced</div>
+<div class="small">Bar + extended hours reduce risk</div>
+</div>
+
+</div>
+</div>
+
 <!-- VENUES -->
 <div class="card">
 <h3>🖼 Venues</h3>
 
 <div class="venueGrid">
 
-<!-- CARRETES -->
 <div class="venueCard" onclick="openGallery('carretes',0)">
 <img class="venueImg" src="/images/carretes47/IMG_7272.jpeg"/>
 <div class="venueBody">
 <div class="venueTitle">🟡 Carretes 47</div>
 <div class="venueMeta">El Raval • 150 cap • 13–21h</div>
-<div class="tag">Lower cost / higher ops load</div>
+<div class="tag">Ops-heavy / lower cost</div>
 </div>
 </div>
 
-<!-- ROOTS -->
 <div class="venueCard" onclick="openGallery('roots',0)">
 <img class="venueImg" src="/images/roots/IMG_7237.jpeg"/>
 <div class="venueBody">
-<div class="venueTitle">🟢 Roots Gastro Club</div>
+<div class="venueTitle">🟢 Roots</div>
 <div class="venueMeta">Poblenou • 200 cap • 13–02h</div>
-<div class="tag">Bar revenue + premium + black-owned</div>
+<div class="tag">Premium + bar revenue</div>
 </div>
 </div>
 
 </div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<div class="card">
+<h3>⚖️ Full Comparison</h3>
+
+<div class="tableWrap">
+<table>
+<tr>
+<th>Metric</th>
+<th>Carretes</th>
+<th>Roots</th>
+</tr>
+
+<tr><td>Hours</td><td>13–21</td><td>13–02</td></tr>
+<tr><td>Capacity</td><td>150</td><td>200</td></tr>
+<tr><td>Bar Revenue</td><td>❌</td><td>✔ 10% kickback</td></tr>
+<tr><td>Production</td><td>External cost</td><td>Included</td></tr>
+<tr><td>Risk Profile</td><td>Higher ops complexity</td><td>More stable monetization</td></tr>
+
+</table>
+</div>
+
 </div>
 
 </div>
@@ -215,11 +281,10 @@ margin-top:6px;
 <!-- MODAL -->
 <div class="modal" id="modal" onclick="closeModal()">
 <img id="modalImg"/>
-
 <div class="modalControls">
-<button class="btn" onclick="prevImg(event)">← Prev</button>
-<button class="btn" onclick="nextImg(event)">Next →</button>
-<button class="btn" onclick="closeModal()">Close ✕</button>
+<button class="btn" onclick="prevImg(event)">←</button>
+<button class="btn" onclick="nextImg(event)">→</button>
+<button class="btn" onclick="closeModal()">Close</button>
 </div>
 </div>
 
@@ -234,24 +299,21 @@ roots:{capacity:200,cost:2960,bar:true}
 
 let state={oversell:1.3,ticket:12,confidence:0.8};
 
-/* IMAGES */
 const images={
-carretes:Array.from({length:9},(_,i)=>`/images/carreres47/IMG_${7272+i}.jpeg`),
+carretes:Array.from({length:9},(_,i)=>`/images/carretes47/IMG_${7272+i}.jpeg`),
 roots:Array.from({length:30},(_,i)=>`/images/roots/IMG_${7237+i}.jpeg`)
 };
 
 let currentVenue="carretes";
 let currentIndex=0;
 
-/* MODEL */
 function demand(v){
 return v.capacity * state.oversell * state.confidence;
 }
 
 function barRevenue(v){
 if(!v.bar) return 0;
-const d=demand(v);
-return d * 25 * 0.10;
+return demand(v)*25*0.1;
 }
 
 function revenue(v){
@@ -262,30 +324,15 @@ function gap(v){
 return (v.cost - BASE_SPONSOR) - revenue(v);
 }
 
-/* RENDER */
-function renderGap(){
-
-const carretesGap = gap(venues.carretes);
-const rootsGap = gap(venues.roots);
-
+function render(){
 document.getElementById("gap").innerHTML=`
 <div class="grid">
-
-<div>
-<div>🟡 Carretes</div>
-<div class="kpi ${carretesGap<=0?'green':'red'}">€${Math.round(carretesGap)}</div>
-</div>
-
-<div>
-<div>🟢 Roots</div>
-<div class="kpi ${rootsGap<=0?'green':'red'}">€${Math.round(rootsGap)}</div>
-</div>
-
+<div>🟡 Carretes <div class="kpi ${gap(venues.carretes)<=0?'green':'red'}">€${Math.round(gap(venues.carretes))}</div></div>
+<div>🟢 Roots <div class="kpi ${gap(venues.roots)<=0?'green':'red'}">€${Math.round(gap(venues.roots))}</div></div>
 </div>
 `;
 }
 
-/* GALLERY */
 function openGallery(v,i){
 currentVenue=v;
 currentIndex=i;
@@ -294,9 +341,7 @@ document.getElementById("modal").style.display="flex";
 event.stopPropagation();
 }
 
-function closeModal(){
-document.getElementById("modal").style.display="none";
-}
+function closeModal(){document.getElementById("modal").style.display="none";}
 
 function nextImg(e){
 e.stopPropagation();
@@ -310,15 +355,14 @@ currentIndex=(currentIndex-1+images[currentVenue].length)%images[currentVenue].l
 document.getElementById("modalImg").src=images[currentVenue][currentIndex];
 }
 
-/* INPUTS */
 document.querySelectorAll("input").forEach(i=>{
 i.addEventListener("input",e=>{
 state[e.target.id]=parseFloat(e.target.value);
-renderGap();
+render();
 });
 });
 
-renderGap();
+render();
 
 </script>
 
