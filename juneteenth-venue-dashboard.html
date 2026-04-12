@@ -223,7 +223,9 @@ let costScore = 10 - Math.min(4, v.cost / 1000);
 let capScore = (v.cap / 200) * 10;
 
 // 4. Operational bonus (implicit quality bump)
-let opsScore = v.name.includes("Roots") ? 9.2 : 8.4;
+let opsScore = v.name.includes("Roots")
+    ? 9.4   // integrated systems advantage
+    : 8.6;  // modular flexibility advantage
 
 // 5. Weighted blend
 let raw =
