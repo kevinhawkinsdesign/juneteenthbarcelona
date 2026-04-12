@@ -572,15 +572,15 @@
         const venues = {
             carretes47: {
                 name: 'Carretes 47',
-                location: 'Poblenou, Barcelona (Old Town)',
-                owned: 'Community-oriented',
+                location: 'El Raval, Ciutat Vella, Barcelona',
+                owned: 'Community-oriented coliving',
                 color: '#C8102E',
                 baseRental: 1200,
                 baseCapacity: 150,
                 totalArea: 340,
-                standingArea: 200,
+                standingArea: 150,
                 diningArea: 80,
-                artMarketArea: 40,
+                artMarketArea: 80,
                 stagingArea: 30,
                 rentalHours: '10:00 AM – 10:00 PM (12 hours)',
                 hourlyRate: '€100/hour',
@@ -592,9 +592,9 @@
                     'Sound System Rental': 400,
                     'Furniture Rental (3 couches, 6 chairs, tables)': 300
                 },
-                equipment: ['Sound system rental', 'Wi-Fi', 'Lighting', 'A/C', 'Kitchen access'],
-                strengths: ['Historic character & brand story', 'Lower hourly rate (€100/hr)', 'External food vendors allowed', 'Flexible BYO alcohol'],
-                warnings: ['Coliving residents (noise curfew)', 'Flex space renovation timing', 'Multi-vendor coordination', 'Must close by 10 PM']
+                equipment: ['Wi-Fi', 'Natural skylight lighting', 'A/C', 'Kitchen access (+20% surcharge)', 'Modular 9-zone curtain dividers', 'Vehicle load-in access', 'Sound system (rental required)'],
+                strengths: ['Historic restored factory — original timber trusses & stone walls', 'Lower hourly rate (€100/hr)', 'BYO alcohol flexibility', 'Configurable 9-module layout with curtains', 'Vehicle access directly into space for vendor load-in'],
+                warnings: ['NOT in Poblenou — located in El Raval, Ciutat Vella', 'No commercial kitchen — food vendors must cook & prep at their own booths (80m² allocated)', 'Coliving residents on-site (noise curfew — must close by 10 PM)', 'Sound system must be rented separately (+€400)', 'Security must be hired separately (+€800)', 'Multi-vendor coordination required']
             },
             roots: {
                 name: 'Roots Gastro Club',
@@ -618,9 +618,9 @@
                     'Sound System (included)': 0,
                     'Furniture Rental': 0
                 },
-                equipment: ['Professional sound system (included)', 'Stage', 'Professional lighting (included)', 'Security staff (included)', 'Bar operations', 'Kitchen', 'Catering service available'],
-                strengths: ['Black-owned partnership', 'Professional turn-key infrastructure', '3-zone configuration', 'Sound & security INCLUDED', 'Open until 2 AM for extended celebration', 'No policy ambiguity'],
-                warnings: ['Higher hourly rate (€190/hr)', 'Catering may limit external vendors', 'Extended hours add cost but allow late-night celebration']
+                equipment: ['Professional sound system (included)', 'Stage (main hall)', 'Professional lighting (included)', 'Security staff (included)', 'Entrance bar + 2nd bar (attached to kitchen)', 'Commercial kitchen — open to food vendors', 'Back terrace (3rd zone)'],
+                strengths: ['Black-owned business in Poblenou', 'Commercial kitchen: food vendors cook on-site & serve from the attached 2nd bar — no vendor booths needed', '3-zone layout: entrance bar → main hall + stage → back terrace', 'Sound system, lighting & security all INCLUDED', 'Open until 2 AM — full late-night celebration', 'Turn-key setup — no equipment rentals needed'],
+                warnings: ['Higher base hourly rate (€190/hr)', 'Confirm food vendor kitchen access terms with management', 'Extended hours increase base cost but unlock late-night programme']
             }
         };
         
@@ -672,7 +672,7 @@
                 const areas = [
                     { name: 'Live Performance Stage', size: venue.stagingArea, color: '#FFB703' },
                     { name: 'Dance Floor (100 guests)', size: venue.standingArea, color: '#FB5607' },
-                    { name: 'Art Market (20 vendors)', size: venue.artMarketArea, color: '#8338EC' },
+                    { name: venueKey === 'carretes47' ? 'Food Vendor Booths (cook + prep on-site)' : 'Art & Craft Vendors (food vendors use kitchen)', size: venue.artMarketArea, color: '#8338EC' },
                     { name: 'Dining & Seating', size: venue.diningArea, color: '#3A86FF' }
                 ];
                 
@@ -717,8 +717,11 @@
                             <div className="adequacy-title">✓ Space Adequacy for Event Requirements</div>
                             <ul className="adequacy-list">
                                 <li>✓ Performance stage: {venue.stagingArea}m² {venue.stagingArea >= 30 ? '(adequate)' : '(tight)'}</li>
-                                <li>✓ 100 dancers @ 1.5–2m² per person: {venue.standingArea}m² {venue.standingArea >= 150 ? '(comfortable)' : '(adequate)'}</li>
-                                <li>✓ Art market 20 vendors @ 2m²/booth: {venue.artMarketArea}m² {venue.artMarketArea >= 40 ? '(ideal)' : '(tight)'}</li>
+                                <li>✓ Dance floor @ 1.5m² per person: {venue.standingArea}m² {venue.standingArea >= 150 ? '(comfortable)' : '(adequate)'}</li>
+                                {venueKey === 'carretes47'
+                                    ? <li>✓ Food vendor booths (cook + prep): {venue.artMarketArea}m² — vendors set up their own cooking station in their booth space</li>
+                                    : <li>✓ Art & craft vendors: {venue.artMarketArea}m² — food vendors cook in commercial kitchen & serve from the 2nd bar (no booth space needed)</li>
+                                }
                                 <li>✓ Dining & socializing: {venue.diningArea}m² {venue.diningArea >= 80 ? '(generous)' : '(moderate)'}</li>
                             </ul>
                         </div>
@@ -922,13 +925,23 @@
                                     <td>Cost (€800)</td>
                                     <td>✓ Included</td>
                                 </tr>
+                                <tr>
+                                    <td style={{ fontWeight: 'bold' }}>🍳 Food Vendor Setup</td>
+                                    <td>Vendors cook & prep at their own booth (80m² allocated)</td>
+                                    <td>✓ Vendors use commercial kitchen — serve from 2nd bar, no booths needed</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ fontWeight: 'bold' }}>📍 Location</td>
+                                    <td>El Raval, Ciutat Vella (not Poblenou)</td>
+                                    <td>Poblenou, Barcelona (Badajoz 115)</td>
+                                </tr>
                             </tbody>
                         </table>
                         
                         <div className="highlight-box">
                             <div className="highlight-box-title">💡 Bottom Line</div>
                             <div className="highlight-box-text">
-                                <strong>Roots is €{difference} cheaper</strong> when sound & security are included. Plus you get until 2 AM, professional infrastructure, larger space, and black-owned partnership.
+                                <strong>Roots is €{difference} cheaper</strong> when sound & security are included. Plus: until 2 AM, larger space (650m² vs 340m²), black-owned partnership, and a commercial kitchen so food vendors cook on-site and serve from the attached 2nd bar — no booths needed.
                             </div>
                         </div>
                     </div>
@@ -936,7 +949,7 @@
                     <div className="footer">
                         <div className="emphasis">📊 Dashboard Guide</div>
                         <p>Click on any venue card above to expand and explore detailed cost breakdowns, space allocations, and feature comparisons.</p>
-                        <p style={{ marginTop: '1rem', fontSize: '0.75rem' }}>Carretes 47: 10 AM–10 PM rental (€100/hr). Roots Gastro: 10 AM–2 AM rental (€190/hr, includes sound system & security).</p>
+                        <p style={{ marginTop: '1rem', fontSize: '0.75rem' }}>Carretes 47 (El Raval, Ciutat Vella): 10 AM–10 PM, €100/hr, 340m², sound & security extra. Roots Gastro Club (Poblenou): 10 AM–2 AM, €190/hr, 650m², sound, lighting & security included, commercial kitchen for food vendors.</p>
                     </div>
                 </div>
             </div>
