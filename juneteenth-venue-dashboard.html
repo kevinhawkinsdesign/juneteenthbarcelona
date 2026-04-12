@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Juneteenth Venue Decision OS</title>
+<title>Juneteenth Venue OS</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -15,7 +15,7 @@ background:#0b0f19;
 color:#e5e7eb;
 }
 
-.container{max-width:1100px;margin:auto;padding:16px}
+.container{max-width:1200px;margin:auto;padding:16px}
 
 .card{
 background:rgba(255,255,255,0.04);
@@ -25,54 +25,31 @@ padding:14px;
 margin-top:12px;
 }
 
-h1{font-size:20px;margin:0}
+.grid{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:900px){.grid{grid-template-columns:1fr 1fr}}
 
-.grid{display:grid;grid-template-columns:1fr;gap:10px}
-@media(min-width:768px){.grid{grid-template-columns:1fr 1fr}}
+h1{font-size:22px;margin:0}
 
 input[type=range]{width:100%}
 
 .kpi{font-size:18px;font-weight:800}
 
-table{
-width:100%;
-border-collapse:collapse;
-font-size:12px;
-}
-
-td,th{
-padding:8px;
-border-bottom:1px solid rgba(255,255,255,0.1);
-text-align:left;
-}
-
+table{width:100%;border-collapse:collapse;font-size:12px}
+td,th{padding:8px;border-bottom:1px solid rgba(255,255,255,0.1);text-align:left}
 th{color:#93c5fd}
+
+img{width:100%;border-radius:12px;cursor:pointer}
+
+.badge{font-size:10px;padding:3px 6px;border:1px solid #334155;border-radius:999px;color:#93c5fd}
 
 .green{color:#4ade80}
 .red{color:#f87171}
 
-img{
-width:100%;
-border-radius:12px;
-cursor:pointer;
-}
-
-.small{font-size:11px;color:#94a3b8}
-
-.badge{
-font-size:10px;
-padding:3px 6px;
-border:1px solid #334155;
-border-radius:999px;
-}
-
 .modal{
 display:none;
 position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
+top:0;left:0;
+width:100%;height:100%;
 background:black;
 z-index:999;
 align-items:center;
@@ -84,6 +61,9 @@ flex-direction:column;
 
 button{padding:8px 12px;border-radius:8px;border:none}
 
+.small{font-size:11px;color:#94a3b8}
+
+hr{border:0;border-top:1px solid rgba(255,255,255,0.1);margin:10px 0}
 </style>
 </head>
 
@@ -91,39 +71,39 @@ button{padding:8px 12px;border-radius:8px;border:none}
 
 <div class="container">
 
-<h1>🎟 Venue Decision OS</h1>
+<h1>🎟 Juneteenth Venue Decision OS</h1>
 
-<!-- SLIDERS -->
+<!-- CONTROLS -->
 <div class="card">
-<h3>🎛 Controls (live values shown)</h3>
+<h3>🎛 Pricing & Sponsorship</h3>
 
 <div>Carretes Ticket (€8–12)</div>
-<input id="carPrice" type="range" min="8" max="12" value="10" oninput="update()">
-<div class="kpi" id="carPriceLabel"></div>
+<input id="carP" type="range" min="8" max="12" value="10" oninput="update()">
+<div class="kpi" id="carPLabel"></div>
 
 <div>Roots Early (€8–12)</div>
-<input id="rootEarly" type="range" min="8" max="12" value="10" oninput="update()">
-<div class="kpi" id="rootEarlyLabel"></div>
+<input id="rE" type="range" min="8" max="12" value="10" oninput="update()">
+<div class="kpi" id="rELabel"></div>
 
 <div>Roots Late (€12–20)</div>
-<input id="rootLate" type="range" min="12" max="20" value="15" oninput="update()">
-<div class="kpi" id="rootLateLabel"></div>
+<input id="rL" type="range" min="12" max="20" value="15" oninput="update()">
+<div class="kpi" id="rLLabel"></div>
 
 <div>Sponsorship (€0–5000)</div>
-<input id="sponsor" type="range" min="0" max="5000" value="300" oninput="update()">
-<div class="kpi" id="sponsorLabel"></div>
+<input id="s" type="range" min="0" max="5000" value="300" oninput="update()">
+<div class="kpi" id="sLabel"></div>
 
 </div>
 
-<!-- FINANCIAL -->
-<div class="card" id="financial"></div>
+<!-- FINANCIAL OUTPUT -->
+<div class="card" id="finance"></div>
 
-<!-- PRESSURE -->
-<div class="card" id="pressure"></div>
+<!-- BREAK EVEN -->
+<div class="card" id="breakeven"></div>
 
-<!-- COMPARISON TABLE -->
+<!-- COMPARISON -->
 <div class="card">
-<h3>📊 Full Venue Comparison</h3>
+<h3>📊 Venue Comparison (Standing + Lounge Model)</h3>
 
 <table>
 <tr>
@@ -132,34 +112,38 @@ button{padding:8px 12px;border-radius:8px;border:none}
 <th>Roots</th>
 </tr>
 
-<tr><td>Location</td><td>El Raval</td><td>Poblenou</td></tr>
-<tr><td>Hours</td><td>10:00–22:00</td><td>10:00–02:00</td></tr>
-<tr><td>Kitchen</td><td>Mini kitchen</td><td>Commercial + 3 prep zones</td></tr>
+<tr><td>Space</td><td>340m²</td><td>650–750m²</td></tr>
+<tr><td>Flow model</td><td>80% standing / 20% lounge</td><td>80% standing / 20% lounge</td></tr>
 <tr><td>Bathrooms</td><td>2</td><td>6</td></tr>
-<tr><td>Sound</td><td>Rental (€400)</td><td>Included</td></tr>
-<tr><td>Security</td><td>€800 required</td><td>Included</td></tr>
-<tr><td>Cleaning</td><td>€300</td><td>€300</td></tr>
-<tr><td>Furniture</td><td>€300</td><td>Included</td></tr>
-<tr><td>Food setup</td><td>Booths (80m²)</td><td>Kitchen + bar service</td></tr>
-<tr><td>Capacity feel</td><td>Compact / intimate</td><td>Large / open flow</td></tr>
+<tr><td>Kitchen</td><td>Mini kitchen</td><td>Commercial + 3 prep zones</td></tr>
+<tr><td>Walls</td><td>Brick (limited mounting)</td><td>Drywall (fully flexible)</td></tr>
+<tr><td>Lighting</td><td>LED system</td><td>Advanced LED + stage rig</td></tr>
+<tr><td>Sound</td><td>Projector + sound rental</td><td>Professional system included</td></tr>
+<tr><td>Hours</td><td>10:00–22:00</td><td>10:00–02:00</td></tr>
+<tr><td>Transport</td><td>Central metro network</td><td>Llacuna (less central)</td></tr>
+<tr><td>Outdoor</td><td>Courtyard + jacuzzi</td><td>Terrace + courtyard</td></tr>
+<tr><td>Bar revenue</td><td>None</td><td>10% kickback</td></tr>
+<tr><td>Identity</td><td>Neutral</td><td><b>Black-owned ⭐</b></td></tr>
 </table>
 
 </div>
 
 <!-- VENUES -->
 <div class="card">
-<h3>🖼 Venues (click image)</h3>
+<h3>🖼 Venue Galleries</h3>
 
 <div class="grid">
+
 <div>
 <img src="/images/carretes47/IMG_7276.jpeg" onclick="openImg(this.src)">
-<div class="small">📍 Carretes 47 <span class="badge">tap</span></div>
+<div class="small">Carretes 47 📸 tap to view</div>
 </div>
 
 <div>
 <img src="/images/roots/IMG_7238.jpeg" onclick="openImg(this.src)">
-<div class="small">📍 Roots <span class="badge">tap</span></div>
+<div class="small">Roots 📸 tap to view</div>
 </div>
+
 </div>
 
 </div>
@@ -167,73 +151,98 @@ button{padding:8px 12px;border-radius:8px;border:none}
 </div>
 
 <!-- MODAL -->
-<div class="modal" id="modal" onclick="closeImg()">
-<img id="modalImg"/>
+<div class="modal" id="m" onclick="closeImg()">
+<img id="mi"/>
 </div>
 
 <script>
 
-function val(id){return +document.getElementById(id).value}
+function v(id){return +document.getElementById(id).value}
 
 function update(){
 
-document.getElementById("carPriceLabel").innerText = "€"+val("carPrice");
-document.getElementById("rootEarlyLabel").innerText = "€"+val("rootEarly");
-document.getElementById("rootLateLabel").innerText = "€"+val("rootLate");
-document.getElementById("sponsorLabel").innerText = "€"+val("sponsor");
+document.getElementById("carPLabel").innerText="€"+v("carP");
+document.getElementById("rELabel").innerText="€"+v("rE");
+document.getElementById("rLLabel").innerText="€"+v("rL");
+document.getElementById("sLabel").innerText="€"+v("s");
 
-let carDemand = 150*1.35*0.85;
-let rootDemand = 200*1.35*0.85;
+/* STANDING-FIRST MODEL */
+let capCar=150;
+let capRoot=200;
 
-let rootAvg = (val("rootEarly")+val("rootLate"))/2;
+let oversell=1.35;
+let noshow=0.85;
 
-let carRevenue = carDemand*val("carPrice");
-let rootRevenue = rootDemand*rootAvg + rootDemand*2.5;
+/* demand adjusted for standing flow efficiency */
+let flowFactor=0.95;
 
-let carCost = 3000+1800;
-let rootCost = 3200+300;
+let carDemand=capCar*oversell*noshow*flowFactor;
+let rootDemand=capRoot*oversell*noshow*flowFactor;
 
-let carProfit = carRevenue+val("sponsor")-carCost;
-let rootProfit = rootRevenue+val("sponsor")-rootCost;
+let rootAvg=(v("rE")+v("rL"))/2;
 
-document.getElementById("financial").innerHTML = `
-<h3>📊 Financial Output</h3>
+/* revenue */
+let carRev=carDemand*v("carP");
+let rootRev=rootDemand*rootAvg + rootDemand*2.5 + rootDemand*0.1*10;
+
+/* costs */
+let carCost=3000+800+400;
+let rootCost=3200+300;
+
+/* profit */
+let carProfit=carRev+v("s")-carCost;
+let rootProfit=rootRev+v("s")-rootCost;
+
+/* break even ticket */
+let carBE=carCost/carDemand;
+let rootBE=rootCost/rootDemand;
+
+/* sponsor gap */
+let carGap=Math.max(0,carCost-carRev-v("s"));
+let rootGap=Math.max(0,rootCost-rootRev-v("s"));
+
+document.getElementById("finance").innerHTML=`
+<h3>💰 Financial Output</h3>
 
 <div class="grid">
+
 <div>
 <b>Carretes</b>
-<div>Revenue €${Math.round(carRevenue)}</div>
+<div>Revenue €${Math.round(carRev)}</div>
 <div class="${carProfit>=0?'green':'red'}">Profit €${Math.round(carProfit)}</div>
+<div class="small">Break-even ticket €${carBE.toFixed(2)}</div>
+<div class="small">Sponsor gap €${Math.round(carGap)}</div>
 </div>
 
 <div>
-<b>Roots</b>
-<div>Revenue €${Math.round(rootRevenue)}</div>
+<b>Roots ⭐ (Black-owned)</b>
+<div>Revenue €${Math.round(rootRev)}</div>
 <div class="${rootProfit>=0?'green':'red'}">Profit €${Math.round(rootProfit)}</div>
+<div class="small">Break-even ticket €${rootBE.toFixed(2)}</div>
+<div class="small">Sponsor gap €${Math.round(rootGap)}</div>
 </div>
+
 </div>
 `;
 
-let carP = carDemand/150;
-let rootP = rootDemand/200;
-
-document.getElementById("pressure").innerHTML = `
-<h3>📈 Sellout Pressure</h3>
+document.getElementById("breakeven").innerHTML=`
+<h3>📈 Sellout Pressure (Standing Flow Model)</h3>
 
 <div class="grid">
-<div>Carretes: ${carP.toFixed(2)}x</div>
-<div>Roots: ${rootP.toFixed(2)}x</div>
+<div>Carretes: ${(carDemand/capCar).toFixed(2)}x density</div>
+<div>Roots: ${(rootDemand/capRoot).toFixed(2)}x density</div>
 </div>
 `;
+
 }
 
 function openImg(src){
-document.getElementById("modal").style.display="flex";
-document.getElementById("modalImg").src=src;
+document.getElementById("m").style.display="flex";
+document.getElementById("mi").src=src;
 }
 
 function closeImg(){
-document.getElementById("modal").style.display="none";
+document.getElementById("m").style.display="none";
 }
 
 update();
