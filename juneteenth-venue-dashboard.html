@@ -3,370 +3,234 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-<title>Juneteenth Barcelona 2026 – Venue OS</title>
+<title>Juneteenth Venue OS – Optimization Engine</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-:root{
-    --bg:#0b0f19;
-    --line:rgba(255,255,255,.08);
-    --text:#e5e7eb;
-    --muted:#94a3b8;
-    --green:#22c55e;
-}
-
-*{margin:0;padding:0;box-sizing:border-box;}
-
 body{
-    font-family:Inter;
-    background:radial-gradient(circle at top,#111827,#0b0f19);
-    color:var(--text);
+margin:0;
+font-family:Inter;
+background:#0b0f19;
+color:#e5e7eb;
 }
 
-/* HEADER */
-.header{
-    text-align:center;
-    padding:2.5rem 1rem 1rem;
-}
-
-.header h1{font-size:2.2rem;font-weight:800;}
-.header p{color:var(--muted);margin-top:.5rem;}
-
-/* TABS */
-.tabs{
-    display:flex;
-    justify-content:center;
-    gap:.5rem;
-    margin:1rem 0;
-}
-
-.tab{
-    padding:.45rem .8rem;
-    border:1px solid var(--line);
-    border-radius:999px;
-    cursor:pointer;
-    font-size:.85rem;
-}
-
-.tab.active{
-    border-color:white;
-}
-
-/* LAYOUT */
 .container{
-    max-width:1100px;
-    margin:0 auto;
-    padding:1rem;
+max-width:1200px;
+margin:auto;
+padding:20px;
 }
 
-/* CONFIG PANEL */
-.config{
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:1rem;
-    margin-bottom:1rem;
+h1{
+font-size:22px;
+margin-bottom:15px;
 }
 
-.slider{
-    width:100%;
-}
-
-/* WINNER */
-.winner{
-    padding:1rem;
-    border:1px solid var(--line);
-    border-radius:14px;
-    margin-bottom:1rem;
-    background:rgba(34,197,94,.08);
-}
-
-/* GRID */
 .grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:1rem;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
 }
 
-@media(max-width:900px){
-    .grid{grid-template-columns:1fr;}
-}
-
-/* CARD */
 .card{
-    border:1px solid var(--line);
-    border-radius:14px;
-    overflow:hidden;
+background:rgba(255,255,255,0.03);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:14px;
+padding:15px;
 }
 
-.header-card{
-    padding:1rem;
-    font-weight:800;
-}
-
-/* CAROUSEL */
-.carousel{
-    display:flex;
-    overflow-x:auto;
-    gap:6px;
-    padding:6px;
-}
-
-.carousel img{
-    width:240px;
-    height:140px;
-    object-fit:cover;
-    border-radius:10px;
-}
-
-/* METRICS */
-.metrics{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    border-top:1px solid var(--line);
+input[type=range]{
+width:100%;
+margin:8px 0 16px;
 }
 
 .metric{
-    text-align:center;
-    padding:.75rem;
+display:flex;
+justify-content:space-between;
+margin:6px 0;
+font-size:13px;
 }
 
-/* EXPLAINER */
-.explainer{
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:1rem;
-    margin-top:1rem;
-    color:var(--muted);
-    line-height:1.5;
+.badge{
+padding:3px 8px;
+border-radius:999px;
+font-size:11px;
 }
 
-/* PITCH */
-.pitch{
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:1rem;
-    background:rgba(255,255,255,.03);
+.green{background:#16a34a22;color:#4ade80}
+.red{background:#dc262622;color:#f87171}
+
+.small{
+font-size:12px;
+color:#94a3b8;
 }
 
-.pitch h3{
-    margin-bottom:.5rem;
+.toggle{
+margin-top:10px;
+font-size:12px;
+color:#93c5fd;
+cursor:pointer;
+}
+
+.hidden{display:none}
+
+hr{
+border:0;
+border-top:1px solid rgba(255,255,255,0.08);
+margin:12px 0;
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">
-<h1>Venue Decision OS</h1>
-<p>Juneteenth Barcelona 2026</p>
-</div>
-
-<div class="tabs">
-<div class="tab active" onclick="setTab('decision')">Decision</div>
-<div class="tab" onclick="setTab('media')">Media</div>
-<div class="tab" onclick="setTab('stakeholders')">Stakeholders</div>
-<div class="tab" onclick="setTab('pitch')">Sponsor Pitch</div>
-</div>
-
 <div class="container">
 
-<div id="config"></div>
-<div id="winner"></div>
-<div id="app"></div>
+<h1>🎟 Juneteenth Venue Optimization Engine</h1>
+
+<div class="grid">
+
+<!-- CONTROLS -->
+<div class="card">
+<h3>Live Controls</h3>
+
+<label>Oversell Rate</label>
+<input type="range" min="1" max="1.6" step="0.05" id="oversell"/>
+
+<label>Early Ticket (€)</label>
+<input type="range" min="8" max="20" step="1" id="early"/>
+
+<label>Late Ticket (€)</label>
+<input type="range" min="10" max="30" step="1" id="late"/>
+
+<label>Early/Late Split</label>
+<input type="range" min="0.3" max="0.7" step="0.05" id="split"/>
+
+<div class="small">
+Adjust pricing + demand assumptions in real time
+</div>
+</div>
+
+<!-- VENUES -->
+<div class="card" id="roots"></div>
+<div class="card" id="carretes"></div>
+
+</div>
+
+<!-- DEMAND CURVE -->
+<div class="card" style="margin-top:15px">
+<h3>📊 Sell-out Pressure Curve</h3>
+<div id="pressure"></div>
+</div>
 
 </div>
 
 <script>
 
-let tab="decision";
-
-let weights={
-cost:0.4,
-exp:0.3,
-ops:0.2,
-night:0.1
-};
-
 const venues=[
-{
-name:"Carretes 47",
-color:"#ef4444",
-folder:"/images/carretes47/IMG_",
-range:[7272,7280],
-base:8.1,
-cost:2940,
-cap:150
-},
-{
-name:"Roots Gastro Club",
-color:"#22c55e",
-folder:"/images/roots/IMG_",
-range:[7237,7266],
-base:9.1,
-cost:2960,
-cap:200
-}
+{ name:"Roots", capacity:200, cost:2960, bar:true },
+{ name:"Carretes 47", capacity:150, cost:2940, bar:false }
 ];
 
-function score(v){
+let state={
+oversell:1.4,
+early:10,
+late:15,
+split:0.6
+};
 
-// 1. Experience (already 0–10 scale-ish)
-let exp = v.base;
+function calc(v){
 
-// 2. Cost score (SOFTER PENALTY)
-let costScore = 10 - Math.min(4, v.cost / 1000); 
-// caps penalty so expensive venues never collapse
+const att = Math.floor(v.capacity * state.oversell * 0.85);
 
-// 3. Capacity efficiency (smooth scaling)
-let capScore = (v.cap / 200) * 10;
+const earlyAtt = Math.floor(att * state.split);
+const lateAtt = att - earlyAtt;
 
-// 4. Operational bonus (implicit quality bump)
-let opsScore = v.name.includes("Roots")
-    ? 9.4   // integrated systems advantage
-    : 8.6;  // modular flexibility advantage
+const ticket =
+earlyAtt * state.early +
+lateAtt * state.late;
 
-// 5. Weighted blend
-let raw =
-(exp * weights.exp) +
-(costScore * weights.cost) +
-(capScore * weights.ops) +
-(opsScore * weights.night);
+const bar =
+v.bar ? att * 25 * 0.10 : 0;
 
-// 6. Normalize to 10 scale
-let finalScore = (raw / (weights.exp + weights.cost + weights.ops + weights.night));
+const total = ticket + bar;
 
-// 7. UPLIFT BIAS (key improvement)
-finalScore = finalScore + 1.2;
+const profit = total - v.cost;
 
-// 8. Clamp to realistic range (7.5 → 9.5 sweet spot)
-finalScore = Math.max(7.5, Math.min(9.6, finalScore));
-
-return finalScore.toFixed(2);
+return {att,earlyAtt,lateAtt,ticket,bar,total,profit};
 }
 
-function winner(){
-return venues.reduce((a,b)=>score(a)>score(b)?a:b);
+function badge(p){
+return p>=0
+? `<span class="badge green">Profit</span>`
+: `<span class="badge red">Loss</span>`;
 }
 
-function images(v){
-let h="";
-for(let i=v.range[0];i<=v.range[1];i++){
-h+=`<img src="${v.folder}${i}.jpeg"/>`;
-}
-return h;
-}
+function renderVenue(v, elId){
 
-/* AI EXPLAINER (RULE-BASED) */
-function explain(w){
-if(w.name.includes("Roots")){
-return "Roots wins due to operational completeness: integrated kitchen, sound, lighting, and extended license reduce production friction and risk. This makes it structurally more reliable for large-scale programming and late-night flow.";
-}else{
-return "Carretes wins on cost efficiency and spatial flexibility, but requires additional production infrastructure (sound, security, kitchen logistics), increasing execution complexity.";
-}
-}
+const r = calc(v);
 
-function renderConfig(){
-return `
-<div class="config">
-<b>Live Weight Controls</b><br/><br/>
+document.getElementById(elId).innerHTML=`
+<h3>${v.name}</h3>
 
-Cost <input class="slider" type="range" min="0" max="1" step="0.1" value="${weights.cost}" onchange="updateWeight('cost',this.value)"/><br/>
-Experience <input class="slider" type="range" min="0" max="1" step="0.1" value="${weights.exp}" onchange="updateWeight('exp',this.value)"/><br/>
-Operations <input class="slider" type="range" min="0" max="1" step="0.1" value="${weights.ops}" onchange="updateWeight('ops',this.value)"/><br/>
-Night Flow <input class="slider" type="range" min="0" max="1" step="0.1" value="${weights.night}" onchange="updateWeight('night',this.value)"/>
+<div class="metric"><span>Attendance</span><b>${r.att}</b></div>
+<div class="metric"><span>Ticket Revenue</span><b>€${Math.round(r.ticket)}</b></div>
+<div class="metric"><span>Bar Revenue</span><b>€${Math.round(r.bar)}</b></div>
+
+<hr/>
+
+<div class="metric"><span>Total Revenue</span><b>€${Math.round(r.total)}</b></div>
+<div class="metric"><span>Cost</span><b>€${v.cost}</b></div>
+
+<div class="metric">
+<span>Result</span>
+<b>${badge(r.profit)} €${Math.round(r.profit)}</b>
+</div>
+
+<div class="toggle" onclick="this.nextElementSibling.classList.toggle('hidden')">
+🧠 View Logic
+</div>
+
+<div class="hidden small">
+Attendance = capacity × oversell × 0.85<br>
+Ticket split = early/late pricing model<br>
+Bar model (Roots only) = attendance × €25 × 10% share<br>
+No scoring system — pure revenue simulation
 </div>
 `;
+}
+
+function renderPressure(){
+
+const levels=[1.0,1.1,1.2,1.3,1.4,1.5,1.6];
+
+document.getElementById("pressure").innerHTML =
+levels.map(l=>{
+
+const att = Math.floor(200*l*0.85);
+const rev = att * 13;
+
+return `
+<div class="metric">
+<span>${Math.round(l*100)}% demand</span>
+<b>€${Math.round(rev)}</b>
+</div>
+`;
+}).join("");
 }
 
 function render(){
-const w=winner();
-
-document.getElementById("config").innerHTML=renderConfig();
-
-document.getElementById("winner").innerHTML=`
-<div class="winner">
-🏆 <b>Recommended: ${w.name}</b><br/>
-<span style="color:var(--muted)">Score ${score(w)}</span>
-
-<div class="explainer">
-<b>Decision Insight</b><br/>
-${explain(w)}
-</div>
-</div>
-`;
-
-if(tab==="decision"){
-document.getElementById("app").innerHTML=`
-<div class="grid">
-${venues.map(v=>`
-<div class="card">
-
-<div class="header-card" style="color:${v.color}">
-${v.name}
-</div>
-
-<div class="metrics">
-<div class="metric">€${v.cost}<br/><small>Cost</small></div>
-<div class="metric">${v.cap}<br/><small>Cap</small></div>
-<div class="metric">${score(v)}<br/><small>Score</small></div>
-</div>
-
-</div>
-`).join("")}
-</div>
-`;
+renderVenue(venues[0],"roots");
+renderVenue(venues[1],"carretes");
+renderPressure();
 }
 
-if(tab==="media"){
-document.getElementById("app").innerHTML=`
-<div class="grid">
-${venues.map(v=>`
-<div class="card">
-<div class="header-card">${v.name}</div>
-<div class="carousel">${images(v)}</div>
-</div>
-`).join("")}
-</div>
-`;
-}
-
-if(tab==="pitch"){
-document.getElementById("app").innerHTML=`
-<div class="pitch">
-<h3>Juneteenth Barcelona 2026</h3>
-<p>
-A culturally significant large-scale experience combining music, art, food, and community.
-</p>
-
-<br/>
-
-<b>Audience:</b> 150–200 guests<br/>
-<b>Format:</b> Day → Night cultural progression<br/>
-<b>Programming:</b> Live music, DJ sets, food vendors, art market<br/>
-
-<br/>
-
-<b>Why it matters:</b>
-This event positions Barcelona as a global cultural node for diasporic creative expression, combining immersive hospitality and nightlife programming.
-</div>
-`;
-}
-
-}
-
-function updateWeight(k,v){
-weights[k]=parseFloat(v);
+document.querySelectorAll("input").forEach(i=>{
+i.addEventListener("input",e=>{
+state[e.target.id]=parseFloat(e.target.value);
 render();
-}
-
-function setTab(t){
-tab=t;
-document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
-event.target.classList.add("active");
-render();
-}
+});
+});
 
 render();
 
