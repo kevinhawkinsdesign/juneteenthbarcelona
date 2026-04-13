@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Juneteenth Venue OS</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<title>Internal Planning — Venue Comparison</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -114,6 +116,16 @@ button{padding:8px 12px;border-radius:8px;border:none}
 <tr><td>Transport</td><td>Central metro network</td><td>Llacuna (less central)</td></tr>
 <tr><td>Ownership</td><td>Neutral</td><td><b>Black-owned ⭐</b></td></tr>
 <tr><td>Bar Revenue</td><td>None</td><td>10% kickback</td></tr>
+
+<tr><td colspan="3" style="background:rgba(255,255,255,0.06);font-size:10px;font-weight:700;letter-spacing:.1em;color:#93c5fd;padding-top:14px;padding-bottom:6px">💰 COST BREAKDOWN</td></tr>
+<tr><td>Venue Rental</td><td>€1,200 &nbsp;<span class="small">€100/hr × 12 hrs</span></td><td>€2,660 &nbsp;<span class="small">€190/hr × 14 hrs</span></td></tr>
+<tr><td>Kitchen Access</td><td>€240 &nbsp;<span class="small">+20% surcharge</span></td><td class="green">€0 &nbsp;<span class="small">included</span></td></tr>
+<tr><td>Security (2 guards)</td><td>€800</td><td class="green">€0 &nbsp;<span class="small">included</span></td></tr>
+<tr><td>Sound System</td><td>€400 &nbsp;<span class="small">rental</span></td><td class="green">€0 &nbsp;<span class="small">included</span></td></tr>
+<tr><td>Cleaning & Breakdown</td><td>€300</td><td>€300</td></tr>
+<tr><td>Furniture Rental</td><td>€300</td><td class="green">€0 &nbsp;<span class="small">included</span></td></tr>
+<tr style="border-top:1px solid rgba(255,255,255,0.2)"><td><b>Total Event Cost</b></td><td><b class="red">€3,240</b></td><td><b class="green">€2,960</b></td></tr>
+<tr><td>Savings vs other venue</td><td>—</td><td class="green"><b>Save €280</b></td></tr>
 </table>
 
 </div>
@@ -180,7 +192,7 @@ let carCost =
 300;     // cleaning
 
 let rootCost =
-(190 * 10) + // assumed 10h full day rate
+(190 * 14) + // 14h rental (10AM–2AM actual booking)
 300;         // cleaning + ops
 
 /* profit */
