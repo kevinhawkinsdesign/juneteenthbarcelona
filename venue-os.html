@@ -119,13 +119,13 @@ button{padding:8px 12px;border-radius:8px;border:none}
 
 <tr><td colspan="3" style="background:rgba(255,255,255,0.06);font-size:10px;font-weight:700;letter-spacing:.1em;color:#93c5fd;padding-top:14px;padding-bottom:6px">💰 COST BREAKDOWN</td></tr>
 <tr><td>Venue Rental</td><td>€1,200 &nbsp;<span class="small">€100/hr × 12 hrs</span></td><td>€2,660 &nbsp;<span class="small">€190/hr × 14 hrs</span></td></tr>
-<tr><td>Kitchen Access</td><td>€240 &nbsp;<span class="small">+20% surcharge</span></td><td class="green">€0 &nbsp;<span class="small">included</span></td></tr>
-<tr><td>Security (2 guards)</td><td>€800</td><td class="green">€0 &nbsp;<span class="small">included</span></td></tr>
-<tr><td>Sound System</td><td>€400 &nbsp;<span class="small">rental</span></td><td class="green">€0 &nbsp;<span class="small">included</span></td></tr>
+<tr><td>Kitchen Access</td><td>€240 &nbsp;<span class="small">flat fee</span></td><td class="green">€0 &nbsp;<span class="small">included</span></td></tr>
+<tr><td>Security (2 guards)</td><td>€240</td><td class="green">€0 &nbsp;<span class="small">included</span></td></tr>
+<tr><td>Sound System</td><td class="green">€0 &nbsp;<span class="small">included</span></td><td class="green">€0 &nbsp;<span class="small">included</span></td></tr>
 <tr><td>Cleaning & Breakdown</td><td>€300</td><td>€300</td></tr>
 <tr><td>Furniture Rental</td><td>€300</td><td class="green">€0 &nbsp;<span class="small">included</span></td></tr>
-<tr style="border-top:1px solid rgba(255,255,255,0.2)"><td><b>Total Event Cost</b></td><td><b class="red">€3,240</b></td><td><b class="green">€2,960</b></td></tr>
-<tr><td>Savings vs other venue</td><td>—</td><td class="green"><b>Save €280</b></td></tr>
+<tr style="border-top:1px solid rgba(255,255,255,0.2)"><td><b>Total Event Cost</b></td><td><b class="red">€2,280</b></td><td><b class="green">€2,960</b></td></tr>
+<tr><td>Savings vs other venue</td><td class="green"><b>Save €680</b></td><td>—</td></tr>
 </table>
 
 </div>
@@ -180,66 +180,64 @@ let rootDemand = rootCap * oversell * noshow;
 /* pricing */
 let rootAvg = (v("rE")+v("rL"))/2;
 
-/* revenue */
-let carRev = carDemand * v("cP");
-let rootRev = rootDemand * rootAvg + rootDemand * 2.5 + rootDemand * 0.1 * 10;
+/* COSTS (must match breakdown table) */
+let carCost = 1200 + 240 + 240 + 300 + 300; // venue + kitchen + security + cleaning + furniture = €2,280
+let rootCost = (190 * 14) + 300;             // venue rental + cleaning = €2,960
 
-/* COSTS (FULL STACK) */
-let carCost =
-3000 +   // venue
-800 +    // security optional
-400 +    // sound/tech
-300;     // cleaning
+/* REVENUE */
+let carTicketRev = carDemand * v("cP");
+let carBarRev    = 0;                             // no bar kickback at Carretes
+let carTotalRev  = carTicketRev + carBarRev;
 
-let rootCost =
-(190 * 14) + // 14h rental (10AM–2AM actual booking)
-300;         // cleaning + ops
+let rootTicketRev = rootDemand * rootAvg;
+let rootBarRev    = rootDemand * 0.1 * 10;        // 10% kickback on €10 avg bar spend/person
+let rootTotalRev  = rootTicketRev + rootBarRev;
 
-/* profit */
-let carProfit = carRev + v("s") - carCost;
-let rootProfit = rootRev + v("s") - rootCost;
+/* PROFIT / GAP */
+let carProfit  = carTotalRev  + v("s") - carCost;
+let rootProfit = rootTotalRev + v("s") - rootCost;
 
-/* break even */
-let carBErev = carCost;
-let rootBErev = rootCost;
-
-let carBEpct = carBErev / carRev;
-let rootBEpct = rootBErev / rootRev;
-
-/* sponsor gap */
-let carGap = Math.max(0, carCost - carRev - v("s"));
-let rootGap = Math.max(0, rootCost - rootRev - v("s"));
+let carGap  = Math.max(0, carCost  - carTotalRev  - v("s"));
+let rootGap = Math.max(0, rootCost - rootTotalRev - v("s"));
 
 document.getElementById("finance").innerHTML = `
 <h3>💰 Financial Breakdown</h3>
-
 <div class="grid">
 
 <div>
-<b>Carretes</b>
-<div>Revenue €${Math.round(carRev)}</div>
-<div class="${carProfit>=0?'green':'red'}">Profit €${Math.round(carProfit)}</div>
-<div class="small">Break-even: ${Math.round(carBEpct*100)}% tickets sold</div>
-<div class="small">Sponsor gap €${Math.round(carGap)}</div>
+<b>Carretes 47</b>
+<table>
+<tr><td>Tickets (~${Math.round(carDemand)} pax × €${v("cP")})</td><td>€${Math.round(carTicketRev)}</td></tr>
+<tr><td>Bar revenue</td><td>€0</td></tr>
+<tr><td>Sponsorship</td><td>€${Math.round(v("s"))}</td></tr>
+<tr style="border-top:1px solid rgba(255,255,255,0.2)"><td><b>Total Revenue</b></td><td><b>€${Math.round(carTotalRev+v("s"))}</b></td></tr>
+<tr><td>Total Cost</td><td class="red">−€${Math.round(carCost)}</td></tr>
+<tr style="border-top:1px solid rgba(255,255,255,0.2)"><td><b>Profit / Loss</b></td><td class="${carProfit>=0?'green':'red'}"><b>€${Math.round(carProfit)}</b></td></tr>
+${carGap>0?`<tr><td colspan="2" class="small red">Needs €${Math.round(carGap)} more in sponsorship to break even</td></tr>`:`<tr><td colspan="2" class="small green">Profitable ✓</td></tr>`}
+</table>
 </div>
 
 <div>
 <b>Roots ⭐ (Black-owned)</b>
-<div>Revenue €${Math.round(rootRev)}</div>
-<div class="${rootProfit>=0?'green':'red'}">Profit €${Math.round(rootProfit)}</div>
-<div class="small">Break-even: ${Math.round(rootBEpct*100)}% tickets sold</div>
-<div class="small">Sponsor gap €${Math.round(rootGap)}</div>
+<table>
+<tr><td>Tickets (~${Math.round(rootDemand)} pax × avg €${Math.round(rootAvg*10)/10})</td><td>€${Math.round(rootTicketRev)}</td></tr>
+<tr><td>Bar kickback (10% of €10/pax)</td><td>€${Math.round(rootBarRev)}</td></tr>
+<tr><td>Sponsorship</td><td>€${Math.round(v("s"))}</td></tr>
+<tr style="border-top:1px solid rgba(255,255,255,0.2)"><td><b>Total Revenue</b></td><td><b>€${Math.round(rootTotalRev+v("s"))}</b></td></tr>
+<tr><td>Total Cost</td><td class="red">−€${Math.round(rootCost)}</td></tr>
+<tr style="border-top:1px solid rgba(255,255,255,0.2)"><td><b>Profit / Loss</b></td><td class="${rootProfit>=0?'green':'red'}"><b>€${Math.round(rootProfit)}</b></td></tr>
+${rootGap>0?`<tr><td colspan="2" class="small red">Needs €${Math.round(rootGap)} more in sponsorship to break even</td></tr>`:`<tr><td colspan="2" class="small green">Profitable ✓</td></tr>`}
+</table>
 </div>
 
 </div>
 `;
 
 document.getElementById("breakeven").innerHTML = `
-<h3>📈 Break-even & Pressure</h3>
-
+<h3>📈 Capacity Notes</h3>
 <div class="grid">
-<div>Carretes break-even: ${Math.round(carBEpct*100)}%</div>
-<div>Roots break-even: ${Math.round(rootBEpct*100)}%</div>
+<div class="small">Carretes: ${Math.round(carDemand)} effective attendees (150 cap × 80% usable × 1.35 oversell × 0.85 no-show) · Tickets cover ${Math.round(carTotalRev/carCost*100)}% of costs</div>
+<div class="small">Roots: ${Math.round(rootDemand)} effective attendees (200 cap × 80% usable × 1.35 oversell × 0.85 no-show) · Tickets + bar cover ${Math.round(rootTotalRev/rootCost*100)}% of costs</div>
 </div>
 `;
 
