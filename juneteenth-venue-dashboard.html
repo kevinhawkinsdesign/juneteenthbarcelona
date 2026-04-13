@@ -1,964 +1,262 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juneteenth Barcelona 2026 - Venue Dashboard</title>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<title>Internal Planning — Venue Comparison</title>
 
-```
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
-        background: linear-gradient(135deg, #FBF5ED 0%, #F9EFE0 50%, #F7E8D0 100%);
-        min-height: 100vh;
-    }
-    
-    .header {
-        background: linear-gradient(to right, #111827, #1F2937, #111827);
-        color: white;
-        padding: 4rem 1.5rem;
-        text-align: center;
-    }
-    
-    .header h1 {
-        font-size: 3rem;
-        font-weight: 900;
-        margin-bottom: 0.5rem;
-    }
-    
-    .header p {
-        font-size: 1.5rem;
-        font-weight: bold;
-        opacity: 0.9;
-        margin-bottom: 0.5rem;
-    }
-    
-    .header .subtitle {
-        font-size: 1rem;
-        opacity: 0.8;
-    }
-    
-    .container {
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 3rem 1.5rem;
-    }
-    
-    .requirements-box {
-        background: white;
-        border-radius: 1rem;
-        padding: 2rem;
-        margin-bottom: 3rem;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        border: 3px solid #d1d5db;
-    }
-    
-    .requirements-box h2 {
-        font-size: 2rem;
-        font-weight: 900;
-        margin-bottom: 2rem;
-    }
-    
-    .requirements-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1rem;
-    }
-    
-    .requirement-card {
-        border-radius: 0.75rem;
-        padding: 1.5rem;
-        border: 2px solid;
-    }
-    
-    .requirement-card.blue {
-        background: linear-gradient(135deg, #EFF6FF 0%, #E0F2FE 100%);
-        border-color: #60A5FA;
-    }
-    
-    .requirement-card.purple {
-        background: linear-gradient(135deg, #F3E8FF 0%, #E9D5FF 100%);
-        border-color: #C084FC;
-    }
-    
-    .requirement-card.orange {
-        background: linear-gradient(135deg, #FEF3C7 0%, #FCD34D 100%);
-        border-color: #FB923C;
-    }
-    
-    .requirement-card.green {
-        background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
-        border-color: #4ADE80;
-    }
-    
-    .requirement-card .label {
-        font-size: 0.875rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        margin-bottom: 0.5rem;
-    }
-    
-    .requirement-card .title {
-        font-size: 1.5rem;
-        font-weight: 900;
-        margin-bottom: 0.5rem;
-    }
-    
-    .requirement-card .desc {
-        font-size: 0.875rem;
-    }
-    
-    .venues-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-        gap: 2rem;
-        margin-bottom: 3rem;
-    }
-    
-    @media (max-width: 1200px) {
-        .venues-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-    
-    .venue-card {
-        border-radius: 1.5rem;
-        overflow: hidden;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        border: 3px solid #d1d5db;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-    
-    .venue-card:hover {
-        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        border-color: #374151;
-    }
-    
-    .venue-card.expanded {
-        border-color: #111827;
-        box-shadow: 0 25px 50px rgba(0,0,0,0.3);
-    }
-    
-    .venue-header {
-        padding: 2rem;
-        color: white;
-    }
-    
-    .venue-header h3 {
-        font-size: 2rem;
-        font-weight: 900;
-        margin-bottom: 1rem;
-    }
-    
-    .venue-header-info {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        opacity: 0.95;
-        margin-bottom: 1rem;
-        font-size: 1rem;
-    }
-    
-    .venue-header-badge {
-        font-weight: bold;
-        display: inline-block;
-        background: rgba(255,255,255,0.2);
-        padding: 0.5rem 1rem;
-        border-radius: 0.5rem;
-        backdrop-filter: blur(10px);
-        margin-top: 0.5rem;
-    }
-    
-    .venue-stats {
-        background: linear-gradient(to right, #F9FAFB, #F3F4F6);
-        padding: 1.5rem 2rem;
-        border-bottom: 2px solid #e5e7eb;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-    }
-    
-    .stat {
-        text-align: center;
-    }
-    
-    .stat-label {
-        font-size: 0.75rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: #4b5563;
-        margin-bottom: 0.5rem;
-    }
-    
-    .stat-value {
-        font-size: 1.875rem;
-        font-weight: 900;
-        color: #111827;
-    }
-    
-    .stat-subtext {
-        font-size: 0.75rem;
-        color: #6b7280;
-        margin-top: 0.25rem;
-    }
-    
-    .venue-content {
-        background: white;
-        padding: 2rem;
-        display: none;
-    }
-    
-    .venue-card.expanded .venue-content {
-        display: block;
-    }
-    
-    .venue-tabs {
-        display: flex;
-        gap: 0.5rem;
-        border-bottom: 2px solid #e5e7eb;
-        margin-bottom: 2rem;
-    }
-    
-    .venue-tab {
-        padding: 0.75rem 1.25rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        font-size: 0.75rem;
-        letter-spacing: 0.05em;
-        background: none;
-        border: none;
-        border-bottom: 4px solid transparent;
-        cursor: pointer;
-        color: #6b7280;
-        transition: all 0.3s;
-    }
-    
-    .venue-tab.active {
-        color: white;
-        border-bottom-color: currentColor;
-    }
-    
-    .tab-content {
-        display: none;
-    }
-    
-    .tab-content.active {
-        display: block;
-    }
-    
-    .cost-item {
-        margin-bottom: 1rem;
-    }
-    
-    .cost-label {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 0.5rem;
-        font-size: 0.875rem;
-        font-weight: 600;
-    }
-    
-    .cost-bar {
-        height: 0.5rem;
-        background: #e5e7eb;
-        border-radius: 9999px;
-        overflow: hidden;
-    }
-    
-    .cost-bar-fill {
-        height: 100%;
-        border-radius: 9999px;
-        transition: width 0.5s ease;
-    }
-    
-    .cost-total {
-        margin-top: 2rem;
-        padding-top: 1rem;
-        border-top: 3px solid #d1d5db;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-weight: 900;
-    }
-    
-    .cost-total-label {
-        font-size: 1.25rem;
-        color: #111827;
-    }
-    
-    .cost-total-value {
-        font-size: 2.25rem;
-    }
-    
-    .space-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    @media (max-width: 768px) {
-        .space-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-    
-    .space-stat {
-        background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%);
-        padding: 1rem;
-        border-radius: 0.5rem;
-        border: 2px solid #d1d5db;
-    }
-    
-    .space-stat-label {
-        font-size: 0.75rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        color: #4b5563;
-        margin-bottom: 0.5rem;
-    }
-    
-    .space-stat-value {
-        font-size: 2rem;
-        font-weight: 900;
-        color: #111827;
-    }
-    
-    .space-area {
-        margin-bottom: 1.5rem;
-    }
-    
-    .space-area-header {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 0.5rem;
-        font-weight: 600;
-    }
-    
-    .space-area-value {
-        text-align: right;
-    }
-    
-    .space-area-size {
-        font-weight: bold;
-    }
-    
-    .space-area-pct {
-        font-size: 0.75rem;
-        color: #6b7280;
-    }
-    
-    .space-bar {
-        height: 1rem;
-        background: #e5e7eb;
-        border-radius: 9999px;
-        overflow: hidden;
-        border: 1px solid #d1d5db;
-    }
-    
-    .space-bar-fill {
-        height: 100%;
-        border-radius: 9999px;
-    }
-    
-    .adequacy-box {
-        background: #f0fdf4;
-        border-left: 4px solid #22c55e;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        margin-top: 1.5rem;
-    }
-    
-    .adequacy-title {
-        font-size: 0.75rem;
-        font-weight: 900;
-        text-transform: uppercase;
-        color: #166534;
-        margin-bottom: 0.75rem;
-    }
-    
-    .adequacy-list {
-        list-style: none;
-        font-size: 0.875rem;
-        color: #166534;
-        margin-left: 0.5rem;
-    }
-    
-    .adequacy-list li {
-        margin-bottom: 0.5rem;
-    }
-    
-    .equipment-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.75rem;
-    }
-    
-    @media (max-width: 768px) {
-        .equipment-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-    
-    .equipment-item {
-        display: flex;
-        gap: 0.75rem;
-        background: #f9fafb;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        border: 1px solid #e5e7eb;
-        font-size: 0.875rem;
-        font-weight: 600;
-    }
-    
-    .equipment-check {
-        flex-shrink: 0;
-        width: 1.25rem;
-        height: 1.25rem;
-    }
-    
-    .strength-item {
-        display: flex;
-        gap: 0.75rem;
-        margin-bottom: 0.75rem;
-        font-size: 0.875rem;
-    }
-    
-    .strength-arrow {
-        font-weight: bold;
-        font-size: 1.125rem;
-        flex-shrink: 0;
-    }
-    
-    .warning-item {
-        display: flex;
-        gap: 0.75rem;
-        background: #fef3c7;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        border-left: 4px solid #eab308;
-        margin-bottom: 0.75rem;
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: #92400e;
-    }
-    
-    .warning-icon {
-        flex-shrink: 0;
-        width: 1.125rem;
-        height: 1.125rem;
-    }
-    
-    .comparison-table {
-        background: white;
-        border-radius: 1rem;
-        padding: 2rem;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        border: 3px solid #d1d5db;
-        margin-bottom: 2rem;
-        overflow-x: auto;
-    }
-    
-    .comparison-table h2 {
-        font-size: 2rem;
-        font-weight: 900;
-        margin-bottom: 1.5rem;
-    }
-    
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-    
-    thead tr {
-        border-bottom: 3px solid #9ca3af;
-    }
-    
-    th {
-        text-align: left;
-        padding: 1rem;
-        font-weight: 900;
-        color: white;
-    }
-    
-    th:first-child {
-        background: white;
-        color: #111827;
-    }
-    
-    th:nth-child(2) {
-        background: #b91c1c;
-        text-align: center;
-    }
-    
-    th:nth-child(3) {
-        background: #15803d;
-        text-align: center;
-    }
-    
-    td {
-        padding: 1rem;
-        border-bottom: 1px solid #d1d5db;
-    }
-    
-    tr:nth-child(even) td {
-        background: #f9fafb;
-    }
-    
-    td:nth-child(2), td:nth-child(3) {
-        text-align: center;
-    }
-    
-    .highlight-box {
-        background: linear-gradient(to right, #eff6ff, #e0f2fe);
-        border: 2px solid #60a5fa;
-        border-radius: 0.75rem;
-        padding: 1.5rem;
-        margin-top: 2rem;
-    }
-    
-    .highlight-box-title {
-        font-weight: bold;
-        color: #1e40af;
-        margin-bottom: 0.5rem;
-    }
-    
-    .highlight-box-text {
-        color: #1e40af;
-    }
-    
-    .footer {
-        text-align: center;
-        color: #4b5563;
-        font-size: 0.875rem;
-        background: white;
-        border-radius: 0.75rem;
-        padding: 1.5rem;
-        border: 2px solid #d1d5db;
-        margin-bottom: 2rem;
-    }
-    
-    .footer .emphasis {
-        font-weight: bold;
-        margin-bottom: 0.5rem;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+font-family:Inter;
+background:#0b0f19;
+color:#e5e7eb;
+}
+
+.container{max-width:1200px;margin:auto;padding:16px}
+
+.card{
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:14px;
+padding:14px;
+margin-top:12px;
+}
+
+.grid{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:900px){.grid{grid-template-columns:1fr 1fr}}
+
+h1{font-size:22px;margin:0}
+
+input[type=range]{width:100%}
+
+.kpi{font-size:18px;font-weight:800}
+
+table{width:100%;border-collapse:collapse;font-size:12px}
+td,th{padding:8px;border-bottom:1px solid rgba(255,255,255,0.1);text-align:left}
+th{color:#93c5fd}
+
+img{width:100%;border-radius:12px;cursor:pointer}
+
+.modal{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:black;
+z-index:999;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+}
+
+.modal img{max-width:90%;max-height:80%}
+
+button{padding:8px 12px;border-radius:8px;border:none}
+
+.small{font-size:11px;color:#94a3b8}
+
+.green{color:#4ade80}
+.red{color:#f87171}
 </style>
-```
-
 </head>
-<body>
-    <div id="root"></div>
 
-```
-<script type="text/babel">
-    const { useState } = React;
-    
-    function VenueDashboard() {
-        const [expandedVenue, setExpandedVenue] = useState(null);
-        const [viewMode, setViewMode] = useState('costs');
-        
-        const venues = {
-            carretes47: {
-                name: 'Carretes 47',
-                location: 'El Raval, Ciutat Vella, Barcelona',
-                owned: 'Community-oriented coliving',
-                color: '#C8102E',
-                baseRental: 1200,
-                baseCapacity: 150,
-                totalArea: 340,
-                standingArea: 150,
-                diningArea: 80,
-                artMarketArea: 80,
-                stagingArea: 30,
-                rentalHours: '10:00 AM – 10:00 PM (12 hours)',
-                hourlyRate: '€100/hour',
-                costs: {
-                    'Venue Rental (€100/hr × 12 hrs)': 1200,
-                    'Kitchen Access (+20%)': 240,
-                    'Security (2 guards, 12hrs)': 800,
-                    'Cleaning & Breakdown': 300,
-                    'Sound System Rental': 400,
-                    'Furniture Rental (3 couches, 6 chairs, tables)': 300
-                },
-                equipment: ['Wi-Fi', 'Natural skylight lighting', 'A/C', 'Kitchen access (+20% surcharge)', 'Modular 9-zone curtain dividers', 'Vehicle load-in access', 'Sound system (rental required)'],
-                strengths: ['Historic restored factory — original timber trusses & stone walls', 'Lower hourly rate (€100/hr)', 'BYO alcohol flexibility', 'Configurable 9-module layout with curtains', 'Vehicle access directly into space for vendor load-in'],
-                warnings: ['NOT in Poblenou — located in El Raval, Ciutat Vella', 'No commercial kitchen — food vendors must cook & prep at their own booths (80m² allocated)', 'Coliving residents on-site (noise curfew — must close by 10 PM)', 'Sound system must be rented separately (+€400)', 'Security must be hired separately (+€800)', 'Multi-vendor coordination required']
-            },
-            roots: {
-                name: 'Roots Gastro Club',
-                location: 'Poblenou, Barcelona',
-                owned: 'Black-owned Business',
-                color: '#00693A',
-                baseRental: 2660,
-                baseCapacity: 200,
-                totalArea: 650,
-                standingArea: 250,
-                diningArea: 120,
-                artMarketArea: 60,
-                stagingArea: 80,
-                rentalHours: '10:00 AM – 2:00 AM (14 hours)',
-                hourlyRate: '€190/hour',
-                costs: {
-                    'Venue Rental (€190/hr × 14 hrs)': 2660,
-                    'Kitchen Access': 0,
-                    'Security (2 guards, included)': 0,
-                    'Cleaning & Breakdown': 300,
-                    'Sound System (included)': 0,
-                    'Furniture Rental': 0
-                },
-                equipment: ['Professional sound system (included)', 'Stage (main hall)', 'Professional lighting (included)', 'Security staff (included)', 'Entrance bar + 2nd bar (attached to kitchen)', 'Commercial kitchen — open to food vendors', 'Back terrace (3rd zone)'],
-                strengths: ['Black-owned business in Poblenou', 'Commercial kitchen: food vendors cook on-site & serve from the attached 2nd bar — no vendor booths needed', '3-zone layout: entrance bar → main hall + stage → back terrace', 'Sound system, lighting & security all INCLUDED', 'Open until 2 AM — full late-night celebration', 'Turn-key setup — no equipment rentals needed'],
-                warnings: ['Higher base hourly rate (€190/hr)', 'Confirm food vendor kitchen access terms with management', 'Extended hours increase base cost but unlock late-night programme']
-            }
-        };
-        
-        const calculateTotal = (venue) => Object.values(venue.costs).reduce((a, b) => a + b, 0);
-        
-        const VenueCard = ({ venueKey }) => {
-            const venue = venues[venueKey];
-            const isExpanded = expandedVenue === venueKey;
-            const total = calculateTotal(venue);
-            const otherVenue = venueKey === 'carretes47' ? venues.roots : venues.carretes47;
-            const otherTotal = calculateTotal(otherVenue);
-            const difference = Math.abs(total - otherTotal);
-            const isCheaper = total < otherTotal;
-            
-            const colors = ['#C8102E', '#FF6B35', '#004E89', '#7209B7', '#FF006E', '#3A86FF'];
-            
-            const CostBreakdown = () => {
-                const costs = Object.entries(venue.costs).filter(([_, value]) => value > 0);
-                const maxValue = Math.max(...costs.map(([_, v]) => v));
-                
-                return (
-                    <div>
-                        {costs.map(([label, value], idx) => (
-                            <div key={label} className="cost-item">
-                                <div className="cost-label">
-                                    <span>{label}</span>
-                                    <span style={{ color: colors[idx] }}>€{value}</span>
-                                </div>
-                                <div className="cost-bar">
-                                    <div 
-                                        className="cost-bar-fill" 
-                                        style={{ 
-                                            width: `${(value / maxValue) * 100}%`,
-                                            backgroundColor: colors[idx]
-                                        }}
-                                    />
-                                </div>
-                            </div>
-                        ))}
-                        <div className="cost-total">
-                            <span className="cost-total-label">TOTAL EVENT COST</span>
-                            <span className="cost-total-value" style={{ color: venue.color }}>€{total}</span>
-                        </div>
-                    </div>
-                );
-            };
-            
-            const SpaceBreakdown = () => {
-                const areas = [
-                    { name: 'Live Performance Stage', size: venue.stagingArea, color: '#FFB703' },
-                    { name: 'Dance Floor (100 guests)', size: venue.standingArea, color: '#FB5607' },
-                    { name: venueKey === 'carretes47' ? 'Food Vendor Booths (cook + prep on-site)' : 'Art & Craft Vendors (food vendors use kitchen)', size: venue.artMarketArea, color: '#8338EC' },
-                    { name: 'Dining & Seating', size: venue.diningArea, color: '#3A86FF' }
-                ];
-                
-                return (
-                    <div>
-                        <div className="space-grid">
-                            <div className="space-stat">
-                                <div className="space-stat-label">Total Floor Space</div>
-                                <div className="space-stat-value">{venue.totalArea}m²</div>
-                            </div>
-                            <div className="space-stat">
-                                <div className="space-stat-label">Standing Capacity</div>
-                                <div className="space-stat-value">{venue.baseCapacity}</div>
-                            </div>
-                        </div>
-                        
-                        {areas.map((area) => {
-                            const pct = (area.size / venue.totalArea * 100).toFixed(0);
-                            return (
-                                <div key={area.name} className="space-area">
-                                    <div className="space-area-header">
-                                        <span>{area.name}</span>
-                                        <div className="space-area-value">
-                                            <div className="space-area-size">{area.size}m²</div>
-                                            <div className="space-area-pct">{pct}% of total</div>
-                                        </div>
-                                    </div>
-                                    <div className="space-bar">
-                                        <div 
-                                            className="space-bar-fill"
-                                            style={{ 
-                                                width: `${pct}%`,
-                                                backgroundColor: area.color
-                                            }}
-                                        />
-                                    </div>
-                                </div>
-                            );
-                        })}
-                        
-                        <div className="adequacy-box">
-                            <div className="adequacy-title">✓ Space Adequacy for Event Requirements</div>
-                            <ul className="adequacy-list">
-                                <li>✓ Performance stage: {venue.stagingArea}m² {venue.stagingArea >= 30 ? '(adequate)' : '(tight)'}</li>
-                                <li>✓ Dance floor @ 1.5m² per person: {venue.standingArea}m² {venue.standingArea >= 150 ? '(comfortable)' : '(adequate)'}</li>
-                                {venueKey === 'carretes47'
-                                    ? <li>✓ Food vendor booths (cook + prep): {venue.artMarketArea}m² — vendors set up their own cooking station in their booth space</li>
-                                    : <li>✓ Art & craft vendors: {venue.artMarketArea}m² — food vendors cook in commercial kitchen & serve from the 2nd bar (no booth space needed)</li>
-                                }
-                                <li>✓ Dining & socializing: {venue.diningArea}m² {venue.diningArea >= 80 ? '(generous)' : '(moderate)'}</li>
-                            </ul>
-                        </div>
-                    </div>
-                );
-            };
-            
-            const FeaturesBreakdown = () => (
-                <div>
-                    <div style={{ marginBottom: '2rem' }}>
-                        <h4 style={{ fontWeight: '900', marginBottom: '1rem' }}>Included Equipment & Services</h4>
-                        <div className="equipment-grid">
-                            {venue.equipment.map((item, idx) => (
-                                <div key={idx} className="equipment-item">
-                                    <div className="equipment-check">✓</div>
-                                    <span>{item}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                    
-                    <div style={{ marginBottom: '2rem' }}>
-                        <h4 style={{ fontWeight: '900', marginBottom: '1rem' }}>Key Strengths</h4>
-                        <div>
-                            {venue.strengths.map((strength, idx) => (
-                                <div key={idx} className="strength-item">
-                                    <span className="strength-arrow">→</span>
-                                    <span>{strength}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                    
-                    {venue.warnings.length > 0 && (
-                        <div>
-                            <h4 style={{ fontWeight: '900', marginBottom: '1rem' }}>Considerations</h4>
-                            {venue.warnings.map((warning, idx) => (
-                                <div key={idx} className="warning-item">
-                                    <div className="warning-icon">⚠</div>
-                                    <span>{warning}</span>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                </div>
-            );
-            
-            return (
-                <div className={`venue-card ${isExpanded ? 'expanded' : ''}`}>
-                    <div className="venue-header" style={{ backgroundColor: venue.color }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                            <div>
-                                <h3>{venue.name}</h3>
-                                <div className="venue-header-info">
-                                    📍 {venue.location}
-                                </div>
-                                <div className="venue-header-info">
-                                    🕐 {venue.rentalHours}
-                                </div>
-                                {venue.owned && (
-                                    <div className="venue-header-badge">⭐ {venue.owned}</div>
-                                )}
-                            </div>
-                            <div style={{ fontSize: '1.5rem', cursor: 'pointer', transition: 'transform 0.3s' }}>
-                                {isExpanded ? '▼' : '▶'}
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div className="venue-stats">
-                        <div className="stat">
-                            <div className="stat-label">Total Cost</div>
-                            <div className="stat-value" style={{ color: venue.color }}>€{total}</div>
-                            <div className="stat-subtext">{venue.hourlyRate}</div>
-                        </div>
-                        <div className="stat">
-                            <div className="stat-label">Capacity</div>
-                            <div className="stat-value">{venue.baseCapacity}</div>
-                        </div>
-                        <div className="stat">
-                            <div className="stat-label">Total Area</div>
-                            <div className="stat-value">{venue.totalArea}m²</div>
-                        </div>
-                    </div>
-                    
-                    {isCheaper && (
-                        <div style={{ background: '#dcfce7', borderTop: '2px solid #e5e7eb', padding: '1rem 2rem' }}>
-                            <div style={{ color: '#166534', fontWeight: 'bold' }}>
-                                💰 Save €{difference} vs. {otherVenue.name}
-                            </div>
-                        </div>
-                    )}
-                    
-                    {isExpanded && (
-                        <div className="venue-content">
-                            <div className="venue-tabs">
-                                {['costs', 'space', 'features'].map(tab => (
-                                    <button
-                                        key={tab}
-                                        className={`venue-tab ${viewMode === tab ? 'active' : ''}`}
-                                        onClick={() => setViewMode(tab)}
-                                        style={viewMode === tab ? { color: venue.color, borderBottomColor: venue.color } : {}}
-                                    >
-                                        {tab === 'costs' && '💰 Costs'}
-                                        {tab === 'space' && '📐 Space'}
-                                        {tab === 'features' && '⚙️ Features'}
-                                    </button>
-                                ))}
-                            </div>
-                            
-                            {viewMode === 'costs' && <CostBreakdown />}
-                            {viewMode === 'space' && <SpaceBreakdown />}
-                            {viewMode === 'features' && <FeaturesBreakdown />}
-                        </div>
-                    )}
-                </div>
-            );
-        };
-        
-        const total1 = calculateTotal(venues.carretes47);
-        const total2 = calculateTotal(venues.roots);
-        const difference = Math.abs(total1 - total2);
-        
-        return (
-            <div>
-                <div className="header">
-                    <h1>Juneteenth Barcelona 2026</h1>
-                    <p>Venue Selection Dashboard</p>
-                    <div className="subtitle">Saturday, June 20, 2026 | 10:00 AM Setup – 2:00 AM Final Celebration</div>
-                </div>
-                
-                <div className="container">
-                    <div className="requirements-box">
-                        <h2>📋 Event Requirements & Space Allocation</h2>
-                        <div className="requirements-grid">
-                            <div className="requirement-card blue">
-                                <div className="label">🎤 Performance</div>
-                                <div className="title">Live Music</div>
-                                <div className="desc">Musicians + DJ stage setup</div>
-                            </div>
-                            <div className="requirement-card purple">
-                                <div className="label">💃 Dancing</div>
-                                <div className="title">100 Guests</div>
-                                <div className="desc">Open dance floor</div>
-                            </div>
-                            <div className="requirement-card orange">
-                                <div className="label">🎨 Arts Market</div>
-                                <div className="title">20 Vendors</div>
-                                <div className="desc">Craft & art displays</div>
-                            </div>
-                            <div className="requirement-card green">
-                                <div className="label">🍽️ Dining</div>
-                                <div className="title">Seating Areas</div>
-                                <div className="desc">Food & socializing</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div className="venues-grid">
-                        <div onClick={() => setExpandedVenue(expandedVenue === 'carretes47' ? null : 'carretes47')}>
-                            <VenueCard venueKey="carretes47" />
-                        </div>
-                        <div onClick={() => setExpandedVenue(expandedVenue === 'roots' ? null : 'roots')}>
-                            <VenueCard venueKey="roots" />
-                        </div>
-                    </div>
-                    
-                    <div className="comparison-table">
-                        <h2>💡 Quick Comparison</h2>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Criteria</th>
-                                    <th>Carretes 47</th>
-                                    <th>Roots Gastro</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td style={{ fontWeight: 'bold' }}>⏰ Operating Hours</td>
-                                    <td>10 AM – 10 PM (12 hrs)</td>
-                                    <td>10 AM – 2 AM (14 hrs)</td>
-                                </tr>
-                                <tr>
-                                    <td style={{ fontWeight: 'bold' }}>💰 Total Cost</td>
-                                    <td style={{ fontWeight: 'bold', color: '#b91c1c' }}>€{total1}</td>
-                                    <td style={{ fontWeight: 'bold', color: '#15803d' }}>€{total2}</td>
-                                </tr>
-                                <tr>
-                                    <td style={{ fontWeight: 'bold' }}>💵 Hourly Rate</td>
-                                    <td>€100/hr</td>
-                                    <td>€190/hr</td>
-                                </tr>
-                                <tr>
-                                    <td style={{ fontWeight: 'bold' }}>🔊 Sound System</td>
-                                    <td>Rental cost (€400)</td>
-                                    <td>✓ Included</td>
-                                </tr>
-                                <tr>
-                                    <td style={{ fontWeight: 'bold' }}>👮 Security (2 guards)</td>
-                                    <td>Cost (€800)</td>
-                                    <td>✓ Included</td>
-                                </tr>
-                                <tr>
-                                    <td style={{ fontWeight: 'bold' }}>🍳 Food Vendor Setup</td>
-                                    <td>Vendors cook & prep at their own booth (80m² allocated)</td>
-                                    <td>✓ Vendors use commercial kitchen — serve from 2nd bar, no booths needed</td>
-                                </tr>
-                                <tr>
-                                    <td style={{ fontWeight: 'bold' }}>📍 Location</td>
-                                    <td>El Raval, Ciutat Vella (not Poblenou)</td>
-                                    <td>Poblenou, Barcelona (Badajoz 115)</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        
-                        <div className="highlight-box">
-                            <div className="highlight-box-title">💡 Bottom Line</div>
-                            <div className="highlight-box-text">
-                                <strong>Roots is €{difference} cheaper</strong> when sound & security are included. Plus: until 2 AM, larger space (650m² vs 340m²), black-owned partnership, and a commercial kitchen so food vendors cook on-site and serve from the attached 2nd bar — no booths needed.
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div className="footer">
-                        <div className="emphasis">📊 Dashboard Guide</div>
-                        <p>Click on any venue card above to expand and explore detailed cost breakdowns, space allocations, and feature comparisons.</p>
-                        <p style={{ marginTop: '1rem', fontSize: '0.75rem' }}>Carretes 47 (El Raval, Ciutat Vella): 10 AM–10 PM, €100/hr, 340m², sound & security extra. Roots Gastro Club (Poblenou): 10 AM–2 AM, €190/hr, 650m², sound, lighting & security included, commercial kitchen for food vendors.</p>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-    
-    ReactDOM.render(<VenueDashboard />, document.getElementById('root'));
+<body>
+
+<div class="container">
+
+<h1>🎟 Juneteenth Venue Decision OS</h1>
+
+<!-- CONTROLS -->
+<div class="card">
+<h3>🎛 Pricing + Sponsorship</h3>
+
+<div>Carretes Ticket (€8–12)</div>
+<input id="cP" type="range" min="8" max="12" value="10" oninput="update()">
+<div class="kpi" id="cPL"></div>
+
+<div>Roots Early (€8–12)</div>
+<input id="rE" type="range" min="8" max="12" value="10" oninput="update()">
+<div class="kpi" id="rEL"></div>
+
+<div>Roots Late (€12–20)</div>
+<input id="rL" type="range" min="12" max="20" value="15" oninput="update()">
+<div class="kpi" id="rLL"></div>
+
+<div>Sponsorship (€0–5000)</div>
+<input id="s" type="range" min="0" max="5000" value="300" oninput="update()">
+<div class="kpi" id="sL"></div>
+
+</div>
+
+<!-- FINANCIAL -->
+<div class="card" id="finance"></div>
+
+<!-- BREAK EVEN -->
+<div class="card" id="breakeven"></div>
+
+<!-- COMPARISON TABLE -->
+<div class="card">
+<h3>📊 Full Venue Comparison</h3>
+
+<table>
+<tr><th>Feature</th><th>Carretes 47</th><th>Roots</th></tr>
+
+<tr><td>Space</td><td>340m²</td><td>650–750m²</td></tr>
+<tr><td>Flow Model</td><td>80% standing / 20% lounge</td><td>80% standing / 20% lounge</td></tr>
+<tr><td>Bathrooms</td><td>2</td><td>6</td></tr>
+<tr><td>Kitchen</td><td>Mini kitchen (+20% surcharge)</td><td>Commercial + 3 prep zones (included)</td></tr>
+<tr><td>Lighting</td><td>LED</td><td>Advanced LED system</td></tr>
+<tr><td>Sound</td><td>Rental required</td><td>Included</td></tr>
+<tr><td>Hours</td><td>10:00–22:00 (12 hrs)</td><td>10:00–02:00 (16 hrs)</td></tr>
+<tr><td>Transport</td><td>Central metro network</td><td>Llacuna (less central)</td></tr>
+<tr><td>Ownership</td><td>Neutral</td><td><b>Black-owned ⭐</b></td></tr>
+<tr><td>Bar Revenue</td><td>None</td><td>10% kickback</td></tr>
+
+<tr><td colspan="3" style="background:rgba(255,255,255,0.06);font-size:10px;font-weight:700;letter-spacing:.08em;color:#93c5fd;padding-top:12px">💰 COST BREAKDOWN</td></tr>
+<tr><td>Venue Rental</td><td>€1,200 (€100/hr × 12 hrs)</td><td>€2,660 (€190/hr × 14 hrs)</td></tr>
+<tr><td>Kitchen Access</td><td>€240 (+20% surcharge)</td><td class="green">€0 — included</td></tr>
+<tr><td>Security (2 guards)</td><td>€800</td><td class="green">€0 — included</td></tr>
+<tr><td>Sound System</td><td>€400 rental</td><td class="green">€0 — included</td></tr>
+<tr><td>Cleaning & Breakdown</td><td>€300</td><td>€300</td></tr>
+<tr><td>Furniture Rental</td><td>€300</td><td class="green">€0 — included</td></tr>
+<tr><td><b>Total Event Cost</b></td><td><b class="red">€3,240</b></td><td><b class="green">€2,960</b></td></tr>
+<tr><td>You Save</td><td>—</td><td class="green"><b>€280 vs Carretes</b></td></tr>
+</table>
+
+</div>
+
+<!-- IMAGES -->
+<div class="card">
+<h3>🖼 Venue Galleries</h3>
+
+<div class="grid">
+<div>
+<img src="/images/carretes47/IMG_7276.jpeg" onclick="openImg(this.src)">
+<div class="small">Carretes 47 📸 click to expand</div>
+</div>
+
+<div>
+<img src="/images/roots/IMG_7238.jpeg" onclick="openImg(this.src)">
+<div class="small">Roots 📸 click to expand</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="m" onclick="closeImg()">
+<img id="mi"/>
+</div>
+
+<script>
+
+function v(id){return +document.getElementById(id).value}
+
+/* capacity assumptions (standing 80% usable) */
+const carCap = 150 * 0.8;
+const rootCap = 200 * 0.8;
+
+const oversell = 1.35;
+const noshow = 0.85;
+
+function update(){
+
+document.getElementById("cPL").innerText="€"+v("cP");
+document.getElementById("rEL").innerText="€"+v("rE");
+document.getElementById("rLL").innerText="€"+v("rL");
+document.getElementById("sL").innerText="€"+v("s");
+
+/* demand */
+let carDemand = carCap * oversell * noshow;
+let rootDemand = rootCap * oversell * noshow;
+
+/* pricing */
+let rootAvg = (v("rE")+v("rL"))/2;
+
+/* revenue */
+let carRev = carDemand * v("cP");
+let rootRev = rootDemand * rootAvg + rootDemand * 2.5 + rootDemand * 0.1 * 10;
+
+/* COSTS (FULL STACK) */
+let carCost =
+3000 +   // venue
+800 +    // security optional
+400 +    // sound/tech
+300;     // cleaning
+
+let rootCost =
+(190 * 14) + // 14h rental (10AM–2AM)
+300;         // cleaning + ops
+
+/* profit */
+let carProfit = carRev + v("s") - carCost;
+let rootProfit = rootRev + v("s") - rootCost;
+
+/* break even */
+let carBErev = carCost;
+let rootBErev = rootCost;
+
+let carBEpct = carBErev / carRev;
+let rootBEpct = rootBErev / rootRev;
+
+/* sponsor gap */
+let carGap = Math.max(0, carCost - carRev - v("s"));
+let rootGap = Math.max(0, rootCost - rootRev - v("s"));
+
+document.getElementById("finance").innerHTML = `
+<h3>💰 Financial Breakdown</h3>
+
+<div class="grid">
+
+<div>
+<b>Carretes</b>
+<div>Revenue €${Math.round(carRev)}</div>
+<div class="${carProfit>=0?'green':'red'}">Profit €${Math.round(carProfit)}</div>
+<div class="small">Break-even: ${Math.round(carBEpct*100)}% tickets sold</div>
+<div class="small">Sponsor gap €${Math.round(carGap)}</div>
+</div>
+
+<div>
+<b>Roots ⭐ (Black-owned)</b>
+<div>Revenue €${Math.round(rootRev)}</div>
+<div class="${rootProfit>=0?'green':'red'}">Profit €${Math.round(rootProfit)}</div>
+<div class="small">Break-even: ${Math.round(rootBEpct*100)}% tickets sold</div>
+<div class="small">Sponsor gap €${Math.round(rootGap)}</div>
+</div>
+
+</div>
+`;
+
+document.getElementById("breakeven").innerHTML = `
+<h3>📈 Break-even & Pressure</h3>
+
+<div class="grid">
+<div>Carretes break-even: ${Math.round(carBEpct*100)}%</div>
+<div>Roots break-even: ${Math.round(rootBEpct*100)}%</div>
+</div>
+`;
+
+}
+
+function openImg(src){
+document.getElementById("m").style.display="flex";
+document.getElementById("mi").src=src;
+}
+
+function closeImg(){
+document.getElementById("m").style.display="none";
+}
+
+update();
+
 </script>
-```
 
 </body>
 </html>

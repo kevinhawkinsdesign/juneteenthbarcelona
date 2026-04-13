@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Private internal planning pages — must not be indexed
+Disallow: /juneteenth-venue-dashboard.html
