@@ -3,9 +3,8 @@
 Website for **Juneteenth Barcelona 2026** — a day of unity and celebration for the African diaspora in Barcelona.
 
 **Date:** Saturday, June 20, 2026  
-**Venue:** La Fábrica & Co, Doctor Trueta 191, El Poblenou, Barcelona  
-**Contact:** barcelona@juneteenth.es  
-**Live site:** https://dancing-lebkuchen-8348db.netlify.app
+**Venue:** Roots Gastro Club, Carrer de Badajoz 115, 08018 Barcelona, España
+**Live site:** https://juneteenth.es
 
 ---
 
@@ -51,10 +50,6 @@ juneteenthbarcelona/
 │       ├── about.json                     ← About page text content (CMS-editable)
 │       └── contact.json                   ← Contact page text content (CMS-editable)
 ├── images/
-│   ├── barcelona-hero.jpg
-│   ├── barcelona-skyline.jpg
-│   ├── juneteenth_image_3.jpg
-│   └── when-is-juneteenth-what-it-celebrates.webp
 └── walking-tour/
     ├── index.html
     ├── spanish-slave-trade.html
