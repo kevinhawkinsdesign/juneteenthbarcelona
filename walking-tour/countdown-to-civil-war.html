@@ -134,10 +134,13 @@
   font-family: 'Inter', sans-serif; font-weight: 800;
   font-size: 1.3rem; color: var(--gold); line-height: 1;
 }
-.timeline-text { font-size: 0.9rem; line-height: 1.75; color: rgba(13,13,13,0.68); }
+.timeline-text { font-size: 0.9rem; line-height: 1.75; color: rgba(13,13,13,0.68); min-width: 0; }
+.timeline-text p { font-size: 0.9rem; line-height: 1.75; color: rgba(13,13,13,0.68); margin-bottom: 0.9rem; }
+.timeline-text p:last-child { margin-bottom: 0; }
 @media (max-width: 600px) {
   .tour-meta { gap: 1rem; }
-  .timeline-item { grid-template-columns: 60px 1fr; gap: 1rem; }
+  .timeline-item { grid-template-columns: 56px 1fr; gap: 0.75rem; }
+  .timeline-year { font-size: 1rem; }
 }
 
 /* ── SKIP TO CONTENT (accessibility) ── */
@@ -218,11 +221,11 @@
   </div>
   <div class="timeline-item">
     <div class="timeline-year">1931</div>
-    <div class="timeline-text"><img src="../images/second-republic-1931.jpg" alt="Proclamation of the Spanish Second Republic, April 14, 1931" class="stop-img" style="margin-bottom:0.8rem;" onerror="this.style.display='none'">Republican parties won in most big cities in local elections As this result was interpreted as a clear rejection of the monarchy, the king fled the country and the Second Republic was declared on April 14. The Republic raised people’s expectations of modernity and social justice. Industrial workers hoped to improve their working conditions and peasants hoped for agrarian reform. The ‘historical regions’ (Basque Country, Catalonia, and Galicia) saw this as their opportunity to achieve some form of self-government within Spain. But it was interpreted as a threat by industrialists, landowners, the Church, and high-ranking military officers.</div>
+    <div class="timeline-text"><p>Republican parties won in most big cities in local elections. As this result was interpreted as a clear rejection of the monarchy, the king fled the country and the Second Republic was declared on April 14. The Republic raised people’s expectations of modernity and social justice. Industrial workers hoped to improve their working conditions and peasants hoped for agrarian reform. The ‘historical regions’ (Basque Country, Catalonia, and Galicia) saw this as their opportunity to achieve some form of self-government within Spain. But it was interpreted as a threat by industrialists, landowners, the Church, and high-ranking military officers.</p><img src="../images/second-republic-1931.jpg" alt="Proclamation of the Spanish Second Republic, April 14, 1931" class="stop-img" style="margin-top:0.8rem;" onerror="this.style.display=’none’"></div>
   </div>
   <div class=”timeline-item”>
     <div class=”timeline-year”>1936</div>
-    <div class=”timeline-text”>The election was won by a coalition of Republicans, Socialists, and Communists under the name <em>Frente Popular</em> (Popular Front). This was a much more radical left-wing coalition than the one that won in 1931, and was supported by the Anarchist union CNT (Confederación Nacional de Trabajadores). This government restored the Catalan Statute and granted a statute to Basque Country as well. A new agrarian reform policy, more radical than the previous one, was implemented.<br><br>The right-wing parties and their followers found it impossible to tolerate a new stint of left-wing policies that went against their interests, whereas many landless labourers and workers saw the new government as the first step towards a full-blown revolution that would change Spain forever. The unrest in some military quarters was also noticed. The government posted some “dangerous” generals far from centres of government, including General Franco, who was posted to the Canary Islands. Despite this, a small group of generals hatched a new plot. On July 17, the Spanish Army of Africa arose in Morocco, with support by garrisons in different parts of Spain. The country split in two sections: Republican, loyal to the government, and Nationalist, supporters of the coup.<br><br>The Spanish Civil War began.</div>
+    <div class=”timeline-text”><p>The election was won by a coalition of Republicans, Socialists, and Communists under the name <em>Frente Popular</em> (Popular Front). This was a much more radical left-wing coalition than the one that won in 1931, and was supported by the Anarchist union CNT (Confederación Nacional de Trabajadores). This government restored the Catalan Statute and granted a statute to Basque Country as well. A new agrarian reform policy, more radical than the previous one, was implemented.</p><p>The right-wing parties and their followers found it impossible to tolerate a new stint of left-wing policies that went against their interests, whereas many landless labourers and workers saw the new government as the first step towards a full-blown revolution that would change Spain forever. The unrest in some military quarters was also noticed. The government posted some “dangerous” generals far from centres of government, including General Franco, who was posted to the Canary Islands. Despite this, a small group of generals hatched a new plot. On July 17, the Spanish Army of Africa arose in Morocco, with support by garrisons in different parts of Spain. The country split in two sections: Republican, loyal to the government, and Nationalist, supporters of the coup.</p><p>The Spanish Civil War began.</p></div>
   </div>
 </div>
 
