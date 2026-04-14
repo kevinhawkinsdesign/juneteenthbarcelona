@@ -124,7 +124,7 @@
 }
 .hero-eyebrow {
   display: inline-flex; align-items: center; gap: 0.6rem;
-  font-size: 0.68rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase;
+  font-size: clamp(1.6rem, 3.5vw, 2.8rem); font-weight: 800; letter-spacing: -0.02em; text-transform: none;
   color: var(--gold); margin-bottom: 1.5rem;
   opacity: 0; animation: fadeUp 0.7s 0.1s forwards;
 }
@@ -355,7 +355,7 @@
 <section class="hero" aria-label="Site hero">
   <div class="hero-bg"></div>
   <div class="hero-body">
-    <div class="hero-eyebrow" data-cms="hero_eyebrow">Barcelona · June 20, 2026</div>
+    <div class="hero-eyebrow" data-cms="hero_eyebrow">June 20, 2026</div>
     <h1 class="hero-h1" data-cms="hero_title">Juneteenth<br>Barcelona</h1>
   </div>
   <div class="hero-footer">
