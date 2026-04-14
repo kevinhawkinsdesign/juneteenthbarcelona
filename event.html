@@ -87,24 +87,6 @@
 .detail-sub { font-size: 0.8rem; color: rgba(13,13,13,0.5); margin-top: 0.4rem; line-height: 1.6; }
 .detail-sub a { color: var(--red); text-decoration: none; border-bottom: 1px solid rgba(200,16,46,0.3); }
 
-/* ── SCHEDULE ── */
-.schedule-section { padding: 6rem 5vw; border-bottom: 1px solid var(--border); }
-.schedule-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
-.schedule-title { font-family: 'Inter', sans-serif; font-weight: 800; font-size: clamp(2rem, 3vw, 2.8rem); letter-spacing: -0.025em; margin-top: 0.5rem; }
-.schedule-list { display: flex; flex-direction: column; }
-.schedule-item {
-  display: grid; grid-template-columns: 100px 1fr auto;
-  align-items: center; gap: 3rem;
-  padding: 2rem 0; border-top: 1px solid var(--border);
-  transition: background 0.2s;
-}
-.schedule-item:last-child { border-bottom: 1px solid var(--border); }
-.schedule-time { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.82rem; color: var(--gold); }
-.schedule-info {}
-.schedule-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1.05rem; }
-.schedule-desc { font-size: 0.82rem; color: var(--mid); margin-top: 0.2rem; }
-.schedule-tag { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.35rem 0.9rem; border: 1px solid var(--border); color: var(--mid); white-space: nowrap; }
-.schedule-empty { font-size: 0.95rem; color: var(--mid); padding: 3rem 0; font-style: italic; border-top: 1px solid var(--border); }
 
 
 /* ── VENUE ── */
@@ -127,79 +109,19 @@
 .register-title { font-family: 'Inter', sans-serif; font-weight: 800; font-size: clamp(2rem, 4vw, 3.5rem); color: white; line-height: 0.95; letter-spacing: -0.02em; }
 .register-sub { font-size: 0.88rem; color: rgba(255,255,255,0.6); margin-top: 0.6rem; }
 
-/* ── SHARE CARD ── */
-.share-card {
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  background: var(--off-white);
-}
-.share-card-inner {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 0;
-}
-.share-card-left {
-  padding: 4rem 5vw;
-  border-right: 1px solid var(--border);
-}
-.share-card-eyebrow {
-  font-size: 0.62rem; font-weight: 600; letter-spacing: 0.28em;
-  text-transform: uppercase; color: var(--mid); margin-bottom: 0.8rem;
-}
-.share-card-title {
-  font-family: 'Inter', sans-serif; font-weight: 800;
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
-  letter-spacing: -0.025em; color: var(--black);
-  margin-bottom: 2rem; line-height: 1;
-}
-.share-detail {
-  display: flex; align-items: flex-start; gap: 0.9rem;
-  padding: 0.9rem 0; border-bottom: 1px solid var(--border);
-}
-.share-detail:first-child { border-top: 1px solid var(--border); }
-.share-detail-icon { font-size: 1rem; flex-shrink: 0; padding-top: 2px; }
-.share-detail div { display: flex; flex-direction: column; gap: 0.15rem; }
-.share-detail strong { font-size: 0.88rem; font-weight: 600; color: var(--black); }
-.share-detail span { font-size: 0.78rem; color: var(--mid); }
-.share-card-right {
-  padding: 4rem 5vw;
-  display: flex; flex-direction: column; justify-content: space-between;
-}
-.share-card-url {
-  font-family: 'Inter', sans-serif; font-weight: 700;
-  font-size: 0.78rem; letter-spacing: 0.08em;
-  color: var(--mid); margin-bottom: 2rem;
-  word-break: break-all;
-}
-.share-btns { display: flex; flex-direction: column; gap: 0.6rem; }
-.share-btn {
-  display: block; padding: 0.75rem 1.2rem; text-align: center;
-  font-family: 'DM Sans', sans-serif; font-size: 0.78rem;
-  font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
-  text-decoration: none; border: none; cursor: pointer; transition: all 0.2s;
-}
-.share-btn-wa  { background: #25D366; color: white; }
-.share-btn-wa:hover { background: #1ebe5d; }
-.share-btn-x   { background: #000; color: white; }
-.share-btn-x:hover { background: #333; }
-.share-btn-fb  { background: #1877F2; color: white; }
-.share-btn-fb:hover { background: #0f65d9; }
-.share-btn-copy { background: var(--brown-dark); color: white; }
-.share-btn-copy:hover { background: var(--red); }
-@media (max-width: 768px) {
-  .share-card-inner { grid-template-columns: 1fr; }
-  .share-card-left { border-right: none; border-bottom: 1px solid var(--border); }
-}
 
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .event-hero-inner { grid-template-columns: 1fr; gap: 2rem; }
   .details-grid { grid-template-columns: 1fr; }
-  .schedule-item { grid-template-columns: 80px 1fr; }
-  .schedule-tag { display: none; }
   .venue-section { grid-template-columns: 1fr; }
   .venue-right { min-height: 260px; }
   .venue-left { border-right: none; border-bottom: 1px solid var(--border); }
   .register-band { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 768px) {
+  [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+  [style*="grid-template-columns:1fr 1fr 1fr"] { grid-template-columns: 1fr !important; }
 }
 
 /* ── SKIP TO CONTENT (accessibility) ── */
@@ -325,60 +247,56 @@
   </div>
 </div>
 
-<!-- SHARE CARD -->
-<div class="share-card reveal">
-  <div class="share-card-inner">
-    <div class="share-card-left">
-      <div class="share-card-eyebrow">Save the date &amp; share</div>
-      <div class="share-card-title">Juneteenth Barcelona 2026</div>
-      <div class="share-card-details">
-        <div class="share-detail"><span class="share-detail-icon">🗓</span><div><strong>Saturday, 20 June 2026</strong><span>Juneteenth — commemorating freedom, 1865</span></div></div>
-        <div class="share-detail"><span class="share-detail-icon">📍</span><div><strong>Roots Gastro Club</strong><span>Carrer de Badajoz 115 · Sant Martí, Barcelona 08018</span></div></div>
-        <div class="share-detail"><span class="share-detail-icon">🌍</span><div><strong>Open to all</strong><span>A day of unity and celebration for the African diaspora</span></div></div>
-        <div class="share-detail"><span class="share-detail-icon">🎟</span><div><strong>Two ticket tiers</strong><span>Early (13:00, family-friendly) · Late (21:00, DJs until 02:00)</span></div></div>
-        <div class="share-detail"><span class="share-detail-icon">✉️</span><div><a href="/contact" style="font-size:0.88rem;font-weight:600;color:inherit">Get in touch</a><span>Volunteer · Perform · Sponsor · Attend</span></div></div>
-      </div>
-    </div>
-    <div class="share-card-right">
-      <div class="share-card-url">juneteenth.es/event</div>
-      <div class="share-btns">
-        <a href="https://wa.me/?text=Join%20us%20for%20Juneteenth%20BCN%202026%20%E2%80%94%20Saturday%2C%20June%2020%20at%20Roots%20Gastro%20Club%2C%20Sant%20Mart%C3%AD%2C%20Barcelona.%20https%3A%2F%2Fjuneteenth.es%2Fevent.html" target="_blank" class="share-btn share-btn-wa">Share on WhatsApp</a>
-        <a href="https://twitter.com/intent/tweet?text=Join%20us%20for%20Juneteenth%20BCN%202026%20%E2%80%94%20Saturday%2C%20June%2020%20at%20Roots%20Gastro%20Club%2C%20Sant%20Mart%C3%AD%2C%20Barcelona.&url=https%3A%2F%2Fjuneteenth.es%2Fevent.html" target="_blank" class="share-btn share-btn-x">Share on X</a>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fjuneteenth.es%2Fevent.html" target="_blank" class="share-btn share-btn-fb">Share on Facebook</a>
-        <button class="share-btn share-btn-copy" onclick="navigator.clipboard.writeText(window.location.href).then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy Link',2000)})">Copy Link</button>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- SCHEDULE -->
-<section class="schedule-section" aria-label="Event schedule">
-  <div class="schedule-header reveal">
-    <div>
-      <div class="section-tag" data-cms="schedule_tag">Program</div>
-      <h2 class="schedule-title" data-cms="schedule_title">Schedule</h2>
-    </div>
-  </div>
-  <div class="schedule-list reveal" id="schedule-list">
-    <p class="schedule-empty" data-cms="schedule_empty">Full schedule coming soon — check back closer to the event.</p>
-  </div>
-</section>
-
-<!-- PERFORMERS & FOOD -->
+<!-- PROGRAM -->
 <section style="padding:6rem 5vw;border-bottom:1px solid var(--border)">
-  <div style="max-width:960px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem">
-    <div>
-      <div class="section-tag">Live Performances</div>
-      <h2 style="font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(1.6rem,2.5vw,2.2rem);letter-spacing:-0.025em;margin:0.5rem 0 1rem">Dozens of art &amp;<br>musical acts</h2>
-      <p style="font-size:0.95rem;line-height:1.8;color:rgba(13,13,13,0.65);margin-bottom:1.5rem">From live music and DJs to dance, visual art, and spoken word — Juneteenth Barcelona 2026 will feature a full day of performances celebrating Black creativity and culture. We are curating a diverse lineup of artists representing the African diaspora.</p>
-      <a href="https://forms.gle/QX8mur2on663DX7L9" target="_blank" class="btn btn-dark">Apply to perform →</a>
+  <div style="max-width:960px;margin:auto">
+
+    <div class="section-tag">Program</div>
+    <h2 style="font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-0.03em;margin:0.5rem 0 1rem;line-height:1">Juneteenth Day Party</h2>
+    <p style="font-size:1.05rem;line-height:1.85;color:rgba(13,13,13,0.7);max-width:680px;margin-bottom:0.6rem">Join us for an all-day fair &amp; party packed with good vibes, better beats, and a celebration of culture, community, and connection. Expect a DJ on deck, drinks flowing, and a dance floor ready for you and your crew.</p>
+    <p style="font-size:0.88rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--mid);margin-bottom:3rem">International food fair, music, and cultural celebration</p>
+
+    <!-- Performances + Food columns -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-bottom:4rem">
+      <div>
+        <div class="section-tag">Live Performances</div>
+        <h3 style="font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(1.4rem,2.2vw,2rem);letter-spacing:-0.025em;margin:0.5rem 0 1rem">Dozens of art &amp;<br>musical acts</h3>
+        <p style="font-size:0.95rem;line-height:1.8;color:rgba(13,13,13,0.65);margin-bottom:1.5rem">From live music and DJs to dance, visual art, and spoken word — Juneteenth Barcelona 2026 will feature a full day of performances celebrating Black creativity and culture. We are curating a diverse lineup of artists representing the African diaspora.</p>
+        <a href="https://forms.gle/QX8mur2on663DX7L9" target="_blank" class="btn btn-dark">Apply to perform →</a>
+      </div>
+      <div>
+        <div class="section-tag">Food Village</div>
+        <h3 style="font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(1.4rem,2.2vw,2rem);letter-spacing:-0.025em;margin:0.5rem 0 1rem">4 food vendors,<br>one world of flavor</h3>
+        <p style="font-size:0.95rem;line-height:1.8;color:rgba(13,13,13,0.65);margin-bottom:1.5rem">Four carefully selected food vendors will serve a rich variety of dishes from across Africa and the Americas — from West African street food to Caribbean classics and beyond. Cooked fresh on-site using Roots Gastro Club's commercial kitchen.</p>
+        <a href="https://forms.gle/wF9KL14L6CHMUN1XA" target="_blank" class="btn btn-dark">Register as food vendor →</a>
+      </div>
     </div>
-    <div>
-      <div class="section-tag">Food Village</div>
-      <h2 style="font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(1.6rem,2.5vw,2.2rem);letter-spacing:-0.025em;margin:0.5rem 0 1rem">4 food vendors,<br>one world of flavor</h2>
-      <p style="font-size:0.95rem;line-height:1.8;color:rgba(13,13,13,0.65);margin-bottom:1.5rem">Four carefully selected food vendors will serve a rich variety of dishes from across Africa and the Americas — from West African street food to Caribbean classics and beyond. Cooked fresh on-site using Roots Gastro Club's commercial kitchen.</p>
-      <a href="https://forms.gle/wF9KL14L6CHMUN1XA" target="_blank" class="btn btn-dark">Register as food vendor →</a>
+
+    <!-- What to expect -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3rem;padding-top:3rem;border-top:1px solid var(--border)">
+      <div>
+        <div class="section-tag">What to expect</div>
+        <ul style="list-style:none;padding:0;margin:1rem 0 0;display:flex;flex-direction:column;gap:0.75rem">
+          <li style="font-size:0.9rem;line-height:1.6;color:rgba(13,13,13,0.72);padding:0.6rem 0;border-bottom:1px solid var(--border)">Community cookout and international food fair</li>
+          <li style="font-size:0.9rem;line-height:1.6;color:rgba(13,13,13,0.72);padding:0.6rem 0;border-bottom:1px solid var(--border)">Local vendors selling art, jewelry, and crafts</li>
+          <li style="font-size:0.9rem;line-height:1.6;color:rgba(13,13,13,0.72);padding:0.6rem 0;border-bottom:1px solid var(--border)">Live entertainment: DJs, musicians, and performances</li>
+          <li style="font-size:0.9rem;line-height:1.6;color:rgba(13,13,13,0.72);padding:0.6rem 0;border-bottom:1px solid var(--border)">2 fully-stocked bars: cocktails, wine, sodas, juices</li>
+          <li style="font-size:0.9rem;line-height:1.6;color:rgba(13,13,13,0.72);padding:0.6rem 0">A fun day party rooted in culture</li>
+        </ul>
+      </div>
+      <div>
+        <div class="section-tag">What is Juneteenth?</div>
+        <p style="font-size:0.9rem;line-height:1.75;color:rgba(13,13,13,0.68);margin-top:1rem">Juneteenth celebrations started in the USA but have expanded geographically with the movement of Black Americans to other countries. Celebrations abroad use the day to recognize freedom, liberation, and to celebrate the culture, achievements, and unity of the African diaspora.</p>
+        <p style="font-size:0.9rem;line-height:1.75;color:rgba(13,13,13,0.68);margin-top:0.75rem">As the population of Black Americans grows in Barcelona, celebrating Juneteenth provides a new opportunity for the community to ground itself, increase its visibility, and become better connected and integrated within Barcelona's African diaspora and the city as a whole.</p>
+      </div>
+      <div>
+        <div class="section-tag">Who is organizing?</div>
+        <p style="font-size:0.9rem;line-height:1.75;color:rgba(13,13,13,0.68);margin-top:1rem">We are a passionate team of volunteers who are local business owners, lawyers, tech workers, event planners, and more. We are dedicated to creating an annual, unforgettable experience for the local community.</p>
+        <p style="font-size:0.9rem;line-height:1.75;color:rgba(13,13,13,0.68);margin-top:0.75rem">Our mission is to deliver events that inspire and connect the diaspora and embed a feeling of belonging.</p>
+      </div>
     </div>
+
   </div>
 </section>
 
