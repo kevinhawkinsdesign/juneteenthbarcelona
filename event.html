@@ -26,22 +26,7 @@
 <link rel="stylesheet" href="shared.css">
 <style>
 /* ── PAGE HERO ── */
-/* ── NEXT EVENT PROMO ── */
-.next-event { background: var(--green); border-bottom: 1px solid rgba(0,0,0,0.1); }
-.next-event-inner { display: grid; grid-template-columns: 220px 1fr auto; gap: 0; align-items: stretch; }
-.next-event-left { flex-shrink: 0; }
-.next-event-poster { width: 100%; height: 100%; object-fit: cover; display: block; min-height: 220px; }
-.next-event-center { padding: 3rem 3vw; border-left: 1px solid rgba(255,255,255,0.15); border-right: 1px solid rgba(255,255,255,0.15); }
-.next-event-center .section-tag { color: rgba(255,255,255,0.5); }
-.next-event-title { font-family: 'Inter', sans-serif; font-weight: 800; font-size: clamp(1.4rem, 2.5vw, 2rem); letter-spacing: -0.025em; color: white; line-height: 1; margin: 0.5rem 0 1rem; }
-.next-event-when { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
-.next-event-date-pill { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; background: rgba(255,255,255,0.15); color: white; padding: 0.3rem 0.8rem; }
-.next-event-time { font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; color: rgba(255,255,255,0.55); }
-.next-event-desc { font-size: 0.88rem; line-height: 1.75; color: rgba(255,255,255,0.65); max-width: 560px; margin-bottom: 1rem; }
-.next-event-meta { font-size: 0.78rem; color: rgba(255,255,255,0.5); }
-.next-event-right { padding: 3rem 3vw; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 1rem; }
-.next-event-right .btn-white { white-space: nowrap; }
-.next-event-series { font-size: 0.72rem; color: rgba(255,255,255,0.4); line-height: 1.5; max-width: 160px; }
+
 
 .event-hero {
   padding-top: var(--nav-h);
@@ -121,16 +106,6 @@
 .schedule-tag { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.35rem 0.9rem; border: 1px solid var(--border); color: var(--mid); white-space: nowrap; }
 .schedule-empty { font-size: 0.95rem; color: var(--mid); padding: 3rem 0; font-style: italic; border-top: 1px solid var(--border); }
 
-/* ── LUMA EMBED ── */
-.luma-section { padding: 6rem 5vw; border-bottom: 1px solid var(--border); background: var(--off-white); }
-.luma-header { margin-bottom: 3rem; }
-.luma-title { font-family: 'Inter', sans-serif; font-weight: 800; font-size: clamp(2rem, 3vw, 2.8rem); letter-spacing: -0.025em; margin-top: 0.5rem; }
-.luma-embed-wrap {
-  border: 1px solid var(--border);
-  overflow: hidden;
-  background: white;
-}
-.luma-embed-wrap iframe { display: block; width: 100%; border: none; }
 
 /* ── VENUE ── */
 .venue-section {
@@ -322,38 +297,13 @@
 })();
 </script>
 
-<!-- NEXT EVENT PROMO -->
-<section class="next-event reveal">
-  <div class="next-event-inner">
-    <div class="next-event-left">
-      <img src="https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/event-covers/da/08a154c1-6cf5-4405-a475-6644cb18eb77.png" alt="B Juneteenth March event poster" class="next-event-poster">
-    </div>
-    <div class="next-event-center">
-      <div class="section-tag light" data-cms="next_event_tag">Next Meetup · Monthly Series</div>
-      <h2 class="next-event-title" data-cms="next_event_title">BJuneteenth: Monthly Meetup</h2>
-      <div class="next-event-when">
-        <span class="next-event-date-pill" data-cms="next_event_date">March 19</span>
-        <span class="next-event-time" data-cms="next_event_time">19:30 – 23:30</span>
-      </div>
-      <p class="next-event-desc" data-cms="next_event_desc">Join us for the first BJuneteenth community meet-up — a gathering bringing together members of the Black diaspora as we begin preparing for Juneteenth Barcelona 2026. Connection, collaboration, and building momentum together. DJ Chanti takes over at 22:00.</p>
-      <div class="next-event-meta">
-        <span data-cms="next_event_meta">📍 The Station Bar, Carrer de Sant Bertran 14, Ciutat Vella</span>
-      </div>
-    </div>
-    <div class="next-event-right">
-      <a href="https://luma.com/94qpoz24?tk=H1K3vp" data-cms-href="next_event_rsvp_url" target="_blank" rel="noopener noreferrer" title="RSVP on Luma (opens in new tab)" class="btn btn-white">RSVP on Luma →</a>
-      <p class="next-event-series" data-cms="next_event_series">Part of a monthly series on the 19th of each month.</p>
-    </div>
-  </div>
-</section>
-
 <!-- DETAILS GRID -->
 <div class="details-grid reveal">
   <div class="detail-cell">
     <span class="detail-icon">📅</span>
     <div class="detail-label">Date</div>
     <div class="detail-value" data-cms="detail_date_value">Saturday, June 20, 2026</div>
-    <div class="detail-sub" data-cms="detail_date_sub">Juneteenth — commemorating June 19, 1865</div>
+    <div class="detail-sub" data-cms="detail_date_sub">13:00 – 02:00 (next day)<br>Juneteenth — commemorating June 19, 1865</div>
   </div>
   <div class="detail-cell">
     <span class="detail-icon">📍</span>
@@ -364,8 +314,14 @@
   <div class="detail-cell">
     <span class="detail-icon">🎟</span>
     <div class="detail-label">Tickets</div>
-    <div class="detail-value" data-cms="detail_tickets_value">Coming Soon</div>
-    <div class="detail-sub" data-cms="detail_tickets_sub">Register your interest below and we'll notify you when tickets are available.</div>
+    <div class="detail-value" data-cms="detail_tickets_value">Two Ticket Tiers</div>
+    <div class="detail-sub" data-cms="detail_tickets_sub">
+      <strong>Early Entry — from 13:00</strong><br>
+      Family &amp; kid-friendly. Food, culture, and community vibes all afternoon.<br><br>
+      <strong>Late Entry — from 21:00</strong><br>
+      Non-stop musicians &amp; DJs, drinks until 02:00.<br><br>
+      Tickets coming soon — <a href="contact.html">register your interest</a>.
+    </div>
   </div>
 </div>
 
@@ -379,6 +335,7 @@
         <div class="share-detail"><span class="share-detail-icon">🗓</span><div><strong>Saturday, 20 June 2026</strong><span>Juneteenth — commemorating freedom, 1865</span></div></div>
         <div class="share-detail"><span class="share-detail-icon">📍</span><div><strong>Roots Gastro Club</strong><span>Carrer de Badajoz 115 · Sant Martí, Barcelona 08018</span></div></div>
         <div class="share-detail"><span class="share-detail-icon">🌍</span><div><strong>Open to all</strong><span>A day of unity and celebration for the African diaspora</span></div></div>
+        <div class="share-detail"><span class="share-detail-icon">🎟</span><div><strong>Two ticket tiers</strong><span>Early (13:00, family-friendly) · Late (21:00, DJs until 02:00)</span></div></div>
         <div class="share-detail"><span class="share-detail-icon">✉️</span><div><a href="/contact" style="font-size:0.88rem;font-weight:600;color:inherit">Get in touch</a><span>Volunteer · Perform · Sponsor · Attend</span></div></div>
       </div>
     </div>
@@ -404,27 +361,6 @@
   </div>
   <div class="schedule-list reveal" id="schedule-list">
     <p class="schedule-empty" data-cms="schedule_empty">Full schedule coming soon — check back closer to the event.</p>
-  </div>
-</section>
-
-<!-- LUMA CALENDAR EMBED -->
-<section class="luma-section" aria-label="Calendar embed">
-  <div class="luma-header reveal">
-    <div class="section-tag" data-cms="luma_tag">Calendar</div>
-    <h2 class="luma-title" data-cms="luma_title">Add to your calendar</h2>
-  </div>
-  <div class="luma-embed-wrap reveal">
-
-    <iframe
-      src="https://luma.com/embed/calendar/cal-y8ergaqNQm9K33Z/events?tag=jtn"
-      width="100%"
-      height="550"
-      frameborder="0"
-      style="border: 1px solid #bfcbda88; border-radius: 4px;"
-      allowfullscreen=""
-      aria-hidden="false"
-      tabindex="0"
-    ></iframe>
   </div>
 </section>
 
