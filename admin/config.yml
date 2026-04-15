@@ -297,6 +297,7 @@ collections:
           - { label: "Stop 12 Address", name: stop_12_address, widget: string }
           - { label: "Stop 12 Image URL", name: stop_12_image, widget: string }
           - { label: "Stop 12 Image Alt", name: stop_12_image_alt, widget: string }
+          - { label: "Stop 12 Text", name: stop_12_text, widget: markdown }
           - label: "Stop 13 — Richard Wright"
             name: stop_13_title
             widget: string
