@@ -160,6 +160,158 @@ collections:
       - { label: "Body", name: body, widget: markdown }
       - { label: "Published", name: published, widget: boolean, default: true }
 
+  # ── EVENT PAGE ────────────────────────────────────────────
+  - name: event_page
+    label: "Event Page"
+    files:
+      - name: event
+        label: "Event Page Content"
+        file: _data/pages/event.json
+        fields:
+          - { label: "Hero Tagline", name: hero_tagline, widget: string }
+          - { label: "Date Value", name: detail_date_value, widget: string }
+          - { label: "Date Sub-text", name: detail_date_sub, widget: string }
+          - { label: "Venue Name", name: detail_venue_value, widget: string }
+          - { label: "Venue Sub-text", name: detail_venue_sub, widget: string }
+          - { label: "Tickets Headline", name: detail_tickets_value, widget: string }
+          - { label: "Tickets Detail", name: detail_tickets_sub, widget: text }
+          - label: "Program Section"
+            name: program_tag
+            widget: string
+            hint: "Tag line above the heading"
+          - { label: "Program Title", name: program_title, widget: string }
+          - { label: "Program Intro", name: program_intro, widget: text }
+          - { label: "Program Sub-line", name: program_sub, widget: string }
+          - { label: "Performances Tag", name: performances_tag, widget: string }
+          - { label: "Performances Title", name: performances_title, widget: string }
+          - { label: "Performances Body", name: performances_body, widget: text }
+          - { label: "Food Tag", name: food_tag, widget: string }
+          - { label: "Food Title", name: food_title, widget: string }
+          - { label: "Food Body", name: food_body, widget: text }
+          - { label: "What to Expect Tag", name: expect_tag, widget: string }
+          - { label: "What is Juneteenth Tag", name: juneteenth_tag, widget: string }
+          - { label: "What is Juneteenth — Paragraph 1", name: juneteenth_body_1, widget: text }
+          - { label: "What is Juneteenth — Paragraph 2", name: juneteenth_body_2, widget: text }
+          - { label: "Venue Section Tag", name: venue_tag, widget: string }
+          - { label: "Venue Title", name: venue_title, widget: string }
+          - { label: "Venue Body", name: venue_body, widget: text }
+          - { label: "Venue Address", name: venue_address, widget: text }
+          - { label: "Register CTA Title", name: register_title, widget: string }
+          - { label: "Register CTA Sub-text", name: register_sub, widget: string }
+          - { label: "Register Button Label", name: register_btn, widget: string }
+
+  # ── WALKING TOUR — PRE-WAR TIMELINE ───────────────────────
+  - name: countdown_page
+    label: "Walking Tour: Pre-War Timeline"
+    files:
+      - name: countdown
+        label: "Countdown to Civil War"
+        file: _data/pages/countdown-to-civil-war.json
+        fields:
+          - { label: "Page Tag", name: tour_tag, widget: string }
+          - { label: "Page Title", name: page_title, widget: string }
+          - { label: "Intro Paragraph", name: intro, widget: text }
+          - label: "1898 Entry"
+            name: timeline_1898_title
+            widget: string
+            hint: "Event title for 1898"
+          - { label: "1898 Body Text", name: timeline_1898_text, widget: text }
+          - label: "1909 Entry"
+            name: timeline_1909_title
+            widget: string
+          - { label: "1909 Body Text", name: timeline_1909_text, widget: text }
+          - label: "1921 Entry"
+            name: timeline_1921_title
+            widget: string
+          - { label: "1921 Body Text", name: timeline_1921_text, widget: text }
+          - label: "1923 Entry"
+            name: timeline_1923_title
+            widget: string
+          - { label: "1923 Body Text", name: timeline_1923_text, widget: text }
+          - label: "1926 Entry"
+            name: timeline_1926_title
+            widget: string
+          - { label: "1926 Body Text", name: timeline_1926_text, widget: text }
+          - label: "1931 Entry"
+            name: timeline_1931_title
+            widget: string
+          - { label: "1931 Body Text", name: timeline_1931_text, widget: text }
+          - { label: "1931 Image URL", name: timeline_1931_image, widget: string, hint: "Full URL to the 1931 Second Republic image" }
+          - { label: "1931 Image Alt Text", name: timeline_1931_image_alt, widget: string }
+          - label: "1936 Entry"
+            name: timeline_1936_title
+            widget: string
+          - { label: "1936 Body — Paragraph 1", name: timeline_1936_text_1, widget: text }
+          - { label: "1936 Body — Paragraph 2", name: timeline_1936_text_2, widget: text }
+          - { label: "1936 Body — Paragraph 3", name: timeline_1936_text_3, widget: string }
+
+  # ── WALKING TOUR — EL RAVAL ───────────────────────────────
+  - name: el_raval_page
+    label: "Walking Tour: El Raval"
+    files:
+      - name: el_raval
+        label: "El Raval Page Content"
+        file: _data/pages/el-raval.json
+        fields:
+          - { label: "Page Tag", name: tour_tag, widget: string }
+          - { label: "Page Title", name: page_title, widget: string }
+          - { label: "Section Heading", name: section_evolution, widget: string }
+          - { label: "Stop 10 Number Label", name: stop_10_num, widget: string }
+          - { label: "Barri Xines Title", name: stop_barri_xines_title, widget: string }
+          - { label: "Little Harlem Title", name: stop_little_harlem_title, widget: string }
+
+  # ── WALKING TOUR — SPANISH SLAVE TRADE ───────────────────
+  - name: slave_trade_page
+    label: "Walking Tour: Spanish Slave Trade"
+    files:
+      - name: slave_trade
+        label: "Slave Trade Page Content"
+        file: _data/pages/spanish-slave-trade.json
+        fields:
+          - { label: "Page Tag", name: tour_tag, widget: string }
+          - { label: "Page Title", name: page_title, widget: string }
+          - { label: "Section Heading", name: section_stops, widget: string }
+
+  # ── WALKING TOUR — POST-WAR INTELLECTUALS ─────────────────
+  - name: post_war_page
+    label: "Walking Tour: Post-War Intellectuals"
+    files:
+      - name: post_war
+        label: "Post-War Intellectuals Page Content"
+        file: _data/pages/post-war-intellectuals.json
+        fields:
+          - { label: "Page Tag", name: tour_tag, widget: string }
+          - { label: "Page Title", name: page_title, widget: string }
+          - { label: "Intro Paragraph 1", name: intro_para_1, widget: text }
+          - { label: "Intro Paragraph 2", name: intro_para_2, widget: text }
+          - label: "Stop 11 — MACBA"
+            name: stop_11_title
+            widget: string
+          - { label: "Stop 11 Address", name: stop_11_address, widget: string }
+          - { label: "Stop 11 Image URL", name: stop_11_image, widget: string }
+          - { label: "Stop 11 Image Alt", name: stop_11_image_alt, widget: string }
+          - { label: "Stop 11 Text", name: stop_11_text, widget: text }
+          - label: "Stop 12 — CCCB"
+            name: stop_12_title
+            widget: string
+          - { label: "Stop 12 Address", name: stop_12_address, widget: string }
+          - { label: "Stop 12 Image URL", name: stop_12_image, widget: string }
+          - { label: "Stop 12 Image Alt", name: stop_12_image_alt, widget: string }
+          - label: "Stop 13 — Richard Wright"
+            name: stop_13_title
+            widget: string
+          - { label: "Stop 13 Address", name: stop_13_address, widget: string }
+          - { label: "Stop 13 Image URL", name: stop_13_image, widget: string }
+          - { label: "Stop 13 Image Alt", name: stop_13_image_alt, widget: string }
+          - label: "Stop 14 — James Baldwin"
+            name: stop_14_title
+            widget: string
+          - { label: "Stop 14 Address", name: stop_14_address, widget: string }
+          - { label: "Stop 14 Image URL", name: stop_14_image, widget: string }
+          - { label: "Stop 14 Image Alt", name: stop_14_image_alt, widget: string }
+          - { label: "End Stop Title", name: stop_end_title, widget: string }
+          - { label: "End Stop Address", name: stop_end_address, widget: string }
+
   # ── SITE SETTINGS ─────────────────────────────────────────
   - name: settings
     label: "Site Settings"

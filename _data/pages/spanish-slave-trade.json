@@ -1,5 +1,7 @@
 {
   "tour_tag": "Walking Tour · Barcelona",
   "page_title": "Spanish Slave Trade",
-  "section_stops": "Stops: 15th–19th Centuries"
+  "section_stops": "Stops: 15th–19th Centuries",
+  "hero_image": "../images/slave-trade-hero.jpg",
+  "hero_image_alt": "Spanish slave trade historical context"
 }

@@ -89,20 +89,101 @@
 
 
 
-/* ── VENUE ── */
-.venue-section {
-  display: grid; grid-template-columns: 1fr 1fr;
+/* ── VENUE GALLERY ── */
+.venue-gallery {
+  width: 100%; background: #0d0d0d; position: relative; overflow: hidden;
   border-top: 1px solid var(--border);
 }
-.venue-left { padding: 6rem 5vw; border-right: 1px solid var(--border); }
+.venue-gallery-track {
+  display: flex;
+  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+.venue-gallery-slide {
+  width: 100%; flex-shrink: 0;
+  height: 72vh; max-height: 640px; min-height: 320px;
+  display: flex; align-items: center; justify-content: center;
+}
+.venue-gallery-slide img {
+  max-width: 100%; max-height: 100%;
+  object-fit: contain; display: block;
+  user-select: none; cursor: zoom-in;
+}
+.gallery-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.12); border: none; color: white;
+  width: 44px; height: 44px; border-radius: 50%; font-size: 1.1rem;
+  cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(4px); transition: background 0.2s;
+}
+.gallery-btn:hover { background: rgba(255,255,255,0.28); }
+.gallery-prev { left: 1.25rem; }
+.gallery-next { right: 1.25rem; }
+.gallery-dots {
+  position: absolute; bottom: 0.85rem; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 5px; z-index: 5;
+}
+.gallery-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.35); cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.gallery-dot.active { background: white; transform: scale(1.3); }
+.gallery-fullscreen {
+  position: absolute; top: 0.85rem; right: 1rem;
+  background: rgba(255,255,255,0.12); border: none; color: white;
+  width: 36px; height: 36px; border-radius: 4px; font-size: 1rem;
+  cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(4px); transition: background 0.2s; line-height: 1;
+}
+.gallery-fullscreen:hover { background: rgba(255,255,255,0.28); }
+.gallery-counter {
+  position: absolute; top: 0.9rem; left: 1rem;
+  font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.6);
+  letter-spacing: 0.06em; z-index: 5;
+}
+/* ── LIGHTBOX ── */
+.gallery-lightbox {
+  position: fixed; inset: 0; z-index: 9900;
+  background: rgba(0,0,0,0.95); display: none;
+  align-items: center; justify-content: center;
+}
+.gallery-lightbox.open { display: flex; }
+.lightbox-img {
+  max-width: calc(100vw - 100px); max-height: calc(100vh - 80px);
+  object-fit: contain; display: block; user-select: none;
+}
+.lightbox-close {
+  position: fixed; top: 1.25rem; right: 1.5rem;
+  background: none; border: none; color: white; font-size: 1.8rem;
+  cursor: pointer; z-index: 10; line-height: 1; opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.lightbox-close:hover { opacity: 1; }
+.lightbox-prev, .lightbox-next {
+  position: fixed; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.1); border: none; color: white;
+  width: 48px; height: 48px; border-radius: 50%; font-size: 1.3rem;
+  cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.lightbox-prev:hover, .lightbox-next:hover { background: rgba(255,255,255,0.25); }
+.lightbox-prev { left: 1rem; }
+.lightbox-next { right: 1rem; }
+.lightbox-counter {
+  position: fixed; bottom: 1.25rem; left: 50%; transform: translateX(-50%);
+  font-size: 0.75rem; color: rgba(255,255,255,0.5); letter-spacing: 0.1em;
+}
+/* ── VENUE INFO ── */
+.venue-info-section {
+  border-top: 1px solid var(--border);
+  padding: 6rem 5vw;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+  max-width: none;
+}
 .venue-title { font-family: 'Inter', sans-serif; font-weight: 800; font-size: clamp(2rem, 3vw, 2.8rem); letter-spacing: -0.025em; margin: 0.5rem 0 1.5rem; }
 .venue-body { font-size: 0.97rem; line-height: 1.82; color: rgba(13,13,13,0.62); margin-bottom: 2rem; }
 .venue-address { font-size: 0.85rem; line-height: 1.8; color: var(--mid); border-left: 2px solid var(--red); padding-left: 1rem; margin-bottom: 2rem; }
-.venue-right {
-  background: url('/images/roots/IMG_7237.jpeg') center/cover no-repeat;
-  min-height: 400px; position: relative;
-}
-.venue-right::after { content: ''; position: absolute; inset: 0; background: rgba(44,27,14,0.3); }
 
 /* ── REGISTER BAND ── */
 .register-band { background: var(--red); padding: 5rem 5vw; display: flex; justify-content: space-between; align-items: center; gap: 3rem; flex-wrap: wrap; }
@@ -114,14 +195,14 @@
 @media (max-width: 900px) {
   .event-hero-inner { grid-template-columns: 1fr; gap: 2rem; }
   .details-grid { grid-template-columns: 1fr; }
-  .venue-section { grid-template-columns: 1fr; }
-  .venue-right { min-height: 260px; }
-  .venue-left { border-right: none; border-bottom: 1px solid var(--border); }
+  .venue-info-section { grid-template-columns: 1fr; gap: 0; }
   .register-band { flex-direction: column; align-items: flex-start; }
+  .gallery-btn { width: 36px; height: 36px; font-size: 0.9rem; }
 }
 @media (max-width: 768px) {
   [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
   [style*="grid-template-columns:1fr 1fr 1fr"] { grid-template-columns: 1fr !important; }
+  .venue-gallery-slide { height: 55vw; max-height: none; min-height: 200px; }
 }
 
 /* ── SKIP TO CONTENT (accessibility) ── */
@@ -273,8 +354,8 @@
       </div>
     </div>
 
-    <!-- What to expect -->
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3rem;padding-top:3rem;border-top:1px solid var(--border)">
+    <!-- What to expect / What is Juneteenth -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;padding-top:3rem;border-top:1px solid var(--border)">
       <div>
         <div class="section-tag">What to expect</div>
         <ul style="list-style:none;padding:0;margin:1rem 0 0;display:flex;flex-direction:column;gap:0.75rem">
@@ -290,24 +371,78 @@
         <p style="font-size:0.9rem;line-height:1.75;color:rgba(13,13,13,0.68);margin-top:1rem">Juneteenth celebrations started in the USA but have expanded geographically with the movement of Black Americans to other countries. Celebrations abroad use the day to recognize freedom, liberation, and to celebrate the culture, achievements, and unity of the African diaspora.</p>
         <p style="font-size:0.9rem;line-height:1.75;color:rgba(13,13,13,0.68);margin-top:0.75rem">As the population of Black Americans grows in Barcelona, celebrating Juneteenth provides a new opportunity for the community to ground itself, increase its visibility, and become better connected and integrated within Barcelona's African diaspora and the city as a whole.</p>
       </div>
-      <div>
-        <div class="section-tag">Who is organizing?</div>
-        <p style="font-size:0.9rem;line-height:1.75;color:rgba(13,13,13,0.68);margin-top:1rem">We are a passionate team of volunteers who are local business owners, lawyers, tech workers, event planners, and more. We are dedicated to creating an annual, unforgettable experience for the local community.</p>
-        <p style="font-size:0.9rem;line-height:1.75;color:rgba(13,13,13,0.68);margin-top:0.75rem">Our mission is to deliver events that inspire and connect the diaspora and embed a feeling of belonging.</p>
-      </div>
     </div>
 
   </div>
 </section>
 
-<!-- VENUE -->
-<section class="venue-section" aria-label="Venue information">
-  <div class="venue-left reveal">
+<!-- VENUE GALLERY -->
+<div class="venue-gallery" id="venueGallery" aria-label="Venue photo gallery">
+  <div class="venue-gallery-track" id="galleryTrack">
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7237.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7238.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7239.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7240.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7241.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7242.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7243.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7244.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7245.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7246.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7247.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7248.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7249.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7250.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7251.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7252.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7253.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7254.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7255.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7256.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7257.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7258.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7259.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7260.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7261.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7262.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7263.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7264.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7265.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7266.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+  </div>
+  <button class="gallery-btn gallery-prev" id="galleryPrev" aria-label="Previous photo">&#8592;</button>
+  <button class="gallery-btn gallery-next" id="galleryNext" aria-label="Next photo">&#8594;</button>
+  <div class="gallery-counter" id="galleryCounter">1 / 30</div>
+  <div class="gallery-dots" id="galleryDots"></div>
+  <button class="gallery-fullscreen" id="galleryFullscreen" aria-label="View fullscreen" title="Fullscreen">&#x26F6;</button>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="gallery-lightbox" id="galleryLightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">&#x2715;</button>
+  <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous photo">&#8592;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="Roots Gastro Club">
+  <button class="lightbox-next" id="lightboxNext" aria-label="Next photo">&#8594;</button>
+  <div class="lightbox-counter" id="lightboxCounter">1 / 30</div>
+</div>
+
+<!-- VENUE INFO -->
+<section class="venue-info-section reveal" aria-label="Venue information">
+  <div>
     <div class="section-tag" data-cms="venue_tag">The Venue</div>
     <h2 class="venue-title" data-cms="venue_title">Roots Gastro Club,<br>Sant Martí</h2>
     <p class="venue-body">We are thrilled to partner with <strong>Martinho</strong>, the owner of Roots Gastro Club — a Black-owned creative space in the heart of Sant Martí. Martinho has been a warm, generous, and enthusiastic collaborator, and his passion for community is exactly why this space feels like home for Juneteenth Barcelona 2026.</p>
+    <div class="venue-address" data-cms="venue_address">
+      Roots Gastro Club<br>
+      Carrer de Badajoz 115<br>
+      08018 Barcelona<br>
+      Sant Martí
+    </div>
+    <a href="https://venuu.com/es/en/venues/roots-gastro-club" target="_blank" rel="noopener noreferrer" class="btn btn-dark">View Venue →</a>
+  </div>
+  <div>
     <p class="venue-body">As Martinho describes it:</p>
-    <div style="display:flex;flex-direction:column;gap:1.25rem;margin-bottom:2rem">
+    <div style="display:flex;flex-direction:column;gap:1.25rem;">
       <div style="border-left:3px solid var(--gold);padding-left:1.25rem">
         <div style="font-weight:700;font-size:0.88rem;margin-bottom:0.3rem">Bar &amp; Tapas Area</div>
         <div style="font-size:0.85rem;color:rgba(13,13,13,0.62);line-height:1.7">Start your afternoon with a cocktail, a bite, and good company. The entrance bar sets the tone — lively, welcoming, and full of flavor from the moment you walk in.</div>
@@ -321,15 +456,7 @@
         <div style="font-size:0.85rem;color:rgba(13,13,13,0.62);line-height:1.7">Step outside to breathe, catch up with someone new, or just take in the night. A quieter outdoor space to recharge between sets.</div>
       </div>
     </div>
-    <div class="venue-address" data-cms="venue_address">
-      Roots Gastro Club<br>
-      Carrer de Badajoz 115<br>
-      08018 Barcelona<br>
-      Sant Martí
-    </div>
-    <a href="https://venuu.com/es/en/venues/roots-gastro-club" target="_blank" rel="noopener noreferrer" class="btn btn-dark">View Venue →</a>
   </div>
-  <div class="venue-right"></div>
 </section>
 
 <!-- REGISTER BAND -->
@@ -369,6 +496,96 @@
 
 <script src="shared.js"></script>
 <script>loadPageContent('/_data/pages/event.json');</script>
+<script>
+(function() {
+  var total = 30, current = 0;
+  var track = document.getElementById('galleryTrack');
+  var counter = document.getElementById('galleryCounter');
+  var dotsEl = document.getElementById('galleryDots');
+  var lightbox = document.getElementById('galleryLightbox');
+  var lbImg = document.getElementById('lightboxImg');
+  var lbCounter = document.getElementById('lightboxCounter');
+  if (!track) return;
+
+  // Build dots (grouped for 30 slides — show every 5th)
+  var dots = [];
+  for (var i = 0; i < total; i++) {
+    var d = document.createElement('button');
+    d.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Go to photo ' + (i + 1));
+    d.dataset.idx = i;
+    dotsEl.appendChild(d);
+    dots.push(d);
+  }
+
+  function goTo(idx) {
+    if (idx < 0) idx = total - 1;
+    if (idx >= total) idx = 0;
+    current = idx;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    if (counter) counter.textContent = (current + 1) + ' / ' + total;
+    dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
+    // Update lightbox if open
+    if (lightbox.classList.contains('open')) openLightbox(current);
+  }
+
+  document.getElementById('galleryPrev').addEventListener('click', function() { goTo(current - 1); });
+  document.getElementById('galleryNext').addEventListener('click', function() { goTo(current + 1); });
+  dotsEl.addEventListener('click', function(e) {
+    var btn = e.target.closest('.gallery-dot');
+    if (btn) goTo(parseInt(btn.dataset.idx));
+  });
+
+  // Swipe support
+  var startX = null;
+  track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', function(e) {
+    if (startX === null) return;
+    var diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+    startX = null;
+  }, { passive: true });
+
+  // Lightbox
+  function openLightbox(idx) {
+    var slides = track.querySelectorAll('.venue-gallery-slide img');
+    if (!slides[idx]) return;
+    lbImg.src = slides[idx].src;
+    lbCounter.textContent = (idx + 1) + ' / ' + total;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Click image or fullscreen btn to open
+  track.addEventListener('click', function(e) {
+    if (e.target.tagName === 'IMG') openLightbox(current);
+  });
+  document.getElementById('galleryFullscreen').addEventListener('click', function() { openLightbox(current); });
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  document.getElementById('lightboxPrev').addEventListener('click', function() { goTo(current - 1); });
+  document.getElementById('lightboxNext').addEventListener('click', function() { goTo(current + 1); });
+  lightbox.addEventListener('click', function(e) { if (e.target === lightbox) closeLightbox(); });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    if (lightbox.classList.contains('open')) {
+      if (e.key === 'ArrowLeft') goTo(current - 1);
+      if (e.key === 'ArrowRight') goTo(current + 1);
+      if (e.key === 'Escape') closeLightbox();
+    } else {
+      var gallery = document.getElementById('venueGallery');
+      if (gallery && document.activeElement && gallery.contains(document.activeElement)) {
+        if (e.key === 'ArrowLeft') goTo(current - 1);
+        if (e.key === 'ArrowRight') goTo(current + 1);
+      }
+    }
+  });
+})();
+</script>
 <!-- Google Translate (hidden widget) -->
 <div id="google_translate_element"></div>
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
