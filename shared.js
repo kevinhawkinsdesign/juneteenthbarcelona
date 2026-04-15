@@ -46,6 +46,14 @@ async function loadPageContent(dataFile) {
       const key = el.getAttribute('data-cms-href');
       if (data[key] !== undefined) el.href = data[key];
     });
+    document.querySelectorAll('[data-cms-src]').forEach(el => {
+      const key = el.getAttribute('data-cms-src');
+      if (data[key] !== undefined) el.src = data[key];
+    });
+    document.querySelectorAll('[data-cms-alt]').forEach(el => {
+      const key = el.getAttribute('data-cms-alt');
+      if (data[key] !== undefined) el.alt = data[key];
+    });
   } catch (e) {
     // Silently fall back to hardcoded HTML content
   }
