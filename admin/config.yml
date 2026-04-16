@@ -258,7 +258,15 @@ collections:
           - { label: "Section Heading", name: section_evolution, widget: string }
           - { label: "Stop 10 Number Label", name: stop_10_num, widget: string }
           - { label: "Barri Xines Title", name: stop_barri_xines_title, widget: string }
+          - { label: "Barri Xines / Mella — Para 1", name: intro_para_1, widget: text }
+          - { label: "Barri Xines / Mella — Para 2", name: intro_para_2, widget: text }
+          - { label: "Barri Xines / Mella — Para 3", name: intro_para_3, widget: text }
+          - { label: "Barri Xines / Mella — Para 4", name: intro_para_4, widget: text }
           - { label: "Little Harlem Title", name: stop_little_harlem_title, widget: string }
+          - { label: "Little Harlem — Para 1", name: little_harlem_para_1, widget: text }
+          - { label: "Little Harlem — Para 2 (Kid Tunero quote)", name: little_harlem_para_2, widget: text }
+          - { label: "Little Harlem — Para 3 (Barcelona Hot Club)", name: little_harlem_para_3, widget: text }
+          - { label: "Little Harlem — Para 4 (Olympia & Eden)", name: little_harlem_para_4, widget: text }
 
   # ── WALKING TOUR — SPANISH SLAVE TRADE ───────────────────
   - name: slave_trade_page
@@ -270,7 +278,74 @@ collections:
         fields:
           - { label: "Page Tag", name: tour_tag, widget: string }
           - { label: "Page Title", name: page_title, widget: string }
+          - { label: "Intro — Para 1 (Enslaved in Spain)", name: intro_para_1, widget: text }
+          - { label: "Intro — Para 2 (Columbus)", name: intro_para_2, widget: text }
+          - { label: "Intro — Para 3 (Slave trade)", name: intro_para_3, widget: text }
+          - { label: "Intro — Para 4 (18th–19th c.)", name: intro_para_4, widget: text }
+          - { label: "Intro — Para 5 (1817 treaty)", name: intro_para_5, widget: text }
           - { label: "Section Heading", name: section_stops, widget: string }
+          - { label: "Stop 1 Title", name: stop_1_title, widget: string }
+          - { label: "Stop 1 Address", name: stop_1_address, widget: string }
+          - { label: "Stop 1 Text", name: stop_1_text, widget: text }
+          - { label: "Stop 2 Title", name: stop_2_title, widget: string }
+          - { label: "Stop 2 Address", name: stop_2_address, widget: string }
+          - { label: "Stop 2 Text", name: stop_2_text, widget: text }
+          - { label: "Stop 3 Title", name: stop_3_title, widget: string }
+          - { label: "Stop 3 Text", name: stop_3_text, widget: text }
+          - { label: "Stop 4 Title", name: stop_4_title, widget: string }
+          - { label: "Stop 4 Address", name: stop_4_address, widget: string }
+          - { label: "Stop 4 Text", name: stop_4_text, widget: text }
+          - { label: "Stop 5 Title", name: stop_5_title, widget: string }
+          - { label: "Stop 5 Text", name: stop_5_text, widget: text }
+          - { label: "Stop 6 Title", name: stop_6_title, widget: string }
+          - { label: "Stop 6 Address", name: stop_6_address, widget: string }
+          - { label: "Stop 6 Text", name: stop_6_text, widget: text }
+
+  # ── WALKING TOUR — SPANISH CIVIL WAR ─────────────────────
+  - name: civil_war_page
+    label: "Walking Tour: Spanish Civil War"
+    files:
+      - name: civil_war
+        label: "Spanish Civil War Page Content"
+        file: _data/pages/spanish-civil-war.json
+        fields:
+          - { label: "Page Tag", name: tour_tag, widget: string }
+          - { label: "Page Title", name: page_title, widget: string }
+          - { label: "Intro — Para 1", name: intro_para_1, widget: text }
+          - { label: "Intro — Para 2 (Langston Hughes)", name: intro_para_2, widget: text }
+          - { label: "Stop 7 Title", name: stop_7_title, widget: string }
+          - { label: "Stop 7 Address", name: stop_7_address, widget: string }
+          - { label: "Stop 7 Text", name: stop_7_text, widget: text }
+          - { label: "Stop 8 Title", name: stop_8_title, widget: string }
+          - { label: "Stop 8 Text 1", name: stop_8_text_1, widget: text }
+          - { label: "Stop 8 Text 2", name: stop_8_text_2, widget: text }
+          - { label: "Stop 9 Title", name: stop_9_title, widget: string }
+          - { label: "Stop 9 Text", name: stop_9_text, widget: text }
+
+  # ── WALKING TOUR — INDEX ──────────────────────────────────
+  - name: tour_index_page
+    label: "Walking Tour: Index"
+    files:
+      - name: tour_index
+        label: "Tour Index Page Content"
+        file: _data/pages/walking-tour-index.json
+        fields:
+          - { label: "Page Tag", name: tour_tag, widget: string }
+          - { label: "Page Title", name: page_title, widget: string }
+          - { label: "Duration", name: meta_duration, widget: string }
+          - { label: "Difficulty", name: meta_difficulty, widget: string }
+          - { label: "Start Point", name: meta_start, widget: string }
+          - { label: "End Point", name: meta_end, widget: string }
+          - { label: "Start Section Heading", name: section_start, widget: string }
+          - { label: "Intro — Para 1", name: intro_para_1, widget: text }
+          - { label: "Intro — Para 2 (Juneteenth)", name: intro_para_2, widget: text }
+          - { label: "Intro — Para 3 (Self-guided)", name: intro_para_3, widget: text }
+          - { label: "Intro — Para 4 (About)", name: intro_para_4, widget: text }
+          - { label: "Langston Hughes — Para 1", name: langston_para_1, widget: text }
+          - { label: "Langston Hughes — Para 2", name: langston_para_2, widget: text }
+          - { label: "Langston Hughes — Para 3", name: langston_para_3, widget: text }
+          - { label: "Langston Hughes — Para 4", name: langston_para_4, widget: text }
+          - { label: "Langston Hughes — Para 5", name: langston_para_5, widget: text }
 
   # ── WALKING TOUR — POST-WAR INTELLECTUALS ─────────────────
   - name: post_war_page
