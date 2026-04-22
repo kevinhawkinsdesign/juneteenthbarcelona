@@ -75,11 +75,12 @@
   display: grid; grid-template-columns: 340px 1fr;
 }
 .featured-poster {
-  position: relative; overflow: hidden;
-  min-height: 420px;
+  position: relative;
+  background: var(--green);
+  display: flex; align-items: center; justify-content: center;
 }
 .featured-poster img {
-  width: 100%; height: 100%; object-fit: cover; display: block;
+  width: 100%; height: auto; object-fit: contain; display: block;
 }
 .featured-body {
   padding: 4rem 5vw;
@@ -213,7 +214,7 @@
 @media (max-width: 900px) {
   .page-hero-inner { grid-template-columns: 1fr; gap: 2rem; }
   .featured-inner { grid-template-columns: 1fr; }
-  .featured-poster { min-height: 300px; }
+  .featured-poster { min-height: unset; }
   .venue-section { grid-template-columns: 1fr; }
   .venue-intro { border-right: none; border-bottom: 1px solid var(--border); }
   .venue-photo-grid { min-height: 360px; }

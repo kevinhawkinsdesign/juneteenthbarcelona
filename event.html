@@ -208,6 +208,87 @@
   .event-hero-inner { padding-top: 2.5rem; padding-bottom: 2.5rem; }
 }
 
+/* ── FEATURED ACTS ── */
+.evt-featured {
+  border-top: 1px solid var(--border);
+  background: var(--brown-dark);
+  color: var(--off-white);
+  padding: 6rem 5vw;
+}
+.evt-featured .section-tag { color: rgba(246,243,238,0.3); }
+.evt-featured-title {
+  font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  line-height: 1.05; letter-spacing: -0.025em; color: white;
+  margin: 0.5rem 0 3rem;
+}
+.evt-featured-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem;
+}
+.evt-act-carousel {
+  position: relative; overflow: hidden;
+  aspect-ratio: 4 / 5; margin-bottom: 1.5rem;
+  cursor: zoom-in; background: #1a1008;
+}
+.evt-act-track {
+  display: flex; height: 100%;
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+.evt-act-slide {
+  flex-shrink: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+.evt-act-dots {
+  position: absolute; bottom: 0.75rem; left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 0.45rem; z-index: 2;
+}
+.evt-act-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.4); border: none;
+  cursor: pointer; padding: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+.evt-act-dot.active { background: white; transform: scale(1.3); }
+.evt-act-name {
+  font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: 1.3rem; letter-spacing: -0.02em; color: white; margin-bottom: 0.3rem;
+}
+.evt-act-role {
+  font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.4rem;
+}
+.evt-act-ig {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.8rem; color: rgba(246,243,238,0.45);
+  text-decoration: none; margin-top: 0.2rem; transition: color 0.2s;
+}
+.evt-act-ig:hover { color: rgba(246,243,238,0.85); }
+.evt-act-followers {
+  font-family: 'Inter', sans-serif; font-weight: 700;
+  font-size: 0.78rem; color: white; margin-top: 0.35rem;
+}
+.evt-featured-lightbox {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.93); z-index: 9800;
+  align-items: center; justify-content: center;
+}
+.evt-featured-lightbox.open { display: flex; }
+.evt-featured-lightbox-img {
+  max-width: 90vw; max-height: 90vh;
+  object-fit: contain; display: block;
+}
+.evt-featured-lightbox-close {
+  position: absolute; top: 1.25rem; right: 1.5rem;
+  background: none; border: none; color: white;
+  font-size: 2.2rem; line-height: 1; cursor: pointer;
+  opacity: 0.6; transition: opacity 0.2s;
+}
+.evt-featured-lightbox-close:hover { opacity: 1; }
+@media (max-width: 900px) {
+  .evt-featured-grid { grid-template-columns: 1fr; gap: 3rem; }
+}
+
 /* ── SKIP TO CONTENT (accessibility) ── */
 .skip-link {
   position: absolute; top: -100%; left: 1rem;
@@ -379,6 +460,80 @@
 
   </div>
 </section>
+
+<!-- FEATURED ACTS -->
+<section class="evt-featured reveal" aria-label="Featured performers and vendors">
+  <div class="section-tag">Featured at the Event</div>
+  <h2 class="evt-featured-title">Who you'll<br>be there with.</h2>
+  <div class="evt-featured-grid">
+
+    <!-- JAY JAY REVLON -->
+    <div class="evt-featured-act">
+      <div class="evt-act-carousel" data-evt-carousel>
+        <div class="evt-act-track">
+          <img src="images/featured/image (3).png" alt="Jay Jay Revlon performing" class="evt-act-slide">
+          <img src="images/featured/image (1).png" alt="Jay Jay Revlon portrait" class="evt-act-slide">
+          <img src="images/featured/image (2).png" alt="Jay Jay Revlon in Vogue" class="evt-act-slide">
+        </div>
+        <div class="evt-act-dots">
+          <button class="evt-act-dot active" data-index="0" aria-label="Photo 1"></button>
+          <button class="evt-act-dot" data-index="1" aria-label="Photo 2"></button>
+          <button class="evt-act-dot" data-index="2" aria-label="Photo 3"></button>
+        </div>
+      </div>
+      <div class="evt-act-role">Featured DJ &amp; Performer</div>
+      <div class="evt-act-name">Jay Jay Revlon</div>
+      <a href="https://www.instagram.com/jayjayrevlon/" class="evt-act-ig" target="_blank" rel="noopener">@jayjayrevlon</a>
+      <div class="evt-act-followers">18K followers</div>
+    </div>
+
+    <!-- CECI HEATHER -->
+    <div class="evt-featured-act">
+      <div class="evt-act-carousel" data-evt-carousel>
+        <div class="evt-act-track">
+          <img src="images/featured/GramFetchr_Thumbnail_34599759.jpg" alt="Ceci Heather rollerskating" class="evt-act-slide">
+          <img src="images/featured/GramFetchr_Thumbnail_51709524.jpg" alt="Ceci Heather with skates" class="evt-act-slide">
+          <img src="images/featured/image.png" alt="Ceci Heather promo" class="evt-act-slide">
+        </div>
+        <div class="evt-act-dots">
+          <button class="evt-act-dot active" data-index="0" aria-label="Photo 1"></button>
+          <button class="evt-act-dot" data-index="1" aria-label="Photo 2"></button>
+          <button class="evt-act-dot" data-index="2" aria-label="Photo 3"></button>
+        </div>
+      </div>
+      <div class="evt-act-role">Featured Rollerskate Performer</div>
+      <div class="evt-act-name">Ceci Heather</div>
+      <a href="https://www.instagram.com/thestylishglobesk8r/" class="evt-act-ig" target="_blank" rel="noopener">@thestylishglobesk8r</a>
+    </div>
+
+    <!-- TUDY'S KITCHEN -->
+    <div class="evt-featured-act">
+      <div class="evt-act-carousel" data-evt-carousel>
+        <div class="evt-act-track">
+          <img src="images/featured/68F1D2E8-E0C3-480B-8278-FEECEA69EEBC_L0_001-09_04_2026, 09_52_16.webp" alt="Tudy's Kitchen signature dessert" class="evt-act-slide">
+          <img src="images/featured/icecream.jpg" alt="Tudy's Kitchen ice cream" class="evt-act-slide">
+          <img src="images/featured/27901A45-CAC0-47C4-8A17-24B941DD1CA6_L0_001-09_04_2026, 12_57_23.jpg" alt="Tudy's Kitchen at Disney+ event" class="evt-act-slide">
+        </div>
+        <div class="evt-act-dots">
+          <button class="evt-act-dot active" data-index="0" aria-label="Photo 1"></button>
+          <button class="evt-act-dot" data-index="1" aria-label="Photo 2"></button>
+          <button class="evt-act-dot" data-index="2" aria-label="Photo 3"></button>
+        </div>
+      </div>
+      <div class="evt-act-role">Featured Food Vendor</div>
+      <div class="evt-act-name">Tudy's Kitchen</div>
+      <a href="https://www.instagram.com/tudyskitchen/" class="evt-act-ig" target="_blank" rel="noopener">@tudyskitchen</a>
+      <div class="evt-act-followers">2.5K followers</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FEATURED ACTS LIGHTBOX -->
+<div id="evtFeaturedLightbox" class="evt-featured-lightbox" role="dialog" aria-modal="true" aria-label="Full-size photo">
+  <button class="evt-featured-lightbox-close" aria-label="Close">&times;</button>
+  <img class="evt-featured-lightbox-img" src="" alt="">
+</div>
 
 <!-- VENUE GALLERY -->
 <div class="venue-gallery" id="venueGallery" aria-label="Venue photo gallery">
@@ -590,6 +745,53 @@
     }
   });
 })();
+</script>
+<script>
+(function () {
+  var lb = document.getElementById('evtFeaturedLightbox');
+  var lbImg = lb.querySelector('.evt-featured-lightbox-img');
+  var lbClose = lb.querySelector('.evt-featured-lightbox-close');
+
+  document.querySelectorAll('[data-evt-carousel]').forEach(function (carousel) {
+    var track = carousel.querySelector('.evt-act-track');
+    var slides = Array.from(carousel.querySelectorAll('.evt-act-slide'));
+    var dots = Array.from(carousel.querySelectorAll('.evt-act-dot'));
+    var current = 0;
+
+    function goTo(index) {
+      current = index;
+      track.style.transform = 'translateX(-' + (100 * current) + '%)';
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
+    }
+
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function (e) {
+        e.stopPropagation();
+        goTo(parseInt(dot.dataset.index, 10));
+      });
+    });
+
+    carousel.addEventListener('click', function () {
+      lbImg.src = slides[current].src;
+      lbImg.alt = slides[current].alt;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  lbClose.addEventListener('click', function () {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+  lb.addEventListener('click', function (e) {
+    if (e.target === lb) { lb.classList.remove('open'); document.body.style.overflow = ''; }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && lb.classList.contains('open')) {
+      lb.classList.remove('open'); document.body.style.overflow = '';
+    }
+  });
+}());
 </script>
 <!-- Google Translate (hidden widget) -->
 <div id="google_translate_element"></div>
