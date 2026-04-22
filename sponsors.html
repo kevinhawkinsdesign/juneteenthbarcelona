@@ -325,6 +325,14 @@
   color: rgba(13,13,13,0.35); margin-bottom: 1rem;
 }
 .pkg-gold .pkg-plus-note { color: rgba(246,243,238,0.35); }
+.pkg-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 0.65rem; }
+.pkg-enquire {
+  font-size: 0.78rem; color: rgba(13,13,13,0.4);
+  text-decoration: none; transition: color 0.2s;
+}
+.pkg-enquire:hover { color: var(--black); text-decoration: underline; }
+.pkg-gold .pkg-enquire { color: rgba(246,243,238,0.3); }
+.pkg-gold .pkg-enquire:hover { color: rgba(246,243,238,0.75); }
 
 /* ── CTA BAND ── */
 .cta-band {
@@ -565,7 +573,10 @@
           <li><span class="pkg-perk-check" aria-hidden="true"></span>Included in marketing materials</li>
           <li><span class="pkg-perk-check" aria-hidden="true"></span>Included in printed materials</li>
         </ul>
-        <a href="contact.html?interest=sponsor-supporter" class="btn btn-dark">Become a Supporter →</a>
+        <div class="pkg-actions">
+          <a href="https://checkout.revolut.com/pay/d8d56a13-f212-46f5-8ba9-29a08d773b58" target="_blank" rel="noopener" class="btn btn-dark">Become a Supporter →</a>
+          <a href="contact.html?interest=sponsor-supporter" class="pkg-enquire">or enquire first</a>
+        </div>
       </div>
     </div>
 
@@ -585,7 +596,10 @@
           <li><span class="pkg-perk-check" aria-hidden="true"></span>Listed on website</li>
           <li><span class="pkg-perk-check" aria-hidden="true"></span>Verbal shout-out at event</li>
         </ul>
-        <a href="contact.html?interest=sponsor-bronze" class="btn btn-dark">Become a Bronze Sponsor →</a>
+        <div class="pkg-actions">
+          <a href="https://checkout.revolut.com/pay/6f99e172-b416-4e76-9b55-e0339a8ebb3b" target="_blank" rel="noopener" class="btn btn-dark">Become a Bronze Sponsor →</a>
+          <a href="contact.html?interest=sponsor-bronze" class="pkg-enquire">or enquire first</a>
+        </div>
       </div>
     </div>
 
@@ -607,7 +621,10 @@
             <li><span class="pkg-perk-check" aria-hidden="true"></span>Speak on-stage at the event</li>
           </ul>
         </div>
-        <a href="contact.html?interest=sponsor-silver" class="btn btn-dark">Become a Silver Partner →</a>
+        <div class="pkg-actions">
+          <a href="https://checkout.revolut.com/pay/0001f591-6291-4593-bce8-14375b3f5b9e" target="_blank" rel="noopener" class="btn btn-dark">Become a Silver Partner →</a>
+          <a href="contact.html?interest=sponsor-silver" class="pkg-enquire">or enquire first</a>
+        </div>
       </div>
     </div>
 
@@ -629,7 +646,10 @@
             <li><span class="pkg-perk-check" aria-hidden="true"></span>5 complimentary tickets or raffle &amp; giveaway inclusion</li>
           </ul>
         </div>
-        <a href="contact.html?interest=sponsor-gold" class="btn btn-white">Become the Title Sponsor →</a>
+        <div class="pkg-actions">
+          <a href="https://checkout.revolut.com/pay/78929929-1a06-40b3-b2f7-798d8eca00c5" target="_blank" rel="noopener" class="btn btn-white">Become the Title Sponsor →</a>
+          <a href="contact.html?interest=sponsor-gold" class="pkg-enquire">or enquire first</a>
+        </div>
       </div>
     </div>
 
