@@ -246,6 +246,15 @@
 <script src="shared.js"></script>
 <script>loadPageContent('/_data/pages/contact.json');</script>
 <script>
+// Preselect dropdown from URL param (e.g. ?interest=sponsor-gold)
+(function () {
+  var param = new URLSearchParams(window.location.search).get('interest');
+  if (param) {
+    var sel = document.getElementById('interest');
+    if (sel) sel.value = param;
+  }
+}());
+
 // Netlify form with JS success state
 document.getElementById('contact-form').addEventListener('submit', async function(e) {
   e.preventDefault();
