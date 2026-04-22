@@ -121,6 +121,50 @@
   color: white; min-width: 110px; padding-top: 0.15rem;
 }
 
+/* ── FEATURED ACTS ── */
+.featured-section {
+  border-top: 1px solid var(--border);
+  background: var(--brown-dark);
+  color: var(--off-white);
+  padding: 6rem 5vw;
+}
+.featured-section .section-tag { color: rgba(246,243,238,0.3); }
+.featured-section-title {
+  font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  line-height: 1.05; letter-spacing: -0.025em; color: white;
+  margin: 0.5rem 0 3rem;
+}
+.featured-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+.featured-act-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 260px 130px;
+  gap: 3px;
+  margin-bottom: 1.5rem;
+}
+.featured-act-photos img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.featured-act-photos img:first-child {
+  grid-column: 1; grid-row: 1 / 3;
+}
+.featured-act-name {
+  font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: 1.3rem; letter-spacing: -0.02em;
+  color: white; margin-bottom: 0.3rem;
+}
+.featured-act-role {
+  font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.4rem;
+}
+.featured-act-handle {
+  font-size: 0.8rem; color: rgba(246,243,238,0.4);
+}
+
 /* ── PACKAGES ── */
 .packages-section {
   border-top: 1px solid var(--border);
@@ -143,8 +187,8 @@
   align-self: end;
 }
 .packages-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
 }
 .pkg-card {
   background: white;
@@ -155,7 +199,7 @@
   background: var(--brown-dark); border-color: var(--brown-dark);
 }
 .pkg-card-top {
-  padding: 2.5rem 2.5rem 2rem;
+  padding: 1.75rem 1.75rem 1.5rem;
   border-bottom: 1px solid var(--border);
   display: flex; justify-content: space-between; align-items: flex-start;
 }
@@ -167,43 +211,44 @@
 }
 .pkg-gold .pkg-name { color: var(--gold); }
 .pkg-silver .pkg-name { color: var(--brown-mid); }
+.pkg-bronze .pkg-name { color: #B87333; }
 .pkg-supporter .pkg-name { color: var(--green); }
 .pkg-price {
   font-family: 'Inter', sans-serif; font-weight: 800;
-  font-size: clamp(2.4rem, 3.5vw, 3.2rem);
+  font-size: clamp(2rem, 2.5vw, 2.8rem);
   line-height: 1; letter-spacing: -0.03em; color: var(--black);
   margin-top: 0.75rem;
 }
 .pkg-gold .pkg-price { color: white; }
 .pkg-price-note {
-  font-size: 0.72rem; color: rgba(13,13,13,0.4);
-  margin-top: 0.4rem; letter-spacing: 0.03em;
+  font-size: 0.68rem; color: rgba(13,13,13,0.4);
+  margin-top: 0.4rem; letter-spacing: 0.03em; line-height: 1.4;
 }
 .pkg-gold .pkg-price-note { color: rgba(246,243,238,0.35); }
 .pkg-tag {
   display: inline-block;
-  font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
-  padding: 0.3rem 0.75rem;
+  font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
   background: rgba(13,13,13,0.05); color: rgba(13,13,13,0.5);
-  align-self: flex-start; margin-top: 0.25rem;
+  align-self: flex-start; margin-top: 0.25rem; white-space: nowrap;
 }
 .pkg-gold .pkg-tag { background: rgba(200,146,10,0.15); color: var(--gold); }
 .pkg-body {
-  padding: 2.5rem;
+  padding: 1.75rem;
   flex: 1;
   display: flex; flex-direction: column; justify-content: space-between;
 }
 .pkg-perks {
-  list-style: none; padding: 0; margin: 0 0 2.5rem;
+  list-style: none; padding: 0; margin: 0 0 2rem;
   display: flex; flex-direction: column; gap: 0.85rem;
 }
 .pkg-perks li {
-  display: flex; align-items: flex-start; gap: 0.8rem;
-  font-size: 0.88rem; line-height: 1.55; color: rgba(13,13,13,0.7);
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  font-size: 0.84rem; line-height: 1.55; color: rgba(13,13,13,0.7);
 }
 .pkg-gold .pkg-perks li { color: rgba(246,243,238,0.65); }
 .pkg-perk-check {
-  flex-shrink: 0; width: 18px; height: 18px;
+  flex-shrink: 0; width: 17px; height: 17px;
   background: var(--green); border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   margin-top: 0.1rem;
@@ -211,14 +256,14 @@
 .pkg-gold .pkg-perk-check { background: var(--gold); }
 .pkg-perk-check::after {
   content: '';
-  width: 5px; height: 9px;
+  width: 4px; height: 8px;
   border: 1.5px solid white; border-top: none; border-left: none;
   transform: rotate(45deg) translateY(-1px);
   display: block;
 }
 .pkg-plus-note {
-  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
-  color: rgba(13,13,13,0.35); margin-bottom: 1.2rem;
+  font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(13,13,13,0.35); margin-bottom: 1rem;
 }
 .pkg-gold .pkg-plus-note { color: rgba(246,243,238,0.35); }
 
@@ -250,15 +295,21 @@
 .skip-link:focus { top: 1rem; }
 
 /* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+  .packages-grid { grid-template-columns: repeat(2, 1fr); }
+}
 @media (max-width: 900px) {
   .page-hero-inner { grid-template-columns: 1fr; gap: 2rem; }
   .stats-band { grid-template-columns: 1fr 1fr; }
   .stat-block:nth-child(2) { border-right: none; }
   .why-section { grid-template-columns: 1fr; }
   .why-left { border-right: none; border-bottom: 1px solid var(--border); }
+  .featured-grid { grid-template-columns: 1fr; gap: 3rem; }
   .packages-intro { grid-template-columns: 1fr; gap: 1.5rem; }
-  .packages-grid { grid-template-columns: 1fr; }
   .cta-band { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 600px) {
+  .packages-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
   .stats-band { grid-template-columns: 1fr 1fr; }
@@ -359,12 +410,57 @@
   </div>
 </section>
 
+<!-- FEATURED ACTS -->
+<section class="featured-section reveal" aria-label="Featured performers and exhibitors">
+  <div class="section-tag">Featured at the Event</div>
+  <h2 class="featured-section-title">Who you'll<br>be seen with.</h2>
+  <div class="featured-grid">
+
+    <!-- JAY JAY REVLON -->
+    <div class="featured-act">
+      <div class="featured-act-photos">
+        <img src="images/featured/image (3).png" alt="Jay Jay Revlon performing at a sold-out event">
+        <img src="images/featured/image (1).png" alt="Jay Jay Revlon portrait">
+        <img src="images/featured/image (2).png" alt="Jay Jay Revlon in Vogue magazine">
+      </div>
+      <div class="featured-act-role">Featured DJ &amp; Performer</div>
+      <div class="featured-act-name">Jay Jay Revlon</div>
+      <div class="featured-act-handle">@jayjayrevlon</div>
+    </div>
+
+    <!-- CECI HEATHER -->
+    <div class="featured-act">
+      <div class="featured-act-photos">
+        <img src="images/featured/GramFetchr_Thumbnail_34599759.jpg" alt="Ceci Heather and team rollerskating in the street">
+        <img src="images/featured/GramFetchr_Thumbnail_51709524.jpg" alt="Ceci Heather with rollerskates">
+        <img src="images/featured/image.png" alt="Ceci Heather — The Stylish Globe Skater promo">
+      </div>
+      <div class="featured-act-role">Featured Rollerskate Performer</div>
+      <div class="featured-act-name">Ceci Heather</div>
+      <div class="featured-act-handle">@thestylishglobeskater</div>
+    </div>
+
+    <!-- TUDY'S KITCHEN -->
+    <div class="featured-act">
+      <div class="featured-act-photos">
+        <img src="images/featured/68F1D2E8-E0C3-480B-8278-FEECEA69EEBC_L0_001-09_04_2026, 09_52_16.webp" alt="Tudy's Kitchen signature dessert">
+        <img src="images/featured/icecream.jpg" alt="Tudy's Kitchen ice cream">
+        <img src="images/featured/27901A45-CAC0-47C4-8A17-24B941DD1CA6_L0_001-09_04_2026, 12_57_23.jpg" alt="Tudy's Kitchen team at Disney+ event">
+      </div>
+      <div class="featured-act-role">Featured Food Vendor</div>
+      <div class="featured-act-name">Tudy's Kitchen</div>
+      <div class="featured-act-handle">@tudyskitchen</div>
+    </div>
+
+  </div>
+</section>
+
 <!-- PACKAGES -->
-<section class="packages-section reveal" aria-label="Sponsor packages">
+<section class="packages-section reveal" id="packages" aria-label="Sponsor packages">
   <div class="packages-intro">
     <div>
       <div class="section-tag">Sponsor Packages</div>
-      <h2 class="packages-title">Three ways<br>to get involved.</h2>
+      <h2 class="packages-title">Four ways<br>to get involved.</h2>
     </div>
     <p class="packages-sub">Choose the level that fits your goals. All packages include recognition before and at the event. Get in touch and we'll send the full sponsor pack.</p>
   </div>
@@ -377,18 +473,37 @@
         <div>
           <div class="pkg-name">Supporter</div>
           <div class="pkg-price">€100</div>
-          <div class="pkg-price-note">One-time · Local &amp; community businesses</div>
+          <div class="pkg-price-note">Local &amp; community businesses</div>
+        </div>
+        <span class="pkg-tag">Community</span>
+      </div>
+      <div class="pkg-body">
+        <ul class="pkg-perks" aria-label="Supporter benefits">
+          <li><span class="pkg-perk-check" aria-hidden="true"></span>Listed on the website</li>
+          <li><span class="pkg-perk-check" aria-hidden="true"></span>Included in marketing materials</li>
+          <li><span class="pkg-perk-check" aria-hidden="true"></span>Included in printed materials</li>
+        </ul>
+        <a href="contact.html" class="btn btn-dark">Become a Supporter →</a>
+      </div>
+    </div>
+
+    <!-- BRONZE -->
+    <div class="pkg-card pkg-bronze">
+      <div class="pkg-card-top">
+        <div>
+          <div class="pkg-name">Bronze</div>
+          <div class="pkg-price">€100</div>
+          <div class="pkg-price-note">Entry-level business sponsorship</div>
         </div>
         <span class="pkg-tag">Entry</span>
       </div>
       <div class="pkg-body">
-        <ul class="pkg-perks" aria-label="Supporter benefits">
-          <li><span class="pkg-perk-check" aria-hidden="true"></span>Listed on the Juneteenth Barcelona website</li>
-          <li><span class="pkg-perk-check" aria-hidden="true"></span>Included in social media posts</li>
-          <li><span class="pkg-perk-check" aria-hidden="true"></span>Included in printed event materials</li>
-          <li><span class="pkg-perk-check" aria-hidden="true"></span>Verbal shout-out at the event</li>
+        <ul class="pkg-perks" aria-label="Bronze benefits">
+          <li><span class="pkg-perk-check" aria-hidden="true"></span>Included in social media</li>
+          <li><span class="pkg-perk-check" aria-hidden="true"></span>Listed on website</li>
+          <li><span class="pkg-perk-check" aria-hidden="true"></span>Verbal shout-out at event</li>
         </ul>
-        <a href="contact.html" class="btn btn-dark">Become a Supporter →</a>
+        <a href="contact.html" class="btn btn-dark">Become a Bronze Sponsor →</a>
       </div>
     </div>
 
@@ -398,13 +513,13 @@
         <div>
           <div class="pkg-name">Silver</div>
           <div class="pkg-price">€500</div>
-          <div class="pkg-price-note">One-time · All Supporter benefits, plus:</div>
+          <div class="pkg-price-note">Bronze, plus on-stage presence</div>
         </div>
         <span class="pkg-tag">Partner</span>
       </div>
       <div class="pkg-body">
         <div>
-          <p class="pkg-plus-note">Supporter, plus:</p>
+          <p class="pkg-plus-note">Bronze, plus:</p>
           <ul class="pkg-perks" aria-label="Silver benefits">
             <li><span class="pkg-perk-check" aria-hidden="true"></span>Included in the step&amp;repeat backdrop</li>
             <li><span class="pkg-perk-check" aria-hidden="true"></span>Speak on-stage at the event</li>
@@ -420,7 +535,7 @@
         <div>
           <div class="pkg-name">Gold</div>
           <div class="pkg-price">€3,500</div>
-          <div class="pkg-price-note">One-time · All Silver benefits, plus:</div>
+          <div class="pkg-price-note">Silver, plus title sponsorship</div>
         </div>
         <span class="pkg-tag">Title Sponsor</span>
       </div>
