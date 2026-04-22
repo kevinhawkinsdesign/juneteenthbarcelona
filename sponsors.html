@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/Juneteenth_flag.svg/1280px-Juneteenth_flag.svg.png">
+  <meta name="theme-color" content="#00693A">
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Become a partner of Juneteenth Barcelona 2026. Sponsor packages from €100 — connect your brand with 350+ members of the African diaspora in Barcelona.">
+  <meta name="keywords" content="Juneteenth Barcelona sponsor, sponsor package Barcelona, African diaspora event sponsor, Juneteenth 2026 partner">
+  <meta property="og:title" content="Become a Partner — Juneteenth Barcelona 2026">
+  <meta property="og:description" content="Sponsor packages from €100. Connect your brand with 350+ members of the African diaspora at Juneteenth Barcelona, June 20, 2026.">
+  <meta property="og:image" content="https://juneteenth.es/images/barcelona-hero.jpg">
+  <meta property="og:url" content="https://juneteenth.es/sponsors.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://juneteenth.es/sponsors.html">
+<title>Become a Partner — Juneteenth Barcelona</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+
+/* ── PAGE HERO ── */
+.page-hero {
+  padding-top: var(--nav-h);
+  background: var(--brown-dark);
+  color: var(--off-white);
+  position: relative; overflow: hidden;
+  min-height: 56vh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.page-hero-bg {
+  position: absolute; inset: 0;
+  background: url('images/volta/Borneta_Noviembre-115.jpg') center/cover no-repeat;
+  opacity: 0.18;
+}
+.page-hero-inner {
+  position: relative; z-index: 1;
+  padding: 4rem 5vw 5rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: end;
+}
+.page-hero-h1 {
+  font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  line-height: 0.9; letter-spacing: -0.03em; color: white;
+  margin-top: 1rem; margin-bottom: 0;
+  opacity: 0; animation: fadeUp 0.8s 0.15s forwards;
+}
+.page-hero-right {
+  padding-bottom: 0.5rem;
+  opacity: 0; animation: fadeUp 0.8s 0.3s forwards;
+}
+.page-hero-tagline {
+  font-size: clamp(0.9rem, 1.4vw, 1.05rem); line-height: 1.75;
+  color: rgba(246,243,238,0.6); max-width: 420px;
+  margin-bottom: 2rem;
+}
+
+/* ── STATS BAND ── */
+.stats-band {
+  border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: repeat(4, 1fr);
+}
+.stat-block {
+  padding: 3.5rem 5vw;
+  border-right: 1px solid var(--border);
+}
+.stat-block:last-child { border-right: none; }
+.stat-block-num {
+  font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  line-height: 1; letter-spacing: -0.03em; color: var(--black);
+}
+.stat-block-num sup { font-size: 0.45em; color: var(--gold); }
+.stat-block-label {
+  font-size: 0.72rem; letter-spacing: 0.08em;
+  color: rgba(13,13,13,0.45); margin-top: 0.4rem; line-height: 1.4;
+}
+
+/* ── WHY SECTION ── */
+.why-section {
+  border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr 1fr;
+}
+.why-left {
+  padding: 6rem 5vw;
+  border-right: 1px solid var(--border);
+}
+.why-title {
+  font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  line-height: 1.05; letter-spacing: -0.025em;
+  color: var(--black); margin: 0.5rem 0 1.8rem;
+}
+.why-body {
+  font-size: 0.97rem; line-height: 1.85;
+  color: rgba(13,13,13,0.6); max-width: 460px;
+}
+.why-body p + p { margin-top: 1.2rem; }
+.why-right {
+  padding: 6rem 5vw;
+  background: var(--brown-dark); color: var(--off-white);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.why-right .section-tag { color: rgba(246,243,238,0.3); margin-bottom: 2rem; }
+.why-list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 0;
+}
+.why-list li {
+  display: flex; align-items: flex-start; gap: 1.2rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid rgba(246,243,238,0.07);
+  font-size: 0.9rem; line-height: 1.65;
+  color: rgba(246,243,238,0.65);
+}
+.why-list li:first-child { border-top: 1px solid rgba(246,243,238,0.07); }
+.why-list li strong {
+  font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.75rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: white; min-width: 110px; padding-top: 0.15rem;
+}
+
+/* ── PACKAGES ── */
+.packages-section {
+  border-top: 1px solid var(--border);
+  padding: 6rem 5vw;
+  background: var(--off-white);
+}
+.packages-intro {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+  margin-bottom: 4rem; align-items: end;
+}
+.packages-title {
+  font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  line-height: 1.0; letter-spacing: -0.03em; color: var(--black);
+  margin: 0.5rem 0 0;
+}
+.packages-sub {
+  font-size: 0.95rem; line-height: 1.8;
+  color: rgba(13,13,13,0.55); max-width: 420px;
+  align-self: end;
+}
+.packages-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.pkg-card {
+  background: white;
+  border: 1px solid var(--border);
+  display: flex; flex-direction: column;
+}
+.pkg-card.pkg-gold {
+  background: var(--brown-dark); border-color: var(--brown-dark);
+}
+.pkg-card-top {
+  padding: 2.5rem 2.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: flex-start;
+}
+.pkg-gold .pkg-card-top { border-bottom-color: rgba(246,243,238,0.08); }
+.pkg-name {
+  font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--black);
+}
+.pkg-gold .pkg-name { color: var(--gold); }
+.pkg-silver .pkg-name { color: var(--brown-mid); }
+.pkg-supporter .pkg-name { color: var(--green); }
+.pkg-price {
+  font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: clamp(2.4rem, 3.5vw, 3.2rem);
+  line-height: 1; letter-spacing: -0.03em; color: var(--black);
+  margin-top: 0.75rem;
+}
+.pkg-gold .pkg-price { color: white; }
+.pkg-price-note {
+  font-size: 0.72rem; color: rgba(13,13,13,0.4);
+  margin-top: 0.4rem; letter-spacing: 0.03em;
+}
+.pkg-gold .pkg-price-note { color: rgba(246,243,238,0.35); }
+.pkg-tag {
+  display: inline-block;
+  font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 0.3rem 0.75rem;
+  background: rgba(13,13,13,0.05); color: rgba(13,13,13,0.5);
+  align-self: flex-start; margin-top: 0.25rem;
+}
+.pkg-gold .pkg-tag { background: rgba(200,146,10,0.15); color: var(--gold); }
+.pkg-body {
+  padding: 2.5rem;
+  flex: 1;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.pkg-perks {
+  list-style: none; padding: 0; margin: 0 0 2.5rem;
+  display: flex; flex-direction: column; gap: 0.85rem;
+}
+.pkg-perks li {
+  display: flex; align-items: flex-start; gap: 0.8rem;
+  font-size: 0.88rem; line-height: 1.55; color: rgba(13,13,13,0.7);
+}
+.pkg-gold .pkg-perks li { color: rgba(246,243,238,0.65); }
+.pkg-perk-check {
+  flex-shrink: 0; width: 18px; height: 18px;
+  background: var(--green); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 0.1rem;
+}
+.pkg-gold .pkg-perk-check { background: var(--gold); }
+.pkg-perk-check::after {
+  content: '';
+  width: 5px; height: 9px;
+  border: 1.5px solid white; border-top: none; border-left: none;
+  transform: rotate(45deg) translateY(-1px);
+  display: block;
+}
+.pkg-plus-note {
+  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(13,13,13,0.35); margin-bottom: 1.2rem;
+}
+.pkg-gold .pkg-plus-note { color: rgba(246,243,238,0.35); }
+
+/* ── CTA BAND ── */
+.cta-band {
+  border-top: 1px solid var(--border);
+  background: var(--green);
+  padding: 5rem 5vw;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 3rem; flex-wrap: wrap;
+}
+.cta-band-title {
+  font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  color: white; line-height: 1; letter-spacing: -0.02em;
+}
+.cta-band-sub {
+  font-size: 0.88rem; color: rgba(255,255,255,0.6);
+  margin-top: 0.6rem; max-width: 440px; line-height: 1.65;
+}
+
+/* ── SKIP LINK ── */
+.skip-link {
+  position: absolute; top: -100%; left: 1rem;
+  background: var(--brown-dark); color: white;
+  padding: 0.6rem 1.2rem; font-size: 0.82rem; font-weight: 600;
+  text-decoration: none; z-index: 9999; transition: top 0.2s;
+}
+.skip-link:focus { top: 1rem; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .page-hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .stats-band { grid-template-columns: 1fr 1fr; }
+  .stat-block:nth-child(2) { border-right: none; }
+  .why-section { grid-template-columns: 1fr; }
+  .why-left { border-right: none; border-bottom: 1px solid var(--border); }
+  .packages-intro { grid-template-columns: 1fr; gap: 1.5rem; }
+  .packages-grid { grid-template-columns: 1fr; }
+  .cta-band { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 600px) {
+  .stats-band { grid-template-columns: 1fr 1fr; }
+  .stat-block { padding: 2.5rem 5vw; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- NAV -->
+<nav aria-label="Main navigation" role="navigation">
+  <a href="index.html" class="nav-logo">
+    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/Juneteenth_flag.svg/1280px-Juneteenth_flag.svg.png" alt="Juneteenth flag" style="height:22px;width:auto;display:block;">
+    <span class="nav-logo-text">Juneteenth Barcelona</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="event.html">Event</a></li>
+    <li><a href="monthly-events.html">Meetup</a></li>
+    <li><a href="walking-tour/index.html">Walking Tour</a></li>
+    <li><a href="sponsors.html" aria-current="page">Sponsors</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-picker">
+      <button class="lang-trigger" aria-label="Select language">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="lang-current">EN</span>
+        <span class="lang-caret">▾</span>
+      </button>
+      <div class="lang-dropdown" role="menu" aria-label="Language options">
+        <button class="lang-option" role="menuitem" data-lang="en">English</button>
+        <button class="lang-option" role="menuitem" data-lang="es">Español</button>
+        <button class="lang-option" role="menuitem" data-lang="ca">Català</button>
+      </div>
+    </div>
+    <button class="nav-mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<main id="main-content">
+
+<!-- HERO -->
+<section class="page-hero" aria-label="Page header">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-inner">
+    <div>
+      <div class="series-pill" style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(246,243,238,0.08);border:1px solid rgba(246,243,238,0.15);padding:0.4rem 1rem;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(246,243,238,0.5);margin-bottom:1.5rem;">June 20, 2026 · Barcelona</div>
+      <h1 class="page-hero-h1">Become<br>a Partner</h1>
+    </div>
+    <div class="page-hero-right">
+      <div class="section-tag light">Why Partner</div>
+      <p class="page-hero-tagline">Connect your brand with 350+ members of the African diaspora in Barcelona — and help us build a celebration that the city won't forget.</p>
+      <a href="contact.html" class="btn btn-white">Get in Touch →</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-band reveal" aria-label="Event statistics">
+  <div class="stat-block">
+    <div class="stat-block-num">350<sup>+</sup></div>
+    <div class="stat-block-label">Target attendees</div>
+  </div>
+  <div class="stat-block">
+    <div class="stat-block-num">5</div>
+    <div class="stat-block-label">Hours of programming</div>
+  </div>
+  <div class="stat-block">
+    <div class="stat-block-num">155</div>
+    <div class="stat-block-label">Avg. guests per hour</div>
+  </div>
+  <div class="stat-block">
+    <div class="stat-block-num">3</div>
+    <div class="stat-block-label">Languages: EN · ES · CA</div>
+  </div>
+</div>
+
+<!-- WHY PARTNER -->
+<section class="why-section reveal" aria-label="Why partner with us">
+  <div class="why-left">
+    <div class="section-tag">The Opportunity</div>
+    <h2 class="why-title">An experience that's both delicious and culturally enriching.</h2>
+    <div class="why-body">
+      <p>Juneteenth Barcelona 2026 is a full-day celebration bringing together the African diaspora and allies from across Barcelona and beyond. International culture exchange through food, music, and collective joy.</p>
+      <p>Sponsoring this event places your brand at the heart of a growing, engaged community — with authentic exposure across digital, print, and on-site touchpoints before, during, and after the event.</p>
+    </div>
+  </div>
+  <div class="why-right">
+    <div class="section-tag light">What's on offer</div>
+    <ul class="why-list" aria-label="Event highlights">
+      <li><strong>Networking</strong> Meet the diaspora from Barcelona and surrounding areas — Afro-Spaniards, Black Americans, and people of color from everywhere.</li>
+      <li><strong>Community Cookout</strong> A world food fair with traditional dishes from African countries, the Caribbean, local dishes, and more.</li>
+      <li><strong>Cultural Immersion</strong> Live speakers, entertainers, and sponsors sharing insights, stories, and talent with the crowd.</li>
+      <li><strong>Live Music</strong> Special guest DJs, live musicians, and performances throughout the day.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="packages-section reveal" aria-label="Sponsor packages">
+  <div class="packages-intro">
+    <div>
+      <div class="section-tag">Sponsor Packages</div>
+      <h2 class="packages-title">Three ways<br>to get involved.</h2>
+    </div>
+    <p class="packages-sub">Choose the level that fits your goals. All packages include recognition before and at the event. Get in touch and we'll send the full sponsor pack.</p>
+  </div>
+
+  <div class="packages-grid">
+
+    <!-- SUPPORTER -->
+    <div class="pkg-card pkg-supporter">
+      <div class="pkg-card-top">
+        <div>
+          <div class="pkg-name">Supporter</div>
+          <div class="pkg-price">€100</div>
+          <div class="pkg-price-note">One-time · Local &amp; community businesses</div>
+        </div>
+        <span class="pkg-tag">Entry</span>
+      </div>
+      <div class="pkg-body">
+        <ul class="pkg-perks" aria-label="Supporter benefits">
+          <li><span class="pkg-perk-check" aria-hidden="true"></span>Listed on the Juneteenth Barcelona website</li>
+          <li><span class="pkg-perk-check" aria-hidden="true"></span>Included in social media posts</li>
+          <li><span class="pkg-perk-check" aria-hidden="true"></span>Included in printed event materials</li>
+          <li><span class="pkg-perk-check" aria-hidden="true"></span>Verbal shout-out at the event</li>
+        </ul>
+        <a href="contact.html" class="btn btn-dark">Become a Supporter →</a>
+      </div>
+    </div>
+
+    <!-- SILVER -->
+    <div class="pkg-card pkg-silver">
+      <div class="pkg-card-top">
+        <div>
+          <div class="pkg-name">Silver</div>
+          <div class="pkg-price">€500</div>
+          <div class="pkg-price-note">One-time · All Supporter benefits, plus:</div>
+        </div>
+        <span class="pkg-tag">Partner</span>
+      </div>
+      <div class="pkg-body">
+        <div>
+          <p class="pkg-plus-note">Supporter, plus:</p>
+          <ul class="pkg-perks" aria-label="Silver benefits">
+            <li><span class="pkg-perk-check" aria-hidden="true"></span>Included in the step&amp;repeat backdrop</li>
+            <li><span class="pkg-perk-check" aria-hidden="true"></span>Speak on-stage at the event</li>
+          </ul>
+        </div>
+        <a href="contact.html" class="btn btn-dark">Become a Silver Partner →</a>
+      </div>
+    </div>
+
+    <!-- GOLD -->
+    <div class="pkg-card pkg-gold">
+      <div class="pkg-card-top">
+        <div>
+          <div class="pkg-name">Gold</div>
+          <div class="pkg-price">€3,500</div>
+          <div class="pkg-price-note">One-time · All Silver benefits, plus:</div>
+        </div>
+        <span class="pkg-tag">Title Sponsor</span>
+      </div>
+      <div class="pkg-body">
+        <div>
+          <p class="pkg-plus-note">Silver, plus:</p>
+          <ul class="pkg-perks" aria-label="Gold benefits">
+            <li><span class="pkg-perk-check" aria-hidden="true"></span>Named in event title — "Juneteenth Barcelona by [Your Brand]"</li>
+            <li><span class="pkg-perk-check" aria-hidden="true"></span>5 complimentary tickets or raffle &amp; giveaway inclusion</li>
+          </ul>
+        </div>
+        <a href="contact.html" class="btn btn-white">Become the Title Sponsor →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band reveal">
+  <div>
+    <div class="cta-band-title">Ready to<br>partner up?</div>
+    <p class="cta-band-sub">Get in touch and we'll send you the full sponsor pack with audience insights, venue details, and a confirmed rundown of the day.</p>
+  </div>
+  <a href="contact.html" class="btn btn-white">Contact Us →</a>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer role="contentinfo" aria-label="Site footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-wrap">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/Juneteenth_flag.svg/1280px-Juneteenth_flag.svg.png" alt="Juneteenth flag" style="height:16px;width:auto;display:block;">
+        <span class="footer-logo-text">Juneteenth Barcelona</span>
+      </div>
+      <p class="footer-tagline">Celebrating Black freedom, heritage, and community in Barcelona.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Pages</h5>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="event.html">The Event</a></li>
+        <li><a href="monthly-events.html">Monthly Meetup</a></li>
+        <li><a href="walking-tour/index.html">Walking Tour</a></li>
+        <li><a href="sponsors.html">Sponsors</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Partner</h5>
+      <ul>
+        <li><a href="sponsors.html#packages">Supporter — €100</a></li>
+        <li><a href="sponsors.html#packages">Silver — €500</a></li>
+        <li><a href="sponsors.html#packages">Gold — €3,500</a></li>
+        <li><a href="contact.html">Get in touch</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Juneteenth Barcelona. Organized by volunteers with love.</p>
+    <div class="footer-flag">
+      <span style="background:var(--red)"></span>
+      <span style="background:#333"></span>
+      <span style="background:var(--green)"></span>
+    </div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<!-- Google Translate (hidden widget) -->
+<div id="google_translate_element"></div>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
