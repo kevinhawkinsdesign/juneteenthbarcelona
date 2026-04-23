@@ -337,13 +337,15 @@ function calc() {
   document.getElementById('lMI').textContent = '€' + mi.toLocaleString();
 
   /* revenue */
-  const MAX_CAP = 350;
-  const totalPax      = et + st;
+  const MAX_CAP    = 350;
+  const SHOW_RATE  = 0.85;
+  const totalPax   = et + st;
+  const actualPax  = Math.round(totalPax * SHOW_RATE);
   document.getElementById('capWarning').style.display = totalPax > MAX_CAP ? 'block' : 'none';
   const earlyRev      = et * ep;
   const stdRev        = st * sp;
   const ticketRev     = earlyRev + stdRev;
-  const barRev        = totalPax * bs * 0.10;   // 10% kickback
+  const barRev        = actualPax * bs * 0.10;   // 10% kickback on 85% who show up
   const totalRev      = ticketRev + barRev + spn;
 
   /* costs */
@@ -378,8 +380,8 @@ function calc() {
       <div class="kpi-lbl">Total Costs</div>
     </div>
     <div class="kpi-box">
-      <div class="kpi-val">${totalPax}</div>
-      <div class="kpi-lbl">Attendees</div>
+      <div class="kpi-val">${actualPax}</div>
+      <div class="kpi-lbl">Est. Attendees (85% show)</div>
     </div>
   `;
 
@@ -392,7 +394,7 @@ function calc() {
         <div class="pl-row"><span class="pl-label">Early Bird (${et} × €${ep})</span><span class="pl-val green">${fmt(earlyRev)}</span></div>
         <div class="pl-row"><span class="pl-label">Standard (${st} × €${sp})</span><span class="pl-val green">${fmt(stdRev)}</span></div>
         <div class="pl-row subtotal"><span class="pl-label">Ticket Revenue</span><span class="pl-val green">${fmt(ticketRev)}</span></div>
-        <div class="pl-row"><span class="pl-label indent">Bar kickback (10% of €${bs}/pax × ${totalPax})</span><span class="pl-val green">${fmt(barRev)}</span></div>
+        <div class="pl-row"><span class="pl-label indent">Bar kickback (10% of €${bs} × ${actualPax} who show up)</span><span class="pl-val green">${fmt(barRev)}</span></div>
         <div class="pl-row"><span class="pl-label indent">Sponsorship</span><span class="pl-val green">${fmt(spn)}</span></div>
         <div class="pl-row total"><span class="pl-label">Total Revenue</span><span class="pl-val green">${fmt(totalRev)}</span></div>
       </div>
