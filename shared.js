@@ -12,7 +12,10 @@ function closeMobileMenu() {
   navLinks.classList.remove('open');
   toggle.classList.remove('open');
   toggle.setAttribute('aria-expanded', 'false');
-  document.documentElement.style.overflow = '';
+  const scrollY = parseInt(document.documentElement.style.getPropertyValue('--scroll-lock-top') || '0') * -1;
+  document.body.classList.remove('scroll-locked');
+  document.documentElement.style.removeProperty('--scroll-lock-top');
+  window.scrollTo(0, scrollY);
 }
 
 if (toggle && navLinks) {
@@ -23,7 +26,8 @@ if (toggle && navLinks) {
       navLinks.classList.add('open');
       toggle.classList.add('open');
       toggle.setAttribute('aria-expanded', 'true');
-      document.documentElement.style.overflow = 'hidden';
+      document.documentElement.style.setProperty('--scroll-lock-top', `-${window.scrollY}px`);
+      document.body.classList.add('scroll-locked');
     } else {
       closeMobileMenu();
     }
