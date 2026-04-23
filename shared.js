@@ -12,7 +12,7 @@ function closeMobileMenu() {
   navLinks.classList.remove('open');
   toggle.classList.remove('open');
   toggle.setAttribute('aria-expanded', 'false');
-  document.body.style.overflow = '';
+  document.documentElement.style.overflow = '';
 }
 
 if (toggle && navLinks) {
@@ -23,7 +23,7 @@ if (toggle && navLinks) {
       navLinks.classList.add('open');
       toggle.classList.add('open');
       toggle.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
     } else {
       closeMobileMenu();
     }
