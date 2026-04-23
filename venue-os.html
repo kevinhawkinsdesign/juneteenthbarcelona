@@ -177,12 +177,13 @@ tr:last-child td{border-bottom:none}
 
       <div class="slider-row">
         <div class="slider-label">Early Bird tickets sold <strong id="lET">80</strong></div>
-        <input id="sET" type="range" min="0" max="200" value="80" oninput="calc()">
+        <input id="sET" type="range" min="0" max="350" value="80" oninput="calc()">
       </div>
       <div class="slider-row">
         <div class="slider-label">Standard tickets sold <strong id="lST">100</strong></div>
-        <input id="sST" type="range" min="0" max="200" value="100" oninput="calc()">
+        <input id="sST" type="range" min="0" max="350" value="100" oninput="calc()">
       </div>
+      <div id="capWarning" class="small" style="color:#fbbf24;margin-top:-8px;margin-bottom:8px;display:none">⚠ Combined tickets exceed 350 max capacity</div>
 
       <div class="section-label" style="margin-top:20px">Bar</div>
 
@@ -341,7 +342,9 @@ function calc() {
   document.getElementById('lMI').textContent = '€' + mi.toLocaleString();
 
   /* revenue */
+  const MAX_CAP = 350;
   const totalPax      = et + st;
+  document.getElementById('capWarning').style.display = totalPax > MAX_CAP ? 'block' : 'none';
   const earlyRev      = et * ep;
   const stdRev        = st * sp;
   const ticketRev     = earlyRev + stdRev;
