@@ -302,6 +302,42 @@
   .evt-featured-grid { grid-template-columns: 1fr; gap: 3rem; }
 }
 
+/* ── FAQ ── */
+.faq-section {
+  border-top: 1px solid var(--border);
+  padding: 6rem 5vw;
+}
+.faq-inner { max-width: 760px; margin: 0 auto; }
+.faq-title {
+  font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.03em; line-height: 1.05;
+  margin-bottom: 3.5rem;
+}
+.faq-item { border-top: 1px solid var(--border); }
+.faq-item:last-child { border-bottom: 1px solid var(--border); }
+.faq-item summary {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 2rem; padding: 1.5rem 0;
+  font-family: 'Inter', sans-serif; font-weight: 700;
+  font-size: 1rem; letter-spacing: -0.01em;
+  color: var(--black); cursor: pointer; list-style: none;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+'; flex-shrink: 0;
+  font-family: 'Inter', sans-serif; font-weight: 300;
+  font-size: 1.6rem; line-height: 1; color: var(--mid);
+  transition: transform 0.25s;
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-body {
+  font-size: 0.93rem; line-height: 1.85;
+  color: rgba(13,13,13,0.68);
+  padding-bottom: 1.75rem;
+}
+.faq-body p + p { margin-top: 0.75rem; }
+
 /* ── SKIP TO CONTENT (accessibility) ── */
 .skip-link {
   position: absolute; top: -100%; left: 1rem;
@@ -639,6 +675,59 @@
   </div>
   <a href="contact.html" class="btn btn-white" data-cms="register_btn">Get in Touch</a>
 </div>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq" aria-label="Frequently asked questions">
+  <div class="faq-inner">
+    <div class="section-tag">FAQ</div>
+    <h2 class="faq-title">Frequently Asked<br>Questions</h2>
+
+    <details class="faq-item">
+      <summary>Who is the Juneteenth Barcelona committee?</summary>
+      <div class="faq-body">
+        <p>We are a passionate team of volunteers united by a shared belief that Black culture and history deserve to be celebrated, seen, and honored in Barcelona. We aim to be an integrated community for residents and visitors to enjoy and learn from on an important day in Black American history that relates to the global diaspora of Black and brown descendants from Africa.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is your mission?</summary>
+      <div class="faq-body">
+        <p>We believe that the African diaspora in Barcelona deserves a space to gather, celebrate, and be seen. Our mission is to honor the history of Black liberation while building a living, breathing community in one of Europe's most vibrant cities.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is the Juneteenth event?</summary>
+      <div class="faq-body">
+        <p>Juneteenth Barcelona is a day of diaspora unity and joy. The event brings together artists, performers, chefs, musicians, merchants, and other members of the African diaspora to gather, celebrate, and be seen. The event is open to residents and visitors in Barcelona.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is BJuneteenth?</summary>
+      <div class="faq-body">
+        <p>The BJuneteenth events are monthly Juneteenth-inspired meetups to share inspiration, connect with people from the African diaspora, and support collective liberation. The meetups occur every month on the 19th as a year-round reminder of the importance of building community and sustaining liberatory practices.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is the history of Juneteenth?</summary>
+      <div class="faq-body">
+        <p>Juneteenth is an American holiday that commemorates the day (June 19, 1865) when enslaved Black people in Galveston, Texas learned — two months late — from Union troops that the Civil War had ended. The name Juneteenth is a portmanteau combining the words "June" and "nineteenth."</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Why celebrate Juneteenth in Barcelona?</summary>
+      <div class="faq-body">
+        <p>As the Black American and African diasporic communities have grown in Barcelona, the need for a shared cultural moment has grown with it. Juneteenth provides that anchor — a day to ground ourselves, increase our visibility, and become better connected with the broader city.</p>
+        <p>Given the concerted efforts to erase and repress knowledge of Black history and culture globally, Black Americans — and the African diaspora by extension — have a vested interest and responsibility to continue the traditions and remembrances of Juneteenth in their adopted communities.</p>
+        <p>Our committee of volunteers — representing the United States, Caribbean islands, African countries, and more — organizes with three goals: to connect, to make visible, and to liberate. We recognize Barcelona as an important, functional node in Black history, as opposed to a romanticized symbolic ideal. We also uplift the ideals of liberation and honor the people who fought — and continue to fight — to secure and maintain freedom for everyone.</p>
+      </div>
+    </details>
+
+  </div>
+</section>
 
 </main>
 <!-- FOOTER -->
