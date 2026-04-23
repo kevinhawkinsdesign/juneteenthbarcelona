@@ -6,8 +6,45 @@ window.addEventListener('scroll', () => {
 // ── Mobile nav toggle ──────────────────────────────
 const toggle = document.querySelector('.nav-mobile-toggle');
 const navLinks = document.querySelector('.nav-links');
+
+function closeMobileMenu() {
+  if (!navLinks || !toggle) return;
+  navLinks.classList.remove('open');
+  toggle.classList.remove('open');
+  toggle.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+
 if (toggle && navLinks) {
-  toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const opening = !navLinks.classList.contains('open');
+    if (opening) {
+      navLinks.classList.add('open');
+      toggle.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    } else {
+      closeMobileMenu();
+    }
+  });
+
+  // Close when clicking a nav link
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+  });
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (navLinks.classList.contains('open') && !e.target.closest('nav')) {
+      closeMobileMenu();
+    }
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMobileMenu();
+  });
 }
 
 // ── Active nav link ────────────────────────────────
@@ -127,15 +164,6 @@ function googleTranslateElementInit() {
     includedLanguages: 'en,es,ca',
     autoDisplay: false
   }, 'google_translate_element');
-}
-
-// ── Fix mobile toggle aria-expanded ───────────────────────────
-const mobileToggle = document.querySelector('.nav-mobile-toggle');
-if (mobileToggle) {
-  mobileToggle.addEventListener('click', () => {
-    const expanded = mobileToggle.getAttribute('aria-expanded') === 'true';
-    mobileToggle.setAttribute('aria-expanded', String(!expanded));
-  });
 }
 
 // ── Custom cursor ──────────────────────────────────────────
