@@ -1,8 +1,3 @@
-// ── NAV scroll shadow ──────────────────────────────
-window.addEventListener('scroll', () => {
-  document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 20);
-});
-
 // ── Mobile nav toggle ──────────────────────────────
 const toggle = document.querySelector('.nav-mobile-toggle');
 const navLinks = document.querySelector('.nav-links');
