@@ -356,7 +356,7 @@ function calc() {
   const profitClass   = profit >= 0 ? 'green' : profit > -500 ? 'amber' : 'red';
 
   /* break-even */
-  const nonTicketRev  = barRev + spn + gr;
+  const nonTicketRev  = barRev + spn;
   const gap           = totalCost - nonTicketRev;
   const avgPrice      = totalPax > 0 ? ticketRev / totalPax : (ep + sp) / 2 || 1;
   const beTickets     = avgPrice > 0 ? Math.ceil(gap / avgPrice) : Infinity;
