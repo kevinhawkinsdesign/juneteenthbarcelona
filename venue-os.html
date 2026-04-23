@@ -201,10 +201,6 @@ tr:last-child td{border-bottom:none}
         <div class="slider-label">Sponsorship total <strong id="lSP2">€500</strong></div>
         <input id="sSP2" type="range" min="0" max="6000" step="50" value="500" oninput="calc()">
       </div>
-      <div class="slider-row">
-        <div class="slider-label">Ticket sales commission / grants <strong id="lGR">€0</strong></div>
-        <input id="sGR" type="range" min="0" max="2000" step="50" value="0" oninput="calc()">
-      </div>
 
       <div class="section-label" style="margin-top:20px">Variable Costs</div>
 
@@ -326,7 +322,7 @@ function calc() {
   const ep  = n('sEP'),  sp  = n('sSP');
   const et  = n('sET'),  st  = n('sST');
   const bs  = n('sBS');
-  const spn = n('sSP2'), gr  = n('sGR');
+  const spn = n('sSP2');
   const pf  = n('sPF'),  mk  = n('sMK'), mi = n('sMI');
 
   /* update labels */
@@ -336,7 +332,6 @@ function calc() {
   document.getElementById('lST').textContent = st;
   document.getElementById('lBS').textContent = '€' + bs;
   document.getElementById('lSP2').textContent = '€' + spn.toLocaleString();
-  document.getElementById('lGR').textContent = '€' + gr.toLocaleString();
   document.getElementById('lPF').textContent = '€' + pf.toLocaleString();
   document.getElementById('lMK').textContent = '€' + mk.toLocaleString();
   document.getElementById('lMI').textContent = '€' + mi.toLocaleString();
@@ -349,10 +344,11 @@ function calc() {
   const stdRev        = st * sp;
   const ticketRev     = earlyRev + stdRev;
   const barRev        = totalPax * bs * 0.10;   // 10% kickback
-  const totalRev      = ticketRev + barRev + spn + gr;
+  const totalRev      = ticketRev + barRev + spn;
 
   /* costs */
-  const varCost       = pf + mk + mi;
+  const commission    = ticketRev * 0.10;        // 10% sales commission
+  const varCost       = pf + mk + mi + commission;
   const totalCost     = FIXED_COST + varCost;
 
   /* profit */
@@ -398,7 +394,6 @@ function calc() {
         <div class="pl-row subtotal"><span class="pl-label">Ticket Revenue</span><span class="pl-val green">${fmt(ticketRev)}</span></div>
         <div class="pl-row"><span class="pl-label indent">Bar kickback (10% of €${bs}/pax × ${totalPax})</span><span class="pl-val green">${fmt(barRev)}</span></div>
         <div class="pl-row"><span class="pl-label indent">Sponsorship</span><span class="pl-val green">${fmt(spn)}</span></div>
-        <div class="pl-row"><span class="pl-label indent">Commissions / Grants</span><span class="pl-val green">${fmt(gr)}</span></div>
         <div class="pl-row total"><span class="pl-label">Total Revenue</span><span class="pl-val green">${fmt(totalRev)}</span></div>
       </div>
       <div class="pl-block">
@@ -407,6 +402,7 @@ function calc() {
         <div class="pl-row"><span class="pl-label indent">Refundable deposit <span class="small">(returned after event)</span></span><span class="pl-val" style="color:#64748b">€1,000 upfront</span></div>
         <div class="pl-row"><span class="pl-label">Cleaning &amp; breakdown</span><span class="pl-val green">€0 — included</span></div>
         <div class="pl-row subtotal"><span class="pl-label">Fixed Costs</span><span class="pl-val red">−€${FIXED_COST.toLocaleString()}</span></div>
+        <div class="pl-row"><span class="pl-label indent">Sales commission (10% of ticket rev)</span><span class="pl-val red">−${fmt(commission)}</span></div>
         <div class="pl-row"><span class="pl-label indent">Performers / DJs</span><span class="pl-val red">−${fmt(pf)}</span></div>
         <div class="pl-row"><span class="pl-label indent">Marketing &amp; promotion</span><span class="pl-val red">−${fmt(mk)}</span></div>
         <div class="pl-row"><span class="pl-label indent">Misc / ops</span><span class="pl-val red">−${fmt(mi)}</span></div>
