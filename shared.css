@@ -31,9 +31,10 @@ body > nav {
   background: #fff;
   border-bottom: 1px solid rgba(13,13,13,0.1);
 }
-.nav-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
-.nav-logo svg { flex-shrink: 0; height: 22px; width: auto; }
-.nav-logo-text { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.05em; color: var(--black); }
+.nav-logo { display: flex; align-items: center; text-decoration: none; }
+.nav-logo img { height: 44px; width: auto; display: block; }
+.nav-logo svg { display: none; }
+.nav-logo-text { display: none; }
 .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
 .nav-links a { color: var(--black); text-decoration: none; font-size: 0.82rem; font-weight: 500; opacity: 0.75; transition: opacity 0.2s; white-space: nowrap; }
 .nav-links a:hover, .nav-links a.active { opacity: 1; }
