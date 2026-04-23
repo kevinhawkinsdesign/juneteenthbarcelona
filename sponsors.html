@@ -334,6 +334,46 @@
 .pkg-gold .pkg-enquire { color: rgba(246,243,238,0.3); }
 .pkg-gold .pkg-enquire:hover { color: rgba(246,243,238,0.75); }
 
+/* ── AUDIENCE ── */
+.audience-section {
+  border-top: 1px solid var(--border);
+  padding: 6rem 5vw;
+  background: var(--off-white);
+}
+.audience-header {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: end; margin-bottom: 4rem;
+}
+.audience-title {
+  font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  line-height: 1.05; letter-spacing: -0.025em;
+  color: var(--black); margin: 0.5rem 0 0;
+}
+.audience-lead {
+  font-size: 0.97rem; line-height: 1.85;
+  color: rgba(13,13,13,0.58); max-width: 460px; align-self: end;
+}
+.audience-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; border: 1px solid var(--border);
+}
+.aud-card {
+  padding: 2.25rem 2rem;
+  border-right: 1px solid var(--border);
+}
+.aud-card:last-child { border-right: none; }
+.aud-card-icon { font-size: 1.5rem; margin-bottom: 0.9rem; }
+.aud-card-label {
+  font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: 0.82rem; letter-spacing: -0.01em; color: var(--black);
+  margin-bottom: 0.6rem;
+}
+.aud-card-body {
+  font-size: 0.84rem; line-height: 1.75;
+  color: rgba(13,13,13,0.58);
+}
+
 /* ── CTA BAND ── */
 .cta-band {
   border-top: 1px solid var(--border);
@@ -371,9 +411,19 @@
   .stat-block:nth-child(2) { border-right: none; }
   .why-section { grid-template-columns: 1fr; }
   .why-left { border-right: none; border-bottom: 1px solid var(--border); }
+  .audience-header { grid-template-columns: 1fr; gap: 1.5rem; }
+  .audience-grid { grid-template-columns: 1fr 1fr; }
+  .aud-card:nth-child(2) { border-right: none; }
+  .aud-card:nth-child(3) { border-top: 1px solid var(--border); }
+  .aud-card:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
   .featured-grid { grid-template-columns: 1fr; gap: 3rem; }
   .packages-intro { grid-template-columns: 1fr; gap: 1.5rem; }
   .cta-band { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 600px) {
+  .audience-grid { grid-template-columns: 1fr; }
+  .aud-card { border-right: none; border-top: 1px solid var(--border); }
+  .aud-card:first-child { border-top: none; }
 }
 @media (max-width: 600px) {
   .packages-grid { grid-template-columns: 1fr; }
@@ -451,8 +501,8 @@
     <div class="stat-block-label">Avg. guests per hour</div>
   </div>
   <div class="stat-block">
-    <div class="stat-block-num">3</div>
-    <div class="stat-block-label">Languages: EN · ES · CA</div>
+    <div class="stat-block-num">12</div>
+    <div class="stat-block-label">Community meetups<br>per year — every 19th</div>
   </div>
 </div>
 
@@ -474,6 +524,39 @@
       <li><strong>Cultural Immersion</strong> Live speakers, entertainers, and sponsors sharing insights, stories, and talent with the crowd.</li>
       <li><strong>Live Music</strong> Special guest DJs, live musicians, and performances throughout the day.</li>
     </ul>
+  </div>
+</section>
+
+<!-- AUDIENCE -->
+<section class="audience-section reveal" aria-label="Audience profile">
+  <div class="audience-header">
+    <div>
+      <div class="section-tag">The Audience</div>
+      <h2 class="audience-title">Who you'll<br>be reaching.</h2>
+    </div>
+    <p class="audience-lead">Our community is international, creative, and engaged — primarily African diaspora professionals, creatives, and entrepreneurs based in Barcelona, with reach across diaspora networks throughout Spain and beyond.</p>
+  </div>
+  <div class="audience-grid">
+    <div class="aud-card">
+      <div class="aud-card-icon">🌍</div>
+      <div class="aud-card-label">Diaspora-first community</div>
+      <div class="aud-card-body">Afro-European, Black American, Afro-Caribbean, West African, East African — connected by heritage and based in Barcelona.</div>
+    </div>
+    <div class="aud-card">
+      <div class="aud-card-icon">📅</div>
+      <div class="aud-card-label">Year-round touchpoints</div>
+      <div class="aud-card-body">Our monthly meetup series (every 19th) gives sponsors sustained presence throughout the year — not just one day in June.</div>
+    </div>
+    <div class="aud-card">
+      <div class="aud-card-icon">🗣️</div>
+      <div class="aud-card-label">Multilingual &amp; international</div>
+      <div class="aud-card-body">Communications in English, Spanish, and Catalan. An overwhelmingly multilingual, globally connected audience.</div>
+    </div>
+    <div class="aud-card">
+      <div class="aud-card-icon">📱</div>
+      <div class="aud-card-label">Amplified digital reach</div>
+      <div class="aud-card-body">Active Instagram and WhatsApp communities, amplified by featured performers with 20K+ combined followers.</div>
+    </div>
   </div>
 </section>
 
@@ -569,9 +652,10 @@
       </div>
       <div class="pkg-body">
         <ul class="pkg-perks" aria-label="Supporter benefits">
-          <li><span class="pkg-perk-check" aria-hidden="true"></span>Listed on the website</li>
-          <li><span class="pkg-perk-check" aria-hidden="true"></span>Included in marketing materials</li>
-          <li><span class="pkg-perk-check" aria-hidden="true"></span>Included in printed materials</li>
+          <li><span class="pkg-perk-check" aria-hidden="true"></span>Name &amp; logo on the website sponsor page</li>
+          <li><span class="pkg-perk-check" aria-hidden="true"></span>Listed in the printed event programme</li>
+          <li><span class="pkg-perk-check" aria-hidden="true"></span>Mentioned in pre-event marketing posts</li>
+          <li><span class="pkg-perk-check" aria-hidden="true"></span>2 complimentary event tickets</li>
         </ul>
         <div class="pkg-actions">
           <a href="https://checkout.revolut.com/pay/d8d56a13-f212-46f5-8ba9-29a08d773b58" target="_blank" rel="noopener" class="btn btn-dark">Become a Supporter →</a>
@@ -592,9 +676,12 @@
       </div>
       <div class="pkg-body">
         <ul class="pkg-perks" aria-label="Bronze benefits">
-          <li><span class="pkg-perk-check" aria-hidden="true"></span>Included in social media</li>
-          <li><span class="pkg-perk-check" aria-hidden="true"></span>Listed on website</li>
-          <li><span class="pkg-perk-check" aria-hidden="true"></span>Verbal shout-out at event</li>
+          <li><span class="pkg-perk-check" aria-hidden="true"></span>Logo &amp; link on the website sponsor page</li>
+          <li><span class="pkg-perk-check" aria-hidden="true"></span>Listed in the printed event programme</li>
+          <li><span class="pkg-perk-check" aria-hidden="true"></span>Mentioned in pre-event social media posts</li>
+          <li><span class="pkg-perk-check" aria-hidden="true"></span>Mentioned in pre-event email to community</li>
+          <li><span class="pkg-perk-check" aria-hidden="true"></span>Verbal shout-out from stage on the day</li>
+          <li><span class="pkg-perk-check" aria-hidden="true"></span>2 complimentary event tickets</li>
         </ul>
         <div class="pkg-actions">
           <a href="https://checkout.revolut.com/pay/6f99e172-b416-4e76-9b55-e0339a8ebb3b" target="_blank" rel="noopener" class="btn btn-dark">Become a Bronze Sponsor →</a>
@@ -617,8 +704,11 @@
         <div>
           <p class="pkg-plus-note">Bronze, plus:</p>
           <ul class="pkg-perks" aria-label="Silver benefits">
-            <li><span class="pkg-perk-check" aria-hidden="true"></span>Included in the step&amp;repeat backdrop</li>
-            <li><span class="pkg-perk-check" aria-hidden="true"></span>Speak on-stage at the event</li>
+            <li><span class="pkg-perk-check" aria-hidden="true"></span>Logo on the step-and-repeat branded photo wall</li>
+            <li><span class="pkg-perk-check" aria-hidden="true"></span>3-minute on-stage speaking slot</li>
+            <li><span class="pkg-perk-check" aria-hidden="true"></span>Dedicated Instagram post featuring your brand</li>
+            <li><span class="pkg-perk-check" aria-hidden="true"></span>Option to include a branded item in attendee giveaway</li>
+            <li><span class="pkg-perk-check" aria-hidden="true"></span>4 complimentary event tickets</li>
           </ul>
         </div>
         <div class="pkg-actions">
@@ -642,8 +732,12 @@
         <div>
           <p class="pkg-plus-note">Silver, plus:</p>
           <ul class="pkg-perks" aria-label="Gold benefits">
-            <li><span class="pkg-perk-check" aria-hidden="true"></span>Named in event title — "Juneteenth Barcelona by [Your Brand]"</li>
-            <li><span class="pkg-perk-check" aria-hidden="true"></span>5 complimentary tickets or raffle &amp; giveaway inclusion</li>
+            <li><span class="pkg-perk-check" aria-hidden="true"></span>Title naming: "Juneteenth Barcelona 2026 presented by [Brand]"</li>
+            <li><span class="pkg-perk-check" aria-hidden="true"></span>Featured in all communications — web, social, email &amp; print</li>
+            <li><span class="pkg-perk-check" aria-hidden="true"></span>Exclusive branded activation space at the event</li>
+            <li><span class="pkg-perk-check" aria-hidden="true"></span>Raffle or giveaway integration with your brand</li>
+            <li><span class="pkg-perk-check" aria-hidden="true"></span>10 complimentary event tickets</li>
+            <li><span class="pkg-perk-check" aria-hidden="true"></span>Post-event report: attendance, reach &amp; media metrics</li>
           </ul>
         </div>
         <div class="pkg-actions">
@@ -662,7 +756,10 @@
     <div class="cta-band-title">Ready to<br>partner up?</div>
     <p class="cta-band-sub">Get in touch and we'll send you the full sponsor pack with audience insights, venue details, and a confirmed rundown of the day.</p>
   </div>
-  <a href="contact.html" class="btn btn-white">Contact Us →</a>
+  <div style="display:flex;flex-direction:column;gap:1rem;align-items:flex-start">
+    <a href="contact.html" class="btn btn-white">Contact Us →</a>
+    <span style="font-size:0.72rem;color:rgba(255,255,255,0.35);letter-spacing:0.04em">Organised by <a href="https://xeu.cat/asociacion-cultural-spanish-harlem-bcn/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.45);text-decoration:underline">Spanish Harlem BCN</a> &amp; Kevin Hawkins BV</span>
+  </div>
 </div>
 
 </main>
