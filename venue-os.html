@@ -262,15 +262,15 @@ tr:last-child td{border-bottom:none}
     <tr><td class="tbl-key">Ownership</td><td><strong class="green">Black-owned ⭐</strong></td></tr>
 
     <tr class="tbl-section"><td colspan="2">Financial Terms</td></tr>
-    <tr><td class="tbl-key">Payment model</td><td class="green">No upfront payment — minimum spend guarantee €2,500–3,000</td></tr>
+    <tr><td class="tbl-key">Minimum spend guarantee</td><td>€3,000</td></tr>
+    <tr><td class="tbl-key">Refundable deposit</td><td class="green">€1,000 upfront — <strong>returned after the event</strong></td></tr>
     <tr><td class="tbl-key">Bar revenue share</td><td class="green">10% kickback on all bar sales</td></tr>
-    <tr><td class="tbl-key">Venue rental</td><td>€2,800 <span class="small">(€200/hr × 14 hrs)</span></td></tr>
     <tr><td class="tbl-key">Kitchen access</td><td class="green">€0 — included</td></tr>
     <tr><td class="tbl-key">Security</td><td class="green">€0 — included</td></tr>
     <tr><td class="tbl-key">Sound system</td><td class="green">€0 — included</td></tr>
     <tr><td class="tbl-key">Cleaning &amp; breakdown</td><td>€150</td></tr>
     <tr><td class="tbl-key">Furniture rental</td><td class="green">€0 — included</td></tr>
-    <tr style="border-top:1px solid rgba(255,255,255,0.2)"><td class="tbl-key"><strong>Fixed venue cost</strong></td><td><strong>€2,950</strong> <span class="small">(rental + cleaning)</span></td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,0.2)"><td class="tbl-key"><strong>Total event cost</strong></td><td><strong>€3,150</strong> <span class="small">(min spend €3,000 + cleaning €150)</span></td></tr>
   </table>
 </div>
 
@@ -314,9 +314,9 @@ function openImg(src) {
 function closeImg() { document.getElementById('modal').style.display = 'none'; }
 
 /* ── CALCULATOR ── */
-const VENUE_COST = 2800;
+const MIN_SPEND  = 3000; // minimum bar/venue spend guarantee
 const CLEANING   = 150;
-const FIXED_COST = VENUE_COST + CLEANING; // €2,950
+const FIXED_COST = MIN_SPEND + CLEANING; // €3,150 (deposit €1,000 is refunded after event)
 
 function n(id) { return +document.getElementById(id).value; }
 function fmt(v) { return (v < 0 ? '−€' : '€') + Math.abs(Math.round(v)).toLocaleString(); }
@@ -403,7 +403,8 @@ function calc() {
       </div>
       <div class="pl-block">
         <h4>Costs</h4>
-        <div class="pl-row"><span class="pl-label">Venue rental (€200/hr × 14 hrs)</span><span class="pl-val red">−€${VENUE_COST.toLocaleString()}</span></div>
+        <div class="pl-row"><span class="pl-label">Minimum spend guarantee</span><span class="pl-val red">−€${MIN_SPEND.toLocaleString()}</span></div>
+        <div class="pl-row"><span class="pl-label indent">Refundable deposit <span class="small">(returned after event)</span></span><span class="pl-val" style="color:#64748b">€1,000 upfront</span></div>
         <div class="pl-row"><span class="pl-label">Cleaning &amp; breakdown</span><span class="pl-val red">−€${CLEANING}</span></div>
         <div class="pl-row subtotal"><span class="pl-label">Fixed Costs</span><span class="pl-val red">−€${FIXED_COST.toLocaleString()}</span></div>
         <div class="pl-row"><span class="pl-label indent">Performers / DJs</span><span class="pl-val red">−${fmt(pf)}</span></div>
@@ -450,7 +451,7 @@ function calc() {
     <div class="bk-note">${beNote}</div>
     <div class="bk-note" style="margin-top:6px">${barNote}</div>
     <div class="bk-note" style="margin-top:6px">
-      Fixed venue cost: <strong>${fmtAbs(FIXED_COST)}</strong> ·
+      Fixed venue cost: <strong>${fmtAbs(FIXED_COST)}</strong> (min spend €${MIN_SPEND.toLocaleString()} + cleaning €${CLEANING}) ·
       Total variable costs: <strong>${fmtAbs(varCost)}</strong> ·
       Total costs: <strong>${fmtAbs(totalCost)}</strong>
     </div>
