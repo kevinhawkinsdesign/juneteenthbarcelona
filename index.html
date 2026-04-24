@@ -317,6 +317,47 @@
   transition: top 0.2s;
 }
 .skip-link:focus { top: 1rem; }
+
+/* ── FEATURED ACTS ── */
+.home-featured { background: var(--brown-dark); padding: 5rem 5vw; }
+.home-featured .section-tag { color: rgba(246,243,238,0.3); }
+.home-featured-title {
+  font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  letter-spacing: -0.03em; color: white;
+  margin: 0.5rem 0 3rem; line-height: 1;
+}
+.home-featured-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.75rem;
+}
+.home-act-carousel {
+  position: relative; overflow: hidden;
+  aspect-ratio: 4 / 5; margin-bottom: 1.25rem;
+  cursor: zoom-in; background: #1a1008;
+}
+.home-act-track { display: flex; height: 100%; transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+.home-act-slide { min-width: 100%; width: 100%; height: 100%; object-fit: cover; object-position: top; flex-shrink: 0; user-select: none; }
+.home-act-dots { display: flex; gap: 5px; justify-content: center; margin-top: 8px; }
+.home-act-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(246,243,238,0.25); border: none; cursor: pointer; padding: 0; transition: background 0.2s; }
+.home-act-dot.active { background: var(--off-white); }
+.home-act-role { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+.home-act-name { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.05rem; color: white; margin-bottom: 0.35rem; }
+.home-act-ig { font-size: 0.78rem; color: rgba(246,243,238,0.45); text-decoration: none; display: block; transition: color 0.2s; }
+.home-act-ig:hover { color: rgba(246,243,238,0.85); }
+.home-act-followers { font-size: 0.72rem; color: rgba(246,243,238,0.35); margin-top: 0.25rem; }
+@media (max-width: 900px) { .home-featured-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
+.home-act-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(0,0,0,0.4); border: none; color: white;
+  width: 30px; height: 30px; border-radius: 50%; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 3; font-size: 0.9rem; line-height: 1;
+  opacity: 0; transition: opacity 0.2s, background 0.2s;
+}
+.home-act-carousel:hover .home-act-arrow { opacity: 1; }
+.home-act-arrow:hover { background: rgba(0,0,0,0.72); }
+.home-act-arrow-prev { left: 0.5rem; }
+.home-act-arrow-next { right: 0.5rem; }
 </style>
 </head>
 <body>
@@ -523,6 +564,91 @@
   </div>
 </section>
 
+<!-- FEATURED ACTS -->
+<section class="home-featured reveal">
+  <div class="section-tag light">Featured at the Event</div>
+  <h2 class="home-featured-title">Who you'll<br>be there with.</h2>
+  <div class="home-featured-grid">
+
+    <div>
+      <div class="home-act-carousel" data-home-carousel>
+        <div class="home-act-track">
+          <img src="images/featured/image (3).png" alt="Jay Jay Revlon performing" class="home-act-slide">
+          <img src="images/featured/image (1).png" alt="Jay Jay Revlon portrait" class="home-act-slide">
+          <img src="images/featured/image (2).png" alt="Jay Jay Revlon in Vogue" class="home-act-slide">
+        </div>
+      </div>
+      <div class="home-act-dots">
+        <button class="home-act-dot active" data-index="0" aria-label="Photo 1"></button>
+        <button class="home-act-dot" data-index="1" aria-label="Photo 2"></button>
+        <button class="home-act-dot" data-index="2" aria-label="Photo 3"></button>
+      </div>
+      <div class="home-act-role">Featured DJ &amp; Performer</div>
+      <div class="home-act-name">Jay Jay Revlon</div>
+      <a href="https://www.instagram.com/jayjayrevlon/" class="home-act-ig" target="_blank" rel="noopener">@jayjayrevlon</a>
+      <div class="home-act-followers">18K followers</div>
+    </div>
+
+    <div>
+      <div class="home-act-carousel" data-home-carousel>
+        <div class="home-act-track">
+          <img src="images/featured/GramFetchr_Thumbnail_34599759.jpg" alt="Ceci Heather rollerskating" class="home-act-slide">
+          <img src="images/featured/GramFetchr_Thumbnail_51709524.jpg" alt="Ceci Heather with skates" class="home-act-slide">
+          <img src="images/featured/image.png" alt="Ceci Heather promo" class="home-act-slide">
+        </div>
+      </div>
+      <div class="home-act-dots">
+        <button class="home-act-dot active" data-index="0" aria-label="Photo 1"></button>
+        <button class="home-act-dot" data-index="1" aria-label="Photo 2"></button>
+        <button class="home-act-dot" data-index="2" aria-label="Photo 3"></button>
+      </div>
+      <div class="home-act-role">Featured Rollerskate Performer</div>
+      <div class="home-act-name">Ceci Heather</div>
+      <a href="https://www.instagram.com/thestylishglobesk8r/" class="home-act-ig" target="_blank" rel="noopener">@thestylishglobesk8r</a>
+      <div class="home-act-followers">13K followers</div>
+    </div>
+
+    <div>
+      <div class="home-act-carousel" data-home-carousel>
+        <div class="home-act-track">
+          <img src="images/featured/TinaMasawi.jpeg" alt="Tina Masawi" class="home-act-slide">
+          <img src="https://www.musiqua.es/djmedia/band_pictures/project_image_fb311e2ab7.jpeg" alt="Tina Masawi performing" class="home-act-slide">
+          <img src="https://southernafricantimes.com/wp-content/uploads/2022/03/BF99F005-F69C-4CD2-8380-2905091C6D3B-scaled.jpeg" alt="Tina Masawi" class="home-act-slide">
+        </div>
+      </div>
+      <div class="home-act-dots">
+        <button class="home-act-dot active" data-index="0" aria-label="Photo 1"></button>
+        <button class="home-act-dot" data-index="1" aria-label="Photo 2"></button>
+        <button class="home-act-dot" data-index="2" aria-label="Photo 3"></button>
+      </div>
+      <div class="home-act-role">Featured Performer</div>
+      <div class="home-act-name">Tina Masawi</div>
+      <a href="https://www.instagram.com/tinamasawi/" class="home-act-ig" target="_blank" rel="noopener">@tinamasawi</a>
+      <div class="home-act-followers">12K followers</div>
+    </div>
+
+    <div>
+      <div class="home-act-carousel" data-home-carousel>
+        <div class="home-act-track">
+          <img src="images/featured/68F1D2E8-E0C3-480B-8278-FEECEA69EEBC_L0_001-09_04_2026, 09_52_16.webp" alt="Tudy's Kitchen dessert" class="home-act-slide">
+          <img src="images/featured/icecream.jpg" alt="Tudy's Kitchen ice cream" class="home-act-slide">
+          <img src="images/featured/27901A45-CAC0-47C4-8A17-24B941DD1CA6_L0_001-09_04_2026, 12_57_23.jpg" alt="Tudy's Kitchen at Disney+ event" class="home-act-slide">
+        </div>
+      </div>
+      <div class="home-act-dots">
+        <button class="home-act-dot active" data-index="0" aria-label="Photo 1"></button>
+        <button class="home-act-dot" data-index="1" aria-label="Photo 2"></button>
+        <button class="home-act-dot" data-index="2" aria-label="Photo 3"></button>
+      </div>
+      <div class="home-act-role">Featured Food Vendor</div>
+      <div class="home-act-name">Tudy's Kitchen</div>
+      <a href="https://www.instagram.com/tudyskitchen/" class="home-act-ig" target="_blank" rel="noopener">@tudyskitchen</a>
+      <div class="home-act-followers">3K followers</div>
+    </div>
+
+  </div>
+</section>
+
 <!-- VOLUNTEER CTA -->
 <section style="background:var(--off-white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:5rem 5vw">
   <div style="max-width:960px;margin:auto">
@@ -657,6 +783,58 @@
 
 <script src="shared.js"></script>
 <script>loadPageContent('/_data/pages/home.json');</script>
+<script>
+(function () {
+  document.querySelectorAll('[data-home-carousel]').forEach(function (carousel) {
+    var track = carousel.querySelector('.home-act-track');
+    var slides = Array.from(carousel.querySelectorAll('.home-act-slide'));
+    var dots = Array.from(carousel.nextElementSibling.querySelectorAll('.home-act-dot'));
+    var total = slides.length;
+    var current = 0;
+    var timer;
+
+    function goTo(index) {
+      current = (index + total) % total;
+      track.style.transform = 'translateX(-' + (100 * current) + '%)';
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
+    }
+
+    function startAuto() { timer = setInterval(function () { goTo(current + 1); }, 3200); }
+    function stopAuto() { clearInterval(timer); }
+    startAuto();
+    carousel.addEventListener('mouseenter', stopAuto);
+    carousel.addEventListener('mouseleave', startAuto);
+
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function (e) {
+        e.stopPropagation(); stopAuto(); goTo(parseInt(dot.dataset.index, 10)); startAuto();
+      });
+    });
+
+    var prevBtn = document.createElement('button');
+    prevBtn.className = 'home-act-arrow home-act-arrow-prev';
+    prevBtn.setAttribute('aria-label', 'Previous photo');
+    prevBtn.innerHTML = '&#8592;';
+    var nextBtn = document.createElement('button');
+    nextBtn.className = 'home-act-arrow home-act-arrow-next';
+    nextBtn.setAttribute('aria-label', 'Next photo');
+    nextBtn.innerHTML = '&#8594;';
+    carousel.appendChild(prevBtn);
+    carousel.appendChild(nextBtn);
+    prevBtn.addEventListener('click', function (e) { e.stopPropagation(); stopAuto(); goTo(current - 1); startAuto(); });
+    nextBtn.addEventListener('click', function (e) { e.stopPropagation(); stopAuto(); goTo(current + 1); startAuto(); });
+
+    var touchStartX = null;
+    carousel.addEventListener('touchstart', function (e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+    carousel.addEventListener('touchend', function (e) {
+      if (touchStartX === null) return;
+      var diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) { stopAuto(); goTo(diff > 0 ? current + 1 : current - 1); startAuto(); }
+      touchStartX = null;
+    }, { passive: true });
+  });
+}());
+</script>
 <!-- Google Translate (hidden widget) -->
 <div id="google_translate_element"></div>
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
