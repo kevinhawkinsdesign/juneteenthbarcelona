@@ -223,7 +223,7 @@
   margin: 0.5rem 0 3rem;
 }
 .evt-featured-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.75rem;
 }
 .evt-act-carousel {
   position: relative; overflow: hidden;
@@ -299,7 +299,7 @@
 }
 .evt-featured-lightbox-close:hover { opacity: 1; }
 @media (max-width: 900px) {
-  .evt-featured-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .evt-featured-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
 }
 
 /* ── FAQ ── */
@@ -490,56 +490,6 @@
   </div>
 </div>
 
-<!-- TICKETS -->
-<section class="tickets-section" id="tickets">
-  <div class="tickets-inner">
-    <div class="section-tag light">Tickets</div>
-    <h2 style="font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.03em;color:white;margin:0.5rem 0 2.5rem;line-height:1">Get your tickets</h2>
-
-    <div class="ticket-card">
-      <div class="ticket-price">€12</div>
-      <div class="ticket-info">
-        <div class="ticket-name">Daytime — Early Bird</div>
-        <div class="ticket-desc">Entry from 13:00. Come early to buy art, watch performances, enjoy lunch from the food hall, and meet new people. Family friendly.</div>
-        <span class="ticket-avail">Available until May 30, 11:59 PM</span>
-      </div>
-    </div>
-
-    <div class="ticket-card">
-      <div class="ticket-price">€15</div>
-      <div class="ticket-info">
-        <div class="ticket-name">Night Party — Early Bird</div>
-        <div class="ticket-desc">Entry from 21:30. Enjoy performances and live music all night until 02:00 plus late night food and drinks until closing.</div>
-        <span class="ticket-avail">Available until May 30, 11:59 PM</span>
-      </div>
-    </div>
-
-    <div class="ticket-card">
-      <div class="ticket-price">€15</div>
-      <div class="ticket-info">
-        <div class="ticket-name">Daytime — Standard</div>
-        <div class="ticket-desc">Entry from 13:00. Come early to buy art, watch performances, enjoy lunch from the food hall, and meet new people. Family friendly.</div>
-      </div>
-    </div>
-
-    <div class="ticket-card">
-      <div class="ticket-price">€18</div>
-      <div class="ticket-info">
-        <div class="ticket-name">Night Party — Standard</div>
-        <div class="ticket-desc">Entry from 21:30. Enjoy performances and live music all night until 02:00 plus late night food and drinks until closing.</div>
-      </div>
-    </div>
-
-    <div class="ticket-card">
-      <div class="ticket-price">€1</div>
-      <div class="ticket-info">
-        <div class="ticket-name">Daytime — Kids</div>
-        <div class="ticket-desc">Entry from 13:00. Come early to buy art, watch performances, enjoy lunch from the food hall, and meet new people. Family friendly. Ages 12 and under.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- PROGRAM -->
 <section style="padding:6rem 5vw;border-bottom:1px solid var(--border)">
   <div style="max-width:960px;margin:auto">
@@ -548,22 +498,6 @@
     <h2 style="font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-0.03em;margin:0.5rem 0 1rem;line-height:1" data-cms="program_title">Juneteenth Day Party</h2>
     <p style="font-size:1.05rem;line-height:1.85;color:rgba(13,13,13,0.7);max-width:680px;margin-bottom:0.6rem" data-cms="program_intro">Join us for an all-day fair &amp; party packed with good vibes, better beats, and a celebration of culture, community, and connection. Expect a DJ on deck, drinks flowing, and a dance floor ready for you and your crew.</p>
     <p style="font-size:0.88rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--mid);margin-bottom:3rem" data-cms="program_sub">International food fair, music, and cultural celebration</p>
-
-    <!-- Performances + Food columns -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-bottom:4rem">
-      <div>
-        <div class="section-tag" data-cms="performances_tag">Live Performances</div>
-        <h3 style="font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(1.4rem,2.2vw,2rem);letter-spacing:-0.025em;margin:0.5rem 0 1rem" data-cms="performances_title">Dozens of art &amp;<br>musical acts</h3>
-        <p style="font-size:0.95rem;line-height:1.8;color:rgba(13,13,13,0.65);margin-bottom:1.5rem" data-cms="performances_body">From live music and DJs to dance, visual art, and spoken word — Juneteenth Barcelona 2026 will feature a full day of performances celebrating Black creativity and culture. We are curating a diverse lineup of artists representing the African diaspora.</p>
-        <a href="https://forms.gle/QX8mur2on663DX7L9" target="_blank" class="btn btn-dark">Apply to perform →</a>
-      </div>
-      <div>
-        <div class="section-tag" data-cms="food_tag">Food Village</div>
-        <h3 style="font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(1.4rem,2.2vw,2rem);letter-spacing:-0.025em;margin:0.5rem 0 1rem" data-cms="food_title">4 food vendors,<br>one world of flavor</h3>
-        <p style="font-size:0.95rem;line-height:1.8;color:rgba(13,13,13,0.65);margin-bottom:1.5rem" data-cms="food_body">Four carefully selected food vendors will serve a rich variety of dishes from across Africa and the Americas — from West African street food to Caribbean classics and beyond. Cooked fresh on-site using Roots Gastro Club's commercial kitchen.</p>
-        <a href="https://forms.gle/wF9KL14L6CHMUN1XA" target="_blank" class="btn btn-dark">Register as food vendor →</a>
-      </div>
-    </div>
 
     <!-- What to expect / What is Juneteenth -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;padding-top:3rem;border-top:1px solid var(--border)">
@@ -677,6 +611,56 @@
   <button class="evt-featured-lightbox-close" aria-label="Close">&times;</button>
   <img class="evt-featured-lightbox-img" src="" alt="">
 </div>
+
+<!-- TICKETS -->
+<section class="tickets-section" id="tickets">
+  <div class="tickets-inner">
+    <div class="section-tag light">Tickets</div>
+    <h2 style="font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.03em;color:white;margin:0.5rem 0 2.5rem;line-height:1">Get your tickets</h2>
+
+    <div class="ticket-card">
+      <div class="ticket-price">€12</div>
+      <div class="ticket-info">
+        <div class="ticket-name">Daytime — Early Bird</div>
+        <div class="ticket-desc">Entry from 13:00. Come early to buy art, watch performances, enjoy lunch from the food hall, and meet new people. Family friendly.</div>
+        <span class="ticket-avail">Available until May 30, 11:59 PM</span>
+      </div>
+    </div>
+
+    <div class="ticket-card">
+      <div class="ticket-price">€15</div>
+      <div class="ticket-info">
+        <div class="ticket-name">Night Party — Early Bird</div>
+        <div class="ticket-desc">Entry from 21:30. Enjoy performances and live music all night until 02:00 plus late night food and drinks until closing.</div>
+        <span class="ticket-avail">Available until May 30, 11:59 PM</span>
+      </div>
+    </div>
+
+    <div class="ticket-card">
+      <div class="ticket-price">€15</div>
+      <div class="ticket-info">
+        <div class="ticket-name">Daytime — Standard</div>
+        <div class="ticket-desc">Entry from 13:00. Come early to buy art, watch performances, enjoy lunch from the food hall, and meet new people. Family friendly.</div>
+      </div>
+    </div>
+
+    <div class="ticket-card">
+      <div class="ticket-price">€18</div>
+      <div class="ticket-info">
+        <div class="ticket-name">Night Party — Standard</div>
+        <div class="ticket-desc">Entry from 21:30. Enjoy performances and live music all night until 02:00 plus late night food and drinks until closing.</div>
+      </div>
+    </div>
+
+    <div class="ticket-card">
+      <div class="ticket-price">€1</div>
+      <div class="ticket-info">
+        <div class="ticket-name">Daytime — Kids</div>
+        <div class="ticket-desc">Entry from 13:00. Come early to buy art, watch performances, enjoy lunch from the food hall, and meet new people. Family friendly. Ages 12 and under.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- VENUE GALLERY -->
 <div class="venue-gallery" id="venueGallery" aria-label="Venue photo gallery">
