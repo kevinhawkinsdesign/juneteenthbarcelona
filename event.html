@@ -338,6 +338,43 @@
 }
 .faq-body p + p { margin-top: 0.75rem; }
 
+/* ── TICKETS ── */
+.tickets-section { background: var(--brown-dark); padding: 6rem 5vw; }
+.tickets-inner { max-width: 760px; margin: 0 auto; }
+.ticket-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(246,243,238,0.1);
+  border-radius: 6px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1rem;
+  display: flex; align-items: flex-start; gap: 1.5rem;
+}
+.ticket-card:last-child { margin-bottom: 0; }
+.ticket-price {
+  font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: 1.5rem; color: white;
+  white-space: nowrap; min-width: 70px;
+  padding-top: 0.1rem;
+}
+.ticket-info { flex: 1; }
+.ticket-name {
+  font-family: 'Inter', sans-serif; font-weight: 700;
+  font-size: 1rem; color: white; margin-bottom: 0.35rem;
+}
+.ticket-desc { font-size: 0.85rem; line-height: 1.65; color: rgba(246,243,238,0.65); margin-bottom: 0.6rem; }
+.ticket-avail {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.72rem; font-weight: 600; color: #4ade80;
+}
+.ticket-avail::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #4ade80; display: inline-block; }
+.ticket-cta { flex-shrink: 0; align-self: center; }
+@media (max-width: 600px) {
+  .ticket-card { flex-wrap: wrap; gap: 0.75rem; }
+  .ticket-price { min-width: auto; }
+  .ticket-cta { width: 100%; }
+  .ticket-cta .btn { width: 100%; text-align: center; display: block; }
+}
+
 /* ── SKIP TO CONTENT (accessibility) ── */
 .skip-link {
   position: absolute; top: -100%; left: 1rem;
@@ -451,17 +488,75 @@
   <div class="detail-cell">
     <span class="detail-icon">🎟</span>
     <div class="detail-label">Tickets</div>
-    <div class="detail-value" data-cms="detail_tickets_value">Two Ticket Tiers</div>
-    <div class="detail-sub" data-cms="detail_tickets_sub">
-      <strong>Early Entry — from 13:00</strong><br>
-      Family &amp; kid-friendly. Food, culture, and community vibes all afternoon.<br><br>
-      <strong>Late Entry — from 21:00</strong><br>
-      Non-stop musicians &amp; DJs, drinks until 02:00.<br><br>
-      Tickets coming soon — <a href="https://luma.com/juneteenthbcn" target="_blank" rel="noopener noreferrer">register your interest</a>.
-    </div>
+    <div class="detail-value">From €12</div>
+    <div class="detail-sub">Daytime &amp; Night Party tiers. Early Bird available until May 30. Kids €1. <a href="#tickets">See all tickets ↓</a></div>
   </div>
 </div>
 
+<!-- TICKETS -->
+<section class="tickets-section" id="tickets">
+  <div class="tickets-inner">
+    <div class="section-tag light">Tickets</div>
+    <h2 style="font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.03em;color:white;margin:0.5rem 0 2.5rem;line-height:1">Get your tickets</h2>
+
+    <div class="ticket-card">
+      <div class="ticket-price">€12</div>
+      <div class="ticket-info">
+        <div class="ticket-name">Daytime — Early Bird</div>
+        <div class="ticket-desc">Entry from 13:00. Come early to buy art, watch performances, enjoy lunch from the food hall, and meet new people. Family friendly.</div>
+        <span class="ticket-avail">Available until May 30, 11:59 PM</span>
+      </div>
+      <div class="ticket-cta">
+        <a href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener" class="btn btn-outline-light" style="font-size:0.75rem;padding:0.65rem 1.2rem">Buy →</a>
+      </div>
+    </div>
+
+    <div class="ticket-card">
+      <div class="ticket-price">€15</div>
+      <div class="ticket-info">
+        <div class="ticket-name">Night Party — Early Bird</div>
+        <div class="ticket-desc">Entry from 21:30. Enjoy performances and live music all night until 02:00 plus late night food and drinks until closing.</div>
+        <span class="ticket-avail">Available until May 30, 11:59 PM</span>
+      </div>
+      <div class="ticket-cta">
+        <a href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener" class="btn btn-outline-light" style="font-size:0.75rem;padding:0.65rem 1.2rem">Buy →</a>
+      </div>
+    </div>
+
+    <div class="ticket-card">
+      <div class="ticket-price">€15</div>
+      <div class="ticket-info">
+        <div class="ticket-name">Daytime — Standard</div>
+        <div class="ticket-desc">Entry from 13:00. Come early to buy art, watch performances, enjoy lunch from the food hall, and meet new people. Family friendly.</div>
+      </div>
+      <div class="ticket-cta">
+        <a href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener" class="btn btn-outline-light" style="font-size:0.75rem;padding:0.65rem 1.2rem">Buy →</a>
+      </div>
+    </div>
+
+    <div class="ticket-card">
+      <div class="ticket-price">€18</div>
+      <div class="ticket-info">
+        <div class="ticket-name">Night Party — Standard</div>
+        <div class="ticket-desc">Entry from 21:30. Enjoy performances and live music all night until 02:00 plus late night food and drinks until closing.</div>
+      </div>
+      <div class="ticket-cta">
+        <a href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener" class="btn btn-outline-light" style="font-size:0.75rem;padding:0.65rem 1.2rem">Buy →</a>
+      </div>
+    </div>
+
+    <div class="ticket-card">
+      <div class="ticket-price">€1</div>
+      <div class="ticket-info">
+        <div class="ticket-name">Daytime — Kids</div>
+        <div class="ticket-desc">Entry from 13:00. Come early to buy art, watch performances, enjoy lunch from the food hall, and meet new people. Family friendly. Ages 12 and under.</div>
+      </div>
+      <div class="ticket-cta">
+        <a href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener" class="btn btn-outline-light" style="font-size:0.75rem;padding:0.65rem 1.2rem">Buy →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- PROGRAM -->
 <section style="padding:6rem 5vw;border-bottom:1px solid var(--border)">
