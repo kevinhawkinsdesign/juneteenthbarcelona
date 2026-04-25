@@ -260,7 +260,7 @@ tr:last-child td{border-bottom:none}
     <tr class="tbl-section"><td colspan="2">Financial Terms</td></tr>
     <tr><td class="tbl-key">Minimum spend guarantee</td><td>€3,000</td></tr>
     <tr><td class="tbl-key">Refundable deposit</td><td class="green">€1,000 upfront — <strong>returned after the event</strong></td></tr>
-    <tr><td class="tbl-key">Bar revenue share</td><td class="green">10% kickback on all bar sales</td></tr>
+    <tr><td class="tbl-key">Bar revenue share</td><td class="green">10% kickback on bar sales above €2,000 minimum spend</td></tr>
     <tr><td class="tbl-key">Kitchen access</td><td class="green">€0 — included</td></tr>
     <tr><td class="tbl-key">Security</td><td class="green">€0 — included</td></tr>
     <tr><td class="tbl-key">Sound system</td><td class="green">€0 — included</td></tr>
@@ -310,9 +310,9 @@ function openImg(src) {
 function closeImg() { document.getElementById('modal').style.display = 'none'; }
 
 /* ── CALCULATOR ── */
-const MIN_SPEND  = 3000; // minimum bar/venue spend guarantee
+const MIN_SPEND  = 2000; // minimum bar/venue spend guarantee
 const CLEANING   = 0;   // included
-const FIXED_COST = MIN_SPEND + CLEANING; // €3,000 (deposit €1,000 is refunded after event)
+const FIXED_COST = MIN_SPEND + CLEANING; // €2,000 (deposit €1,000 is refunded after event)
 
 function n(id) { return +document.getElementById(id).value; }
 function fmt(v) { return (v < 0 ? '−€' : '€') + Math.abs(Math.round(v)).toLocaleString(); }
@@ -345,7 +345,8 @@ function calc() {
   const earlyRev      = et * ep;
   const stdRev        = st * sp;
   const ticketRev     = earlyRev + stdRev;
-  const barRev        = actualPax * bs * 0.10;   // 10% kickback on 85% who show up
+  const totalBarSpend = actualPax * bs;
+  const barRev        = Math.max(0, totalBarSpend - MIN_SPEND) * 0.10; // 10% kickback on bar spend above €2k minimum
   const totalRev      = ticketRev + barRev + spn;
 
   /* costs */
@@ -394,7 +395,7 @@ function calc() {
         <div class="pl-row"><span class="pl-label">Early Bird (${et} × €${ep})</span><span class="pl-val green">${fmt(earlyRev)}</span></div>
         <div class="pl-row"><span class="pl-label">Standard (${st} × €${sp})</span><span class="pl-val green">${fmt(stdRev)}</span></div>
         <div class="pl-row subtotal"><span class="pl-label">Ticket Revenue</span><span class="pl-val green">${fmt(ticketRev)}</span></div>
-        <div class="pl-row"><span class="pl-label indent">Bar kickback (10% of €${bs} × ${actualPax} who show up)</span><span class="pl-val green">${fmt(barRev)}</span></div>
+        <div class="pl-row"><span class="pl-label indent">Bar kickback (10% of €${Math.max(0,totalBarSpend-MIN_SPEND).toLocaleString()} above €${MIN_SPEND.toLocaleString()} min)</span><span class="pl-val green">${fmt(barRev)}</span></div>
         <div class="pl-row"><span class="pl-label indent">Sponsorship</span><span class="pl-val green">${fmt(spn)}</span></div>
         <div class="pl-row total"><span class="pl-label">Total Revenue</span><span class="pl-val green">${fmt(totalRev)}</span></div>
       </div>
@@ -441,8 +442,10 @@ function calc() {
       : `You need <strong>${beTickets}</strong> tickets at avg €${Math.round(avgPrice * 10) / 10} to cover all costs. You're currently <strong>${beTickets - totalPax}</strong> short.`;
 
   const barNote = bs > 0
-    ? `Bar kickback adds <strong>${fmt(barRev)}</strong> (${totalPax} pax × €${bs} spend × 10%).`
-    : 'Slide bar spend up to see the 10% kickback contribution.';
+    ? totalBarSpend > MIN_SPEND
+      ? `Bar kickback adds <strong>${fmt(barRev)}</strong> — 10% of €${Math.round(totalBarSpend - MIN_SPEND).toLocaleString()} above the €${MIN_SPEND.toLocaleString()} minimum (total bar spend: €${Math.round(totalBarSpend).toLocaleString()}).`
+      : `Bar spend (€${Math.round(totalBarSpend).toLocaleString()}) hasn't hit the €${MIN_SPEND.toLocaleString()} minimum yet — no kickback earned.`
+    : 'Slide bar spend up to see the 10% kickback above the €2,000 minimum.';
 
   document.getElementById('bkCard').innerHTML = `
     <h3>📈 Break-Even Analysis</h3>
