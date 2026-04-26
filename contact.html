@@ -88,6 +88,10 @@
 .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--black); }
 .form-textarea { resize: vertical; min-height: 140px; }
 .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23767676' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; cursor: pointer; }
+.form-privacy { display: flex; align-items: flex-start; gap: 0.65rem; }
+.form-privacy input[type="checkbox"] { margin-top: 0.15rem; flex-shrink: 0; width: 1rem; height: 1rem; accent-color: var(--brown-dark); cursor: pointer; }
+.form-privacy label { font-size: 0.8rem; color: var(--mid); line-height: 1.5; cursor: pointer; }
+.form-privacy label a { color: var(--black); text-decoration: underline; }
 .form-submit { background: var(--brown-dark); color: white; padding: 1rem 2.5rem; border: none; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.22s; align-self: flex-start; }
 .form-submit:hover { background: var(--red); }
 .form-success { display: none; padding: 2rem; background: #f0faf5; border: 1.5px solid #00693A; font-size: 0.95rem; color: var(--green); }
@@ -219,6 +223,11 @@
       <div class="form-group">
         <label class="form-label" for="message">Message</label>
         <textarea class="form-textarea" id="message" name="message" placeholder="Tell us more..."></textarea>
+      </div>
+
+      <div class="form-privacy">
+        <input type="checkbox" id="privacy-accept" name="privacy-accept" required>
+        <label for="privacy-accept">I have read and accept the <a href="privacy.html">privacy policy</a></label>
       </div>
 
       <button type="submit" class="form-submit">Send Message →</button>
