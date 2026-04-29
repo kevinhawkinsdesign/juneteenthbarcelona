@@ -370,16 +370,21 @@
   font-size: 0.72rem; font-weight: 600; color: #4ade80;
 }
 .ticket-avail::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #4ade80; display: inline-block; }
+a.ticket-card {
+  text-decoration: none; color: inherit; display: flex;
+  transition: background 0.18s, border-color 0.18s;
+}
+a.ticket-card:hover { background: rgba(255,255,255,0.12); border-color: rgba(246,243,238,0.25); }
 .ticket-btn {
   display: inline-block; align-self: center;
   background: white; color: var(--green);
   font-family: 'Inter', sans-serif; font-weight: 700;
   font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
-  text-decoration: none; white-space: nowrap;
-  padding: 0.65rem 1.25rem;
-  transition: opacity 0.2s;
+  white-space: nowrap; padding: 0.65rem 1.25rem;
+  transition: opacity 0.18s;
+  pointer-events: none;
 }
-.ticket-btn:hover { opacity: 0.8; }
+a.ticket-card:hover .ticket-btn { opacity: 0.8; }
 @media (max-width: 600px) {
   .ticket-card { flex-wrap: wrap; gap: 0.75rem; }
   .ticket-price { min-width: auto; }
@@ -646,52 +651,52 @@
     <div class="section-tag light">Tickets</div>
     <h2 style="font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.03em;color:white;margin:0.5rem 0 2.5rem;line-height:1">Get your tickets</h2>
 
-    <div class="ticket-card">
+    <a class="ticket-card" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">
       <div class="ticket-price">€12</div>
       <div class="ticket-info">
         <div class="ticket-name">Daytime — Early Bird</div>
         <div class="ticket-desc">Entry from 13:00. Come early to buy art, watch performances, enjoy lunch from the food hall, and meet new people. Family friendly.</div>
         <span class="ticket-avail">Available until May 30, 11:59 PM</span>
       </div>
-      <a class="ticket-btn" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">Get Ticket →</a>
-    </div>
+      <span class="ticket-btn">Buy</span>
+    </a>
 
-    <div class="ticket-card">
+    <a class="ticket-card" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">
       <div class="ticket-price">€15</div>
       <div class="ticket-info">
         <div class="ticket-name">Night Party — Early Bird</div>
         <div class="ticket-desc">Entry from 21:30. Enjoy performances and live music all night until 02:00 plus late night food and drinks until closing.</div>
         <span class="ticket-avail">Available until May 30, 11:59 PM</span>
       </div>
-      <a class="ticket-btn" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">Get Ticket →</a>
-    </div>
+      <span class="ticket-btn">Buy</span>
+    </a>
 
-    <div class="ticket-card">
+    <a class="ticket-card" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">
       <div class="ticket-price">€15</div>
       <div class="ticket-info">
         <div class="ticket-name">Daytime — Standard</div>
         <div class="ticket-desc">Entry from 13:00. Come early to buy art, watch performances, enjoy lunch from the food hall, and meet new people. Family friendly.</div>
       </div>
-      <a class="ticket-btn" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">Get Ticket →</a>
-    </div>
+      <span class="ticket-btn">Buy</span>
+    </a>
 
-    <div class="ticket-card">
+    <a class="ticket-card" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">
       <div class="ticket-price">€18</div>
       <div class="ticket-info">
         <div class="ticket-name">Night Party — Standard</div>
         <div class="ticket-desc">Entry from 21:30. Enjoy performances and live music all night until 02:00 plus late night food and drinks until closing.</div>
       </div>
-      <a class="ticket-btn" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">Get Ticket →</a>
-    </div>
+      <span class="ticket-btn">Buy</span>
+    </a>
 
-    <div class="ticket-card">
+    <a class="ticket-card" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">
       <div class="ticket-price">€1</div>
       <div class="ticket-info">
         <div class="ticket-name">Daytime — Kids</div>
         <div class="ticket-desc">Entry from 13:00. Come early to buy art, watch performances, enjoy lunch from the food hall, and meet new people. Family friendly. Ages 12 and under.</div>
       </div>
-      <a class="ticket-btn" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">Get Ticket →</a>
-    </div>
+      <span class="ticket-btn">Buy</span>
+    </a>
   </div>
 </section>
 
