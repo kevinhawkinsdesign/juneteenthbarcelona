@@ -161,6 +161,18 @@
   transition: top 0.2s;
 }
 .skip-link:focus { top: 1rem; }
+
+.tour-map-banner {
+  display: flex; align-items: center; gap: 0.75rem;
+  background: var(--green); color: white;
+  padding: 0.85rem 5vw; text-decoration: none;
+  font-size: 0.85rem; font-weight: 600; letter-spacing: 0.01em;
+  transition: background 0.18s;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.tour-map-banner:hover { background: #005530; color: white; }
+.tour-map-banner svg { flex-shrink: 0; opacity: 0.85; }
+.tour-map-banner-arrow { margin-left: auto; opacity: 0.7; }
 </style>
   <!-- PostHog Analytics -->
   <script>
@@ -212,6 +224,11 @@
   </div>
 </section>
 <div class="tour-subnav"><div class="tour-subnav-inner"><a href="index.html">Start</a><a href="spanish-slave-trade.html">Slave Trade</a><a href="countdown-to-civil-war.html" class="active">Pre-War</a><a href="spanish-civil-war.html">Civil War</a><a href="el-raval.html">El Raval</a><a href="post-war-intellectuals.html">Post-War</a></div></div>
+<a class="tour-map-banner" href="https://www.google.com/maps/d/edit?mid=1WfqBlwuaAFGL0RKfQeEWvz5mzZp3W48&usp=sharing" target="_blank" rel="noopener noreferrer">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+  Open the full walking tour map in Google Maps
+  <span class="tour-map-banner-arrow">→</span>
+</a>
 <div class="tour-body">
 
 <p data-cms="intro">The following timeline traces the political upheavals in Spain that set the stage for the Civil War — a conflict that drew Black American intellectuals and volunteers to Barcelona in remarkable numbers.</p>
