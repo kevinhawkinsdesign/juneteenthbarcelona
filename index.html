@@ -360,6 +360,153 @@
 .home-act-arrow:hover { background: rgba(0,0,0,0.72); }
 .home-act-arrow-prev { left: 0.5rem; }
 .home-act-arrow-next { right: 0.5rem; }
+
+/* ── DETAILS GRID ── */
+.details-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.detail-cell {
+  background: var(--off-white); padding: 3rem 3vw;
+  transition: background 0.2s;
+}
+.detail-cell:hover { background: #f0ece4; }
+.detail-icon { font-size: 1.3rem; margin-bottom: 1rem; display: block; }
+.detail-label { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mid); margin-bottom: 0.5rem; }
+.detail-value { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--black); line-height: 1.2; }
+.detail-sub { font-size: 0.8rem; color: rgba(13,13,13,0.5); margin-top: 0.4rem; line-height: 1.6; }
+.detail-sub a { color: var(--red); text-decoration: none; border-bottom: 1px solid rgba(200,16,46,0.3); }
+
+/* ── EVT FEATURED ACTS ── */
+.evt-featured {
+  border-top: 1px solid var(--border);
+  background: var(--brown-dark);
+  color: var(--off-white);
+  padding: 6rem 5vw;
+}
+.evt-featured .section-tag { color: rgba(246,243,238,0.3); }
+.evt-featured-title {
+  font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  line-height: 1.05; letter-spacing: -0.025em; color: white;
+  margin: 0.5rem 0 3rem;
+}
+.evt-featured-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.75rem; }
+.evt-act-carousel {
+  position: relative; overflow: hidden;
+  aspect-ratio: 4 / 5; margin-bottom: 1.5rem;
+  cursor: zoom-in; background: #1a1008;
+}
+.evt-act-track { display: flex; height: 100%; transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+.evt-act-slide { flex-shrink: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.evt-act-dots {
+  position: absolute; bottom: 0.75rem; left: 50%;
+  transform: translateX(-50%); display: flex; gap: 0.45rem; z-index: 2;
+}
+.evt-act-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.4); border: none; cursor: pointer; padding: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+.evt-act-dot.active { background: white; transform: scale(1.3); }
+.evt-act-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(0,0,0,0.4); border: none; color: white;
+  width: 30px; height: 30px; border-radius: 50%; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 3; font-size: 0.9rem; line-height: 1;
+  opacity: 0; transition: opacity 0.2s, background 0.2s;
+}
+.evt-act-carousel:hover .evt-act-arrow { opacity: 1; }
+.evt-act-arrow:hover { background: rgba(0,0,0,0.72); }
+.evt-act-arrow-prev { left: 0.5rem; }
+.evt-act-arrow-next { right: 0.5rem; }
+.evt-act-name { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.3rem; letter-spacing: -0.02em; color: white; margin-bottom: 0.3rem; }
+.evt-act-role { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+.evt-act-ig { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: rgba(246,243,238,0.45); text-decoration: none; margin-top: 0.2rem; transition: color 0.2s; }
+.evt-act-ig:hover { color: rgba(246,243,238,0.85); }
+.evt-act-followers { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.78rem; color: white; margin-top: 0.35rem; }
+.evt-featured-lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.93); z-index: 9800; align-items: center; justify-content: center; }
+.evt-featured-lightbox.open { display: flex; }
+.evt-featured-lightbox-img { max-width: 90vw; max-height: 90vh; object-fit: contain; display: block; }
+.evt-featured-lightbox-close { position: absolute; top: 1.25rem; right: 1.5rem; background: none; border: none; color: white; font-size: 2.2rem; line-height: 1; cursor: pointer; opacity: 0.6; transition: opacity 0.2s; }
+.evt-featured-lightbox-close:hover { opacity: 1; }
+@media (max-width: 900px) { .evt-featured-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } .details-grid { grid-template-columns: 1fr; } }
+
+/* ── TICKETS ── */
+.tickets-section { background: var(--green); padding: 6rem 5vw; }
+.tickets-inner { max-width: 760px; margin: 0 auto; }
+.ticket-card {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(246,243,238,0.1);
+  border-radius: 6px; padding: 1.5rem 1.75rem; margin-bottom: 1rem;
+  display: flex; align-items: flex-start; gap: 1.5rem;
+}
+.ticket-card:last-child { margin-bottom: 0; }
+.ticket-price { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.5rem; color: white; white-space: nowrap; min-width: 70px; padding-top: 0.1rem; }
+.ticket-info { flex: 1; }
+.ticket-name { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; color: white; margin-bottom: 0.35rem; }
+.ticket-desc { font-size: 0.85rem; line-height: 1.65; color: rgba(246,243,238,0.65); margin-bottom: 0.6rem; }
+.ticket-avail { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.72rem; font-weight: 600; color: #4ade80; }
+.ticket-avail::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #4ade80; display: inline-block; }
+a.ticket-card { text-decoration: none; color: inherit; display: flex; transition: background 0.18s, border-color 0.18s; }
+a.ticket-card:hover { background: rgba(255,255,255,0.12); border-color: rgba(246,243,238,0.25); }
+.ticket-btn { display: inline-block; align-self: center; background: white; color: var(--green); font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; padding: 0.65rem 1.25rem; transition: opacity 0.18s; pointer-events: none; }
+a.ticket-card:hover .ticket-btn { opacity: 0.8; }
+@media (max-width: 600px) { .ticket-card { flex-wrap: wrap; gap: 0.75rem; } .ticket-price { min-width: auto; } .ticket-btn { align-self: flex-start; } }
+
+/* ── VENUE GALLERY ── */
+.venue-gallery { width: 100%; background: #0d0d0d; position: relative; overflow: hidden; border-top: 1px solid var(--border); }
+.venue-gallery-track { display: flex; transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94); will-change: transform; }
+.venue-gallery-slide { width: 100%; flex-shrink: 0; height: 72vh; max-height: 640px; min-height: 320px; display: flex; align-items: center; justify-content: center; }
+.venue-gallery-slide img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; user-select: none; cursor: zoom-in; }
+.gallery-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.12); border: none; color: white; width: 44px; height: 44px; border-radius: 50%; font-size: 1.1rem; cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px); transition: background 0.2s; }
+.gallery-btn:hover { background: rgba(255,255,255,0.28); }
+.gallery-prev { left: 1.25rem; }
+.gallery-next { right: 1.25rem; }
+.gallery-dots { position: absolute; bottom: 0.85rem; left: 50%; transform: translateX(-50%); display: flex; gap: 5px; z-index: 5; }
+.gallery-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.35); cursor: pointer; transition: background 0.2s, transform 0.2s; }
+.gallery-dot.active { background: white; transform: scale(1.3); }
+.gallery-fullscreen { position: absolute; top: 0.85rem; right: 1rem; background: rgba(255,255,255,0.12); border: none; color: white; width: 36px; height: 36px; border-radius: 4px; font-size: 1rem; cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px); transition: background 0.2s; line-height: 1; }
+.gallery-fullscreen:hover { background: rgba(255,255,255,0.28); }
+.gallery-counter { position: absolute; top: 0.9rem; left: 1rem; font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.6); letter-spacing: 0.06em; z-index: 5; }
+.gallery-lightbox { position: fixed; inset: 0; z-index: 9900; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; }
+.gallery-lightbox.open { display: flex; }
+.lightbox-img { max-width: calc(100vw - 100px); max-height: calc(100vh - 80px); object-fit: contain; display: block; user-select: none; }
+.lightbox-close { position: fixed; top: 1.25rem; right: 1.5rem; background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; z-index: 10; line-height: 1; opacity: 0.7; transition: opacity 0.2s; }
+.lightbox-close:hover { opacity: 1; }
+.lightbox-prev, .lightbox-next { position: fixed; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); border: none; color: white; width: 48px; height: 48px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+.lightbox-prev:hover, .lightbox-next:hover { background: rgba(255,255,255,0.25); }
+.lightbox-prev { left: 1rem; }
+.lightbox-next { right: 1rem; }
+.lightbox-counter { position: fixed; bottom: 1.25rem; left: 50%; transform: translateX(-50%); font-size: 0.75rem; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; }
+@media (max-width: 768px) { .venue-gallery-slide { height: 55vw; max-height: none; min-height: 200px; } .gallery-btn { width: 36px; height: 36px; font-size: 0.9rem; } }
+
+/* ── VENUE INFO ── */
+.venue-info-section { border-top: 1px solid var(--border); padding: 6rem 5vw; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.venue-title { font-family: 'Inter', sans-serif; font-weight: 800; font-size: clamp(2rem, 3vw, 2.8rem); letter-spacing: -0.025em; margin: 0.5rem 0 1.5rem; }
+.venue-body { font-size: 0.97rem; line-height: 1.82; color: rgba(13,13,13,0.62); margin-bottom: 2rem; }
+.venue-address { font-size: 0.85rem; line-height: 1.8; color: var(--mid); border-left: 2px solid var(--red); padding-left: 1rem; margin-bottom: 2rem; }
+@media (max-width: 900px) { .venue-info-section { grid-template-columns: 1fr; gap: 0; } }
+
+/* ── REGISTER BAND ── */
+.register-band { background: var(--red); padding: 5rem 5vw; display: flex; justify-content: space-between; align-items: center; gap: 3rem; flex-wrap: wrap; }
+.register-title { font-family: 'Inter', sans-serif; font-weight: 800; font-size: clamp(2rem, 4vw, 3.5rem); color: white; line-height: 0.95; letter-spacing: -0.02em; }
+.register-sub { font-size: 0.88rem; color: rgba(255,255,255,0.6); margin-top: 0.6rem; }
+@media (max-width: 900px) { .register-band { flex-direction: column; align-items: flex-start; } }
+
+/* ── FAQ ── */
+.faq-section { border-top: 1px solid var(--border); padding: 6rem 5vw; }
+.faq-inner { max-width: 760px; margin: 0 auto; }
+.faq-title { font-family: 'Inter', sans-serif; font-weight: 800; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 3.5rem; }
+.faq-item { border-top: 1px solid var(--border); }
+.faq-item:last-child { border-bottom: 1px solid var(--border); }
+.faq-item summary { display: flex; justify-content: space-between; align-items: center; gap: 2rem; padding: 1.5rem 0; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: -0.01em; color: var(--black); cursor: pointer; list-style: none; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: '+'; flex-shrink: 0; font-family: 'Inter', sans-serif; font-weight: 300; font-size: 1.6rem; line-height: 1; color: var(--mid); transition: transform 0.25s; }
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-body { font-size: 0.93rem; line-height: 1.85; color: rgba(13,13,13,0.68); padding-bottom: 1.75rem; }
+.faq-body p + p { margin-top: 0.75rem; }
 </style>
   <!-- PostHog Analytics -->
   <script>
@@ -418,7 +565,7 @@
   <div class="hero-footer">
     <p class="hero-desc" data-cms="hero_desc">A day of unity and celebration for the African diaspora and allies.</p>
     <div class="hero-ctas">
-      <a href="event.html" class="btn btn-white">The Main Event</a>
+      <a href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer" class="btn btn-white">Buy Tickets</a>
       <a href="about.html" class="btn btn-outline-light">About Us</a>
     </div>
   </div>
@@ -539,7 +686,7 @@
 
 
 <!-- MAIN EVENT SECTION -->
-<section class="walking-tour-section reveal">
+<section class="walking-tour-section reveal" style="display:none">
   <div class="wt-inner">
     <div class="wt-left">
       <div class="section-tag">June 20, 2026</div>
@@ -579,7 +726,7 @@
 </section>
 
 <!-- FEATURED ACTS -->
-<section class="home-featured reveal">
+<section class="home-featured reveal" style="display:none">
   <div class="section-tag light">Featured at the Event</div>
   <h2 class="home-featured-title">Who you'll<br>be there with.</h2>
   <div class="home-featured-grid">
@@ -664,7 +811,7 @@
 </section>
 
 <!-- VOLUNTEER CTA -->
-<section style="background:var(--off-white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:5rem 5vw">
+<section style="display:none;background:var(--off-white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:5rem 5vw">
   <div style="max-width:960px;margin:auto">
     <div class="section-tag">Get Involved</div>
     <h2 style="font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(1.8rem,3vw,2.6rem);letter-spacing:-0.025em;margin:0.5rem 0 0.75rem">Help make Juneteenth Barcelona 2026 happen.</h2>
@@ -707,6 +854,362 @@
         <a href="https://checkout.revolut.com/pay/7cbe0d37-2272-4934-ae91-0a07571301a5" target="_blank" class="btn btn-white" style="font-size:0.82rem">Donate now →</a>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- DETAILS GRID -->
+<div class="details-grid reveal">
+  <div class="detail-cell">
+    <span class="detail-icon">📅</span>
+    <div class="detail-label">Date</div>
+    <div class="detail-value">Saturday, June 20, 2026</div>
+    <div class="detail-sub">13:00 – 02:00 (next day)<br>Juneteenth is a portmanteau of "June" and "nineteenth," in memory of June 19, 1865. But we think Saturday is a better day to celebrate and party.</div>
+  </div>
+  <div class="detail-cell">
+    <span class="detail-icon">📍</span>
+    <div class="detail-label">Venue</div>
+    <div class="detail-value">Roots Gastro Club</div>
+    <div class="detail-sub">Carrer de Badajoz 115, 08018 Barcelona<br>Poblenou · Barcelona</div>
+  </div>
+  <div class="detail-cell">
+    <span class="detail-icon">🎟</span>
+    <div class="detail-label">Tickets</div>
+    <div class="detail-value">From €12</div>
+    <div class="detail-sub">Daytime &amp; Night Party tiers. Early Bird available until May 31. Kids €1. <a href="#tickets">See all tickets ↓</a></div>
+  </div>
+</div>
+
+<!-- PROGRAM -->
+<section style="padding:6rem 5vw;border-bottom:1px solid var(--border)">
+  <div style="max-width:960px;margin:auto">
+    <div class="section-tag">Program</div>
+    <h2 style="font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-0.03em;margin:0.5rem 0 0.5rem;line-height:1">Juneteenth Day Party</h2>
+    <p style="font-size:0.88rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--mid);margin-bottom:1.5rem">International food fair, music, and cultural celebration</p>
+    <p style="font-size:1.05rem;line-height:1.85;color:rgba(13,13,13,0.7);max-width:680px;margin-bottom:3rem">Join us for an all-day fair &amp; party packed with good vibes, better beats, and a celebration of culture, community, and connection. Expect a DJ on deck, drinks flowing, and a dance floor ready for you and your crew.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;padding-top:3rem;border-top:1px solid var(--border)">
+      <div>
+        <div class="section-tag">What to expect</div>
+        <ul style="list-style:none;padding:0;margin:1rem 0 0;display:flex;flex-direction:column;gap:0.75rem">
+          <li style="font-size:0.9rem;line-height:1.6;color:rgba(13,13,13,0.72);padding:0.6rem 0;border-bottom:1px solid var(--border)">Community cookout and international food fair</li>
+          <li style="font-size:0.9rem;line-height:1.6;color:rgba(13,13,13,0.72);padding:0.6rem 0;border-bottom:1px solid var(--border)">Local vendors selling art, jewelry, and crafts</li>
+          <li style="font-size:0.9rem;line-height:1.6;color:rgba(13,13,13,0.72);padding:0.6rem 0;border-bottom:1px solid var(--border)">Live entertainment: DJs, musicians, and performances</li>
+          <li style="font-size:0.9rem;line-height:1.6;color:rgba(13,13,13,0.72);padding:0.6rem 0;border-bottom:1px solid var(--border)">2 fully-stocked bars: cocktails, wine, sodas, juices</li>
+          <li style="font-size:0.9rem;line-height:1.6;color:rgba(13,13,13,0.72);padding:0.6rem 0">Day party + night party until 2 AM</li>
+        </ul>
+      </div>
+      <div>
+        <div class="section-tag">What is Juneteenth?</div>
+        <p style="font-size:0.9rem;line-height:1.75;color:rgba(13,13,13,0.68);margin-top:1rem">Juneteenth celebrations started in the USA but have expanded geographically with the movement of Black Americans to other countries. Celebrations abroad use the day to recognize freedom, liberation, and to celebrate the culture, achievements, and unity of the African diaspora and allies.</p>
+        <p style="font-size:0.9rem;line-height:1.75;color:rgba(13,13,13,0.68);margin-top:0.75rem">As the population of Black Americans grows in Barcelona, celebrating Juneteenth provides a new opportunity for the community to ground itself, increase its visibility, and become better connected and integrated within the community and the city as a whole.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED ACTS -->
+<section class="evt-featured reveal" aria-label="Featured performers and vendors">
+  <div class="section-tag">Featured at the Event</div>
+  <h2 class="evt-featured-title">Who you'll<br>be there with.</h2>
+  <div class="evt-featured-grid">
+
+    <div class="evt-featured-act">
+      <div class="evt-act-carousel" data-evt-carousel>
+        <div class="evt-act-track">
+          <img src="images/featured/image (3).png" alt="Jay Jay Revlon performing" class="evt-act-slide">
+          <img src="images/featured/image (1).png" alt="Jay Jay Revlon portrait" class="evt-act-slide">
+          <img src="images/featured/image (2).png" alt="Jay Jay Revlon in Vogue" class="evt-act-slide">
+        </div>
+        <div class="evt-act-dots">
+          <button class="evt-act-dot active" data-index="0" aria-label="Photo 1"></button>
+          <button class="evt-act-dot" data-index="1" aria-label="Photo 2"></button>
+          <button class="evt-act-dot" data-index="2" aria-label="Photo 3"></button>
+        </div>
+      </div>
+      <div class="evt-act-role">Featured DJ &amp; Performer</div>
+      <div class="evt-act-name">Jay Jay Revlon</div>
+      <a href="https://www.instagram.com/jayjayrevlon/" class="evt-act-ig" target="_blank" rel="noopener">@jayjayrevlon</a>
+      <div class="evt-act-followers">18K followers</div>
+    </div>
+
+    <div class="evt-featured-act">
+      <div class="evt-act-carousel" data-evt-carousel>
+        <div class="evt-act-track">
+          <img src="images/featured/GramFetchr_Thumbnail_34599759.jpg" alt="Ceci Heather rollerskating" class="evt-act-slide">
+          <img src="images/featured/GramFetchr_Thumbnail_51709524.jpg" alt="Ceci Heather with skates" class="evt-act-slide">
+          <img src="images/featured/image.png" alt="Ceci Heather promo" class="evt-act-slide">
+        </div>
+        <div class="evt-act-dots">
+          <button class="evt-act-dot active" data-index="0" aria-label="Photo 1"></button>
+          <button class="evt-act-dot" data-index="1" aria-label="Photo 2"></button>
+          <button class="evt-act-dot" data-index="2" aria-label="Photo 3"></button>
+        </div>
+      </div>
+      <div class="evt-act-role">Featured Rollerskate Performer</div>
+      <div class="evt-act-name">Ceci Heather</div>
+      <a href="https://www.instagram.com/thestylishglobesk8r/" class="evt-act-ig" target="_blank" rel="noopener">@thestylishglobesk8r</a>
+      <div class="evt-act-followers">13K followers</div>
+    </div>
+
+    <div class="evt-featured-act">
+      <div class="evt-act-carousel" data-evt-carousel>
+        <div class="evt-act-track">
+          <img src="images/featured/TinaMasawi.jpeg" alt="Tina Masawi" class="evt-act-slide">
+          <img src="https://www.musiqua.es/djmedia/band_pictures/project_image_fb311e2ab7.jpeg" alt="Tina Masawi performing" class="evt-act-slide">
+          <img src="https://southernafricantimes.com/wp-content/uploads/2022/03/BF99F005-F69C-4CD2-8380-2905091C6D3B-scaled.jpeg" alt="Tina Masawi" class="evt-act-slide">
+        </div>
+        <div class="evt-act-dots">
+          <button class="evt-act-dot active" data-index="0" aria-label="Photo 1"></button>
+          <button class="evt-act-dot" data-index="1" aria-label="Photo 2"></button>
+          <button class="evt-act-dot" data-index="2" aria-label="Photo 3"></button>
+        </div>
+      </div>
+      <div class="evt-act-role">Featured Performer</div>
+      <div class="evt-act-name">Tina Masawi</div>
+      <a href="https://www.instagram.com/tinamasawi/" class="evt-act-ig" target="_blank" rel="noopener">@tinamasawi</a>
+      <div class="evt-act-followers">12K followers</div>
+    </div>
+
+    <div class="evt-featured-act">
+      <div class="evt-act-carousel" data-evt-carousel>
+        <div class="evt-act-track">
+          <img src="images/featured/68F1D2E8-E0C3-480B-8278-FEECEA69EEBC_L0_001-09_04_2026, 09_52_16.webp" alt="Tudy's Kitchen signature dessert" class="evt-act-slide">
+          <img src="images/featured/icecream.jpg" alt="Tudy's Kitchen ice cream" class="evt-act-slide">
+          <img src="images/featured/27901A45-CAC0-47C4-8A17-24B941DD1CA6_L0_001-09_04_2026, 12_57_23.jpg" alt="Tudy's Kitchen at Disney+ event" class="evt-act-slide">
+        </div>
+        <div class="evt-act-dots">
+          <button class="evt-act-dot active" data-index="0" aria-label="Photo 1"></button>
+          <button class="evt-act-dot" data-index="1" aria-label="Photo 2"></button>
+          <button class="evt-act-dot" data-index="2" aria-label="Photo 3"></button>
+        </div>
+      </div>
+      <div class="evt-act-role">Featured Food Vendor</div>
+      <div class="evt-act-name">Tudy's Kitchen</div>
+      <a href="https://www.instagram.com/tudyskitchen/" class="evt-act-ig" target="_blank" rel="noopener">@tudyskitchen</a>
+      <div class="evt-act-followers">3K followers</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FEATURED ACTS LIGHTBOX -->
+<div id="evtFeaturedLightbox" class="evt-featured-lightbox" role="dialog" aria-modal="true" aria-label="Full-size photo">
+  <button class="evt-featured-lightbox-close" aria-label="Close">&times;</button>
+  <img class="evt-featured-lightbox-img" src="" alt="">
+</div>
+
+<!-- TICKETS -->
+<section class="tickets-section" id="tickets">
+  <div class="tickets-inner">
+    <div class="section-tag light">Tickets</div>
+    <h2 style="font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.03em;color:white;margin:0.5rem 0 2.5rem;line-height:1">Get your tickets</h2>
+
+    <a class="ticket-card" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">
+      <div class="ticket-price">€12</div>
+      <div class="ticket-info">
+        <div class="ticket-name">Daytime — Early Bird</div>
+        <div class="ticket-desc">Entry from 13:00. Come early to buy art, watch performances, enjoy lunch from the food hall, and meet new people. Family friendly.</div>
+        <span class="ticket-avail">Available until May 31, 11:59 PM</span>
+      </div>
+      <span class="ticket-btn">Buy</span>
+    </a>
+
+    <a class="ticket-card" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">
+      <div class="ticket-price">€15</div>
+      <div class="ticket-info">
+        <div class="ticket-name">Night Party — Early Bird</div>
+        <div class="ticket-desc">Entry from 21:30. Enjoy performances and live music all night until 02:00 plus late night food and drinks until closing.</div>
+        <span class="ticket-avail">Available until May 31, 11:59 PM</span>
+      </div>
+      <span class="ticket-btn">Buy</span>
+    </a>
+
+    <a class="ticket-card" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">
+      <div class="ticket-price">€15</div>
+      <div class="ticket-info">
+        <div class="ticket-name">Daytime — Standard</div>
+        <div class="ticket-desc">Entry from 13:00. Come early to buy art, watch performances, enjoy lunch from the food hall, and meet new people. Family friendly.</div>
+      </div>
+      <span class="ticket-btn">Buy</span>
+    </a>
+
+    <a class="ticket-card" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">
+      <div class="ticket-price">€18</div>
+      <div class="ticket-info">
+        <div class="ticket-name">Night Party — Standard</div>
+        <div class="ticket-desc">Entry from 21:30. Enjoy performances and live music all night until 02:00 plus late night food and drinks until closing.</div>
+      </div>
+      <span class="ticket-btn">Buy</span>
+    </a>
+
+    <a class="ticket-card" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">
+      <div class="ticket-price">€1</div>
+      <div class="ticket-info">
+        <div class="ticket-name">Daytime — Kids</div>
+        <div class="ticket-desc">Entry from 13:00. Ages 12 and under. Family friendly.</div>
+      </div>
+      <span class="ticket-btn">Buy</span>
+    </a>
+  </div>
+</section>
+
+<!-- VENUE GALLERY -->
+<div class="venue-gallery" id="venueGallery" aria-label="Venue photo gallery">
+  <div class="venue-gallery-track" id="galleryTrack">
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7237.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7238.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7239.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7240.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7241.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7242.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7243.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7244.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7245.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7246.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7247.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7248.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7249.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7250.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7251.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7252.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7253.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7254.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7255.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7256.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7257.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7258.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7259.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7260.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7261.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7262.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7263.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7264.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7265.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+    <div class="venue-gallery-slide"><img src="images/roots/IMG_7266.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
+  </div>
+  <button class="gallery-btn gallery-prev" id="galleryPrev" aria-label="Previous photo">&#8592;</button>
+  <button class="gallery-btn gallery-next" id="galleryNext" aria-label="Next photo">&#8594;</button>
+  <div class="gallery-counter" id="galleryCounter">1 / 30</div>
+  <div class="gallery-dots" id="galleryDots"></div>
+  <button class="gallery-fullscreen" id="galleryFullscreen" aria-label="View fullscreen" title="Fullscreen">&#x26F6;</button>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="gallery-lightbox" id="galleryLightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">&#x2715;</button>
+  <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous photo">&#8592;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="Roots Gastro Club">
+  <button class="lightbox-next" id="lightboxNext" aria-label="Next photo">&#8594;</button>
+  <div class="lightbox-counter" id="lightboxCounter">1 / 30</div>
+</div>
+
+<!-- VENUE INFO -->
+<section class="venue-info-section reveal" aria-label="Venue information">
+  <div>
+    <div class="section-tag">The Venue</div>
+    <h2 class="venue-title">Roots Gastro Club,<br>Poblenou</h2>
+    <p class="venue-body">We are thrilled to partner with <strong>Martinho</strong>, the owner of Roots Gastro Club — a Black-owned creative space in the heart of Poblenou. Martinho has been a warm, generous, and enthusiastic collaborator, and his passion for community is exactly why this space feels like home for Juneteenth Barcelona 2026.</p>
+    <div class="venue-address">
+      Roots Gastro Club<br>
+      Carrer de Badajoz 115<br>
+      08018 Barcelona<br>
+      Poblenou
+    </div>
+  </div>
+  <div>
+    <div style="display:flex;flex-direction:column;gap:1.25rem;">
+      <div style="border-left:3px solid var(--gold);padding-left:1.25rem">
+        <div style="font-weight:700;font-size:0.88rem;margin-bottom:0.3rem">Bar &amp; Tapas Area</div>
+        <div style="font-size:0.85rem;color:rgba(13,13,13,0.62);line-height:1.7">Start your afternoon with a cocktail, a bite, and good company. The entrance bar sets the tone — lively, welcoming, and full of flavor from the moment you walk in.</div>
+      </div>
+      <div style="border-left:3px solid var(--gold);padding-left:1.25rem">
+        <div style="font-weight:700;font-size:0.88rem;margin-bottom:0.3rem">Main Hall with Stage</div>
+        <div style="font-size:0.85rem;color:rgba(13,13,13,0.62);line-height:1.7">Where the magic happens. A full stage, a great sound system, and room to dance. This is where you'll find the live acts, the DJs, and the energy that carries the night all the way to 02:00.</div>
+      </div>
+      <div style="border-left:3px solid var(--gold);padding-left:1.25rem">
+        <div style="font-weight:700;font-size:0.88rem;margin-bottom:0.3rem">Rear Terrace</div>
+        <div style="font-size:0.85rem;color:rgba(13,13,13,0.62);line-height:1.7">Step outside to breathe, catch up with someone new, or just take in the night. A quieter outdoor space to recharge between sets.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARTISAN VENDOR CTA -->
+<div style="background:var(--off-white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:4rem 5vw">
+  <div style="max-width:760px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+    <div style="background:white;border:1px solid var(--border);border-radius:4px;padding:2rem">
+      <div style="font-size:1.5rem;margin-bottom:0.75rem">🎤</div>
+      <div style="font-family:'Inter',sans-serif;font-weight:700;font-size:1rem;margin-bottom:0.4rem">Perform</div>
+      <p style="font-size:0.85rem;color:rgba(13,13,13,0.6);line-height:1.7;margin-bottom:1.25rem">Musicians, singers, dancers, poets — bring your art to the stage at Juneteenth Barcelona 2026.</p>
+      <a href="https://forms.gle/QX8mur2on663DX7L9" target="_blank" class="btn btn-dark" style="font-size:0.82rem">Apply to perform →</a>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-radius:4px;padding:2rem">
+      <div style="font-size:1.5rem;margin-bottom:0.75rem">🎨</div>
+      <div style="font-family:'Inter',sans-serif;font-weight:700;font-size:1rem;margin-bottom:0.4rem">Artisan Vendor</div>
+      <p style="font-size:0.85rem;color:rgba(13,13,13,0.6);line-height:1.7;margin-bottom:1.25rem">Sell your art, jewelry, crafts, or goods at the marketplace. Set up your stall and reach 350+ guests.</p>
+      <a href="https://forms.gle/QX8mur2on663DX7L9" target="_blank" class="btn btn-dark" style="font-size:0.82rem">Apply to vend →</a>
+    </div>
+  </div>
+</div>
+
+<!-- REGISTER BAND -->
+<div class="register-band reveal">
+  <div>
+    <div class="register-title">Be part of<br>the celebration.</div>
+    <div class="register-sub">Volunteer, sponsor, perform, or simply attend. All are welcome.</div>
+  </div>
+  <a href="contact.html" class="btn btn-white">Get in Touch</a>
+</div>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq" aria-label="Frequently asked questions">
+  <div class="faq-inner">
+    <div class="section-tag">FAQ</div>
+    <h2 class="faq-title">Frequently Asked<br>Questions</h2>
+
+    <details class="faq-item">
+      <summary>Who is the Juneteenth Barcelona committee?</summary>
+      <div class="faq-body">
+        <p>We are a passionate team of volunteers united by a shared belief that Black culture and history deserve to be celebrated, seen, and honored in Barcelona. We aim to be an integrated community for residents and visitors to enjoy and learn from on an important day in Black American history that relates to the global diaspora of Black and brown descendants from Africa.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is your mission?</summary>
+      <div class="faq-body">
+        <p>We believe that the African diaspora and allies in Barcelona deserves a space to gather, celebrate, and be seen. Our mission is to honor the history of Black liberation while building a living, breathing community in one of Europe's most vibrant cities.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is the Juneteenth event?</summary>
+      <div class="faq-body">
+        <p>Juneteenth Barcelona is a day of diaspora unity and joy. The event brings together artists, performers, chefs, musicians, merchants, and other members of the African diaspora and allies to gather, celebrate, and be seen. The event is open to residents and visitors in Barcelona.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is BJuneteenth?</summary>
+      <div class="faq-body">
+        <p>The BJuneteenth events are monthly Juneteenth-inspired meetups to share inspiration, connect with people from the African diaspora and allies, and support collective liberation. The meetups occur every month on the 19th as a year-round reminder of the importance of building community and sustaining liberatory practices.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is the history of Juneteenth?</summary>
+      <div class="faq-body">
+        <p>Juneteenth is an American holiday that commemorates the day (June 19, 1865) when enslaved Black people in Galveston, Texas learned — two months late — from Union troops that the Civil War had ended. The name Juneteenth is a portmanteau combining the words "June" and "nineteenth."</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Why celebrate Juneteenth in Barcelona?</summary>
+      <div class="faq-body">
+        <p>As the Black American and African diasporic communities have grown in Barcelona, the need for a shared cultural moment has grown with it. Juneteenth provides that anchor — a day to ground ourselves, increase our visibility, and become better connected with the broader city.</p>
+        <p>Given the concerted efforts to erase and repress knowledge of Black history and culture globally, Black Americans — and the broader diaspora community by extension — have a vested interest and responsibility to continue the traditions and remembrances of Juneteenth in their adopted communities.</p>
+        <p>Our committee of volunteers — representing the United States, Caribbean islands, African countries, and more — organizes with three goals: to connect, to make visible, and to liberate. We recognize Barcelona as an important, functional node in Black history, as opposed to a romanticized symbolic ideal. We also uplift the ideals of liberation and honor the people who fought — and continue to fight — to secure and maintain freedom for everyone.</p>
+      </div>
+    </details>
+
   </div>
 </section>
 
@@ -862,6 +1365,158 @@
       var igLink = carousel.parentElement.querySelector('.home-act-ig');
       if (igLink) window.open(igLink.href, '_blank', 'noopener');
     });
+  });
+}());
+</script>
+<script>
+(function() {
+  var total = 30, current = 0;
+  var track = document.getElementById('galleryTrack');
+  var counter = document.getElementById('galleryCounter');
+  var dotsEl = document.getElementById('galleryDots');
+  var lightbox = document.getElementById('galleryLightbox');
+  var lbImg = document.getElementById('lightboxImg');
+  var lbCounter = document.getElementById('lightboxCounter');
+  if (!track) return;
+
+  var dots = [];
+  for (var i = 0; i < total; i++) {
+    var d = document.createElement('button');
+    d.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Go to photo ' + (i + 1));
+    d.dataset.idx = i;
+    dotsEl.appendChild(d);
+    dots.push(d);
+  }
+
+  function goTo(idx) {
+    if (idx < 0) idx = total - 1;
+    if (idx >= total) idx = 0;
+    current = idx;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    if (counter) counter.textContent = (current + 1) + ' / ' + total;
+    dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
+    if (lightbox.classList.contains('open')) openLightbox(current);
+  }
+
+  document.getElementById('galleryPrev').addEventListener('click', function() { goTo(current - 1); });
+  document.getElementById('galleryNext').addEventListener('click', function() { goTo(current + 1); });
+  dotsEl.addEventListener('click', function(e) {
+    var btn = e.target.closest('.gallery-dot');
+    if (btn) goTo(parseInt(btn.dataset.idx));
+  });
+
+  var startX = null;
+  track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', function(e) {
+    if (startX === null) return;
+    var diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+    startX = null;
+  }, { passive: true });
+
+  function openLightbox(idx) {
+    var slides = track.querySelectorAll('.venue-gallery-slide img');
+    if (!slides[idx]) return;
+    lbImg.src = slides[idx].src;
+    lbCounter.textContent = (idx + 1) + ' / ' + total;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  track.addEventListener('click', function(e) { if (e.target.tagName === 'IMG') openLightbox(current); });
+  document.getElementById('galleryFullscreen').addEventListener('click', function() { openLightbox(current); });
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  document.getElementById('lightboxPrev').addEventListener('click', function() { goTo(current - 1); });
+  document.getElementById('lightboxNext').addEventListener('click', function() { goTo(current + 1); });
+  lightbox.addEventListener('click', function(e) { if (e.target === lightbox) closeLightbox(); });
+
+  document.addEventListener('keydown', function(e) {
+    if (lightbox.classList.contains('open')) {
+      if (e.key === 'ArrowLeft') goTo(current - 1);
+      if (e.key === 'ArrowRight') goTo(current + 1);
+      if (e.key === 'Escape') closeLightbox();
+    }
+  });
+})();
+</script>
+<script>
+(function () {
+  var lb = document.getElementById('evtFeaturedLightbox');
+  var lbImg = lb.querySelector('.evt-featured-lightbox-img');
+  var lbClose = lb.querySelector('.evt-featured-lightbox-close');
+
+  function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+
+  document.querySelectorAll('[data-evt-carousel]').forEach(function (carousel) {
+    var track = carousel.querySelector('.evt-act-track');
+    var slides = Array.from(carousel.querySelectorAll('.evt-act-slide'));
+    var dots = Array.from(carousel.querySelectorAll('.evt-act-dot'));
+    var total = slides.length;
+    var current = 0;
+    var timer;
+
+    function goTo(index) {
+      current = (index + total) % total;
+      track.style.transform = 'translateX(-' + (100 * current) + '%)';
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
+    }
+
+    function startAuto() { timer = setInterval(function () { goTo(current + 1); }, 3200); }
+    function stopAuto() { clearInterval(timer); }
+    startAuto();
+    carousel.addEventListener('mouseenter', stopAuto);
+    carousel.addEventListener('mouseleave', startAuto);
+
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function (e) {
+        e.stopPropagation(); stopAuto(); goTo(parseInt(dot.dataset.index, 10)); startAuto();
+      });
+    });
+
+    var prevBtn = document.createElement('button');
+    prevBtn.className = 'evt-act-arrow evt-act-arrow-prev';
+    prevBtn.setAttribute('aria-label', 'Previous photo');
+    prevBtn.innerHTML = '&#8592;';
+    var nextBtn = document.createElement('button');
+    nextBtn.className = 'evt-act-arrow evt-act-arrow-next';
+    nextBtn.setAttribute('aria-label', 'Next photo');
+    nextBtn.innerHTML = '&#8594;';
+    carousel.appendChild(prevBtn);
+    carousel.appendChild(nextBtn);
+    prevBtn.addEventListener('click', function (e) { e.stopPropagation(); stopAuto(); goTo(current - 1); startAuto(); });
+    nextBtn.addEventListener('click', function (e) { e.stopPropagation(); stopAuto(); goTo(current + 1); startAuto(); });
+
+    var touchStartX = null;
+    carousel.addEventListener('touchstart', function (e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+    carousel.addEventListener('touchend', function (e) {
+      if (touchStartX === null) return;
+      var diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) { stopAuto(); goTo(diff > 0 ? current + 1 : current - 1); startAuto(); }
+      touchStartX = null;
+    }, { passive: true });
+
+    var pointerDownX = null;
+    carousel.addEventListener('pointerdown', function (e) { pointerDownX = e.clientX; });
+    carousel.addEventListener('click', function (e) {
+      if (e.target.closest('.evt-act-arrow') || e.target.closest('.evt-act-dot')) return;
+      if (pointerDownX !== null && Math.abs(e.clientX - pointerDownX) > 8) { pointerDownX = null; return; }
+      pointerDownX = null;
+      lbImg.src = slides[current].src;
+      lbImg.alt = slides[current].alt;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  lbClose.addEventListener('click', closeLb);
+  lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && lb.classList.contains('open')) closeLb();
   });
 }());
 </script>
