@@ -12,6 +12,7 @@
   --mid:         #767676;
   --border:      rgba(13,13,13,0.1);
   --nav-h:       72px;
+  --banner-h:    36px;
   /* Warm earth tones — replace navy/black section backgrounds */
   --brown-dark:  #2C1B0E;  /* espresso — footer, hero overlays, major dark sections */
   --brown-mid:   #5C3A1E;  /* walnut   — secondary content panels */
@@ -22,9 +23,31 @@ html { scroll-behavior: smooth; font-size: 16px; }
 body { background: var(--off-white); color: var(--black); font-family: 'DM Sans', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 body.scroll-locked { position: fixed; width: 100%; overflow-y: scroll; top: var(--scroll-lock-top, 0) !important; }
 
+/* ── TICKET MARQUEE BANNER ── */
+.ticket-marquee {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 201;
+  height: var(--banner-h);
+  background: var(--green);
+  overflow: hidden;
+}
+.ticket-marquee-track {
+  display: inline-flex; align-items: center;
+  height: var(--banner-h);
+  animation: ticker 45s linear infinite;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.ticket-marquee-track:hover { animation-play-state: paused; }
+.ticket-marquee-track span {
+  font-family: 'Inter', sans-serif; font-weight: 600;
+  font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: white; padding: 0 1.25rem;
+}
+.ticket-marquee-track .marquee-dot { color: rgba(255,255,255,0.4); padding: 0; }
+
 /* ── NAV ── */
 body > nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  position: fixed; top: var(--banner-h); left: 0; right: 0; z-index: 200;
   height: var(--nav-h);
   display: flex; justify-content: space-between; align-items: center;
   padding: 0 5vw;
@@ -213,7 +236,7 @@ body { top: 0 !important; }
   .nav-links { display: none; }
   .nav-links.open {
     display: flex; flex-direction: column;
-    position: fixed; top: var(--nav-h); left: 0; right: 0;
+    position: fixed; top: calc(var(--nav-h) + var(--banner-h)); left: 0; right: 0;
     background: var(--off-white);
     padding: 1.75rem 5vw 2rem;
     border-bottom: 1px solid var(--border);

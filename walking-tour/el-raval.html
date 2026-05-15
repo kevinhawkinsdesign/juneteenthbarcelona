@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="../shared.css">
 <style>
 .tour-hero {
-  padding-top: var(--nav-h); position: relative; overflow: hidden;
+  padding-top: calc(var(--nav-h) + var(--banner-h)); position: relative; overflow: hidden;
   min-height: 52vh; display: flex; flex-direction: column; justify-content: flex-end;
 }
 .tour-hero-bg {
@@ -49,7 +49,7 @@
 .tour-subnav {
   background: var(--brown-dark); overflow-x: auto; -webkit-overflow-scrolling: touch;
   border-bottom: 1px solid rgba(255,255,255,0.06);
-  position: sticky; top: var(--nav-h); z-index: 100;
+  position: sticky; top: calc(var(--nav-h) + var(--banner-h)); z-index: 100;
 }
 .tour-subnav-inner {
   display: flex; padding: 0 5vw; min-width: max-content;
@@ -179,6 +179,7 @@
 
 </head>
 <body>
+<div class="ticket-marquee"><a href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer" class="ticket-marquee-track"><span>Tickets on sale now — early bird pricing ends May 31</span><span class="marquee-dot"> · </span><span>Join 350+ guests June 20 at Roots Gastro Club, Poblenou</span><span class="marquee-dot"> · </span><span>Get your tickets before prices go up</span><span class="marquee-dot"> · </span><span>Tickets on sale now — early bird pricing ends May 31</span><span class="marquee-dot"> · </span><span>Join 350+ guests June 20 at Roots Gastro Club, Poblenou</span><span class="marquee-dot"> · </span><span>Get your tickets before prices go up</span><span class="marquee-dot"> · </span></a></div>
 <a href="#main-content" class="skip-link">Skip to main content</a>
 <nav aria-label="Main navigation" role="navigation">
   <a href="../index.html" class="nav-logo">
