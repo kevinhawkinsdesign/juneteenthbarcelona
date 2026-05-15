@@ -200,7 +200,35 @@ footer {
 .share-whatsapp { background: #25D366; color: white; }
 .share-facebook { background: #1877F2; color: white; }
 .share-twitter  { background: #000;    color: white; }
+.share-instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
 .share-copy     { background: var(--brown-dark); color: white; }
+
+/* ── FLOATING TICKET BUTTON ── */
+.floating-ticket-btn {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 150;
+  background: var(--green);
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 2rem;
+  white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(0,105,58,0.35);
+  transition: background 0.2s, opacity 0.3s, transform 0.3s;
+}
+.floating-ticket-btn:hover { background: var(--red); box-shadow: 0 6px 28px rgba(200,16,46,0.35); }
+.floating-ticket-btn.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(1rem);
+}
 
 /* ── ANIMATIONS ── */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }

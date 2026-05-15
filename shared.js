@@ -156,6 +156,19 @@ function initLangPicker() {
 
 document.addEventListener('DOMContentLoaded', initLangPicker);
 
+// ── Floating ticket button ─────────────────────────
+(function() {
+  const btn = document.querySelector('.floating-ticket-btn');
+  const tickets = document.getElementById('tickets');
+  if (!btn || !tickets) return;
+  function update() {
+    const r = tickets.getBoundingClientRect();
+    btn.classList.toggle('hidden', r.top < window.innerHeight && r.bottom > 0);
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
 // ── Google Translate init ──────────────────────────
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
