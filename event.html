@@ -226,7 +226,7 @@
   margin: 0.5rem 0 3rem;
 }
 .evt-featured-grid {
-  display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.75rem;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem;
 }
 .evt-act-carousel {
   position: relative; overflow: hidden;
@@ -698,6 +698,24 @@ a.ticket-card:hover .ticket-btn { opacity: 0.8; }
       <a href="https://www.instagram.com/thevoodooclub/" class="evt-act-ig" target="_blank" rel="noopener">@thevoodooclub</a>
     </div>
 
+    <div class="evt-featured-act">
+      <div class="evt-act-carousel" data-evt-carousel>
+        <div class="evt-act-track">
+          <img src="images/featured/flippin-birds-1.jpg" alt="Flippin' Birds chicken and waffles" class="evt-act-slide">
+          <img src="images/featured/flippin-birds-2.jpg" alt="Flippin' Birds food" class="evt-act-slide">
+          <img src="images/featured/flippin-birds-3.jpg" alt="Flippin' Birds" class="evt-act-slide">
+        </div>
+        <div class="evt-act-dots">
+          <button class="evt-act-dot active" data-index="0" aria-label="Photo 1"></button>
+          <button class="evt-act-dot" data-index="1" aria-label="Photo 2"></button>
+          <button class="evt-act-dot" data-index="2" aria-label="Photo 3"></button>
+        </div>
+      </div>
+      <div class="evt-act-role">Featured Food Vendor</div>
+      <div class="evt-act-name">Flippin' Birds</div>
+      <a href="https://www.instagram.com/weflippinbirds/" class="evt-act-ig" target="_blank" rel="noopener">@weflippinbirds</a>
+    </div>
+
   </div>
 </section>
 
@@ -722,18 +740,66 @@ a.ticket-card:hover .ticket-btn { opacity: 0.8; }
     </div>
 
     <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--black);padding-bottom:0.6rem;border-bottom:2px solid var(--black);margin-bottom:0">🌙&nbsp; Night Party &nbsp;·&nbsp; 21:45 – 02:15</div>
-    <div style="border:1px solid var(--border);border-top:none">
+    <div style="border:1px solid var(--border);border-top:none;margin-bottom:2.5rem">
       <div style="display:grid;grid-template-columns:120px 1fr 140px;gap:1rem 1.5rem;padding:1rem 1.25rem;border-bottom:1px solid var(--border);align-items:start"><div style="font-family:'Inter',sans-serif;font-size:0.78rem;font-weight:600;color:rgba(13,13,13,0.45);padding-top:0.1rem">21:45 – 22:45</div><div><div style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.88rem">Djrodycr</div><div style="font-size:0.75rem;color:rgba(13,13,13,0.5);margin-top:0.1rem">Afrobeats / Dancehall DJ</div></div><div style="font-size:0.72rem;color:rgba(13,13,13,0.4);text-align:right;padding-top:0.15rem">DJ</div></div>
       <div style="display:grid;grid-template-columns:120px 1fr 140px;gap:1rem 1.5rem;padding:1rem 1.25rem;border-bottom:1px solid var(--border);align-items:start"><div style="font-family:'Inter',sans-serif;font-size:0.78rem;font-weight:600;color:rgba(13,13,13,0.45);padding-top:0.1rem">22:55 – 23:55</div><div><div style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.88rem">MAGIIKK</div><div style="font-size:0.75rem;color:rgba(13,13,13,0.5);margin-top:0.1rem">R&amp;B / Hip Hop / Afrobeats DJ</div></div><div style="font-size:0.72rem;color:rgba(13,13,13,0.4);text-align:right;padding-top:0.15rem">DJ</div></div>
-      <div style="display:grid;grid-template-columns:120px 1fr 140px;gap:1rem 1.5rem;padding:1rem 1.25rem;align-items:start"><div style="font-family:'Inter',sans-serif;font-size:0.78rem;font-weight:600;color:rgba(13,13,13,0.45);padding-top:0.1rem">00:00 – 02:15</div><div><div style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.88rem">Club Clapback</div><div style="font-size:0.75rem;color:rgba(13,13,13,0.5);margin-top:0.1rem">Multi-genre Dance Party DJ</div></div><div style="font-size:0.72rem;color:rgba(13,13,13,0.4);text-align:right;padding-top:0.15rem">DJ</div></div>
+      <div style="display:grid;grid-template-columns:120px 1fr 140px;gap:1rem 1.5rem;padding:1rem 1.25rem;border-bottom:1px solid var(--border);align-items:start"><div style="font-family:'Inter',sans-serif;font-size:0.78rem;font-weight:600;color:rgba(13,13,13,0.45);padding-top:0.1rem">00:00 – 02:15</div><div><div style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.88rem">Club Clapback</div><div style="font-size:0.75rem;color:rgba(13,13,13,0.5);margin-top:0.1rem">Multi-genre Dance Party DJ</div></div><div style="font-size:0.72rem;color:rgba(13,13,13,0.4);text-align:right;padding-top:0.15rem">DJ</div></div>
+      <div style="grid-column:1/-1;padding:0.6rem 1.25rem;background:rgba(13,13,13,0.03);border-top:1px solid var(--border);font-size:0.6rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold)">🍽️&nbsp; Food Vendors</div>
+      <div style="display:grid;grid-template-columns:1fr 140px;gap:1rem 1.5rem;padding:1rem 1.25rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border);align-items:start"><div><div style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.88rem">At Kerry's</div><div style="font-size:0.75rem;color:rgba(13,13,13,0.5);margin-top:0.1rem">Pre-Made Food &amp; Desserts · <a href="https://www.instagram.com/kerrysssss/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(13,13,13,0.2)">@kerrysssss</a></div></div><div style="font-size:0.72rem;color:rgba(13,13,13,0.4);text-align:right;padding-top:0.15rem">Food Vendor</div></div>
+      <div style="display:grid;grid-template-columns:1fr 140px;gap:1rem 1.5rem;padding:1rem 1.25rem;border-bottom:1px solid var(--border);align-items:start"><div><div style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.88rem">Tudy's Kitchen ⭐</div><div style="font-size:0.75rem;color:rgba(13,13,13,0.5);margin-top:0.1rem">Desserts &amp; Sweets · <a href="https://www.instagram.com/tudyskitchen/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(13,13,13,0.2)">@tudyskitchen</a></div></div><div style="font-size:0.72rem;color:rgba(13,13,13,0.4);text-align:right;padding-top:0.15rem">Featured</div></div>
+      <div style="display:grid;grid-template-columns:1fr 140px;gap:1rem 1.5rem;padding:1rem 1.25rem;border-bottom:1px solid var(--border);align-items:start"><div><div style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.88rem">Flippin' Birds ⭐</div><div style="font-size:0.75rem;color:rgba(13,13,13,0.5);margin-top:0.1rem">Chicken &amp; Waffles / Soul Food · <a href="https://www.instagram.com/weflippinbirds/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(13,13,13,0.2)">@weflippinbirds</a></div></div><div style="font-size:0.72rem;color:rgba(13,13,13,0.4);text-align:right;padding-top:0.15rem">Featured</div></div>
+      <div style="display:grid;grid-template-columns:1fr 140px;gap:1rem 1.5rem;padding:1rem 1.25rem;border-bottom:1px solid var(--border);align-items:start"><div><div style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.88rem">Adama Traoré</div><div style="font-size:0.75rem;color:rgba(13,13,13,0.5);margin-top:0.1rem">African Cuisine, Desserts &amp; Drinks · <a href="https://www.instagram.com/deliciaafricanabcn/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(13,13,13,0.2)">@deliciaafricanabcn</a></div></div><div style="font-size:0.72rem;color:rgba(13,13,13,0.4);text-align:right;padding-top:0.15rem">Food Vendor</div></div>
+      <div style="display:grid;grid-template-columns:1fr 140px;gap:1rem 1.5rem;padding:1rem 1.25rem;border-bottom:1px solid var(--border);align-items:start"><div><div style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.88rem">Alexandria Audrey</div><div style="font-size:0.75rem;color:rgba(13,13,13,0.5);margin-top:0.1rem">New Orleans Creole, cooked live · <a href="https://www.instagram.com/chopandwhisk/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(13,13,13,0.2)">@chopandwhisk</a></div></div><div style="font-size:0.72rem;color:rgba(13,13,13,0.4);text-align:right;padding-top:0.15rem">Food Vendor</div></div>
+      <div style="display:grid;grid-template-columns:1fr 140px;gap:1rem 1.5rem;padding:1rem 1.25rem;align-items:start"><div><div style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.88rem">Swad BCN (Chef Punit)</div><div style="font-size:0.75rem;color:rgba(13,13,13,0.5);margin-top:0.1rem">Indian Cuisine · <a href="https://www.instagram.com/swadbcn/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(13,13,13,0.2)">@swadbcn</a></div></div><div style="font-size:0.72rem;color:rgba(13,13,13,0.4);text-align:right;padding-top:0.15rem">Food Vendor</div></div>
     </div>
 
-    <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);padding-bottom:0.6rem;border-bottom:2px solid var(--gold);margin-bottom:0;margin-top:2.5rem">🍽️&nbsp; Late Night Food &nbsp;·&nbsp; 14:00 – 01:00</div>
+    <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#7c3aed;padding-bottom:0.6rem;border-bottom:2px solid #7c3aed;margin-bottom:0">🎨&nbsp; Workshops &amp; Activations</div>
     <div style="border:1px solid var(--border);border-top:none">
-      <div style="display:grid;grid-template-columns:120px 1fr 140px;gap:1rem 1.5rem;padding:1rem 1.25rem;border-bottom:1px solid var(--border);align-items:start"><div style="font-family:'Inter',sans-serif;font-size:0.78rem;font-weight:600;color:rgba(13,13,13,0.45);padding-top:0.1rem">14:00 – 01:00</div><div><div style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.88rem">Tudy's Kitchen</div><div style="font-size:0.75rem;color:rgba(13,13,13,0.5);margin-top:0.1rem">Desserts &amp; Sweets · <a href="https://www.instagram.com/tudyskitchen/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(13,13,13,0.2)">@tudyskitchen</a></div></div><div style="font-size:0.72rem;color:rgba(13,13,13,0.4);text-align:right;padding-top:0.15rem">Food Vendor</div></div>
-      <div style="display:grid;grid-template-columns:120px 1fr 140px;gap:1rem 1.5rem;padding:1rem 1.25rem;align-items:start"><div style="font-family:'Inter',sans-serif;font-size:0.78rem;font-weight:600;color:rgba(13,13,13,0.45);padding-top:0.1rem">14:00 – 01:00</div><div><div style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.88rem">Flippin Birds</div><div style="font-size:0.75rem;color:rgba(13,13,13,0.5);margin-top:0.1rem">Chicken &amp; Waffles / Soul Food · <a href="https://www.instagram.com/flippinbirds/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(13,13,13,0.2)">@flippinbirds</a></div></div><div style="font-size:0.72rem;color:rgba(13,13,13,0.4);text-align:right;padding-top:0.15rem">Food Vendor</div></div>
+      <div style="display:grid;grid-template-columns:120px 1fr 160px;gap:1rem 1.5rem;padding:1rem 1.25rem;border-bottom:1px solid var(--border);align-items:start"><div style="font-family:'Inter',sans-serif;font-size:0.78rem;font-weight:600;color:rgba(13,13,13,0.45);padding-top:0.1rem">13:00 – 02:00</div><div><div style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.88rem">Photo Activation</div><div style="font-size:0.75rem;color:rgba(13,13,13,0.5);margin-top:0.1rem"><a href="https://www.instagram.com/manapix_events/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(13,13,13,0.2)">@manapix_events</a></div></div><div style="font-size:0.72rem;color:rgba(13,13,13,0.4);text-align:right;padding-top:0.15rem">Dedicated Photo Zone</div></div>
+      <div style="display:grid;grid-template-columns:120px 1fr 160px;gap:1rem 1.5rem;padding:1rem 1.25rem;border-bottom:1px solid var(--border);align-items:start"><div style="font-family:'Inter',sans-serif;font-size:0.78rem;font-weight:600;color:rgba(13,13,13,0.45);padding-top:0.1rem">15:00 – 16:30</div><div><div style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.88rem">Roller Skating Demo</div><div style="font-size:0.75rem;color:rgba(13,13,13,0.5);margin-top:0.1rem"><a href="https://www.instagram.com/thestylishglobesk8r/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(13,13,13,0.2)">@thestylishglobesk8r</a></div></div><div style="font-size:0.72rem;color:rgba(13,13,13,0.4);text-align:right;padding-top:0.15rem">Main Dancefloor</div></div>
+      <div style="display:grid;grid-template-columns:120px 1fr 160px;gap:1rem 1.5rem;padding:1rem 1.25rem;align-items:start"><div style="font-family:'Inter',sans-serif;font-size:0.78rem;font-weight:600;color:rgba(13,13,13,0.45);padding-top:0.1rem">17:00 – 18:00</div><div><div style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.88rem">Live Tufting / Carpet Art Demo</div><div style="font-size:0.75rem;color:rgba(13,13,13,0.5);margin-top:0.1rem">GüiraGuava · <a href="https://www.instagram.com/guiraguava/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(13,13,13,0.2)">@guiraguava</a></div></div><div style="font-size:0.72rem;color:rgba(13,13,13,0.4);text-align:right;padding-top:0.15rem">Market Vendor Area</div></div>
     </div>
 
+  </div>
+</section>
+
+<!-- MARKET VENDORS -->
+<section class="reveal" style="padding:5rem 5vw;border-top:1px solid var(--border)">
+  <div style="max-width:900px;margin:auto">
+    <div class="section-tag">Marketplace</div>
+    <h2 style="font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(1.8rem,3.5vw,2.8rem);letter-spacing:-0.03em;margin:0.5rem 0 2.5rem;line-height:1">Market vendors.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1rem">
+      <div style="padding:1.5rem;border:1px solid var(--border);display:flex;flex-direction:column;gap:0.4rem">
+        <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(13,13,13,0.4)">Food &amp; Snacks</div>
+        <div style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.95rem;line-height:1.2">Halitta Foods</div>
+        <div style="font-size:0.8rem;color:rgba(13,13,13,0.6);flex:1">Peanut Butter Products</div>
+        <a href="https://www.instagram.com/halittafoods/" target="_blank" rel="noopener" style="font-size:0.75rem;color:var(--green);text-decoration:none;font-weight:600;margin-top:0.5rem;padding-top:0.75rem;border-top:1px solid var(--border);display:block">@halittafoods ↗</a>
+      </div>
+      <div style="padding:1.5rem;border:1px solid var(--border);display:flex;flex-direction:column;gap:0.4rem">
+        <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(13,13,13,0.4)">Jewellery</div>
+        <div style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.95rem;line-height:1.2">Tracy.Africa</div>
+        <div style="font-size:0.8rem;color:rgba(13,13,13,0.6);flex:1">African Jewelry</div>
+        <a href="https://www.instagram.com/tracy.africa/" target="_blank" rel="noopener" style="font-size:0.75rem;color:var(--green);text-decoration:none;font-weight:600;margin-top:0.5rem;padding-top:0.75rem;border-top:1px solid var(--border);display:block">@tracy.africa ↗</a>
+      </div>
+      <div style="padding:1.5rem;border:1px solid var(--border);display:flex;flex-direction:column;gap:0.4rem">
+        <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(13,13,13,0.4)">Textiles &amp; Art</div>
+        <div style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.95rem;line-height:1.2">GüiraGuava</div>
+        <div style="font-size:0.8rem;color:rgba(13,13,13,0.6);flex:1">Handmade Textiles &amp; Goods · Live Tufting / Carpet Art Demo 17:00–18:00</div>
+        <a href="https://www.instagram.com/guiraguava/" target="_blank" rel="noopener" style="font-size:0.75rem;color:var(--green);text-decoration:none;font-weight:600;margin-top:0.5rem;padding-top:0.75rem;border-top:1px solid var(--border);display:block">@guiraguava ↗</a>
+      </div>
+      <div style="padding:1.5rem;border:1px solid var(--border);display:flex;flex-direction:column;gap:0.4rem">
+        <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(13,13,13,0.4)">Beauty &amp; Hair</div>
+        <div style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.95rem;line-height:1.2">Alma Raíz</div>
+        <div style="font-size:0.8rem;color:rgba(13,13,13,0.6);flex:1">Hair Products</div>
+        <a href="https://www.instagram.com/almaraiz.oficial/" target="_blank" rel="noopener" style="font-size:0.75rem;color:var(--green);text-decoration:none;font-weight:600;margin-top:0.5rem;padding-top:0.75rem;border-top:1px solid var(--border);display:block">@almaraiz.oficial ↗</a>
+      </div>
+      <div style="padding:1.5rem;border:1px solid var(--border);display:flex;flex-direction:column;gap:0.4rem">
+        <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(13,13,13,0.4)">Art &amp; Décor</div>
+        <div style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.95rem;line-height:1.2">Zig Action</div>
+        <div style="font-size:0.8rem;color:rgba(13,13,13,0.6);flex:1">African Wooden Artifacts &amp; Décor</div>
+        <a href="https://www.instagram.com/ibrahimsseydi/" target="_blank" rel="noopener" style="font-size:0.75rem;color:var(--green);text-decoration:none;font-weight:600;margin-top:0.5rem;padding-top:0.75rem;border-top:1px solid var(--border);display:block">@ibrahimsseydi ↗</a>
+      </div>
+    </div>
   </div>
 </section>
 
