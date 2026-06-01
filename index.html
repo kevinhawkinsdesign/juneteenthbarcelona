@@ -542,20 +542,10 @@ a.ticket-card:hover .ticket-btn { opacity: 0.8; }
 @media (max-width: 600px) { .ticket-card { flex-wrap: wrap; gap: 0.75rem; } .ticket-price { min-width: auto; } .ticket-btn { align-self: flex-start; } }
 
 /* ── VENUE GALLERY ── */
-.venue-gallery { width: 100%; background: #0d0d0d; position: relative; overflow: hidden; border-top: 1px solid var(--border); }
-.venue-gallery-track { display: flex; transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94); will-change: transform; }
-.venue-gallery-slide { width: 100%; flex-shrink: 0; height: 72vh; max-height: 640px; min-height: 320px; display: flex; align-items: center; justify-content: center; }
-.venue-gallery-slide img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; user-select: none; cursor: zoom-in; }
-.gallery-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.12); border: none; color: white; width: 44px; height: 44px; border-radius: 50%; font-size: 1.1rem; cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px); transition: background 0.2s; }
-.gallery-btn:hover { background: rgba(255,255,255,0.28); }
-.gallery-prev { left: 1.25rem; }
-.gallery-next { right: 1.25rem; }
-.gallery-dots { position: absolute; bottom: 0.85rem; left: 50%; transform: translateX(-50%); display: flex; gap: 5px; z-index: 5; }
-.gallery-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.35); cursor: pointer; transition: background 0.2s, transform 0.2s; }
-.gallery-dot.active { background: white; transform: scale(1.3); }
-.gallery-fullscreen { position: absolute; top: 0.85rem; right: 1rem; background: rgba(255,255,255,0.12); border: none; color: white; width: 36px; height: 36px; border-radius: 4px; font-size: 1rem; cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px); transition: background 0.2s; line-height: 1; }
-.gallery-fullscreen:hover { background: rgba(255,255,255,0.28); }
-.gallery-counter { position: absolute; top: 0.9rem; left: 1rem; font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.6); letter-spacing: 0.06em; z-index: 5; }
+.venue-photo-grid { width: 100%; background: #0d0d0d; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 4px; border-top: 1px solid var(--border); }
+.venue-photo-grid img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; cursor: zoom-in; transition: opacity 0.2s; }
+.venue-photo-grid img:hover { opacity: 0.8; }
+@media (max-width: 600px) { .venue-photo-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 3px; } }
 .gallery-lightbox { position: fixed; inset: 0; z-index: 9900; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; }
 .gallery-lightbox.open { display: flex; }
 .lightbox-img { max-width: calc(100vw - 100px); max-height: calc(100vh - 80px); object-fit: contain; display: block; user-select: none; }
@@ -566,7 +556,6 @@ a.ticket-card:hover .ticket-btn { opacity: 0.8; }
 .lightbox-prev { left: 1rem; }
 .lightbox-next { right: 1rem; }
 .lightbox-counter { position: fixed; bottom: 1.25rem; left: 50%; transform: translateX(-50%); font-size: 0.75rem; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; }
-@media (max-width: 768px) { .venue-gallery-slide { height: 55vw; max-height: none; min-height: 200px; } .gallery-btn { width: 36px; height: 36px; font-size: 0.9rem; } }
 
 /* ── VENUE INFO ── */
 .venue-info-section { border-top: 1px solid var(--border); padding: 6rem 5vw; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
@@ -1206,29 +1195,9 @@ a.ticket-card:hover .ticket-btn { opacity: 0.8; }
     <h2 style="font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.03em;color:white;margin:0.5rem 0 2.5rem;line-height:1">Get your tickets</h2>
 
     <a class="ticket-card" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">
-      <div class="ticket-price">€12</div>
+      <div class="ticket-price">€15</div>
       <div class="ticket-info">
         <div class="ticket-name">Daytime</div>
-        <div class="ticket-desc">Entry from 13:00. Buy art, watch performances, enjoy the food hall, and meet new people. Stay in the venue and your ticket covers the night party too — no second ticket needed. Family friendly.</div>
-        
-      </div>
-      <span class="ticket-btn">Buy</span>
-    </a>
-
-    <a class="ticket-card" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">
-      <div class="ticket-price">€15</div>
-      <div class="ticket-info">
-        <div class="ticket-name">Night Party</div>
-        <div class="ticket-desc">Entry from 21:30. Enjoy performances and live music all night until 02:00 plus late night food and drinks until closing.</div>
-        
-      </div>
-      <span class="ticket-btn">Buy</span>
-    </a>
-
-    <a class="ticket-card" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">
-      <div class="ticket-price">€15</div>
-      <div class="ticket-info">
-        <div class="ticket-name">Daytime — Standard</div>
         <div class="ticket-desc">Entry from 13:00. Buy art, watch performances, enjoy the food hall, and meet new people. Stay in the venue and your ticket covers the night party too — no second ticket needed. Family friendly.</div>
       </div>
       <span class="ticket-btn">Buy</span>
@@ -1237,7 +1206,7 @@ a.ticket-card:hover .ticket-btn { opacity: 0.8; }
     <a class="ticket-card" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">
       <div class="ticket-price">€18</div>
       <div class="ticket-info">
-        <div class="ticket-name">Night Party — Standard</div>
+        <div class="ticket-name">Night Party</div>
         <div class="ticket-desc">Entry from 21:30. Enjoy performances and live music all night until 02:00 plus late night food and drinks until closing.</div>
       </div>
       <span class="ticket-btn">Buy</span>
@@ -1255,44 +1224,37 @@ a.ticket-card:hover .ticket-btn { opacity: 0.8; }
 </section>
 
 <!-- VENUE GALLERY -->
-<div class="venue-gallery" id="venueGallery" aria-label="Venue photo gallery">
-  <div class="venue-gallery-track" id="galleryTrack">
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7237.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7238.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7239.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7240.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7241.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7242.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7243.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7244.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7245.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7246.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7247.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7248.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7249.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7250.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7251.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7252.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7253.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7254.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7255.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7256.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7257.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7258.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7259.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7260.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7261.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7262.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7263.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7264.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7265.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-    <div class="venue-gallery-slide"><img src="images/roots/IMG_7266.jpeg" alt="Roots Gastro Club" loading="lazy"></div>
-  </div>
-  <button class="gallery-btn gallery-prev" id="galleryPrev" aria-label="Previous photo">&#8592;</button>
-  <button class="gallery-btn gallery-next" id="galleryNext" aria-label="Next photo">&#8594;</button>
-  <div class="gallery-counter" id="galleryCounter">1 / 30</div>
-  <div class="gallery-dots" id="galleryDots"></div>
-  <button class="gallery-fullscreen" id="galleryFullscreen" aria-label="View fullscreen" title="Fullscreen">&#x26F6;</button>
+<div class="venue-photo-grid" id="venueGallery" aria-label="Venue photo gallery">
+  <img src="images/roots/IMG_7237.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7238.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7239.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7240.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7241.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7242.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7243.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7244.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7245.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7246.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7247.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7248.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7249.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7250.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7251.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7252.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7253.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7254.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7255.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7256.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7257.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7258.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7259.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7260.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7261.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7262.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7263.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7264.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7265.jpeg" alt="Roots Gastro Club" loading="lazy">
+  <img src="images/roots/IMG_7266.jpeg" alt="Roots Gastro Club" loading="lazy">
 </div>
 
 <!-- LIGHTBOX -->
@@ -1651,56 +1613,21 @@ a.ticket-card:hover .ticket-btn { opacity: 0.8; }
 </script>
 <script>
 (function() {
-  var total = 30, current = 0;
-  var track = document.getElementById('galleryTrack');
-  var counter = document.getElementById('galleryCounter');
-  var dotsEl = document.getElementById('galleryDots');
+  var grid = document.getElementById('venueGallery');
   var lightbox = document.getElementById('galleryLightbox');
   var lbImg = document.getElementById('lightboxImg');
   var lbCounter = document.getElementById('lightboxCounter');
-  if (!track) return;
+  if (!grid || !lightbox) return;
 
-  var dots = [];
-  for (var i = 0; i < total; i++) {
-    var d = document.createElement('button');
-    d.className = 'gallery-dot' + (i === 0 ? ' active' : '');
-    d.setAttribute('aria-label', 'Go to photo ' + (i + 1));
-    d.dataset.idx = i;
-    dotsEl.appendChild(d);
-    dots.push(d);
-  }
-
-  function goTo(idx) {
-    if (idx < 0) idx = total - 1;
-    if (idx >= total) idx = 0;
-    current = idx;
-    track.style.transform = 'translateX(-' + (current * 100) + '%)';
-    if (counter) counter.textContent = (current + 1) + ' / ' + total;
-    dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
-    if (lightbox.classList.contains('open')) openLightbox(current);
-  }
-
-  document.getElementById('galleryPrev').addEventListener('click', function() { goTo(current - 1); });
-  document.getElementById('galleryNext').addEventListener('click', function() { goTo(current + 1); });
-  dotsEl.addEventListener('click', function(e) {
-    var btn = e.target.closest('.gallery-dot');
-    if (btn) goTo(parseInt(btn.dataset.idx));
-  });
-
-  var startX = null;
-  track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener('touchend', function(e) {
-    if (startX === null) return;
-    var diff = startX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
-    startX = null;
-  }, { passive: true });
+  var images = Array.from(grid.querySelectorAll('img'));
+  var total = images.length;
+  var current = 0;
 
   function openLightbox(idx) {
-    var slides = track.querySelectorAll('.venue-gallery-slide img');
-    if (!slides[idx]) return;
-    lbImg.src = slides[idx].src;
-    lbCounter.textContent = (idx + 1) + ' / ' + total;
+    current = idx;
+    lbImg.src = images[idx].src;
+    lbImg.alt = images[idx].alt;
+    if (lbCounter) lbCounter.textContent = (idx + 1) + ' / ' + total;
     lightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -1708,14 +1635,20 @@ a.ticket-card:hover .ticket-btn { opacity: 0.8; }
     lightbox.classList.remove('open');
     document.body.style.overflow = '';
   }
+  function goTo(idx) {
+    if (idx < 0) idx = total - 1;
+    if (idx >= total) idx = 0;
+    openLightbox(idx);
+  }
 
-  track.addEventListener('click', function(e) { if (e.target.tagName === 'IMG') openLightbox(current); });
-  document.getElementById('galleryFullscreen').addEventListener('click', function() { openLightbox(current); });
+  grid.addEventListener('click', function(e) {
+    var img = e.target.closest('img');
+    if (img) openLightbox(images.indexOf(img));
+  });
   document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
   document.getElementById('lightboxPrev').addEventListener('click', function() { goTo(current - 1); });
   document.getElementById('lightboxNext').addEventListener('click', function() { goTo(current + 1); });
   lightbox.addEventListener('click', function(e) { if (e.target === lightbox) closeLightbox(); });
-
   document.addEventListener('keydown', function(e) {
     if (lightbox.classList.contains('open')) {
       if (e.key === 'ArrowLeft') goTo(current - 1);
