@@ -140,23 +140,26 @@ footer {
 
 /* ── WALKING TOUR IMAGES ── */
 .stop-img {
-  width: 100%; height: auto;
+  width: 100%; aspect-ratio: 3 / 2;
+  object-fit: cover; background: #ece8e0;
   display: block; margin: 1.5rem 0 0.4rem;
   filter: grayscale(12%); transition: filter 0.3s;
 }
 .stop-img:hover { filter: grayscale(0%); }
 .stop-img-portrait {
-  float: right; width: 200px; height: auto;
+  float: right; width: 200px; aspect-ratio: 3 / 4;
+  object-fit: cover; background: #ece8e0;
   margin: 0 0 1.2rem 2rem;
   filter: grayscale(12%); transition: filter 0.3s;
 }
+.stop-img-portrait.left { float: left; margin: 0 2rem 1.2rem 0; }
 .stop-img-portrait:hover { filter: grayscale(0%); }
 .stop-img-pair {
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 8px; margin: 1.5rem 0 0.4rem;
   align-items: start;
 }
-.stop-img-pair img { width: 100%; height: auto; display: block; filter: grayscale(12%); }
+.stop-img-pair img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; background: #ece8e0; display: block; filter: grayscale(12%); }
 .img-credit {
   font-size: 0.68rem; color: var(--mid);
   margin-bottom: 1.5rem; line-height: 1.5;
@@ -164,7 +167,7 @@ footer {
 .img-credit a { color: var(--mid); border-bottom: 1px solid var(--border); text-decoration: none; }
 .img-credit a:hover { color: var(--black); }
 @media (max-width: 600px) {
-  .stop-img-portrait { float: none; width: 100%; height: auto; margin: 1rem 0; }
+  .stop-img-portrait, .stop-img-portrait.left { float: none; width: 100%; aspect-ratio: 3 / 2; margin: 1rem 0; }
   .stop-img-pair { grid-template-columns: 1fr; }
 }
 
