@@ -341,7 +341,7 @@ body { top: 0 !important; }
 /* ── SCHEDULE: performer avatar thumbnail with initial fallback ── */
 .sched-av {
   position: relative; flex: 0 0 auto;
-  width: 40px; height: 40px; border-radius: 50%; overflow: hidden;
+  width: 40px; height: 40px; border-radius: 6px; overflow: hidden;
   background: var(--green, #1c7a4f);
   display: inline-flex; align-items: center; justify-content: center;
 }
