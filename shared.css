@@ -324,3 +324,17 @@ body { top: 0 !important; }
   .lang-current { display: none; }
 }
 
+/* ── SCHEDULE: stack row columns on mobile so nothing overflows ── */
+@media (max-width: 600px) {
+  .schedule-section div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+    gap: 0.2rem 0 !important;
+    padding: 0.85rem 1rem !important;
+  }
+  .schedule-section div[style*="grid-template-columns"] > div[style*="text-align:right"] {
+    text-align: left !important;
+    padding-top: 0.1rem !important;
+  }
+  .schedule-section { overflow-x: hidden; }
+}
+
