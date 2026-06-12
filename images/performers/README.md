@@ -12,18 +12,18 @@ Square-ish images work best (they're cropped to a circle). ~200×200px is plenty
 ## Files needed
 | Filename | Performer | Instagram (researched) |
 |---|---|---|
-| quimsa.jpg | Quimsa | (not found — check your lineup posts) |
-| nnamany.jpg | Nnamany | (not found) |
+| quimsa.jpg | Quimsa | @qui.kyo |
+| nnamany.jpg | Nnamany | @nnamanyy |
 | bart-obenda.jpg | Bart Obenda | @bokeliya.bart |
-| jordana.jpg | Jordana | (not found) |
-| ritmo-santo.jpg | RITMO SANTO | (not found) |
+| jordana.jpg | Jordana David | @jordanadavid |
+| ritmo-santo.jpg | RITMO SANTO | (still needed) |
 | ledet.jpg | LEDET | @madame_ledet_dumonde · ledetmusique.com |
 | clement-esso-solomane.jpg | Clément Esso & Solomane | @clement.esso / @solomanetheteacher |
-| serial-p.jpg | Serial P | (not found) |
+| serial-p.jpg | Serial P | @pankthefreak |
 | la-ka.jpg | La Ká | @laka_ofi |
 | nikah-niche.jpg | Nikah NiChe | @thatsmynikah |
 | djrodycr.jpg | Djrodycr | @djrodycr |
-| magiikk.jpg | MAGIIKK | (not found) |
+| magiikk.jpg | MAGIIKK | @magiikkgram |
 
 ## Already wired to existing photos (no action needed)
 - Tina Masawi → images/featured/TinaMasawi.jpeg
