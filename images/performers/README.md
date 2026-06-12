@@ -20,7 +20,7 @@ Square-ish images work best (they're cropped to a circle). ~200×200px is plenty
 | ledet.jpg | LEDET | @madame_ledet_dumonde · ledetmusique.com |
 | clement-esso-solomane.jpg | Clément Esso & Solomane | @clement.esso / @solomanetheteacher |
 | serial-p.jpg | Serial P | (not found) |
-| la-ka.jpg | La Ká | @laka_2020_ (unconfirmed) |
+| la-ka.jpg | La Ká | @laka_ofi |
 | nikah-niche.jpg | Nikah NiChe | @thatsmynikah |
 | djrodycr.jpg | Djrodycr | @djrodycr |
 | magiikk.jpg | MAGIIKK | (not found) |
