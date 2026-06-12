@@ -6,10 +6,20 @@
   "venue_url": "",
   "register_url": "",
   "schedule": [
-    {
-      "time": "6:00 PM",
-      "activity": "testactivity",
-      "description": "testdesc"
-    }
+    { "time": "13:00 – 13:45", "activity": "Quimsa", "description": "Day Party · Indie Folk / R&B · Duo" },
+    { "time": "14:00 – 14:45", "activity": "Tina Masawi", "description": "Day Party · Afrobeat / R&B / Amapiano · Duo" },
+    { "time": "15:00 – 15:45", "activity": "Nnamany", "description": "Day Party · Breathwork + Live Music · Solo" },
+    { "time": "15:55 – 16:05", "activity": "Bart Obenda", "description": "Day Party · Stand-up Comedy · Solo" },
+    { "time": "16:15 – 16:30", "activity": "Jordana", "description": "Day Party · Stand-up Comedy · Solo" },
+    { "time": "16:45 – 17:30", "activity": "RITMO SANTO", "description": "Day Party · Live Band (5-piece) · Large Band" },
+    { "time": "17:40 – 18:10", "activity": "LEDET", "description": "Day Party · Solo Musician / Producer · Solo" },
+    { "time": "18:20 – 18:50", "activity": "Clément Esso & Solomane", "description": "Day Party · Singing + Rapping · Solo" },
+    { "time": "19:00 – 19:45", "activity": "Serial P", "description": "Day Party · Electronic / African Rhythms · DJ" },
+    { "time": "19:55 – 20:40", "activity": "Voodoo System", "description": "Day Party · Afro-Electronic Ensemble · Ensemble" },
+    { "time": "20:50 – 21:35", "activity": "La Ká", "description": "Night Party · Caribbean / Afrolatino DJ · DJ" },
+    { "time": "21:45 – 22:30", "activity": "Nikah NiChe", "description": "Night Party · Atlanta (GA, USA) DJ · DJ" },
+    { "time": "22:40 – 23:25", "activity": "Djrodycr", "description": "Night Party · Afrobeats / Dancehall DJ · DJ" },
+    { "time": "23:35 – 00:20", "activity": "MAGIIKK", "description": "Night Party · R&B / Hip Hop / Afrobeats DJ · DJ" },
+    { "time": "00:30 – 02:00", "activity": "Club Clap Back — DJ AMX back 2 back with DJ Coroco", "description": "Night Party · Multi-genre Dance Party DJ · DJ" }
   ]
 }
