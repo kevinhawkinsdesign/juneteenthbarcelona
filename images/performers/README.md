@@ -18,7 +18,8 @@ Square-ish images work best (they're cropped to a circle). ~200×200px is plenty
 | jordana.jpg | Jordana David | @jordanadavid |
 | ritmo-santo.jpg | RITMO SANTO | (still needed) |
 | ledet.jpg | LEDET | @madame_ledet_dumonde · ledetmusique.com |
-| clement-esso-solomane.jpg | Clément Esso & Solomane | @clement.esso / @solomanetheteacher |
+| clement-esso.jpg | Clément Esso | @clement.esso |
+| solomane.jpg | Solomane | @solomanetheteacher |
 | serial-p.jpg | Serial P | @pankthefreak |
 | la-ka.jpg | La Ká | @laka_ofi |
 | nikah-niche.jpg | Nikah NiChe | @thatsmynikah |
