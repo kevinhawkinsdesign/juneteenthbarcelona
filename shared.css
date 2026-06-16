@@ -341,14 +341,14 @@ body { top: 0 !important; }
 /* ── SCHEDULE: performer avatar thumbnail with initial fallback ── */
 .sched-av {
   position: relative; flex: 0 0 auto;
-  width: 60px; height: 60px; border-radius: 8px; overflow: hidden;
+  width: 80px; height: 80px; border-radius: 8px; overflow: hidden;
   background: var(--green, #1c7a4f);
   display: inline-flex; align-items: center; justify-content: center;
 }
 .sched-av::before {
   content: attr(data-ini);
   color: #fff; font-family: 'Inter', sans-serif; font-weight: 700;
-  font-size: 1.3rem; line-height: 1;
+  font-size: 1.7rem; line-height: 1;
 }
 .sched-av img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
