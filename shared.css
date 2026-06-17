@@ -398,3 +398,4 @@ body { top: 0 !important; }
 .bio-modal-ig { font-size: 0.8rem; margin: 1.1rem 1.75rem 0; }
 .bio-modal-ig a { font-weight: 600; color: var(--green); text-decoration: none; margin-right: 1.1rem; }
 .bio-modal-ig a:hover { text-decoration: underline; }
+.bio-modal-ig a.bio-spotify { color: #1DB954; }

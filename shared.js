@@ -197,6 +197,8 @@ function googleTranslateElementInit() {
     B.innerHTML = bio ? bio.innerHTML : '';
     var igs = card.querySelectorAll('.sa-ig'); A.innerHTML = ''; var any = false;
     igs.forEach(function (g) { if (!g.getAttribute('href')) return; var a = document.createElement('a'); a.href = g.getAttribute('href'); a.target = '_blank'; a.rel = 'noopener'; a.textContent = g.textContent; A.appendChild(a); any = true; });
+    var sp = card.querySelector('.sa-spotify');
+    if (sp && sp.getAttribute('href')) { var s = document.createElement('a'); s.href = sp.getAttribute('href'); s.target = '_blank'; s.rel = 'noopener'; s.className = 'bio-spotify'; s.textContent = '♫ Spotify'; A.appendChild(s); any = true; }
     A.style.display = any ? '' : 'none';
     modal.classList.add('open'); document.body.style.overflow = 'hidden';
   }
