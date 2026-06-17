@@ -395,5 +395,6 @@ body { top: 0 !important; }
 .bio-modal-name { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.5rem; letter-spacing: -0.02em; line-height: 1.1; margin: 0.3rem 1.75rem 0; }
 .bio-modal-genre { font-size: 0.8rem; color: rgba(13,13,13,0.55); margin: 0.35rem 1.75rem 0; }
 .bio-modal-bio { font-size: 0.88rem; line-height: 1.7; color: rgba(13,13,13,0.75); margin: 1.1rem 1.75rem 0; }
-.bio-modal-ig { display: inline-block; font-size: 0.8rem; font-weight: 600; color: var(--green); text-decoration: none; margin: 1.1rem 1.75rem 0; }
-.bio-modal-ig:hover { text-decoration: underline; }
+.bio-modal-ig { font-size: 0.8rem; margin: 1.1rem 1.75rem 0; }
+.bio-modal-ig a { font-weight: 600; color: var(--green); text-decoration: none; margin-right: 1.1rem; }
+.bio-modal-ig a:hover { text-decoration: underline; }

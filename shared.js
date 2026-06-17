@@ -195,8 +195,9 @@ function googleTranslateElementInit() {
     N.textContent = nm ? nm.textContent : '';
     G.textContent = gn ? gn.textContent : '';
     B.innerHTML = bio ? bio.innerHTML : '';
-    if (ig && ig.getAttribute('href')) { A.href = ig.getAttribute('href'); A.textContent = ig.textContent; A.style.display = ''; }
-    else { A.style.display = 'none'; }
+    var igs = card.querySelectorAll('.sa-ig'); A.innerHTML = ''; var any = false;
+    igs.forEach(function (g) { if (!g.getAttribute('href')) return; var a = document.createElement('a'); a.href = g.getAttribute('href'); a.target = '_blank'; a.rel = 'noopener'; a.textContent = g.textContent; A.appendChild(a); any = true; });
+    A.style.display = any ? '' : 'none';
     modal.classList.add('open'); document.body.style.overflow = 'hidden';
   }
   function close() { modal.classList.remove('open'); document.body.style.overflow = ''; }
