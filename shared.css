@@ -371,3 +371,14 @@ body { top: 0 !important; }
 .fv-ig:hover { text-decoration: underline; }
 @media (max-width: 520px) { .fv-card { flex-direction: column; } .fv-img { width: 100%; height: 180px; flex: none; } }
 .fv-fullbleed { width: 100vw; margin-left: calc(50% - 50vw); padding: 0 5vw; box-sizing: border-box; }
+
+/* ── SCHEDULE ARTIST CARDS ── */
+.sa-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2.5rem; }
+.sa-card { border: 1px solid var(--border); background: #fff; display: flex; flex-direction: column; overflow: hidden; }
+.sa-img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; }
+.sa-body { padding: 0.85rem 0.95rem 1rem; display: flex; flex-direction: column; gap: 0.25rem; }
+.sa-time { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em; color: var(--green); }
+.sa-name { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.98rem; line-height: 1.15; }
+.sa-genre { font-size: 0.72rem; line-height: 1.4; color: rgba(13,13,13,0.55); }
+.sa-ig { font-size: 0.7rem; font-weight: 600; color: rgba(13,13,13,0.5); text-decoration: none; margin-top: 0.15rem; }
+.sa-ig:hover { color: var(--green); text-decoration: underline; }
