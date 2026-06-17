@@ -547,6 +547,20 @@ a.ticket-card:hover .ticket-btn { opacity: 0.8; }
 .ticket-card.expired .ticket-price { text-decoration: line-through; }
 .ticket-card.expired .ticket-name { text-decoration: line-through; }
 .ticket-avail.ended { color: rgba(246,243,238,0.45); }
+/* Tickets as horizontal cards (Sónar-style) */
+.tickets-inner { max-width: 1120px; }
+.tickets-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; align-items: stretch; }
+.ticket-card, a.ticket-card { display: flex; flex-direction: column; align-items: stretch; gap: 0; margin: 0; background: #fff; border: 1px solid rgba(13,13,13,0.08); border-radius: 8px; padding: 1.6rem 1.5rem; }
+a.ticket-card { transition: transform 0.18s, box-shadow 0.18s; }
+a.ticket-card:hover { background: #fff; border-color: rgba(13,13,13,0.18); transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.18); }
+.ticket-card .ticket-name { color: var(--black); font-size: 1.35rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 0.6rem; }
+.ticket-card .ticket-desc { color: rgba(13,13,13,0.6); font-size: 0.8rem; margin-bottom: 1.1rem; }
+.ticket-card .ticket-price { color: var(--black); font-size: 1.9rem; min-width: 0; margin-top: auto; margin-bottom: 1rem; padding-top: 0; white-space: nowrap; }
+.ticket-card .ticket-btn { display: block; align-self: stretch; text-align: center; background: var(--black); color: #fff; padding: 0.85rem 1rem; pointer-events: none; opacity: 1; }
+a.ticket-card:hover .ticket-btn { background: var(--red); opacity: 1; }
+.ticket-card .ticket-avail { color: var(--mid); }
+.ticket-card .ticket-avail::before { display: none; }
+.ticket-card.expired { opacity: 0.5; }
 .ticket-avail.ended::before { background: rgba(246,243,238,0.45); }
 .ticket-section-note { font-size: 0.8rem; color: rgba(246,243,238,0.5); margin-bottom: 1.5rem; letter-spacing: 0.02em; }
 
@@ -1262,50 +1276,37 @@ a.ticket-card:hover .ticket-btn { opacity: 0.8; }
 <section class="tickets-section" id="tickets">
   <div class="tickets-inner">
     <div class="section-tag light">Tickets</div>
-    <h2 style="font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.03em;color:white;margin:0.5rem 0 2.5rem;line-height:1">Get your tickets</h2>
+    <h2 style="font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.03em;color:white;margin:0.5rem 0 1rem;line-height:1">Get your tickets</h2>
     <p style="margin:0 0 2rem;font-size:0.82rem;line-height:1.65;color:rgba(246,243,238,0.85);text-align:center">Juneteenth Barcelona is a <strong style="color:#fff;font-weight:700">cash-free event</strong>. Cards and contactless are the only accepted payment methods.</p>
-
-    <a class="ticket-card" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">
-      <div class="ticket-price">€15</div>
-      <div class="ticket-info">
+    <div class="tickets-grid">
+      <a class="ticket-card" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">
         <div class="ticket-name">Daytime</div>
         <div class="ticket-desc">Entry from 13:00. Buy art, watch performances, enjoy the food hall, and meet new people. Stay in the venue and your ticket covers the night party too — no second ticket needed. Family friendly.</div>
-      </div>
-      <span class="ticket-btn">Buy</span>
-    </a>
-
-    <a class="ticket-card" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">
-      <div class="ticket-price">€18</div>
-      <div class="ticket-info">
+        <div class="ticket-price">€15</div>
+        <span class="ticket-btn">Buy ticket</span>
+      </a>
+      <a class="ticket-card" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">
         <div class="ticket-name">Night Party</div>
         <div class="ticket-desc">Entry from 21:00. Enjoy performances and live music all night until 02:00 plus late night food and drinks until closing.</div>
-      </div>
-      <span class="ticket-btn">Buy</span>
-    </a>
-
-    <a class="ticket-card" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">
-      <div class="ticket-price">€1</div>
-      <div class="ticket-info">
+        <div class="ticket-price">€18</div>
+        <span class="ticket-btn">Buy ticket</span>
+      </a>
+      <a class="ticket-card" href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer">
         <div class="ticket-name">Daytime — Kids</div>
-        <div class="ticket-desc">Entry from 13:00. Ages 12 and under. Family friendly.</div>
-      </div>
-      <span class="ticket-btn">Buy</span>
-    </a>
-
-    <div class="ticket-card expired">
-      <div class="ticket-price">€12</div>
-      <div class="ticket-info">
+        <div class="ticket-desc">Entry from 13:00. Come early to buy art, watch performances, enjoy lunch from the food hall, and meet new people. Family friendly. Ages 12 and under.</div>
+        <div class="ticket-price">€1</div>
+        <span class="ticket-btn">Buy ticket</span>
+      </a>
+      <div class="ticket-card expired">
         <div class="ticket-name">Daytime — Early Bird</div>
         <div class="ticket-desc">Entry from 13:00. Buy art, watch performances, enjoy the food hall, and meet new people. Stay in the venue and your ticket covers the night party too — no second ticket needed. Family friendly.</div>
+        <div class="ticket-price">€12</div>
         <span class="ticket-avail ended">Early bird pricing ended May 31, 11:59 PM</span>
       </div>
-    </div>
-
-    <div class="ticket-card expired">
-      <div class="ticket-price">€15</div>
-      <div class="ticket-info">
+      <div class="ticket-card expired">
         <div class="ticket-name">Night Party — Early Bird</div>
         <div class="ticket-desc">Entry from 21:00. Enjoy performances and live music all night until 02:00 plus late night food and drinks until closing.</div>
+        <div class="ticket-price">€15</div>
         <span class="ticket-avail ended">Early bird pricing ended May 31, 11:59 PM</span>
       </div>
     </div>
