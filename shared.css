@@ -370,3 +370,4 @@ body { top: 0 !important; }
 .fv-ig { font-size: 0.74rem; font-weight: 600; color: var(--green); text-decoration: none; margin-top: auto; }
 .fv-ig:hover { text-decoration: underline; }
 @media (max-width: 520px) { .fv-card { flex-direction: column; } .fv-img { width: 100%; height: 180px; flex: none; } }
+.fv-fullbleed { width: 100vw; margin-left: calc(50% - 50vw); padding: 0 5vw; box-sizing: border-box; }
