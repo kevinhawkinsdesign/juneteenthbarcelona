@@ -178,3 +178,34 @@ function googleTranslateElementInit() {
   }, 'google_translate_element');
 }
 
+
+/* ── Artist bio modal ── */
+(function () {
+  var modal = document.getElementById('bioModal');
+  if (!modal) return;
+  var I = modal.querySelector('.bio-modal-img'), T = modal.querySelector('.bio-modal-time'),
+      N = modal.querySelector('.bio-modal-name'), G = modal.querySelector('.bio-modal-genre'),
+      B = modal.querySelector('.bio-modal-bio'), A = modal.querySelector('.bio-modal-ig');
+  function openCard(card) {
+    var im = card.querySelector('.sa-img'), tm = card.querySelector('.sa-time'),
+        nm = card.querySelector('.sa-name'), gn = card.querySelector('.sa-genre'),
+        bio = card.querySelector('.sa-bio'), ig = card.querySelector('.sa-ig');
+    if (im) { I.src = im.src; I.alt = im.alt; I.style.display = ''; } else { I.style.display = 'none'; }
+    T.textContent = tm ? tm.textContent : '';
+    N.textContent = nm ? nm.textContent : '';
+    G.textContent = gn ? gn.textContent : '';
+    B.innerHTML = bio ? bio.innerHTML : '';
+    if (ig && ig.getAttribute('href')) { A.href = ig.getAttribute('href'); A.textContent = ig.textContent; A.style.display = ''; }
+    else { A.style.display = 'none'; }
+    modal.classList.add('open'); document.body.style.overflow = 'hidden';
+  }
+  function close() { modal.classList.remove('open'); document.body.style.overflow = ''; }
+  document.querySelectorAll('.sa-card').forEach(function (card) {
+    if (!card.querySelector('.sa-bio')) return;
+    card.classList.add('has-bio');
+    card.addEventListener('click', function (e) { if (e.target.closest('.sa-ig')) return; openCard(card); });
+  });
+  modal.querySelector('.bio-modal-close').addEventListener('click', close);
+  modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && modal.classList.contains('open')) close(); });
+})();
