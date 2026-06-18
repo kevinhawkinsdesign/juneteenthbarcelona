@@ -405,3 +405,15 @@ body { top: 0 !important; }
 @media (max-width: 1100px) { .expect-grid { grid-template-columns: repeat(4, 1fr); } }
 @media (max-width: 880px) { .expect-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 620px) { .expect-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ── SHOP POLICY ACCORDION ── */
+.policy-acc { border-top: 1px solid var(--border); }
+.policy-acc details { border-bottom: 1px solid var(--border); }
+.policy-acc summary { cursor: pointer; padding: 1rem 0; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.95rem; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+.policy-acc summary::-webkit-details-marker { display: none; }
+.policy-acc summary::after { content: '+'; font-weight: 400; font-size: 1.3rem; color: var(--mid); }
+.policy-acc details[open] summary::after { content: '\2212'; }
+.policy-acc .acc-body { padding: 0 0 1.25rem; font-size: 0.86rem; line-height: 1.7; color: rgba(13,13,13,0.72); }
+.policy-acc .acc-body ul { padding-left: 1.1rem; margin: 0; }
+.policy-acc .acc-body li { margin-bottom: 0.4rem; }
+.policy-acc .acc-body a { color: var(--green); }
