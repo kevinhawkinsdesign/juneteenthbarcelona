@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="/images/logo.png">
+  <meta name="theme-color" content="#00693A">
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shop official Juneteenth Barcelona merch — tees, hoodies, hats, tote bags and more. Printed on demand, shipped worldwide.">
+  <meta property="og:site_name" content="Juneteenth Barcelona">
+  <meta property="og:title" content="Shop — Juneteenth Barcelona Merch">
+  <meta property="og:description" content="Official Juneteenth Barcelona merch — tees, hoodies, hats and more.">
+  <meta property="og:image" content="https://juneteenth.es/images/logo.png">
+  <meta property="og:url" content="https://juneteenth.es/shop.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://juneteenth.es/shop.html">
+<title>Shop — Juneteenth Barcelona Merch</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+.page-top { padding-top: calc(var(--nav-h) + var(--banner-h)); border-bottom: 1px solid var(--border); }
+.page-top-inner { padding: 5rem 5vw 4rem; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2rem; }
+.page-h1 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: clamp(3rem, 7vw, 6rem); line-height: 0.9; letter-spacing: -0.03em; }
+.page-desc { font-size: 0.97rem; line-height: 1.75; color: rgba(13,13,13,0.58); max-width: 380px; }
+
+.shop-section { padding: 4rem 5vw 6rem; }
+.product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; }
+.product-card { border: 1px solid var(--border); background: #fff; display: flex; flex-direction: column; overflow: hidden; }
+.product-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; background: #f1ede6; }
+.product-body { padding: 1rem 1.1rem 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
+.product-name { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.98rem; line-height: 1.2; }
+.product-price { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.05rem; }
+.product-card select { width: 100%; padding: 0.5rem; border: 1px solid var(--border); font-family: inherit; font-size: 0.8rem; background: #fff; }
+.product-add { margin-top: auto; background: var(--black); color: #fff; border: none; padding: 0.7rem 1rem; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.04em; cursor: pointer; transition: background 0.18s; }
+.product-add:hover { background: var(--red); }
+.shop-status { padding: 4rem 0; text-align: center; color: var(--mid); font-size: 0.9rem; }
+
+/* Cart */
+.cart-fab { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 150; background: var(--black); color: #fff; border: none; border-radius: 999px; padding: 0.85rem 1.4rem; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.85rem; cursor: pointer; box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+.cart-overlay { position: fixed; inset: 0; background: rgba(13,13,13,0.5); opacity: 0; pointer-events: none; transition: opacity 0.25s; z-index: 400; }
+.cart-overlay.open { opacity: 1; pointer-events: all; }
+.cart-drawer { position: fixed; top: 0; right: 0; height: 100%; width: min(420px, 92vw); background: #fff; z-index: 401; transform: translateX(100%); transition: transform 0.3s ease; display: flex; flex-direction: column; }
+.cart-drawer.open { transform: translateX(0); }
+.cart-head { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border); }
+.cart-head h3 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.1rem; }
+.cart-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; line-height: 1; }
+.cart-items { flex: 1; overflow-y: auto; padding: 1rem 1.5rem; }
+.cart-row { display: flex; gap: 0.8rem; padding: 0.8rem 0; border-bottom: 1px solid var(--border); }
+.cart-row img { width: 56px; height: 56px; object-fit: cover; flex: 0 0 56px; }
+.cart-row .ci-name { font-size: 0.8rem; font-weight: 600; line-height: 1.3; }
+.cart-row .ci-price { font-size: 0.78rem; color: var(--mid); }
+.ci-qty { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.3rem; }
+.ci-qty button { width: 22px; height: 22px; border: 1px solid var(--border); background: #fff; cursor: pointer; line-height: 1; }
+.ci-remove { background: none; border: none; color: var(--red); font-size: 0.72rem; cursor: pointer; margin-left: auto; align-self: flex-start; }
+.cart-foot { border-top: 1px solid var(--border); padding: 1.25rem 1.5rem; }
+.cart-foot label { display: block; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid); margin: 0.5rem 0 0.2rem; }
+.cart-foot input, .cart-foot select { width: 100%; padding: 0.55rem; border: 1px solid var(--border); font-family: inherit; font-size: 0.85rem; }
+.cart-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 0.6rem; }
+.cart-subtotal { display: flex; justify-content: space-between; font-weight: 700; margin: 1rem 0 0.4rem; }
+.cart-note { font-size: 0.7rem; color: var(--mid); margin-bottom: 0.8rem; }
+.cart-checkout { width: 100%; background: var(--black); color: #fff; border: none; padding: 0.9rem; font-family: 'Inter', sans-serif; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; }
+.cart-checkout:disabled { opacity: 0.5; cursor: not-allowed; }
+.cart-empty { color: var(--mid); font-size: 0.9rem; text-align: center; padding: 2rem 0; }
+</style>
+</head>
+<body>
+<div class="ticket-marquee"><a href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer" class="ticket-marquee-track"><span>Tickets on sale now</span><span class="marquee-dot"> · </span><span>Day pass €15</span><span class="marquee-dot"> · </span><span>Night party €18</span><span class="marquee-dot"> · </span><span>Kids €1</span><span class="marquee-dot"> · </span><span>13 hours of live music &amp; DJs</span><span class="marquee-dot"> · </span><span>6 food &amp; drink vendors</span><span class="marquee-dot"> · </span><span>Saturday June 20</span><span class="marquee-dot"> · </span><span>Roots Gastro Club, Poblenou</span><span class="marquee-dot"> · </span><span>13:00 – 02:00</span><span class="marquee-dot"> · </span><span>Get your tickets today</span><span class="marquee-dot"> · </span><span>@JuneteenthBarcelona</span><span class="marquee-dot"> · </span></a></div>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="/images/logo.png" alt="Juneteenth Barcelona" style="height:44px;width:auto;display:block;"></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="monthly-events.html">Meetup</a></li>
+    <li><a href="walking-tour/index.html">Walking Tour</a></li>
+    <li><a href="sponsors.html">Sponsors</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="https://checkout.revolut.com/pay/7cbe0d37-2272-4934-ae91-0a07571301a5" target="_blank">Donate</a></li>
+    <li><a href="shop.html" class="active">Shop</a></li>
+    <li><a href="https://www.instagram.com/juneteenthbarcelona/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="nav-ig"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a></li>
+    <li><a href="https://lu.ma/juneteenthbcn" target="_blank" rel="noopener noreferrer" class="nav-cta">Tickets</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-mobile-toggle"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="page-top">
+  <div class="page-top-inner">
+    <div>
+      <div class="section-tag">Merch</div>
+      <h1 class="page-h1">Shop</h1>
+    </div>
+    <p class="page-desc">Official Juneteenth Barcelona merch — printed on demand and shipped worldwide. Every purchase supports the celebration.</p>
+  </div>
+</div>
+
+<section class="shop-section">
+  <div class="product-grid" id="product-grid"></div>
+  <div class="shop-status" id="shop-status">Loading products…</div>
+</section>
+
+<button class="cart-fab" id="cart-fab">Cart (<span id="cart-count">0</span>)</button>
+<div class="cart-overlay" id="cart-overlay"></div>
+<aside class="cart-drawer" id="cart-drawer" aria-label="Shopping cart">
+  <div class="cart-head"><h3>Your cart</h3><button class="cart-close" id="cart-close" aria-label="Close">&times;</button></div>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-foot" id="cart-foot">
+    <div class="cart-subtotal"><span>Subtotal</span><span id="cart-subtotal">€0.00</span></div>
+    <div class="cart-note">Shipping calculated at checkout · secure payment via Stripe</div>
+    <div class="cart-form-grid">
+      <input id="f-name" placeholder="Full name" style="grid-column:1/3">
+      <input id="f-email" placeholder="Email" type="email" style="grid-column:1/3">
+      <input id="f-address1" placeholder="Address" style="grid-column:1/3">
+      <input id="f-city" placeholder="City">
+      <input id="f-zip" placeholder="ZIP / Postal code">
+      <input id="f-state" placeholder="State/Province code (e.g. CA)">
+      <input id="f-country" placeholder="Country code (e.g. ES)" maxlength="2">
+    </div>
+    <button class="cart-checkout" id="cart-checkout" style="margin-top:0.8rem">Checkout</button>
+  </div>
+</aside>
+
+<footer>
+    <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-wrap"><img src="/images/logo.png" alt="Juneteenth Barcelona" style="height:28px;width:auto;display:block;"><span class="footer-logo-text">Juneteenth Barcelona</span></div>
+      <p class="footer-tagline">Celebrating Black freedom, heritage, and community in Barcelona.</p>
+    </div>
+    <div class="footer-col"><h5>Pages</h5><ul>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="monthly-events.html">Monthly Meetup</a></li>
+      <li><a href="walking-tour/index.html">Walking Tour</a></li>
+      <li><a href="sponsors.html">Sponsors</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Partner</h5><ul>
+      <li><a href="sponsors.html#packages">Supporter — €100</a></li>
+      <li><a href="sponsors.html#packages">Bronze — €250</a></li>
+      <li><a href="sponsors.html#packages">Silver — €500</a></li>
+      <li><a href="sponsors.html#packages">Gold / Title — €3,500</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Legal</h5><ul>
+      <li><a href="legal.html">Legal Notice</a></li>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="terms.html">Terms &amp; Conditions</a></li>
+      <li><a href="code-of-conduct.html">Code of Conduct</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Juneteenth Barcelona. Organized by volunteers with love.</p>
+    <div class="footer-flag"><span style="background:var(--red)"></span><span style="background:#333"></span><span style="background:var(--green)"></span></div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+const CART_KEY = 'jb_cart';
+const money = (n, c) => (c === 'USD' ? '$' : '€') + Number(n).toFixed(2);
+let CART = [];
+try { CART = JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch {}
+
+async function loadProducts() {
+  const grid = document.getElementById('product-grid');
+  const status = document.getElementById('shop-status');
+  try {
+    const res = await fetch('/.netlify/functions/products');
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Could not load products');
+    const products = data.products || [];
+    if (!products.length) { status.textContent = 'No products available yet — check back soon.'; return; }
+    status.style.display = 'none';
+    grid.innerHTML = products.map((p, i) => {
+      const opts = p.variants.map(v => `<option value="${v.syncVariantId}" data-price="${v.price}" data-image="${v.image}" data-name="${encodeURIComponent(v.name)}">${v.name}</option>`).join('');
+      const img = p.thumbnail || (p.variants[0] && p.variants[0].image) || '';
+      return `<div class="product-card" data-i="${i}">
+        <img src="${img}" alt="${p.name}" loading="lazy">
+        <div class="product-body">
+          <div class="product-name">${p.name}</div>
+          <div class="product-price" data-price>${money(p.priceFrom, p.currency)}</div>
+          ${p.variants.length > 1 ? `<select data-variant>${opts}</select>` : `<select data-variant style="display:none">${opts}</select>`}
+          <button class="product-add">Add to cart</button>
+        </div>
+      </div>`;
+    }).join('');
+    grid.querySelectorAll('.product-card').forEach(card => {
+      const sel = card.querySelector('[data-variant]');
+      const priceEl = card.querySelector('[data-price]');
+      const update = () => { const o = sel.selectedOptions[0]; priceEl.textContent = money(o.dataset.price, 'EUR'); };
+      if (sel.options.length > 1) sel.addEventListener('change', update);
+      card.querySelector('.product-add').addEventListener('click', () => {
+        const o = sel.selectedOptions[0];
+        addToCart({ syncVariantId: o.value, name: decodeURIComponent(o.dataset.name), price: o.dataset.price, image: o.dataset.image, currency: 'EUR' });
+      });
+    });
+  } catch (e) {
+    status.textContent = 'Sorry — the shop is temporarily unavailable. (' + e.message + ')';
+  }
+}
+
+function saveCart() { localStorage.setItem(CART_KEY, JSON.stringify(CART)); renderCart(); }
+function addToCart(item) {
+  const ex = CART.find(c => c.syncVariantId === item.syncVariantId);
+  if (ex) ex.qty++; else CART.push(Object.assign({ qty: 1 }, item));
+  saveCart(); openCart();
+}
+function renderCart() {
+  document.getElementById('cart-count').textContent = CART.reduce((s, c) => s + c.qty, 0);
+  const wrap = document.getElementById('cart-items');
+  const foot = document.getElementById('cart-foot');
+  if (!CART.length) { wrap.innerHTML = '<div class="cart-empty">Your cart is empty.</div>'; foot.style.display = 'none'; return; }
+  foot.style.display = 'block';
+  wrap.innerHTML = CART.map((c, i) => `<div class="cart-row">
+    <img src="${c.image}" alt="">
+    <div style="flex:1">
+      <div class="ci-name">${c.name}</div>
+      <div class="ci-price">${money(c.price, c.currency)}</div>
+      <div class="ci-qty"><button data-dec="${i}">−</button><span>${c.qty}</span><button data-inc="${i}">+</button></div>
+    </div>
+    <button class="ci-remove" data-rm="${i}">Remove</button>
+  </div>`).join('');
+  const subtotal = CART.reduce((s, c) => s + parseFloat(c.price) * c.qty, 0);
+  document.getElementById('cart-subtotal').textContent = money(subtotal, CART[0].currency);
+  wrap.querySelectorAll('[data-inc]').forEach(b => b.onclick = () => { CART[b.dataset.inc].qty++; saveCart(); });
+  wrap.querySelectorAll('[data-dec]').forEach(b => b.onclick = () => { const i = b.dataset.dec; CART[i].qty--; if (CART[i].qty < 1) CART.splice(i, 1); saveCart(); });
+  wrap.querySelectorAll('[data-rm]').forEach(b => b.onclick = () => { CART.splice(b.dataset.rm, 1); saveCart(); });
+}
+function openCart() { document.getElementById('cart-drawer').classList.add('open'); document.getElementById('cart-overlay').classList.add('open'); }
+function closeCart() { document.getElementById('cart-drawer').classList.remove('open'); document.getElementById('cart-overlay').classList.remove('open'); }
+
+document.getElementById('cart-fab').onclick = openCart;
+document.getElementById('cart-close').onclick = closeCart;
+document.getElementById('cart-overlay').onclick = closeCart;
+
+document.getElementById('cart-checkout').onclick = async function () {
+  if (!CART.length) return;
+  const recipient = {
+    name: val('f-name'), email: val('f-email'), address1: val('f-address1'),
+    city: val('f-city'), zip: val('f-zip'), state_code: val('f-state'), country_code: val('f-country').toUpperCase()
+  };
+  if (!recipient.name || !recipient.address1 || !recipient.city || !recipient.zip || !recipient.country_code) {
+    alert('Please fill in your name and full shipping address.'); return;
+  }
+  this.disabled = true; this.textContent = 'Redirecting…';
+  try {
+    const res = await fetch('/.netlify/functions/create-checkout-session', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: CART.map(c => ({ syncVariantId: c.syncVariantId, qty: c.qty })), recipient })
+    });
+    const data = await res.json();
+    if (!res.ok || !data.url) throw new Error(data.error || 'Checkout failed');
+    window.location.href = data.url;
+  } catch (e) {
+    alert('Checkout error: ' + e.message); this.disabled = false; this.textContent = 'Checkout';
+  }
+};
+function val(id) { return (document.getElementById(id).value || '').trim(); }
+
+renderCart();
+loadProducts();
+</script>
+</body>
+</html>
