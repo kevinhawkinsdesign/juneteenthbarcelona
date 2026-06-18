@@ -10,9 +10,11 @@ function json(status, body) {
   return { statusCode: status, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=300' }, body: JSON.stringify(body) };
 }
 
-exports.handler = async () => {
+exports.handler = async (event) => {
   if (!process.env.PRINTFUL_API_KEY) return json(500, { error: 'Missing PRINTFUL_API_KEY' });
-  if (cache && Date.now() - cacheTime < 300000) return json(200, cache);
+  const qs = (event && event.queryStringParameters) || {};
+  const bypass = qs.refresh === '1' || qs.nocache === '1';
+  if (!bypass && cache && Date.now() - cacheTime < 300000) return json(200, cache);
   try {
     const headers = pfHeaders();
     const listRes = await fetch(PF + '/sync/products?limit=100', { headers });
