@@ -30,11 +30,13 @@ exports.handler = async (event) => {
       const vRes = await fetch(PF + '/sync/variant/' + it.syncVariantId, { headers: pfHeaders() });
       const v = await vRes.json();
       if (!vRes.ok || !v.result) return json(400, { error: 'Invalid product in cart' });
-      const sv = v.result;
+      const sv = v.result.sync_variant || v.result;
       currency = sv.currency || 'EUR';
       const qty = Math.max(1, Math.min(20, parseInt(it.qty, 10) || 1));
+      const price = parseFloat(sv.retail_price);
+      if (!isFinite(price) || !sv.variant_id) return json(502, { error: 'Could not read product price from Printful' });
       lineItems.push({
-        price_data: { currency: currency.toLowerCase(), product_data: { name: sv.name }, unit_amount: Math.round(parseFloat(sv.retail_price) * 100) },
+        price_data: { currency: currency.toLowerCase(), product_data: { name: sv.name || 'Item' }, unit_amount: Math.round(price * 100) },
         quantity: qty
       });
       pfItems.push({ variant_id: sv.variant_id, sync_variant_id: sv.id, quantity: qty });
@@ -52,8 +54,8 @@ exports.handler = async (event) => {
       });
       const s = await sRes.json();
       if (sRes.ok && s.result && s.result.length) {
-        shippingAmount = Math.round(parseFloat(s.result[0].rate) * 100);
-        shippingName = s.result[0].name || 'Shipping';
+        const rate = parseFloat(s.result[0].rate);
+        if (isFinite(rate)) { shippingAmount = Math.round(rate * 100); shippingName = s.result[0].name || 'Shipping'; }
       }
     } catch { /* shipping optional; proceed without if it fails */ }
 
