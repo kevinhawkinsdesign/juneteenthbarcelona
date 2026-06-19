@@ -3,6 +3,10 @@
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* Visually-hidden labels — keep forms compact while giving autofill /
+   password managers / screen readers a real label to anchor on. */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
 :root {
   --red:         #C8102E;
   --gold:        #C8920A;

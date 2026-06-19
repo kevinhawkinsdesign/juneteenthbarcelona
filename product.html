@@ -131,14 +131,23 @@
     <div class="cart-subtotal"><span>Subtotal</span><span id="cart-subtotal">€0.00</span></div>
     <div class="cart-note">Shipping calculated at checkout · secure payment via Stripe · <a href="#shop-policy" style="color:var(--green)">Returns &amp; shipping</a></div>
     <form class="cart-form-grid" autocomplete="on" onsubmit="return false">
+      <label for="f-name" class="sr-only">Full name</label>
       <input id="f-name" name="name" autocomplete="name" placeholder="Full name *" required style="grid-column:1/3">
+      <label for="f-email" class="sr-only">Email</label>
       <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="Email *" required style="grid-column:1/3">
-      <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="Phone (for delivery) *" required style="grid-column:1/3">
+      <label for="f-phone" class="sr-only">Phone</label>
+      <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" pattern="[+]?[0-9 ().\-]{6,}" maxlength="20" title="Enter your phone number including country code, e.g. +34 612 345 678" placeholder="Phone (with country code) *" required style="grid-column:1/3">
+      <label for="f-address1" class="sr-only">Address</label>
       <input id="f-address1" name="address-line1" autocomplete="address-line1" placeholder="Address *" required style="grid-column:1/3">
+      <label for="f-address2" class="sr-only">Apartment, suite, etc.</label>
       <input id="f-address2" name="address-line2" autocomplete="address-line2" placeholder="Apartment, suite, etc. (optional)" style="grid-column:1/3">
+      <label for="f-city" class="sr-only">City</label>
       <input id="f-city" name="city" autocomplete="address-level2" placeholder="City *" required>
+      <label for="f-zip" class="sr-only">ZIP / Postal code</label>
       <input id="f-zip" name="postal-code" autocomplete="postal-code" inputmode="text" placeholder="ZIP / Postal code *" required>
+      <label for="f-state" class="sr-only">State / Province code</label>
       <input id="f-state" name="state" autocomplete="off" maxlength="3" placeholder="State/Province code (e.g. CA)">
+      <label for="f-country" class="sr-only">Country</label>
       <select id="f-country" name="country" autocomplete="country" required>
         <option value="">Country</option>
         <option value="ES" selected>Spain</option>
