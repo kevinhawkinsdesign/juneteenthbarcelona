@@ -41,16 +41,22 @@
 
   async function checkout() {
     if (!CART.length) return;
-    const state_code = val('f-state').toUpperCase();
     const country_code = val('f-country').toUpperCase();
+    // State/province is required only where Printful needs it (US/CA/AU).
+    const stateEl = document.getElementById('f-state');
+    if (stateEl) stateEl.required = (country_code === 'US' || country_code === 'CA' || country_code === 'AU');
+    const form = document.querySelector('.cart-form-grid');
+    if (form && !form.reportValidity()) return;
+
+    const state_code = val('f-state').toUpperCase();
     const recipient = {
       name: val('f-name'), email: val('f-email'), phone: val('f-phone'), address1: val('f-address1'),
       address2: val('f-address2'), city: val('f-city'), zip: val('f-zip'), state_code, country_code
     };
-    if (!recipient.name || !recipient.address1 || !recipient.city || !recipient.zip || !recipient.country_code) {
-      alert('Please fill in your name and full shipping address.'); return;
+    if (!recipient.name || !recipient.email || !recipient.phone || !recipient.address1 || !recipient.city || !recipient.zip || !recipient.country_code) {
+      alert('Please fill in all required fields.'); return;
     }
-    if (recipient.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recipient.email)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recipient.email)) {
       alert('Please enter a valid email address.'); return;
     }
     // Printful requires a 2-letter state/province code for these countries.

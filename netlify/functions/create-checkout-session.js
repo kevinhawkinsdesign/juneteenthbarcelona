@@ -39,7 +39,7 @@ exports.handler = async (event) => {
   const country_code = sanitizeCountry(r.country_code);
   const state_code = sanitizeState(r.state_code);
 
-  if (!name || !address1 || !city || !zip) return json(400, { error: 'Missing shipping details' });
+  if (!name || !email || !phone || !address1 || !city || !zip) return json(400, { error: 'Missing required details (name, email, phone and full shipping address).' });
   if (!country_code) return json(400, { error: 'Please select a valid country.' });
   if (STATE_REQUIRED.includes(country_code) && !state_code) {
     return json(400, { error: 'A state/province code is required for ' + country_code + ' (e.g. CA, NY, ON).' });
