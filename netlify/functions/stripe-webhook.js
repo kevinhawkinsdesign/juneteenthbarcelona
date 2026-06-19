@@ -1,4 +1,5 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const nodemailer = require('nodemailer');
 const PF = 'https://api.printful.com';
 
 // Defensive: metadata is already sanitized in create-checkout-session, but
@@ -16,9 +17,9 @@ function esc(v) {
 }
 
 async function sendConfirmationEmail({ to, name, recipient, session, lineItems }) {
-  const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.ORDER_FROM_EMAIL || 'Juneteenth Barcelona <orders@juneteenth.es>';
-  if (!apiKey) { console.log('Skipping confirmation email: RESEND_API_KEY not set'); return; }
+  const user = process.env.GMAIL_USER;
+  const pass = (process.env.GMAIL_APP_PASSWORD || '').replace(/\s+/g, '');
+  if (!user || !pass) { console.log('Skipping confirmation email: GMAIL_USER / GMAIL_APP_PASSWORD not set'); return; }
   if (!to) { console.log('Skipping confirmation email: no recipient email'); return; }
 
   const cur = session.currency || 'eur';
@@ -51,22 +52,24 @@ async function sendConfirmationEmail({ to, name, recipient, session, lineItems }
     <p style="text-align:center;color:#999;font-size:12px;margin:16px 0 0;">Juneteenth Barcelona &middot; juneteenth.es</p>
   </div></body></html>`;
 
-  const payload = {
-    from,
-    to: [to],
+  const fromName = process.env.ORDER_FROM_NAME || 'Juneteenth Barcelona';
+  const replyTo = process.env.ORDER_REPLY_TO || 'barcelona@juneteenth.es';
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com', port: 465, secure: true,
+    auth: { user, pass }
+  });
+  const mail = {
+    from: '"' + fromName + '" <' + user + '>',
+    to,
+    replyTo,
     subject: 'Your Juneteenth Barcelona order is confirmed',
     html
   };
-  if (process.env.ORDER_NOTIFY_EMAIL) payload.bcc = [process.env.ORDER_NOTIFY_EMAIL];
+  if (process.env.ORDER_NOTIFY_EMAIL) mail.bcc = process.env.ORDER_NOTIFY_EMAIL;
 
   try {
-    const res = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { Authorization: 'Bearer ' + apiKey, 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    if (!res.ok) console.error('Confirmation email error:', res.status, await res.text());
-    else console.log('Confirmation email sent to', to);
+    const info = await transporter.sendMail(mail);
+    console.log('Confirmation email sent to', to, info.messageId);
   } catch (e) {
     console.error('Confirmation email exception:', e.message);
   }

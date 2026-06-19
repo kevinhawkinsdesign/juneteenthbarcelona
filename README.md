@@ -205,8 +205,10 @@ form (`cart.js`), in `create-checkout-session.js`, and again in
 | `PRINTFUL_API_KEY` | yes | Printful API token |
 | `PRINTFUL_STORE_ID` | if multi-store | Printful store id |
 | `PRINTFUL_CONFIRM_ORDERS` | optional | `1` to auto-confirm (charge) Printful orders; otherwise drafts |
-| `RESEND_API_KEY` | for emails | [Resend](https://resend.com) API key — order confirmation emails are skipped if unset |
-| `ORDER_FROM_EMAIL` | optional | From address, e.g. `Juneteenth Barcelona <orders@juneteenth.es>` (sender domain must be verified in Resend) |
+| `GMAIL_USER` | for emails | Gmail/Workspace address that sends order confirmations (e.g. `juneteenthbarcelona@gmail.com`) — emails are skipped if unset |
+| `GMAIL_APP_PASSWORD` | for emails | 16-char Google [App Password](https://myaccount.google.com/apppasswords) for that account (requires 2-Step Verification; spaces are ignored) |
+| `ORDER_FROM_NAME` | optional | Display name on the From line (default `Juneteenth Barcelona`) |
+| `ORDER_REPLY_TO` | optional | Reply-To address (default `barcelona@juneteenth.es`) |
 | `ORDER_NOTIFY_EMAIL` | optional | BCC address to also receive every order confirmation |
 
 ---
