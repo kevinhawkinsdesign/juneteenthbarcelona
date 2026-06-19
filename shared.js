@@ -56,6 +56,9 @@ document.querySelectorAll('.nav-links a').forEach(a => {
 });
 
 // ── Scroll reveal ──────────────────────────────────
+// threshold:0 + rootMargin so very tall sections (e.g. the mobile schedule,
+// whose height can exceed the viewport) still reveal — a percentage threshold
+// can never be met when the element is taller than the screen.
 const io = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
@@ -63,8 +66,20 @@ const io = new IntersectionObserver((entries) => {
       io.unobserve(entry.target);
     }
   });
-}, { threshold: 0.08 });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+}, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
+if ('IntersectionObserver' in window) {
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+} else {
+  // No IntersectionObserver support: show everything immediately.
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+}
+// Safety net: never leave content invisible if something prevents reveal.
+setTimeout(() => {
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight) el.classList.add('visible');
+  });
+}, 1500);
 
 // ── Page content loader from _data/pages/<page>.json ──────
 async function loadPageContent(dataFile) {
