@@ -25,6 +25,11 @@
 .pd-add:hover { background: var(--red); }
 .pd-sizebtn { background: none; border: none; color: var(--green); font-weight: 600; font-size: 0.85rem; cursor: pointer; margin-top: 1.1rem; padding: 0; text-decoration: underline; }
 .pd-status { padding: 5rem 0; text-align: center; color: var(--mid); }
+.pd-desc { max-width: 760px; margin: 3rem 0 0; border-top: 1px solid var(--border); padding-top: 2rem; }
+.pd-desc-h { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.01em; margin-bottom: 1rem; }
+.pd-desc p { font-size: 0.95rem; line-height: 1.75; color: rgba(13,13,13,0.72); margin: 0 0 0.9rem; }
+.pd-desc ul { margin: 0 0 0.9rem; padding-left: 1.2rem; }
+.pd-desc li { font-size: 0.95rem; line-height: 1.7; color: rgba(13,13,13,0.72); margin-bottom: 0.35rem; }
 @media (max-width: 768px) { .pd-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
 
 /* size chart modal */
@@ -192,6 +197,19 @@
 <script src="cart.js"></script>
 <script>
 const money = (n, c) => (c === 'USD' ? '$' : '€') + Number(n).toFixed(2);
+const escHtml = s => String(s).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+// Printful catalog descriptions are plain text with line breaks and bullet dots.
+function formatDesc(text) {
+  const lines = String(text).split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+  let html = '', list = [];
+  const flush = () => { if (list.length) { html += '<ul>' + list.map(li => `<li>${escHtml(li)}</li>`).join('') + '</ul>'; list = []; } };
+  for (const line of lines) {
+    if (/^[•\-\*]\s+/.test(line)) { list.push(line.replace(/^[•\-\*]\s+/, '')); }
+    else { flush(); html += `<p>${escHtml(line)}</p>`; }
+  }
+  flush();
+  return html;
+}
 const id = new URLSearchParams(location.search).get('id');
 let SIZE_GUIDE = null;
 
@@ -215,7 +233,8 @@ async function loadProduct() {
         <button class="pd-add" id="pd-add">Add to cart</button>
         ${SIZE_GUIDE ? '<div><button class="pd-sizebtn" id="pd-sizebtn">📏 View size chart</button></div>' : ''}
       </div>
-    </div>`;
+    </div>
+    ${p.description ? `<div class="pd-desc"><h2 class="pd-desc-h">Product details</h2>${formatDesc(p.description)}</div>` : ''}`;
     const sel = document.getElementById('pd-variant');
     const img = document.getElementById('pd-img');
     const priceEl = document.getElementById('pd-price');

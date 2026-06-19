@@ -24,6 +24,7 @@ exports.handler = async (event) => {
       image: (v.files && (v.files.find(f => f.type === 'preview') || {}).preview_url) || (v.product && v.product.image) || sp.thumbnail_url
     }));
     let sizeGuide = null;
+    let description = '';
     const catalogId = sv[0] && sv[0].product && sv[0].product.product_id;
     if (catalogId) {
       try {
@@ -31,9 +32,14 @@ exports.handler = async (event) => {
         const g = await gRes.json();
         if (gRes.ok && g.result) sizeGuide = g.result;
       } catch {}
+      try {
+        const cRes = await fetch(PF + '/products/' + catalogId, { headers });
+        const c = await cRes.json();
+        if (cRes.ok && c.result && c.result.product) description = c.result.product.description || '';
+      } catch {}
     }
     return json(200, {
-      product: { id: sp.id, name: sp.name, thumbnail: sp.thumbnail_url, currency: (variants[0] && variants[0].currency) || 'EUR', variants },
+      product: { id: sp.id, name: sp.name, thumbnail: sp.thumbnail_url, description, currency: (variants[0] && variants[0].currency) || 'EUR', variants },
       sizeGuide
     });
   } catch (e) {
