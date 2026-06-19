@@ -59,6 +59,12 @@
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recipient.email)) {
       alert('Please enter a valid email address.'); return;
     }
+    // Phone: accept any global format — optional +, digits and common
+    // separators — requiring 7–15 digits (E.164 caps at 15).
+    const phoneDigits = recipient.phone.replace(/\D/g, '');
+    if (!/^[+]?[0-9 ().-]+$/.test(recipient.phone) || phoneDigits.length < 7 || phoneDigits.length > 15) {
+      alert('Please enter a valid phone number including country code (e.g. +34 612 345 678).'); return;
+    }
     // Printful requires a 2-letter state/province code for these countries.
     if ((country_code === 'US' || country_code === 'CA' || country_code === 'AU') && !/^[A-Z]{2,3}$/.test(state_code)) {
       alert('For the US, Canada and Australia, enter your state/province code (e.g. CA, NY, ON).'); return;
