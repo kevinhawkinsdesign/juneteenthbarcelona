@@ -41,12 +41,21 @@
 
   async function checkout() {
     if (!CART.length) return;
+    const state_code = val('f-state').toUpperCase();
+    const country_code = val('f-country').toUpperCase();
     const recipient = {
       name: val('f-name'), email: val('f-email'), phone: val('f-phone'), address1: val('f-address1'),
-      city: val('f-city'), zip: val('f-zip'), state_code: val('f-state'), country_code: val('f-country').toUpperCase()
+      address2: val('f-address2'), city: val('f-city'), zip: val('f-zip'), state_code, country_code
     };
     if (!recipient.name || !recipient.address1 || !recipient.city || !recipient.zip || !recipient.country_code) {
       alert('Please fill in your name and full shipping address.'); return;
+    }
+    if (recipient.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recipient.email)) {
+      alert('Please enter a valid email address.'); return;
+    }
+    // Printful requires a 2-letter state/province code for these countries.
+    if ((country_code === 'US' || country_code === 'CA' || country_code === 'AU') && !/^[A-Z]{2,3}$/.test(state_code)) {
+      alert('For the US, Canada and Australia, enter your state/province code (e.g. CA, NY, ON).'); return;
     }
     this.disabled = true; this.textContent = 'Redirecting…';
     try {

@@ -176,6 +176,43 @@ See the **CMS Sections** table above for a full breakdown of what each section c
 
 ---
 
+## Shop / Checkout (Stripe + Printful)
+
+The shop (`shop.html`, `product.html`) is powered by Netlify Functions in
+`netlify/functions/`:
+
+| Function | Role |
+|----------|------|
+| `products.js` / `product.js` | List / fetch Printful catalog products |
+| `create-checkout-session.js` | Validate the cart + shipping address, get a Printful shipping rate, create a Stripe Checkout session |
+| `stripe-webhook.js` | On `checkout.session.completed`: place the Printful order **and email the customer a confirmation** |
+| `health.js` | Reports Stripe mode + confirm-orders config (no secrets) |
+
+### Address validation
+
+Country and state/province are normalized and validated before payment so an
+invalid value never reaches Printful (which needs a 2-letter ISO country code
+and a 2–3 letter state code for US/CA/AU). State/country validation runs in the
+form (`cart.js`), in `create-checkout-session.js`, and again in
+`stripe-webhook.js`.
+
+### Environment variables (set in Netlify → Site settings → Environment)
+
+| Variable | Required | Purpose |
+|----------|----------|---------|
+| `STRIPE_SECRET_KEY` | yes | Stripe API key |
+| `STRIPE_WEBHOOK_SECRET` | yes | Verifies the Stripe webhook signature |
+| `PRINTFUL_API_KEY` | yes | Printful API token |
+| `PRINTFUL_STORE_ID` | if multi-store | Printful store id |
+| `PRINTFUL_CONFIRM_ORDERS` | optional | `1` to auto-confirm (charge) Printful orders; otherwise drafts |
+| `GMAIL_USER` | for emails | Gmail/Workspace address that sends order confirmations (e.g. `juneteenthbarcelona@gmail.com`) — emails are skipped if unset |
+| `GMAIL_APP_PASSWORD` | for emails | 16-char Google [App Password](https://myaccount.google.com/apppasswords) for that account (requires 2-Step Verification; spaces are ignored) |
+| `ORDER_FROM_NAME` | optional | Display name on the From line (default `Juneteenth Barcelona`) |
+| `ORDER_REPLY_TO` | optional | Reply-To address (defaults to `GMAIL_USER`) |
+| `ORDER_NOTIFY_EMAIL` | optional | BCC address(es) to also receive every order confirmation — comma-separate for multiple (e.g. team + owner) |
+
+---
+
 ## Tech Stack
 
 - Plain HTML / CSS / JS — no build step required
@@ -188,4 +225,4 @@ See the **CMS Sections** table above for a full breakdown of what each section c
 
 ## Help
 
-Email: barcelona@juneteenth.es
+Email: hello@kevinhawkinsdesign.com
