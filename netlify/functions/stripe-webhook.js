@@ -16,12 +16,15 @@ exports.handler = async (event) => {
     const m = s.metadata || {};
     let items = [];
     try { items = JSON.parse(m.pf_items || '[]'); } catch {}
+    const country = (m.pf_country || '').trim();
+    const country_code = country.length === 2 ? country.toUpperCase() : '';
+    if (!country_code) { console.error('Invalid country_code in metadata:', country); return { statusCode: 200, body: JSON.stringify({ received: true }) }; }
     const order = {
       recipient: {
         name: m.pf_name,
         email: m.pf_email || (s.customer_details && s.customer_details.email) || '',
         phone: m.pf_phone || '', address1: m.pf_address1, city: m.pf_city, state_code: m.pf_state || '',
-        country_code: m.pf_country, zip: m.pf_zip
+        country_code, zip: m.pf_zip
       },
       items: items.map(i => ({ sync_variant_id: i.v, quantity: i.q }))
     };
