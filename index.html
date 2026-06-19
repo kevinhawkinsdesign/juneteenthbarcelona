@@ -605,6 +605,7 @@ a.ticket-card:hover .ticket-btn { background: var(--red); opacity: 1; }
 .faq-item[open] summary::after { transform: rotate(45deg); }
 .faq-body { font-size: 0.93rem; line-height: 1.85; color: rgba(13,13,13,0.68); padding-bottom: 1.75rem; }
 .faq-body p + p { margin-top: 0.75rem; }
+@media (min-width: 900px) { .faq-grid { column-count: 2; column-gap: 3.5rem; } .faq-grid .faq-item { break-inside: avoid; } }
 </style>
   <!-- PostHog Analytics -->
   <script>
@@ -1470,6 +1471,7 @@ a.ticket-card:hover .ticket-btn { background: var(--red); opacity: 1; }
   <div class="faq-inner">
     <div class="section-tag">FAQ</div>
     <h2 class="faq-title">Frequently Asked<br>Questions</h2>
+    <div class="faq-grid">
 
     <details class="faq-item">
       <summary>Who is the Juneteenth Barcelona committee?</summary>
@@ -1515,6 +1517,7 @@ a.ticket-card:hover .ticket-btn { background: var(--red); opacity: 1; }
       </div>
     </details>
 
+  </div>
   </div>
 </section>
 
