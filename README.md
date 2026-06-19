@@ -187,6 +187,7 @@ The shop (`shop.html`, `product.html`) is powered by Netlify Functions in
 | `create-checkout-session.js` | Validate the cart + shipping address, get a Printful shipping rate, create a Stripe Checkout session |
 | `stripe-webhook.js` | On `checkout.session.completed`: place the Printful order **and email the customer a confirmation** |
 | `health.js` | Reports Stripe mode + confirm-orders config (no secrets) |
+| `test-email.js` | One-off check that the Gmail SMTP credentials work — only emails `GMAIL_USER`, guarded by `TEST_EMAIL_TOKEN`. Visit `/.netlify/functions/test-email?token=YOUR_TOKEN` |
 
 ### Address validation
 
@@ -210,6 +211,7 @@ form (`cart.js`), in `create-checkout-session.js`, and again in
 | `ORDER_FROM_NAME` | optional | Display name on the From line (default `Juneteenth Barcelona`) |
 | `ORDER_REPLY_TO` | optional | Reply-To address (default `barcelona@juneteenth.es`) |
 | `ORDER_NOTIFY_EMAIL` | optional | BCC address to also receive every order confirmation |
+| `TEST_EMAIL_TOKEN` | optional | Secret that enables the `test-email` function for verifying email setup; unset = disabled |
 
 ---
 
