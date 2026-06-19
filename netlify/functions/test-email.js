@@ -24,7 +24,7 @@ exports.handler = async (event) => {
     const info = await transporter.sendMail({
       from: '"Juneteenth Barcelona" <' + user + '>',
       to: user,
-      replyTo: process.env.ORDER_REPLY_TO || 'barcelona@juneteenth.es',
+      replyTo: process.env.ORDER_REPLY_TO || user,
       subject: 'Test email — Juneteenth Barcelona shop',
       text: 'Success! Your Gmail SMTP credentials work. Order confirmation emails are ready to go.'
     });

@@ -45,15 +45,14 @@ async function sendConfirmationEmail({ to, name, recipient, session, lineItems }
       <h3 style="margin:24px 0 6px;font-size:14px;color:#555;">Shipping to</h3>
       <p style="margin:0;font-size:15px;line-height:1.5;">${esc(name)}<br>${addr}</p>
       <p style="margin:24px 0 0;font-size:13px;color:#777;line-height:1.6;">
-        We'll email you tracking once your order ships. Questions? Reply to this email or contact
-        <a href="mailto:barcelona@juneteenth.es" style="color:#0a5c36;">barcelona@juneteenth.es</a>.
+        We'll email you tracking once your order ships. Questions? Just reply to this email.
       </p>
     </div>
     <p style="text-align:center;color:#999;font-size:12px;margin:16px 0 0;">Juneteenth Barcelona &middot; juneteenth.es</p>
   </div></body></html>`;
 
   const fromName = process.env.ORDER_FROM_NAME || 'Juneteenth Barcelona';
-  const replyTo = process.env.ORDER_REPLY_TO || 'barcelona@juneteenth.es';
+  const replyTo = process.env.ORDER_REPLY_TO || user;
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com', port: 465, secure: true,
     auth: { user, pass }
