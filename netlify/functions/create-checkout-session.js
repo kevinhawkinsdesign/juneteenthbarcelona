@@ -10,6 +10,14 @@ function json(status, body) {
   return { statusCode: status, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) };
 }
 
+// Printful expects a 2-letter ISO country code, a 2–3 letter state/province
+// code (US/CA/AU), and a valid email. Anything else is dropped/rejected so
+// invalid values never reach Printful.
+function sanitizeCountry(v) { const s = (v || '').trim().toUpperCase(); return /^[A-Z]{2}$/.test(s) ? s : ''; }
+function sanitizeState(v) { const s = (v || '').trim().toUpperCase(); return /^[A-Z]{2,3}$/.test(s) ? s : ''; }
+function sanitizeEmail(v) { const s = (v || '').trim(); return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s) ? s : ''; }
+const STATE_REQUIRED = ['US', 'CA', 'AU'];
+
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') return json(405, { error: 'Method not allowed' });
   let body;
@@ -18,7 +26,24 @@ exports.handler = async (event) => {
   const items = body.items || [];
   const r = body.recipient || {};
   if (!items.length) return json(400, { error: 'Cart is empty' });
-  if (!r.name || !r.address1 || !r.city || !r.country_code || !r.zip) return json(400, { error: 'Missing shipping details' });
+
+  // Normalize + validate the recipient before we charge anyone, so a bad
+  // address can't take a payment for an order Printful will later reject.
+  const name = (r.name || '').trim();
+  const address1 = (r.address1 || '').trim();
+  const address2 = (r.address2 || '').trim();
+  const city = (r.city || '').trim();
+  const zip = (r.zip || '').trim();
+  const phone = (r.phone || '').trim();
+  const email = sanitizeEmail(r.email);
+  const country_code = sanitizeCountry(r.country_code);
+  const state_code = sanitizeState(r.state_code);
+
+  if (!name || !address1 || !city || !zip) return json(400, { error: 'Missing shipping details' });
+  if (!country_code) return json(400, { error: 'Please select a valid country.' });
+  if (STATE_REQUIRED.includes(country_code) && !state_code) {
+    return json(400, { error: 'A state/province code is required for ' + country_code + ' (e.g. CA, NY, ON).' });
+  }
 
   const base = 'https://' + event.headers.host;
 
@@ -48,7 +73,7 @@ exports.handler = async (event) => {
       const sRes = await fetch(PF + '/shipping/rates', {
         method: 'POST', headers: pfHeaders({ 'Content-Type': 'application/json' }),
         body: JSON.stringify({
-          recipient: { address1: r.address1, city: r.city, country_code: r.country_code, state_code: r.state_code || '', zip: r.zip },
+          recipient: { address1, city, country_code, state_code, zip },
           items: pfItems.map(i => ({ variant_id: i.variant_id, quantity: i.quantity }))
         })
       });
@@ -62,13 +87,13 @@ exports.handler = async (event) => {
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       line_items: lineItems,
-      customer_email: r.email || undefined,
+      customer_email: email || undefined,
       shipping_options: shippingAmount > 0 ? [{ shipping_rate_data: { type: 'fixed_amount', fixed_amount: { amount: shippingAmount, currency: currency.toLowerCase() }, display_name: shippingName } }] : undefined,
       success_url: base + '/success.html?session_id={CHECKOUT_SESSION_ID}',
       cancel_url: base + '/shop.html',
       metadata: {
-        pf_name: r.name, pf_email: r.email || '', pf_phone: r.phone || '', pf_address1: r.address1, pf_city: r.city,
-        pf_state: r.state_code || '', pf_country: r.country_code, pf_zip: r.zip,
+        pf_name: name, pf_email: email, pf_phone: phone, pf_address1: address1, pf_address2: address2, pf_city: city,
+        pf_state: state_code, pf_country: country_code, pf_zip: zip,
         pf_items: JSON.stringify(pfItems.map(i => ({ v: i.sync_variant_id, q: i.quantity }))).slice(0, 490)
       }
     });

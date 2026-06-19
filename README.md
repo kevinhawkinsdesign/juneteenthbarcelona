@@ -176,6 +176,41 @@ See the **CMS Sections** table above for a full breakdown of what each section c
 
 ---
 
+## Shop / Checkout (Stripe + Printful)
+
+The shop (`shop.html`, `product.html`) is powered by Netlify Functions in
+`netlify/functions/`:
+
+| Function | Role |
+|----------|------|
+| `products.js` / `product.js` | List / fetch Printful catalog products |
+| `create-checkout-session.js` | Validate the cart + shipping address, get a Printful shipping rate, create a Stripe Checkout session |
+| `stripe-webhook.js` | On `checkout.session.completed`: place the Printful order **and email the customer a confirmation** |
+| `health.js` | Reports Stripe mode + confirm-orders config (no secrets) |
+
+### Address validation
+
+Country and state/province are normalized and validated before payment so an
+invalid value never reaches Printful (which needs a 2-letter ISO country code
+and a 2–3 letter state code for US/CA/AU). State/country validation runs in the
+form (`cart.js`), in `create-checkout-session.js`, and again in
+`stripe-webhook.js`.
+
+### Environment variables (set in Netlify → Site settings → Environment)
+
+| Variable | Required | Purpose |
+|----------|----------|---------|
+| `STRIPE_SECRET_KEY` | yes | Stripe API key |
+| `STRIPE_WEBHOOK_SECRET` | yes | Verifies the Stripe webhook signature |
+| `PRINTFUL_API_KEY` | yes | Printful API token |
+| `PRINTFUL_STORE_ID` | if multi-store | Printful store id |
+| `PRINTFUL_CONFIRM_ORDERS` | optional | `1` to auto-confirm (charge) Printful orders; otherwise drafts |
+| `RESEND_API_KEY` | for emails | [Resend](https://resend.com) API key — order confirmation emails are skipped if unset |
+| `ORDER_FROM_EMAIL` | optional | From address, e.g. `Juneteenth Barcelona <orders@juneteenth.es>` (sender domain must be verified in Resend) |
+| `ORDER_NOTIFY_EMAIL` | optional | BCC address to also receive every order confirmation |
+
+---
+
 ## Tech Stack
 
 - Plain HTML / CSS / JS — no build step required
