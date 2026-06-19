@@ -140,15 +140,15 @@
     <div class="cart-subtotal"><span>Subtotal</span><span id="cart-subtotal">€0.00</span></div>
     <div class="cart-note">Shipping calculated at checkout · secure payment via Stripe · <a href="#shop-policy" style="color:var(--green)">Returns &amp; shipping</a></div>
     <form class="cart-form-grid" autocomplete="on" onsubmit="return false">
-      <input id="f-name" name="name" autocomplete="name" placeholder="Full name" style="grid-column:1/3">
-      <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="Email" style="grid-column:1/3">
-      <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="Phone (for delivery)" style="grid-column:1/3">
-      <input id="f-address1" name="address-line1" autocomplete="address-line1" placeholder="Address" style="grid-column:1/3">
+      <input id="f-name" name="name" autocomplete="name" placeholder="Full name *" required style="grid-column:1/3">
+      <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="Email *" required style="grid-column:1/3">
+      <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="Phone (for delivery) *" required style="grid-column:1/3">
+      <input id="f-address1" name="address-line1" autocomplete="address-line1" placeholder="Address *" required style="grid-column:1/3">
       <input id="f-address2" name="address-line2" autocomplete="address-line2" placeholder="Apartment, suite, etc. (optional)" style="grid-column:1/3">
-      <input id="f-city" name="city" autocomplete="address-level2" placeholder="City">
-      <input id="f-zip" name="postal-code" autocomplete="postal-code" inputmode="text" placeholder="ZIP / Postal code">
+      <input id="f-city" name="city" autocomplete="address-level2" placeholder="City *" required>
+      <input id="f-zip" name="postal-code" autocomplete="postal-code" inputmode="text" placeholder="ZIP / Postal code *" required>
       <input id="f-state" name="state" autocomplete="off" maxlength="3" placeholder="State/Province code (e.g. CA)">
-      <select id="f-country" name="country" autocomplete="country">
+      <select id="f-country" name="country" autocomplete="country" required>
         <option value="">Country</option>
         <option value="ES" selected>Spain</option>
         <option value="AD">Andorra</option>
