@@ -20,7 +20,7 @@ exports.handler = async (event) => {
       recipient: {
         name: m.pf_name,
         email: m.pf_email || (s.customer_details && s.customer_details.email) || '',
-        address1: m.pf_address1, city: m.pf_city, state_code: m.pf_state || '',
+        phone: m.pf_phone || '', address1: m.pf_address1, city: m.pf_city, state_code: m.pf_state || '',
         country_code: m.pf_country, zip: m.pf_zip
       },
       items: items.map(i => ({ sync_variant_id: i.v, quantity: i.q }))

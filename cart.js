@@ -42,7 +42,7 @@
   async function checkout() {
     if (!CART.length) return;
     const recipient = {
-      name: val('f-name'), email: val('f-email'), address1: val('f-address1'),
+      name: val('f-name'), email: val('f-email'), phone: val('f-phone'), address1: val('f-address1'),
       city: val('f-city'), zip: val('f-zip'), state_code: val('f-state'), country_code: val('f-country').toUpperCase()
     };
     if (!recipient.name || !recipient.address1 || !recipient.city || !recipient.zip || !recipient.country_code) {

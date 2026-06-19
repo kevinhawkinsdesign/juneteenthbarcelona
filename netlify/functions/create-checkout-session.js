@@ -67,7 +67,7 @@ exports.handler = async (event) => {
       success_url: base + '/success.html?session_id={CHECKOUT_SESSION_ID}',
       cancel_url: base + '/shop.html',
       metadata: {
-        pf_name: r.name, pf_email: r.email || '', pf_address1: r.address1, pf_city: r.city,
+        pf_name: r.name, pf_email: r.email || '', pf_phone: r.phone || '', pf_address1: r.address1, pf_city: r.city,
         pf_state: r.state_code || '', pf_country: r.country_code, pf_zip: r.zip,
         pf_items: JSON.stringify(pfItems.map(i => ({ v: i.sync_variant_id, q: i.quantity }))).slice(0, 490)
       }
