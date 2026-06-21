@@ -27,7 +27,14 @@ async function sendConfirmationEmail({ to, name, recipient, session, lineItems }
     `<tr><td style="padding:8px 0;border-bottom:1px solid #eee;">${esc(li.description || 'Item')} &times; ${li.quantity}</td>` +
     `<td style="padding:8px 0;border-bottom:1px solid #eee;text-align:right;white-space:nowrap;">${money(li.amount_total, cur)}</td></tr>`
   ).join('');
-  const shippingCents = (session.shipping_cost && session.shipping_cost.amount_total) || 0;
+  // Stripe's webhook session object often doesn't populate shipping_cost, which
+  // made the email show "Shipping €0.00" even though shipping was charged and
+  // included in the total. Derive it robustly so the breakdown reconciles.
+  const subtotalCents = session.amount_subtotal || 0;
+  const totalCents = session.amount_total || 0;
+  const td = session.total_details || {};
+  let shippingCents = (session.shipping_cost && session.shipping_cost.amount_total) || td.amount_shipping || 0;
+  if (!shippingCents) shippingCents = Math.max(0, totalCents - subtotalCents - (td.amount_tax || 0) + (td.amount_discount || 0));
   const addr = [recipient.address1, recipient.address2, recipient.city, recipient.state_code, recipient.zip, recipient.country_code]
     .filter(Boolean).map(esc).join(', ');
 
@@ -39,8 +46,9 @@ async function sendConfirmationEmail({ to, name, recipient, session, lineItems }
     </div>
     <div style="background:#fff;padding:24px;border-radius:0 0 10px 10px;">
       <table style="width:100%;border-collapse:collapse;font-size:15px;">${rows}
-        <tr><td style="padding:8px 0;">Shipping</td><td style="padding:8px 0;text-align:right;">${money(shippingCents, cur)}</td></tr>
-        <tr><td style="padding:12px 0 0;font-weight:bold;">Total</td><td style="padding:12px 0 0;text-align:right;font-weight:bold;">${money(session.amount_total, cur)}</td></tr>
+        <tr><td style="padding:8px 0;color:#555;">Subtotal</td><td style="padding:8px 0;text-align:right;color:#555;">${money(subtotalCents, cur)}</td></tr>
+        <tr><td style="padding:8px 0;color:#555;">Shipping</td><td style="padding:8px 0;text-align:right;color:#555;">${money(shippingCents, cur)}</td></tr>
+        <tr><td style="padding:12px 0 0;font-weight:bold;border-top:1px solid #eee;">Total</td><td style="padding:12px 0 0;text-align:right;font-weight:bold;border-top:1px solid #eee;">${money(totalCents, cur)}</td></tr>
       </table>
       <h3 style="margin:24px 0 6px;font-size:14px;color:#555;">Shipping to</h3>
       <p style="margin:0;font-size:15px;line-height:1.5;">${esc(name)}<br>${addr}</p>
