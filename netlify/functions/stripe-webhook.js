@@ -35,6 +35,11 @@ async function sendConfirmationEmail({ to, name, recipient, session, lineItems }
   const td = session.total_details || {};
   let shippingCents = (session.shipping_cost && session.shipping_cost.amount_total) || td.amount_shipping || 0;
   if (!shippingCents) shippingCents = Math.max(0, totalCents - subtotalCents - (td.amount_tax || 0) + (td.amount_discount || 0));
+  // Prices are VAT-inclusive, so VAT is the portion already inside the total.
+  // Back-calculate at the destination country's standard rate (EU/OSS).
+  const VAT_RATES = { ES:21, AT:20, BE:21, HR:25, CY:19, CZ:21, DK:25, EE:22, FI:25.5, FR:20, DE:19, GR:24, HU:27, IE:23, IT:22, LV:21, LT:21, LU:17, MT:18, NL:21, PL:23, PT:23, RO:21, SK:23, SI:22 };
+  const vatRate = VAT_RATES[(recipient.country_code || '').toUpperCase()] || 0;
+  const vatCents = vatRate ? Math.round(totalCents * vatRate / (100 + vatRate)) : 0;
   const addr = [recipient.address1, recipient.address2, recipient.city, recipient.state_code, recipient.zip, recipient.country_code]
     .filter(Boolean).map(esc).join(', ');
 
@@ -49,6 +54,7 @@ async function sendConfirmationEmail({ to, name, recipient, session, lineItems }
         <tr><td style="padding:8px 0;color:#555;">Subtotal</td><td style="padding:8px 0;text-align:right;color:#555;">${money(subtotalCents, cur)}</td></tr>
         <tr><td style="padding:8px 0;color:#555;">Shipping</td><td style="padding:8px 0;text-align:right;color:#555;">${money(shippingCents, cur)}</td></tr>
         <tr><td style="padding:12px 0 0;font-weight:bold;border-top:1px solid #eee;">Total</td><td style="padding:12px 0 0;text-align:right;font-weight:bold;border-top:1px solid #eee;">${money(totalCents, cur)}</td></tr>
+        ${vatRate ? `<tr><td style="padding:4px 0 0;font-size:12px;color:#888;">Includes VAT (${vatRate}%)</td><td style="padding:4px 0 0;text-align:right;font-size:12px;color:#888;">${money(vatCents, cur)}</td></tr>` : ''}
       </table>
       <h3 style="margin:24px 0 6px;font-size:14px;color:#555;">Shipping to</h3>
       <p style="margin:0;font-size:15px;line-height:1.5;">${esc(name)}<br>${addr}</p>
