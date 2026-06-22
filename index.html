@@ -935,73 +935,6 @@ a.ticket-card:hover .ticket-btn { background: var(--red); opacity: 1; }
   </div>
 </section>
 
-<!-- FEATURED ACTS -->
-<section class="evt-featured reveal" aria-label="Featured performers and vendors">
-  <div class="section-tag">Featured at the Event</div>
-  <h2 class="evt-featured-title">Featuring...</h2>
-  <div class="evt-featured-grid">
-
-
-    <div class="evt-featured-act">
-      <div class="evt-act-carousel" data-evt-carousel>
-        <div class="evt-act-track">
-          <img src="images/featured/GramFetchr_Thumbnail_34599759.jpg" alt="Ceci Heather rollerskating" class="evt-act-slide">
-          <img src="images/featured/GramFetchr_Thumbnail_51709524.jpg" alt="Ceci Heather with skates" class="evt-act-slide">
-          <img src="images/featured/image.png" alt="Ceci Heather promo" class="evt-act-slide">
-        </div>
-        <div class="evt-act-dots">
-          <button class="evt-act-dot active" data-index="0" aria-label="Photo 1"></button>
-          <button class="evt-act-dot" data-index="1" aria-label="Photo 2"></button>
-          <button class="evt-act-dot" data-index="2" aria-label="Photo 3"></button>
-        </div>
-      </div>
-      <div class="evt-act-role">Featured Rollerskate Performer</div>
-      <div class="evt-act-name">Ceci Heather</div>
-      <a href="https://www.instagram.com/thestylishglobesk8r/" class="evt-act-ig" target="_blank" rel="noopener">@thestylishglobesk8r</a>
-    </div>
-
-    <div class="evt-featured-act">
-      <div class="evt-act-carousel" data-evt-carousel>
-        <div class="evt-act-track">
-          <img src="images/featured/TinaMasawi.jpeg" alt="Tina Masawi" class="evt-act-slide">
-          <img src="https://www.musiqua.es/djmedia/band_pictures/project_image_fb311e2ab7.jpeg" alt="Tina Masawi performing" class="evt-act-slide">
-          <img src="https://southernafricantimes.com/wp-content/uploads/2022/03/BF99F005-F69C-4CD2-8380-2905091C6D3B-scaled.jpeg" alt="Tina Masawi" class="evt-act-slide">
-        </div>
-        <div class="evt-act-dots">
-          <button class="evt-act-dot active" data-index="0" aria-label="Photo 1"></button>
-          <button class="evt-act-dot" data-index="1" aria-label="Photo 2"></button>
-          <button class="evt-act-dot" data-index="2" aria-label="Photo 3"></button>
-        </div>
-      </div>
-      <div class="evt-act-role">Featured Performer</div>
-      <div class="evt-act-name">Tina Masawi</div>
-      <a href="https://www.instagram.com/tinamasawi/" class="evt-act-ig" target="_blank" rel="noopener">@tinamasawi</a>
-    </div>
-
-
-    <div class="evt-featured-act">
-      <div class="evt-act-carousel" data-evt-carousel>
-        <div class="evt-act-track">
-          <img src="images/featured/voodoo-system.jpg" alt="Voodoo System" class="evt-act-slide">
-          <img src="images/featured/voodoo2.jpeg" alt="Voodoo System" class="evt-act-slide">
-          <img src="images/featured/voodoo3.jpg" alt="Voodoo System" class="evt-act-slide">
-        </div>
-        <div class="evt-act-dots">
-          <button class="evt-act-dot active" data-index="0" aria-label="Photo 1"></button>
-          <button class="evt-act-dot" data-index="1" aria-label="Photo 2"></button>
-          <button class="evt-act-dot" data-index="2" aria-label="Photo 3"></button>
-        </div>
-      </div>
-      <div class="evt-act-role">Featured Performers</div>
-      <div class="evt-act-name">Voodoo System</div>
-      <a href="https://www.instagram.com/thevoodooclub/" class="evt-act-ig" target="_blank" rel="noopener">@thevoodooclub</a>
-    </div>
-
-
-
-  </div>
-</section>
-
 <!-- SCHEDULE -->
 <section class="schedule-section" style="padding:5rem 5vw;border-top:1px solid var(--border)">
   <div style="max-width:none">
@@ -1362,12 +1295,6 @@ a.ticket-card:hover .ticket-btn { background: var(--red); opacity: 1; }
   </div>
 </section>
 
-<!-- FEATURED ACTS LIGHTBOX -->
-<div id="evtFeaturedLightbox" class="evt-featured-lightbox" role="dialog" aria-modal="true" aria-label="Full-size photo">
-  <button class="evt-featured-lightbox-close" aria-label="Close">&times;</button>
-  <img class="evt-featured-lightbox-img" src="" alt="">
-</div>
-
 <!-- VENUE INFO -->
 <section class="venue-info-section reveal" aria-label="Venue information">
   <div>
@@ -1639,82 +1566,6 @@ a.ticket-card:hover .ticket-btn { background: var(--red); opacity: 1; }
       var igLink = carousel.parentElement.querySelector('.home-act-ig');
       if (igLink) window.open(igLink.href, '_blank', 'noopener');
     });
-  });
-}());
-</script>
-<script>
-(function () {
-  var lb = document.getElementById('evtFeaturedLightbox');
-  var lbImg = lb.querySelector('.evt-featured-lightbox-img');
-  var lbClose = lb.querySelector('.evt-featured-lightbox-close');
-
-  function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; }
-
-  document.querySelectorAll('[data-evt-carousel]').forEach(function (carousel) {
-    var track = carousel.querySelector('.evt-act-track');
-    var slides = Array.from(carousel.querySelectorAll('.evt-act-slide'));
-    var dots = Array.from(carousel.querySelectorAll('.evt-act-dot'));
-    var total = slides.length;
-    var current = 0;
-    var timer;
-
-    function goTo(index) {
-      current = (index + total) % total;
-      track.style.transform = 'translateX(-' + (100 * current) + '%)';
-      dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
-    }
-
-    function startAuto() { timer = setInterval(function () { goTo(current + 1); }, 3200); }
-    function stopAuto() { clearInterval(timer); }
-    startAuto();
-    carousel.addEventListener('mouseenter', stopAuto);
-    carousel.addEventListener('mouseleave', startAuto);
-
-    dots.forEach(function (dot) {
-      dot.addEventListener('click', function (e) {
-        e.stopPropagation(); stopAuto(); goTo(parseInt(dot.dataset.index, 10)); startAuto();
-      });
-    });
-
-    var prevBtn = document.createElement('button');
-    prevBtn.className = 'evt-act-arrow evt-act-arrow-prev';
-    prevBtn.setAttribute('aria-label', 'Previous photo');
-    prevBtn.innerHTML = '&#8592;';
-    var nextBtn = document.createElement('button');
-    nextBtn.className = 'evt-act-arrow evt-act-arrow-next';
-    nextBtn.setAttribute('aria-label', 'Next photo');
-    nextBtn.innerHTML = '&#8594;';
-    carousel.appendChild(prevBtn);
-    carousel.appendChild(nextBtn);
-    prevBtn.addEventListener('click', function (e) { e.stopPropagation(); stopAuto(); goTo(current - 1); startAuto(); });
-    nextBtn.addEventListener('click', function (e) { e.stopPropagation(); stopAuto(); goTo(current + 1); startAuto(); });
-
-    var touchStartX = null;
-    carousel.addEventListener('touchstart', function (e) { touchStartX = e.touches[0].clientX; }, { passive: true });
-    carousel.addEventListener('touchend', function (e) {
-      if (touchStartX === null) return;
-      var diff = touchStartX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 40) { stopAuto(); goTo(diff > 0 ? current + 1 : current - 1); startAuto(); }
-      touchStartX = null;
-    }, { passive: true });
-
-    var pointerDownX = null;
-    carousel.addEventListener('pointerdown', function (e) { pointerDownX = e.clientX; });
-    carousel.addEventListener('click', function (e) {
-      if (e.target.closest('.evt-act-arrow') || e.target.closest('.evt-act-dot')) return;
-      if (pointerDownX !== null && Math.abs(e.clientX - pointerDownX) > 8) { pointerDownX = null; return; }
-      pointerDownX = null;
-      lbImg.src = slides[current].src;
-      lbImg.alt = slides[current].alt;
-      lb.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    });
-  });
-
-  lbClose.addEventListener('click', closeLb);
-  lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && lb.classList.contains('open')) closeLb();
   });
 }());
 </script>
