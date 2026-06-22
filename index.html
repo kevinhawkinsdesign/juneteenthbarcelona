@@ -605,6 +605,13 @@ a.ticket-card:hover .ticket-btn { background: var(--red); opacity: 1; }
 .faq-body { font-size: 0.93rem; line-height: 1.85; color: rgba(13,13,13,0.68); padding-bottom: 1.75rem; }
 .faq-body p + p { margin-top: 0.75rem; }
 @media (min-width: 900px) { .faq-grid { column-count: 2; column-gap: 3.5rem; } .faq-grid .faq-item { break-inside: avoid; } }
+/* Post-event CTA */
+.post-cta { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.post-cta > div { padding: 4.5rem 5vw; }
+.post-cta > div:first-child { border-right: 1px solid var(--border); }
+.post-cta h2 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: clamp(1.6rem, 3vw, 2.4rem); letter-spacing: -0.02em; line-height: 1.05; margin: 0.6rem 0 1rem; }
+.post-cta p { font-size: 0.95rem; line-height: 1.7; color: rgba(13,13,13,0.6); max-width: 400px; margin: 0 0 1.75rem; }
+@media (max-width: 768px) { .post-cta { grid-template-columns: 1fr; } .post-cta > div:first-child { border-right: none; border-bottom: 1px solid var(--border); } }
 </style>
   <!-- PostHog Analytics -->
   <script>
@@ -867,7 +874,21 @@ a.ticket-card:hover .ticket-btn { background: var(--red); opacity: 1; }
   </div>
 </section>
 
-<!-- SHARE -->
+<!-- POST-EVENT CTA -->
+<section class="post-cta" aria-label="Shop merch and share your photos">
+  <div>
+    <div class="section-tag">Merch</div>
+    <h2>Take home the<br>celebration.</h2>
+    <p>Shirts, tote bags, hats and more — official Juneteenth Barcelona merch, printed on demand and shipped worldwide.</p>
+    <a href="shop.html" class="btn btn-dark">Shop the merch →</a>
+  </div>
+  <div>
+    <div class="section-tag">Your photos &amp; videos</div>
+    <h2>Share your<br>memories.</h2>
+    <p>Were you there on June 20? Upload your photos and videos so we can relive the day together and celebrate our community.</p>
+    <a href="https://www.dropbox.com/request/ogy5rekiamfa2dhvzn49?utm_source=site" target="_blank" rel="noopener noreferrer" class="btn btn-dark">Upload photos &amp; videos →</a>
+  </div>
+</section>
 
 <!-- PROGRAM -->
 <section style="padding:6rem 5vw;border-bottom:1px solid var(--border)">
