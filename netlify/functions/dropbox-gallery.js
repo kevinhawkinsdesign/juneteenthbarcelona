@@ -89,7 +89,7 @@ function folderPath() {
 
 async function buildListing(token) {
   const entries = [];
-  let resp = await rpc(token, '/files/list_folder', { path: folderPath(), recursive: false, limit: 2000 });
+  let resp = await rpc(token, '/files/list_folder', { path: folderPath(), recursive: false, limit: 2000, include_media_info: true });
   entries.push(...resp.entries);
   while (resp.has_more) {
     resp = await rpc(token, '/files/list_folder/continue', { cursor: resp.cursor });
@@ -101,7 +101,12 @@ async function buildListing(token) {
     .map(e => {
       const type = IMAGE_EXT.has(extOf(e.name)) ? 'image' : VIDEO_EXT.has(extOf(e.name)) ? 'video' : null;
       if (!type) return null;
-      return { id: e.id, name: e.name, type, rev: e.rev, size: e.size, caption: captionOf(e.name), modified: e.server_modified || e.client_modified || '' };
+      let duration = null;
+      if (e.media_info && e.media_info['.tag'] === 'metadata') {
+        const m = e.media_info.metadata;
+        if (m && m['.tag'] === 'video' && typeof m.duration === 'number') duration = m.duration; // ms
+      }
+      return { id: e.id, name: e.name, type, rev: e.rev, size: e.size, duration, caption: captionOf(e.name), modified: e.server_modified || e.client_modified || '' };
     })
     .filter(Boolean)
     .sort((a, b) => (b.modified || '').localeCompare(a.modified || '')); // newest first
