@@ -72,6 +72,47 @@
 .gallery-item:hover .gallery-overlay { opacity: 1; }
 .gallery-caption { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.85); }
 
+/* Download button on each tile */
+.gallery-dl {
+  position: absolute; top: 0.75rem; right: 0.75rem; z-index: 2;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(28,17,8,0.55); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; opacity: 0; transform: translateY(-4px);
+  transition: opacity 0.25s, transform 0.25s, background 0.2s;
+}
+.gallery-item:hover .gallery-dl { opacity: 1; transform: translateY(0); }
+.gallery-dl:hover { background: var(--red, #c0392b); }
+.gallery-dl svg { width: 18px; height: 18px; }
+
+/* Video tiles: poster look with a play badge (Dropbox can't thumbnail video) */
+.gallery-item.is-video .gallery-thumb {
+  width: 100%; aspect-ratio: 3 / 2; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #2c1b0e, #4a2f17);
+}
+.gallery-play {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: rgba(255,255,255,0.92); display: flex; align-items: center; justify-content: center;
+  transition: transform 0.3s;
+}
+.gallery-item.is-video:hover .gallery-play { transform: scale(1.08); }
+.gallery-play svg { width: 22px; height: 22px; margin-left: 3px; color: #2c1b0e; }
+
+/* Loading skeleton */
+.gallery-loading { display: flex; gap: 0.6rem; align-items: center; justify-content: center; padding: 4rem 0; color: var(--mid); font-size: 0.85rem; }
+.gallery-spinner { width: 18px; height: 18px; border: 2px solid var(--border); border-top-color: var(--red, #c0392b); border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Lightbox video + download */
+.lightbox video { max-width: 90vw; max-height: 86vh; }
+.lightbox-dl {
+  position: absolute; bottom: 2rem; right: 2rem;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: #fff; color: #1c1108; text-decoration: none;
+  padding: 0.65rem 1.1rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600;
+}
+.lightbox-dl svg { width: 16px; height: 16px; }
+
 /* ── EMPTY STATE ── */
 .gallery-empty {
   padding: 6rem 5vw; text-align: center;
@@ -167,18 +208,18 @@
       <div class="section-tag" data-cms="gallery_tag">Gallery</div>
       <h1 class="page-h1" data-cms="gallery_title">Photo<br>Archive</h1>
     </div>
-    <p class="page-desc" data-cms="gallery_desc">Images from Juneteenth Barcelona celebrations. Add photos via the CMS admin panel — they'll appear here automatically.</p>
+    <p class="page-desc" data-cms="gallery_desc">Photos and videos from Juneteenth Barcelona celebrations. Browse, watch, and download your favourite moments.</p>
   </div>
 </div>
 
 <!-- GALLERY -->
 <section class="gallery-section">
   <div class="gallery-grid reveal" id="gallery-grid">
-    <!-- Populated by JS from gallery.json, or shows placeholder images -->
+    <!-- Populated by JS from the dropbox-gallery function (see script below) -->
   </div>
   <div class="gallery-empty reveal" id="gallery-empty" style="display:none">
-    <h3>Photos coming soon</h3>
-    <p>Add photos in the <a href="/admin" style="color:var(--red)">CMS admin panel</a> and they'll appear here.</p>
+    <h3>Photos &amp; videos coming soon</h3>
+    <p>We're gathering moments from our celebrations — check back shortly.</p>
   </div>
 </section>
 
@@ -186,9 +227,9 @@
 <div class="upload-cta reveal">
   <div>
     <div class="upload-title" data-cms="upload_title">Have photos to share?</div>
-    <div class="upload-sub" data-cms="upload_sub">Committee members can upload photos via the admin panel.</div>
+    <div class="upload-sub" data-cms="upload_sub">Send us your shots from the day and we'll add them to the archive.</div>
   </div>
-  <a href="/admin" class="btn btn-white">Open CMS →</a>
+  <a href="contact.html" class="btn btn-white">Get in touch →</a>
 </div>
 
 <!-- FOOTER -->
@@ -248,69 +289,108 @@
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lightbox-close">✕</button>
-  <img id="lightbox-img" src="" alt="">
+  <img id="lightbox-img" src="" alt="" style="display:none">
+  <video id="lightbox-video" controls playsinline style="display:none"></video>
   <div class="lightbox-caption" id="lightbox-caption"></div>
+  <a class="lightbox-dl" id="lightbox-dl" href="#" download>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Download
+  </a>
 </div>
 
 <script src="shared.js"></script>
 <script>loadPageContent('/_data/pages/gallery.json');</script>
 <script>
-// Load gallery from JSON
+// Gallery photos & videos are served live from a Dropbox folder via a Netlify
+// function. New uploads to the folder appear here automatically (within seconds
+// of upload, thanks to the Dropbox webhook that clears the function's cache).
+const GALLERY_API = '/.netlify/functions/dropbox-gallery';
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+const playSVG = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+const dlSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
+
 async function loadGallery() {
+  const grid = document.getElementById('gallery-grid');
+  const empty = document.getElementById('gallery-empty');
+  grid.innerHTML = '<div class="gallery-loading"><span class="gallery-spinner"></span> Loading photos &amp; videos…</div>';
+
+  let items = [];
   try {
-    const res = await fetch('/_data/gallery.json');
-    if (!res.ok) throw new Error();
-    const data = await res.json();
-    const photos = data.photos || [];
-    const grid = document.getElementById('gallery-grid');
-    const empty = document.getElementById('gallery-empty');
-    if (photos.length === 0) {
-      grid.style.display = 'none';
-      empty.style.display = 'block';
-      return;
-    }
-    grid.innerHTML = photos.map(p => `
-      <div class="gallery-item" data-src="${p.image}" data-caption="${p.caption || ''}">
-        <img src="${p.image}" alt="${p.alt || p.caption || ''}" loading="lazy">
-        <div class="gallery-overlay"><span class="gallery-caption">${p.caption || ''}</span></div>
-      </div>
-    `).join('');
-    attachLightbox();
-  } catch {
-    // Show placeholder images if no JSON
-    const grid = document.getElementById('gallery-grid');
-    const placeholders = [
-      { src: 'https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop', caption: 'Community' },
-      { src: 'https://images.pexels.com/photos/763934/pexels-photo-763934.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop', caption: 'Barcelona' },
-      { src: 'https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=600&q=80', caption: 'Celebration' },
-      { src: 'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=600&q=80', caption: 'Barcelona' },
-      { src: 'https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop', caption: 'Community' },
-      { src: 'https://images.pexels.com/photos/763934/pexels-photo-763934.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop', caption: 'Barcelona' },
-    ];
-    grid.innerHTML = placeholders.map(p => `
-      <div class="gallery-item" data-src="${p.src}" data-caption="${p.caption}">
-        <img src="${p.src}" alt="${p.caption}" loading="lazy">
-        <div class="gallery-overlay"><span class="gallery-caption">${p.caption}</span></div>
-      </div>
-    `).join('');
-    attachLightbox();
+    const res = await fetch(GALLERY_API);
+    if (!res.ok) throw new Error('api ' + res.status);
+    items = (await res.json()).items || [];
+  } catch (e) {
+    grid.style.display = 'none';
+    empty.style.display = 'block';
+    return;
   }
+
+  if (!items.length) {
+    grid.style.display = 'none';
+    empty.style.display = 'block';
+    return;
+  }
+
+  grid.innerHTML = items.map(it => {
+    const id = encodeURIComponent(it.id);
+    const cap = esc(it.caption || '');
+    const fileUrl = `${GALLERY_API}?file=${id}`;
+    const dlUrl = `${GALLERY_API}?download=${id}`;
+    const dlBtn = `<a class="gallery-dl" href="${dlUrl}" download="${esc(it.name)}" aria-label="Download ${cap}" onclick="event.stopPropagation()">${dlSVG}</a>`;
+    const overlay = `<div class="gallery-overlay"><span class="gallery-caption">${cap}</span></div>`;
+    if (it.type === 'video') {
+      return `<div class="gallery-item is-video" data-type="video" data-src="${fileUrl}" data-name="${esc(it.name)}" data-caption="${cap}">
+        ${dlBtn}
+        <div class="gallery-thumb"><span class="gallery-play">${playSVG}</span></div>
+        ${overlay}
+      </div>`;
+    }
+    const thumb = `${GALLERY_API}?thumb=${id}`;
+    return `<div class="gallery-item" data-type="image" data-src="${fileUrl}" data-name="${esc(it.name)}" data-caption="${cap}">
+      ${dlBtn}
+      <img src="${thumb}" alt="${cap}" loading="lazy">
+      ${overlay}
+    </div>`;
+  }).join('');
+
+  attachLightbox();
 }
 
 function attachLightbox() {
   const lb = document.getElementById('lightbox');
   const lbImg = document.getElementById('lightbox-img');
+  const lbVid = document.getElementById('lightbox-video');
   const lbCap = document.getElementById('lightbox-caption');
+  const lbDl = document.getElementById('lightbox-dl');
+
+  const close = () => {
+    lb.classList.remove('open');
+    lbVid.pause(); lbVid.removeAttribute('src'); lbVid.load();
+    lbImg.style.display = 'none'; lbVid.style.display = 'none';
+  };
+
   document.querySelectorAll('.gallery-item').forEach(item => {
     item.addEventListener('click', () => {
-      lbImg.src = item.dataset.src;
+      const src = item.dataset.src;
       lbCap.textContent = item.dataset.caption || '';
+      lbDl.href = src.replace('?file=', '?download=');
+      lbDl.setAttribute('download', item.dataset.name || '');
+      if (item.dataset.type === 'video') {
+        lbImg.style.display = 'none';
+        lbVid.style.display = 'block';
+        lbVid.src = src;
+      } else {
+        lbVid.style.display = 'none';
+        lbImg.style.display = 'block';
+        lbImg.src = src;
+      }
       lb.classList.add('open');
     });
   });
-  document.getElementById('lightbox-close').addEventListener('click', () => lb.classList.remove('open'));
-  lb.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('open'); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+  document.getElementById('lightbox-close').addEventListener('click', close);
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 }
 
 loadGallery();
