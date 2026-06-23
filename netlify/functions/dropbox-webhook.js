@@ -6,7 +6,16 @@
 //   https://juneteenth.es/.netlify/functions/dropbox-webhook
 
 const crypto = require('crypto');
-const { getStore } = require('@netlify/blobs');
+
+// Mirror the gallery function's cache store (Netlify Blobs when available).
+function blobStore() {
+  try {
+    const { getStore } = require('@netlify/blobs');
+    const siteID = process.env.NETLIFY_SITE_ID;
+    const token = process.env.NETLIFY_BLOBS_TOKEN;
+    return siteID && token ? getStore({ name: 'dropbox-gallery', siteID, token }) : getStore('dropbox-gallery');
+  } catch { return null; }
+}
 
 exports.handler = async (event) => {
   // 1. Verification handshake
@@ -30,7 +39,8 @@ exports.handler = async (event) => {
     try { ok = sig.length === expected.length && crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expected)); } catch { ok = false; }
     if (!ok) return { statusCode: 403, body: 'invalid signature' };
 
-    try { await getStore('dropbox-gallery').delete('listing'); } catch { /* nothing cached yet */ }
+    const store = blobStore();
+    if (store) { try { await store.delete('listing'); } catch { /* nothing cached yet */ } }
     return { statusCode: 200, body: 'ok' };
   }
 
