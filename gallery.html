@@ -132,6 +132,8 @@
 .gallery-play-center svg { width: 20px; height: 20px; margin-left: 2px; color: #2c1b0e; }
 .vbadge { position: absolute; bottom: 0.6rem; left: 0.6rem; z-index: 2; display: flex; align-items: center; gap: 0.3rem; background: rgba(0,0,0,0.6); color: #fff; font-size: 0.62rem; letter-spacing: 0.04em; padding: 0.2rem 0.45rem; border-radius: 4px; }
 .vbadge svg { width: 11px; height: 11px; }
+.gl-thumb.gl-video { display: flex; align-items: center; justify-content: center; }
+.gl-thumb.gl-video svg { width: 16px; height: 16px; color: rgba(255,255,255,0.92); margin-left: 2px; }
 
 /* ── LIST / TABLE VIEW ── */
 .gallery-list-wrap { overflow-x: auto; }
@@ -220,11 +222,12 @@
   .upload-cta { flex-direction: column; align-items: flex-start; }
   .gallery-toolbar { flex-direction: column; align-items: stretch; }
   .gallery-search-wrap { max-width: none; }
-  .gallery-tools-right { justify-content: space-between; }
+  .gallery-tools-right { justify-content: space-between; flex-wrap: wrap; }
   .gl-hide-sm { display: none; }
 }
 @media (max-width: 480px) {
-  .gallery-grid { columns: 1; }
+  .gallery-grid { columns: 2; column-gap: 8px; }
+  .gallery-item { margin-bottom: 8px; }
 }
 </style>
   <!-- PostHog Analytics -->
@@ -302,6 +305,11 @@
       <input type="search" id="gallery-search" class="gallery-search" placeholder="Search photos &amp; videos by name…" aria-label="Search gallery">
     </div>
     <div class="gallery-tools-right">
+      <div class="view-toggle type-filter" role="group" aria-label="Filter by type">
+        <button data-type="all" class="active" aria-pressed="true">All</button>
+        <button data-type="photos" aria-pressed="false">Photos</button>
+        <button data-type="videos" aria-pressed="false">Videos</button>
+      </div>
       <span class="gallery-count" id="gallery-count"></span>
       <div class="view-toggle" role="group" aria-label="View mode">
         <button id="view-grid" class="active" aria-pressed="true" aria-label="Grid view">
@@ -450,6 +458,7 @@ const filmSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stro
 // ── State ──
 let allItems = [];
 let view = 'grid';
+let typeFilter = 'all'; // all | photos | videos
 let sortKey = 'modified', sortDir = -1; // newest first
 const selected = new Set();
 let lazyObserver = null;
@@ -461,11 +470,13 @@ const listBody = () => document.getElementById('gallery-list-body');
 function extOf(name) { const i = (name || '').lastIndexOf('.'); return i < 0 ? '' : name.slice(i + 1).toLowerCase(); }
 function fmtSize(b) { if (b == null) return '—'; const u = ['B', 'KB', 'MB', 'GB']; let i = 0, n = b; while (n >= 1024 && i < u.length - 1) { n /= 1024; i++; } return (i === 0 ? n : n.toFixed(n < 10 ? 1 : 0)) + ' ' + u[i]; }
 function fmtDate(iso) { if (!iso) return '—'; const d = new Date(iso); return isNaN(d) ? '—' : d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }); }
+function fmtDuration(ms) { if (!ms) return ''; const s = Math.round(ms / 1000), m = Math.floor(s / 60); return m + ':' + String(s % 60).padStart(2, '0'); }
 
 // ── Data shaping ──
 function filtered() {
   const q = (document.getElementById('gallery-search').value || '').trim().toLowerCase();
   let list = q ? allItems.filter(it => (it.name || '').toLowerCase().includes(q) || (it.caption || '').toLowerCase().includes(q)) : allItems.slice();
+  if (typeFilter !== 'all') { const want = typeFilter === 'photos' ? 'image' : 'video'; list = list.filter(it => it.type === want); }
   list.sort((a, b) => {
     let va, vb;
     if (sortKey === 'size') { va = a.size || 0; vb = b.size || 0; }
@@ -499,9 +510,10 @@ function gridTile(it) {
   const check = `<span class="gallery-check" data-check="1" aria-label="Select">${checkSVG}</span>`;
   let media;
   if (it.type === 'video') {
+    const meta = [extOf(it.name).toUpperCase() || 'VIDEO', it.duration ? fmtDuration(it.duration) : '', fmtSize(it.size)].filter(Boolean).join(' · ');
     media = `<video class="gallery-thumb" muted playsinline preload="none" data-vsrc="${GALLERY_API}?file=${e}#t=0.5"></video>`
       + `<span class="gallery-play-center"><span>${playSVG}</span></span>`
-      + `<span class="vbadge">${filmSVG} ${esc(extOf(it.name).toUpperCase())}</span>`;
+      + `<span class="vbadge">${filmSVG} ${esc(meta)}</span>`;
   } else {
     media = `<img src="${GALLERY_API}?thumb=${e}&rev=${esc(it.rev || '')}" alt="${cap}" loading="lazy">`;
   }
@@ -513,7 +525,7 @@ function listRow(it) {
   const checked = selected.has(it.id) ? ' checked' : '';
   const selCls = selected.has(it.id) ? ' class="selected"' : '';
   const thumb = it.type === 'video'
-    ? `<video class="gl-thumb" muted playsinline preload="none" data-vsrc="${GALLERY_API}?file=${e}#t=0.5"></video>`
+    ? `<span class="gl-thumb gl-video">${playSVG}</span>`
     : `<img class="gl-thumb" src="${GALLERY_API}?thumb=${e}&rev=${esc(it.rev || '')}" loading="lazy" alt="">`;
   return `<tr data-id="${id}"${selCls}>
     <td><input type="checkbox" class="gl-check" data-check="1"${checked} aria-label="Select ${name}"></td>
@@ -638,6 +650,12 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('gallery-search').addEventListener('input', render);
   document.getElementById('view-grid').addEventListener('click', () => setView('grid'));
   document.getElementById('view-list').addEventListener('click', () => setView('list'));
+  // Photos / Videos filter
+  document.querySelectorAll('.type-filter button').forEach(b => b.addEventListener('click', () => {
+    typeFilter = b.dataset.type;
+    document.querySelectorAll('.type-filter button').forEach(x => { const on = x === b; x.classList.toggle('active', on); x.setAttribute('aria-pressed', on); });
+    render();
+  }));
   // Sortable list headers
   document.querySelectorAll('.gallery-list th.sortable').forEach(th => th.addEventListener('click', () => {
     const k = th.dataset.sort;
