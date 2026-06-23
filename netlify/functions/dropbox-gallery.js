@@ -13,8 +13,6 @@
 // change in Dropbox, so new uploads appear within seconds instead of waiting out
 // the 30 minutes. The 30 minutes is just a safety net for any missed webhook.
 
-const { getStore } = require('@netlify/blobs');
-
 const API = 'https://api.dropboxapi.com';
 const CONTENT = 'https://content.dropboxapi.com';
 const LISTING_TTL = 30 * 60 * 1000; // 30-minute fallback
@@ -25,6 +23,34 @@ const VIDEO_EXT = new Set(['mp4', 'mov', 'm4v', 'webm', 'avi', 'mkv', '3gp']);
 // Access tokens last 4h; cache per warm instance and refresh from the long-lived
 // refresh token a little before expiry.
 let tokenCache = { token: null, exp: 0 };
+
+// Listing cache. Prefer Netlify Blobs (shared across instances, cleared by the
+// webhook on upload). If Blobs isn't configured in this environment, fall back to
+// a per-instance in-memory cache so the gallery still works — it just refreshes
+// on the 30-minute fallback instead of instantly on upload. Set NETLIFY_SITE_ID +
+// NETLIFY_BLOBS_TOKEN to force the durable Blobs path.
+let memCache = null;
+
+function blobStore() {
+  try {
+    const { getStore } = require('@netlify/blobs');
+    const siteID = process.env.NETLIFY_SITE_ID;
+    const token = process.env.NETLIFY_BLOBS_TOKEN;
+    return siteID && token ? getStore({ name: 'dropbox-gallery', siteID, token }) : getStore('dropbox-gallery');
+  } catch { return null; }
+}
+
+async function readCache() {
+  const store = blobStore();
+  if (store) { try { const v = await store.get('listing', { type: 'json' }); if (v) return v; } catch { /* fall through */ } }
+  return memCache;
+}
+
+async function writeCache(listing) {
+  memCache = listing;
+  const store = blobStore();
+  if (store) { try { await store.setJSON('listing', listing); } catch { /* non-fatal */ } }
+}
 
 async function getAccessToken() {
   if (tokenCache.token && Date.now() < tokenCache.exp) return tokenCache.token;
@@ -149,15 +175,13 @@ exports.handler = async (event) => {
     }
 
     // ── Listing (default) ──
-    const store = getStore('dropbox-gallery');
     const force = qs.refresh === '1' || qs.nocache === '1';
-    let cached = null;
-    try { cached = await store.get('listing', { type: 'json' }); } catch { /* cold store */ }
-    if (!force && cached && Date.now() - cached.builtAt < LISTING_TTL) {
+    const cached = force ? null : await readCache();
+    if (cached && Date.now() - cached.builtAt < LISTING_TTL) {
       return json(200, { items: cached.items, cached: true }, 60);
     }
     const listing = await buildListing(token);
-    try { await store.setJSON('listing', listing); } catch { /* non-fatal */ }
+    await writeCache(listing);
     return json(200, { items: listing.items, cached: false }, 60);
   } catch (e) {
     return json(e.status || 500, { error: e.message || 'Dropbox error', items: [] });
