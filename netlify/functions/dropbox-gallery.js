@@ -101,7 +101,7 @@ async function buildListing(token) {
     .map(e => {
       const type = IMAGE_EXT.has(extOf(e.name)) ? 'image' : VIDEO_EXT.has(extOf(e.name)) ? 'video' : null;
       if (!type) return null;
-      return { id: e.id, name: e.name, type, rev: e.rev, caption: captionOf(e.name), modified: e.server_modified || e.client_modified || '' };
+      return { id: e.id, name: e.name, type, rev: e.rev, size: e.size, caption: captionOf(e.name), modified: e.server_modified || e.client_modified || '' };
     })
     .filter(Boolean)
     .sort((a, b) => (b.modified || '').localeCompare(a.modified || '')); // newest first
@@ -145,7 +145,7 @@ exports.handler = async (event) => {
         method: 'POST',
         headers: {
           Authorization: 'Bearer ' + token,
-          'Dropbox-API-Arg': JSON.stringify({ resource: { '.tag': 'path', path: qs.thumb }, format: 'jpeg', size: 'w640h480', mode: 'fit_one_bordered' })
+          'Dropbox-API-Arg': JSON.stringify({ resource: { '.tag': 'path', path: qs.thumb }, format: 'jpeg', size: 'w480h320', mode: 'bestfit' })
         }
       });
       if (!res.ok) return json(res.status, { error: 'thumbnail unavailable' });
