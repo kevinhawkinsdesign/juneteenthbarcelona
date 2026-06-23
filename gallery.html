@@ -47,27 +47,54 @@
   opacity: 0; animation: fadeUp 0.8s 0.25s forwards;
 }
 
+/* Hero actions (View on Dropbox) */
+.hero-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.5rem; }
+.btn-dropbox {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--brown-mid, #2c1b0e); color: #fff; text-decoration: none;
+  padding: 0.7rem 1.3rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.02em; transition: opacity 0.2s;
+}
+.btn-dropbox:hover { opacity: 0.88; }
+.btn-dropbox svg { width: 16px; height: 16px; }
+
+/* ── TOOLBAR (search + view toggle) ── */
+.gallery-section { padding: 3rem 5vw 6rem; }
+.gallery-toolbar {
+  display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.gallery-search-wrap { position: relative; flex: 1; min-width: 220px; max-width: 420px; }
+.gallery-search {
+  width: 100%; padding: 0.7rem 1rem 0.7rem 2.5rem;
+  border: 1px solid var(--border); border-radius: 999px; font-size: 0.9rem;
+  background: #fff; color: var(--black); font-family: inherit;
+}
+.gallery-search:focus { outline: none; border-color: var(--brown-mid, #4a2f17); }
+.gallery-search-wrap > svg { position: absolute; left: 0.95rem; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--mid); pointer-events: none; }
+.gallery-tools-right { display: flex; align-items: center; gap: 1.1rem; }
+.gallery-count { font-size: 0.78rem; color: var(--mid); white-space: nowrap; }
+.view-toggle { display: inline-flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden; }
+.view-toggle button { border: none; background: #fff; padding: 0.5rem 0.85rem; cursor: pointer; color: var(--mid); display: flex; align-items: center; gap: 0.35rem; font-size: 0.78rem; font-family: inherit; }
+.view-toggle button.active { background: var(--brown-mid, #2c1b0e); color: #fff; }
+.view-toggle svg { width: 15px; height: 15px; }
+
 /* ── GALLERY GRID ── */
-.gallery-section { padding: 4rem 5vw 6rem; }
-.gallery-grid {
-  columns: 3; column-gap: 12px;
-}
+.gallery-grid { columns: 3; column-gap: 12px; }
 .gallery-item {
-  break-inside: avoid;
-  margin-bottom: 12px;
-  position: relative; overflow: hidden;
-  display: block; cursor: zoom-in;
+  break-inside: avoid; margin-bottom: 12px;
+  position: relative; overflow: hidden; display: block; cursor: zoom-in;
 }
-.gallery-item img {
-  width: 100%; display: block;
-  transition: transform 0.45s ease;
+.gallery-item img, .gallery-item video.gallery-thumb {
+  width: 100%; display: block; transition: transform 0.45s ease; background: #2c1b0e;
 }
-.gallery-item:hover img { transform: scale(1.03); }
+.gallery-item video.gallery-thumb { aspect-ratio: 3 / 2; object-fit: cover; }
+.gallery-item:hover img, .gallery-item:hover video.gallery-thumb { transform: scale(1.03); }
 .gallery-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(to top, rgba(44,27,14,0.7) 0%, transparent 50%);
   opacity: 0; transition: opacity 0.3s;
-  display: flex; align-items: flex-end; padding: 1.2rem;
+  display: flex; align-items: flex-end; padding: 1.2rem; pointer-events: none;
 }
 .gallery-item:hover .gallery-overlay { opacity: 1; }
 .gallery-caption { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.85); }
@@ -85,18 +112,59 @@
 .gallery-dl:hover { background: var(--red, #c0392b); }
 .gallery-dl svg { width: 18px; height: 18px; }
 
-/* Video tiles: poster look with a play badge (Dropbox can't thumbnail video) */
-.gallery-item.is-video .gallery-thumb {
-  width: 100%; aspect-ratio: 3 / 2; display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, #2c1b0e, #4a2f17);
+/* Selection checkbox on tiles */
+.gallery-check {
+  position: absolute; top: 0.75rem; left: 0.75rem; z-index: 3;
+  width: 24px; height: 24px; border-radius: 6px;
+  background: rgba(255,255,255,0.85); border: 1px solid rgba(0,0,0,0.15);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  opacity: 0; transition: opacity 0.2s;
 }
-.gallery-play {
-  width: 56px; height: 56px; border-radius: 50%;
-  background: rgba(255,255,255,0.92); display: flex; align-items: center; justify-content: center;
-  transition: transform 0.3s;
+.gallery-item:hover .gallery-check, .gallery-item.selected .gallery-check { opacity: 1; }
+.gallery-check svg { width: 14px; height: 14px; color: #fff; opacity: 0; }
+.gallery-item.selected .gallery-check { background: var(--red, #c0392b); border-color: var(--red, #c0392b); }
+.gallery-item.selected .gallery-check svg { opacity: 1; }
+.gallery-item.selected { outline: 3px solid var(--red, #c0392b); outline-offset: -3px; }
+
+/* Video tiles: play badge + type chip over the poster frame */
+.gallery-play-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.gallery-play-center span { width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; }
+.gallery-play-center svg { width: 20px; height: 20px; margin-left: 2px; color: #2c1b0e; }
+.vbadge { position: absolute; bottom: 0.6rem; left: 0.6rem; z-index: 2; display: flex; align-items: center; gap: 0.3rem; background: rgba(0,0,0,0.6); color: #fff; font-size: 0.62rem; letter-spacing: 0.04em; padding: 0.2rem 0.45rem; border-radius: 4px; }
+.vbadge svg { width: 11px; height: 11px; }
+
+/* ── LIST / TABLE VIEW ── */
+.gallery-list-wrap { overflow-x: auto; }
+.gallery-list { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.gallery-list th, .gallery-list td { text-align: left; padding: 0.7rem 0.8rem; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.gallery-list th { font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); font-weight: 700; white-space: nowrap; }
+.gallery-list th.sortable { cursor: pointer; user-select: none; }
+.gallery-list th.sortable:hover { color: var(--black); }
+.gallery-list tbody tr { transition: background 0.15s; }
+.gallery-list tbody tr:hover { background: rgba(0,0,0,0.02); }
+.gallery-list tr.selected { background: rgba(192,57,43,0.06); }
+.gl-thumb { width: 66px; height: 46px; object-fit: cover; border-radius: 4px; background: #2c1b0e; display: block; flex: none; }
+.gl-name { display: flex; align-items: center; gap: 0.75rem; cursor: zoom-in; }
+.gl-name strong { font-weight: 600; word-break: break-word; }
+.gl-type { display: inline-block; font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.18rem 0.5rem; border-radius: 4px; background: var(--cream, #f0ece4); color: var(--brown-mid, #4a2f17); font-weight: 600; }
+.gl-dl { color: var(--brown-mid, #4a2f17); display: inline-flex; }
+.gl-dl svg { width: 18px; height: 18px; }
+.gl-check { width: 16px; height: 16px; cursor: pointer; accent-color: var(--red, #c0392b); }
+
+/* ── SELECTION ACTION BAR ── */
+.selection-bar {
+  position: fixed; left: 50%; bottom: 1.5rem; transform: translateX(-50%) translateY(160%);
+  z-index: 900; display: flex; align-items: center; gap: 0.5rem;
+  background: #1c1108; color: #fff; padding: 0.6rem 0.7rem 0.6rem 1.25rem;
+  border-radius: 999px; box-shadow: 0 12px 40px rgba(0,0,0,0.32); transition: transform 0.3s ease;
 }
-.gallery-item.is-video:hover .gallery-play { transform: scale(1.08); }
-.gallery-play svg { width: 22px; height: 22px; margin-left: 3px; color: #2c1b0e; }
+.selection-bar.show { transform: translateX(-50%) translateY(0); }
+.selection-bar .sel-count { font-size: 0.85rem; font-weight: 600; margin-right: 0.5rem; }
+.selection-bar button { border: none; cursor: pointer; font-size: 0.8rem; border-radius: 999px; padding: 0.55rem 1.1rem; font-weight: 600; font-family: inherit; }
+.sel-download { background: var(--red, #c0392b); color: #fff; display: inline-flex; align-items: center; gap: 0.4rem; }
+.sel-download svg { width: 15px; height: 15px; }
+.sel-clear { background: transparent; color: rgba(255,255,255,0.6); }
+.sel-clear:hover { color: #fff; }
 
 /* Loading skeleton */
 .gallery-loading { display: flex; gap: 0.6rem; align-items: center; justify-content: center; padding: 4rem 0; color: var(--mid); font-size: 0.85rem; }
@@ -150,6 +218,10 @@
 @media (max-width: 768px) {
   .gallery-grid { columns: 2; }
   .upload-cta { flex-direction: column; align-items: flex-start; }
+  .gallery-toolbar { flex-direction: column; align-items: stretch; }
+  .gallery-search-wrap { max-width: none; }
+  .gallery-tools-right { justify-content: space-between; }
+  .gl-hide-sm { display: none; }
 }
 @media (max-width: 480px) {
   .gallery-grid { columns: 1; }
@@ -178,6 +250,7 @@
     <li><a href="about.html">About</a></li>
     <li><a href="monthly-events.html">Meetup</a></li>
     <li><a href="walking-tour/index.html">Walking Tour</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
     <li><a href="sponsors.html">Sponsors</a></li>
     <li><a href="contact.html">Contact</a></li>
     <li><a href="https://checkout.revolut.com/pay/7cbe0d37-2272-4934-ae91-0a07571301a5" target="_blank">Donate</a></li>
@@ -208,15 +281,64 @@
       <div class="section-tag" data-cms="gallery_tag">Gallery</div>
       <h1 class="page-h1" data-cms="gallery_title">Photo<br>Archive</h1>
     </div>
-    <p class="page-desc" data-cms="gallery_desc">Photos and videos from Juneteenth Barcelona celebrations. Browse, watch, and download your favourite moments.</p>
+    <div>
+      <p class="page-desc" data-cms="gallery_desc">Photos and videos from Juneteenth Barcelona celebrations. Browse, watch, and download your favourite moments.</p>
+      <div class="hero-actions">
+        <a class="btn-dropbox" href="https://www.dropbox.com/scl/fo/wb361cdtr370j25hodzbq/AASwSUy8r6aSAjVCJovHAHc?rlkey=lfeez5kzizo9bcjpcwrnavnz2&dl=0" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 2L12 6 6 10 0 6zM18 2l6 4-6 4-6-4zM0 14l6-4 6 4-6 4zM18 10l6 4-6 4-6-4zM6 19.5l6-4 6 4-6 4z"/></svg>
+          View all on Dropbox
+        </a>
+      </div>
+    </div>
   </div>
 </div>
 
 <!-- GALLERY -->
 <section class="gallery-section">
-  <div class="gallery-grid reveal" id="gallery-grid">
-    <!-- Populated by JS from the dropbox-gallery function (see script below) -->
+  <!-- Toolbar: search + view toggle -->
+  <div class="gallery-toolbar reveal" id="gallery-toolbar" style="display:none">
+    <div class="gallery-search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="search" id="gallery-search" class="gallery-search" placeholder="Search photos &amp; videos by name…" aria-label="Search gallery">
+    </div>
+    <div class="gallery-tools-right">
+      <span class="gallery-count" id="gallery-count"></span>
+      <div class="view-toggle" role="group" aria-label="View mode">
+        <button id="view-grid" class="active" aria-pressed="true" aria-label="Grid view">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Grid
+        </button>
+        <button id="view-list" aria-pressed="false" aria-label="List view">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          List
+        </button>
+      </div>
+    </div>
   </div>
+
+  <!-- Grid view -->
+  <div class="gallery-grid reveal" id="gallery-grid">
+    <div class="gallery-loading"><span class="gallery-spinner"></span> Loading photos &amp; videos…</div>
+  </div>
+
+  <!-- List view -->
+  <div class="gallery-list-wrap" id="gallery-list-wrap" style="display:none">
+    <table class="gallery-list">
+      <thead>
+        <tr>
+          <th style="width:34px"></th>
+          <th class="sortable" data-sort="name">Name</th>
+          <th class="sortable" data-sort="type">Type</th>
+          <th class="sortable" data-sort="size">Size</th>
+          <th class="sortable gl-hide-sm" data-sort="modified">Uploaded</th>
+          <th class="gl-hide-sm">Uploader</th>
+          <th style="width:44px"></th>
+        </tr>
+      </thead>
+      <tbody id="gallery-list-body"></tbody>
+    </table>
+  </div>
+
   <div class="gallery-empty reveal" id="gallery-empty" style="display:none">
     <h3>Photos &amp; videos coming soon</h3>
     <p>We're gathering moments from our celebrations — check back shortly.</p>
@@ -249,6 +371,7 @@
         <li><a href="event.html">The Event</a></li>
         <li><a href="monthly-events.html">Monthly Meetup</a></li>
         <li><a href="walking-tour/index.html">Walking Tour</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
         <li><a href="sponsors.html">Sponsors</a></li>
         <li><a href="contact.html">Contact</a></li>
     <li><a href="https://checkout.revolut.com/pay/7cbe0d37-2272-4934-ae91-0a07571301a5" target="_blank">Donate</a></li>
@@ -298,102 +421,240 @@
   </a>
 </div>
 
+<!-- MULTI-SELECT ACTION BAR -->
+<div class="selection-bar" id="selection-bar">
+  <span class="sel-count" id="sel-count">0 selected</span>
+  <button class="sel-download" id="sel-download">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Download
+  </button>
+  <button class="sel-clear" id="sel-clear">Clear</button>
+</div>
+
 <script src="shared.js"></script>
 <script>loadPageContent('/_data/pages/gallery.json');</script>
 <script>
 // Gallery photos & videos are served live from a Dropbox folder via a Netlify
-// function. New uploads to the folder appear here automatically (within seconds
-// of upload, thanks to the Dropbox webhook that clears the function's cache).
+// function. New uploads to the folder appear here automatically. The grid loads
+// small low-res thumbnails (and lazy video poster frames) for fast skimming;
+// full-resolution files load only on click or download.
 const GALLERY_API = '/.netlify/functions/dropbox-gallery';
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const enc = encodeURIComponent;
 
 const playSVG = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
 const dlSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
+const checkSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+const filmSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="7" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="17" y2="20"/></svg>';
+
+// ── State ──
+let allItems = [];
+let view = 'grid';
+let sortKey = 'modified', sortDir = -1; // newest first
+const selected = new Set();
+let lazyObserver = null;
+
+const grid = () => document.getElementById('gallery-grid');
+const listBody = () => document.getElementById('gallery-list-body');
+
+// ── Formatting helpers ──
+function extOf(name) { const i = (name || '').lastIndexOf('.'); return i < 0 ? '' : name.slice(i + 1).toLowerCase(); }
+function fmtSize(b) { if (b == null) return '—'; const u = ['B', 'KB', 'MB', 'GB']; let i = 0, n = b; while (n >= 1024 && i < u.length - 1) { n /= 1024; i++; } return (i === 0 ? n : n.toFixed(n < 10 ? 1 : 0)) + ' ' + u[i]; }
+function fmtDate(iso) { if (!iso) return '—'; const d = new Date(iso); return isNaN(d) ? '—' : d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }); }
+
+// ── Data shaping ──
+function filtered() {
+  const q = (document.getElementById('gallery-search').value || '').trim().toLowerCase();
+  let list = q ? allItems.filter(it => (it.name || '').toLowerCase().includes(q) || (it.caption || '').toLowerCase().includes(q)) : allItems.slice();
+  list.sort((a, b) => {
+    let va, vb;
+    if (sortKey === 'size') { va = a.size || 0; vb = b.size || 0; }
+    else if (sortKey === 'type') { va = extOf(a.name); vb = extOf(b.name); }
+    else if (sortKey === 'name') { va = (a.name || '').toLowerCase(); vb = (b.name || '').toLowerCase(); }
+    else { va = a.modified || ''; vb = b.modified || ''; }
+    return va < vb ? -sortDir : va > vb ? sortDir : 0;
+  });
+  return list;
+}
+
+// ── Render ──
+function render() {
+  const list = filtered();
+  const has = list.length > 0;
+  document.getElementById('gallery-count').textContent = has ? (list.length + (list.length === 1 ? ' item' : ' items')) : '';
+  document.getElementById('gallery-empty').style.display = has ? 'none' : 'block';
+  grid().style.display = (has && view === 'grid') ? '' : 'none';
+  document.getElementById('gallery-list-wrap').style.display = (has && view === 'list') ? '' : 'none';
+  if (!has) { grid().innerHTML = ''; listBody().innerHTML = ''; updateBar(); return; }
+  if (view === 'grid') grid().innerHTML = list.map(gridTile).join('');
+  else listBody().innerHTML = list.map(listRow).join('');
+  observeLazyVideos();
+  updateBar();
+}
+
+function gridTile(it) {
+  const id = esc(it.id), e = enc(it.id), cap = esc(it.caption || ''), name = esc(it.name || '');
+  const sel = selected.has(it.id) ? ' selected' : '';
+  const dl = `<a class="gallery-dl" href="${GALLERY_API}?download=${e}" aria-label="Download ${name}" onclick="event.stopPropagation()">${dlSVG}</a>`;
+  const check = `<span class="gallery-check" data-check="1" aria-label="Select">${checkSVG}</span>`;
+  let media;
+  if (it.type === 'video') {
+    media = `<video class="gallery-thumb" muted playsinline preload="none" data-vsrc="${GALLERY_API}?file=${e}#t=0.5"></video>`
+      + `<span class="gallery-play-center"><span>${playSVG}</span></span>`
+      + `<span class="vbadge">${filmSVG} ${esc(extOf(it.name).toUpperCase())}</span>`;
+  } else {
+    media = `<img src="${GALLERY_API}?thumb=${e}&rev=${esc(it.rev || '')}" alt="${cap}" loading="lazy">`;
+  }
+  return `<div class="gallery-item${it.type === 'video' ? ' is-video' : ''}${sel}" data-id="${id}">${check}${dl}${media}<div class="gallery-overlay"><span class="gallery-caption">${cap || name}</span></div></div>`;
+}
+
+function listRow(it) {
+  const id = esc(it.id), e = enc(it.id), name = esc(it.name || ''), cap = esc(it.caption || it.name || '');
+  const checked = selected.has(it.id) ? ' checked' : '';
+  const selCls = selected.has(it.id) ? ' class="selected"' : '';
+  const thumb = it.type === 'video'
+    ? `<video class="gl-thumb" muted playsinline preload="none" data-vsrc="${GALLERY_API}?file=${e}#t=0.5"></video>`
+    : `<img class="gl-thumb" src="${GALLERY_API}?thumb=${e}&rev=${esc(it.rev || '')}" loading="lazy" alt="">`;
+  return `<tr data-id="${id}"${selCls}>
+    <td><input type="checkbox" class="gl-check" data-check="1"${checked} aria-label="Select ${name}"></td>
+    <td><span class="gl-name" data-open="1">${thumb}<strong>${name}</strong></span></td>
+    <td><span class="gl-type">${esc(extOf(it.name).toUpperCase() || (it.type === 'video' ? 'VIDEO' : 'IMG'))}</span></td>
+    <td>${fmtSize(it.size)}</td>
+    <td class="gl-hide-sm">${fmtDate(it.modified)}</td>
+    <td class="gl-hide-sm">—</td>
+    <td><a class="gl-dl" href="${GALLERY_API}?download=${e}" aria-label="Download ${name}">${dlSVG}</a></td>
+  </tr>`;
+}
+
+// Lazy-load video poster frames only as they approach the viewport.
+function observeLazyVideos() {
+  if (lazyObserver) lazyObserver.disconnect();
+  lazyObserver = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      const v = en.target;
+      if (v.dataset.vsrc && !v.src) {
+        v.preload = 'metadata';
+        v.src = v.dataset.vsrc;
+        v.addEventListener('loadedmetadata', () => { try { if (v.currentTime < 0.1) v.currentTime = 0.5; } catch (e) {} }, { once: true });
+      }
+      lazyObserver.unobserve(v);
+    });
+  }, { rootMargin: '400px' });
+  document.querySelectorAll('video[data-vsrc]').forEach(v => lazyObserver.observe(v));
+}
+
+// ── Selection ──
+function toggleSelect(id, el) {
+  if (selected.has(id)) selected.delete(id); else selected.add(id);
+  if (el) {
+    el.classList.toggle('selected', selected.has(id));
+    const cb = el.querySelector('input.gl-check'); if (cb) cb.checked = selected.has(id);
+  }
+  updateBar();
+}
+function updateBar() {
+  const n = selected.size, bar = document.getElementById('selection-bar');
+  document.getElementById('sel-count').textContent = n + ' selected';
+  bar.classList.toggle('show', n > 0);
+}
+// Browsers throttle programmatic downloads, so stagger them.
+function downloadSelected() {
+  [...selected].forEach((id, i) => setTimeout(() => {
+    const a = document.createElement('a');
+    a.href = GALLERY_API + '?download=' + enc(id);
+    a.rel = 'noopener';
+    document.body.appendChild(a); a.click(); a.remove();
+  }, i * 700));
+}
+
+// ── Lightbox ──
+function openLightbox(it) {
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img'), lbVid = document.getElementById('lightbox-video');
+  const src = GALLERY_API + '?file=' + enc(it.id);
+  document.getElementById('lightbox-caption').textContent = it.caption || it.name || '';
+  const lbDl = document.getElementById('lightbox-dl');
+  lbDl.href = GALLERY_API + '?download=' + enc(it.id);
+  lbDl.setAttribute('download', it.name || '');
+  if (it.type === 'video') {
+    lbImg.style.display = 'none'; lbVid.style.display = 'block'; lbVid.src = src;
+  } else {
+    lbVid.pause(); lbVid.style.display = 'none'; lbImg.style.display = 'block'; lbImg.src = src;
+  }
+  lb.classList.add('open');
+}
+function closeLightbox() {
+  const lb = document.getElementById('lightbox'), lbVid = document.getElementById('lightbox-video');
+  lb.classList.remove('open');
+  lbVid.pause(); lbVid.removeAttribute('src'); lbVid.load();
+  document.getElementById('lightbox-img').style.display = 'none';
+  lbVid.style.display = 'none';
+}
+const byId = id => allItems.find(it => it.id === id);
+
+// ── Wiring ──
+function setView(v) {
+  view = v;
+  document.getElementById('view-grid').classList.toggle('active', v === 'grid');
+  document.getElementById('view-list').classList.toggle('active', v === 'list');
+  document.getElementById('view-grid').setAttribute('aria-pressed', v === 'grid');
+  document.getElementById('view-list').setAttribute('aria-pressed', v === 'list');
+  render();
+}
 
 async function loadGallery() {
-  const grid = document.getElementById('gallery-grid');
-  const empty = document.getElementById('gallery-empty');
-  grid.innerHTML = '<div class="gallery-loading"><span class="gallery-spinner"></span> Loading photos &amp; videos…</div>';
-
   let items = [];
   try {
     const res = await fetch(GALLERY_API);
     if (!res.ok) throw new Error('api ' + res.status);
     items = (await res.json()).items || [];
   } catch (e) {
-    grid.style.display = 'none';
-    empty.style.display = 'block';
+    grid().style.display = 'none';
+    document.getElementById('gallery-empty').style.display = 'block';
     return;
   }
-
-  if (!items.length) {
-    grid.style.display = 'none';
-    empty.style.display = 'block';
-    return;
-  }
-
-  grid.innerHTML = items.map(it => {
-    const id = encodeURIComponent(it.id);
-    const cap = esc(it.caption || '');
-    const fileUrl = `${GALLERY_API}?file=${id}`;
-    const dlUrl = `${GALLERY_API}?download=${id}`;
-    const dlBtn = `<a class="gallery-dl" href="${dlUrl}" download="${esc(it.name)}" aria-label="Download ${cap}" onclick="event.stopPropagation()">${dlSVG}</a>`;
-    const overlay = `<div class="gallery-overlay"><span class="gallery-caption">${cap}</span></div>`;
-    if (it.type === 'video') {
-      return `<div class="gallery-item is-video" data-type="video" data-src="${fileUrl}" data-name="${esc(it.name)}" data-caption="${cap}">
-        ${dlBtn}
-        <div class="gallery-thumb"><span class="gallery-play">${playSVG}</span></div>
-        ${overlay}
-      </div>`;
-    }
-    const thumb = `${GALLERY_API}?thumb=${id}`;
-    return `<div class="gallery-item" data-type="image" data-src="${fileUrl}" data-name="${esc(it.name)}" data-caption="${cap}">
-      ${dlBtn}
-      <img src="${thumb}" alt="${cap}" loading="lazy">
-      ${overlay}
-    </div>`;
-  }).join('');
-
-  attachLightbox();
+  allItems = items;
+  document.getElementById('gallery-toolbar').style.display = items.length ? 'flex' : 'none';
+  render();
 }
 
-function attachLightbox() {
-  const lb = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lightbox-img');
-  const lbVid = document.getElementById('lightbox-video');
-  const lbCap = document.getElementById('lightbox-caption');
-  const lbDl = document.getElementById('lightbox-dl');
-
-  const close = () => {
-    lb.classList.remove('open');
-    lbVid.pause(); lbVid.removeAttribute('src'); lbVid.load();
-    lbImg.style.display = 'none'; lbVid.style.display = 'none';
-  };
-
-  document.querySelectorAll('.gallery-item').forEach(item => {
-    item.addEventListener('click', () => {
-      const src = item.dataset.src;
-      lbCap.textContent = item.dataset.caption || '';
-      lbDl.href = src.replace('?file=', '?download=');
-      lbDl.setAttribute('download', item.dataset.name || '');
-      if (item.dataset.type === 'video') {
-        lbImg.style.display = 'none';
-        lbVid.style.display = 'block';
-        lbVid.src = src;
-      } else {
-        lbVid.style.display = 'none';
-        lbImg.style.display = 'block';
-        lbImg.src = src;
-      }
-      lb.classList.add('open');
-    });
+document.addEventListener('DOMContentLoaded', () => {
+  // Grid interactions (event-delegated)
+  grid().addEventListener('click', e => {
+    const item = e.target.closest('.gallery-item'); if (!item) return;
+    if (e.target.closest('[data-check]')) { toggleSelect(item.dataset.id, item); return; }
+    if (e.target.closest('.gallery-dl')) return;
+    const it = byId(item.dataset.id); if (it) openLightbox(it);
   });
-  document.getElementById('lightbox-close').addEventListener('click', close);
-  lb.addEventListener('click', e => { if (e.target === lb) close(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-}
+  // List interactions
+  listBody().addEventListener('click', e => {
+    const row = e.target.closest('tr'); if (!row) return;
+    if (e.target.closest('.gl-dl')) return;
+    if (e.target.closest('[data-check]')) { toggleSelect(row.dataset.id, row); return; }
+    if (e.target.closest('[data-open]')) { const it = byId(row.dataset.id); if (it) openLightbox(it); }
+  });
+  // Search + view toggle
+  document.getElementById('gallery-search').addEventListener('input', render);
+  document.getElementById('view-grid').addEventListener('click', () => setView('grid'));
+  document.getElementById('view-list').addEventListener('click', () => setView('list'));
+  // Sortable list headers
+  document.querySelectorAll('.gallery-list th.sortable').forEach(th => th.addEventListener('click', () => {
+    const k = th.dataset.sort;
+    if (sortKey === k) sortDir *= -1; else { sortKey = k; sortDir = k === 'name' || k === 'type' ? 1 : -1; }
+    render();
+  }));
+  // Selection bar
+  document.getElementById('sel-download').addEventListener('click', downloadSelected);
+  document.getElementById('sel-clear').addEventListener('click', () => { selected.clear(); render(); });
+  // Lightbox close
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
-loadGallery();
+  loadGallery();
+});
 </script>
 <!-- Google Translate (hidden widget) -->
 <div id="google_translate_element"></div>
