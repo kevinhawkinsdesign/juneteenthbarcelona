@@ -73,7 +73,7 @@ async function rpc(token, path, body) {
     body: JSON.stringify(body)
   });
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) { const e = new Error('Dropbox ' + path + ' error'); e.data = data; e.status = res.status; throw e; }
+  if (!res.ok) { const e = new Error('Dropbox ' + path + ' error: ' + (data.error_summary || res.status)); e.data = data; e.status = res.status; throw e; }
   return data;
 }
 
@@ -174,6 +174,13 @@ exports.handler = async (event) => {
       return { statusCode: 302, headers: { Location: link, 'Cache-Control': 'private, max-age=3600' }, body: '' };
     }
 
+    // ── Debug: list real top-level folders to find the correct path ──
+    if (qs.debug === '1') {
+      const root = await rpc(token, '/files/list_folder', { path: '', recursive: false, limit: 2000 });
+      const folders = root.entries.filter(e => e['.tag'] === 'folder').map(e => e.path_display);
+      return json(200, { configuredFolder: folderPath() || '(root)', topLevelFolders: folders });
+    }
+
     // ── Listing (default) ──
     const force = qs.refresh === '1' || qs.nocache === '1';
     const cached = force ? null : await readCache();
@@ -184,6 +191,6 @@ exports.handler = async (event) => {
     await writeCache(listing);
     return json(200, { items: listing.items, cached: false }, 60);
   } catch (e) {
-    return json(e.status || 500, { error: e.message || 'Dropbox error', items: [] });
+    return json(e.status || 500, { error: e.message || 'Dropbox error', detail: e.data || null, items: [] });
   }
 };
