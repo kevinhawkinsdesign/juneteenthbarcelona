@@ -184,6 +184,20 @@ body { overflow-x: hidden; }
 .sel-clear { background: transparent; color: rgba(255,255,255,0.6); }
 .sel-clear:hover { color: #fff; }
 
+/* ── PAGINATION ── */
+.pagination { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.4rem; margin-top: 3rem; }
+.pagination:empty { display: none; }
+.pg-btn {
+  min-width: 38px; height: 38px; padding: 0 0.6rem;
+  border: 1px solid var(--border); background: #fff; border-radius: 8px;
+  font-size: 0.85rem; font-family: inherit; color: var(--black); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.pg-btn:hover:not(:disabled):not(.active) { border-color: var(--brown-mid, #4a2f17); }
+.pg-btn.active { background: var(--brown-mid, #2c1b0e); color: #fff; border-color: var(--brown-mid, #2c1b0e); cursor: default; }
+.pg-btn:disabled { opacity: 0.4; cursor: default; }
+.pg-ellipsis { padding: 0 0.3rem; color: var(--mid); }
+
 /* Loading skeleton */
 .gallery-loading { display: flex; gap: 0.6rem; align-items: center; justify-content: center; padding: 4rem 0; color: var(--mid); font-size: 0.85rem; }
 .gallery-spinner { width: 18px; height: 18px; border: 2px solid var(--border); border-top-color: var(--red, #c0392b); border-radius: 50%; animation: spin 0.8s linear infinite; }
@@ -375,6 +389,8 @@ body { overflow-x: hidden; }
     </table>
   </div>
 
+  <nav class="pagination" id="pagination" aria-label="Gallery pages"></nav>
+
   <div class="gallery-empty reveal" id="gallery-empty" style="display:none">
     <h3>Photos &amp; videos coming soon</h3>
     <p>We're gathering moments from our celebrations — check back shortly.</p>
@@ -489,6 +505,8 @@ let view = 'grid';
 let typeFilter = 'all'; // all | photos | videos
 let uploaderFilter = ''; // '' = all uploaders
 let sortKey = 'modified', sortDir = -1; // newest first
+let page = 1;
+const PER_PAGE = 60;
 const selected = new Set();
 let lazyObserver = null;
 
@@ -533,16 +551,45 @@ function filtered() {
 function render() {
   const list = filtered();
   const has = list.length > 0;
-  document.getElementById('gallery-count').textContent = has ? (list.length + (list.length === 1 ? ' item' : ' items')) : '';
+  const totalPages = Math.max(1, Math.ceil(list.length / PER_PAGE));
+  if (page > totalPages) page = totalPages;
+  if (page < 1) page = 1;
+  const start = (page - 1) * PER_PAGE;
+  const pageItems = list.slice(start, start + PER_PAGE);
+  document.getElementById('gallery-count').textContent = has ? `${start + 1}–${start + pageItems.length} of ${list.length}` : '';
   document.getElementById('gallery-empty').style.display = has ? 'none' : 'block';
   grid().style.display = (has && view === 'grid') ? '' : 'none';
   document.getElementById('gallery-list-wrap').style.display = (has && view === 'list') ? '' : 'none';
-  if (!has) { grid().innerHTML = ''; listBody().innerHTML = ''; updateBar(); return; }
-  if (view === 'grid') grid().innerHTML = list.map(gridTile).join('');
-  else listBody().innerHTML = list.map(listRow).join('');
+  if (!has) { grid().innerHTML = ''; listBody().innerHTML = ''; renderPagination(1, 1); updateBar(); return; }
+  if (view === 'grid') grid().innerHTML = pageItems.map(gridTile).join('');
+  else listBody().innerHTML = pageItems.map(listRow).join('');
   observeLazyVideos();
+  renderPagination(page, totalPages);
   updateBar();
 }
+
+// Compact page list with ellipses, e.g. 1 … 5 6 [7] 8 9 … 13
+function pageList(cur, total) {
+  const keep = new Set([1, total, cur, cur - 1, cur + 1]);
+  const nums = [...keep].filter(p => p >= 1 && p <= total).sort((a, b) => a - b);
+  const out = []; let prev = 0;
+  for (const p of nums) { if (p - prev > 1) out.push('…'); out.push(p); prev = p; }
+  return out;
+}
+function renderPagination(cur, total) {
+  const el = document.getElementById('pagination');
+  if (!el) return;
+  if (total <= 1) { el.innerHTML = ''; return; }
+  let html = `<button class="pg-btn" data-pg="prev"${cur === 1 ? ' disabled' : ''} aria-label="Previous page">‹</button>`;
+  for (const p of pageList(cur, total)) {
+    html += p === '…' ? `<span class="pg-ellipsis">…</span>`
+      : `<button class="pg-btn pg-num${p === cur ? ' active' : ''}" data-pg="${p}">${p}</button>`;
+  }
+  html += `<button class="pg-btn" data-pg="next"${cur === total ? ' disabled' : ''} aria-label="Next page">›</button>`;
+  el.innerHTML = html;
+}
+// Filter/search/sort changes return to page 1; view toggle keeps the page.
+function applyFilters() { page = 1; render(); }
 
 function gridTile(it) {
   const id = esc(it.id), e = enc(it.id), cap = esc(it.caption || ''), name = esc(it.name || '');
@@ -695,21 +742,30 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target.closest('[data-open]')) { const it = byId(row.dataset.id); if (it) openLightbox(it); }
   });
   // Search + uploader filter + view toggle
-  document.getElementById('gallery-search').addEventListener('input', render);
-  document.getElementById('uploader-filter').addEventListener('change', e => { uploaderFilter = e.target.value; render(); });
+  document.getElementById('gallery-search').addEventListener('input', applyFilters);
+  document.getElementById('uploader-filter').addEventListener('change', e => { uploaderFilter = e.target.value; applyFilters(); });
   document.getElementById('view-grid').addEventListener('click', () => setView('grid'));
   document.getElementById('view-list').addEventListener('click', () => setView('list'));
   // Photos / Videos filter
   document.querySelectorAll('.type-filter button').forEach(b => b.addEventListener('click', () => {
     typeFilter = b.dataset.type;
     document.querySelectorAll('.type-filter button').forEach(x => { const on = x === b; x.classList.toggle('active', on); x.setAttribute('aria-pressed', on); });
-    render();
+    applyFilters();
   }));
+  // Pagination
+  document.getElementById('pagination').addEventListener('click', e => {
+    const b = e.target.closest('[data-pg]'); if (!b || b.disabled) return;
+    const total = Math.max(1, Math.ceil(filtered().length / PER_PAGE));
+    const v = b.dataset.pg;
+    page = v === 'prev' ? Math.max(1, page - 1) : v === 'next' ? Math.min(total, page + 1) : parseInt(v, 10);
+    render();
+    document.getElementById('gallery-toolbar').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
   // Sortable list headers
   document.querySelectorAll('.gallery-list th.sortable').forEach(th => th.addEventListener('click', () => {
     const k = th.dataset.sort;
     if (sortKey === k) sortDir *= -1; else { sortKey = k; sortDir = k === 'name' || k === 'type' ? 1 : -1; }
-    render();
+    applyFilters();
   }));
   // Selection bar
   document.getElementById('sel-download').addEventListener('click', downloadSelected);
