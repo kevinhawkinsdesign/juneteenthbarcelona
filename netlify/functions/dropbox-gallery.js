@@ -132,7 +132,7 @@ async function downloadUrl(token, path) {
 function json(status, body, cacheSeconds) {
   return {
     statusCode: status,
-    headers: { 'Content-Type': 'application/json', 'Cache-Control': cacheSeconds ? `public, max-age=${cacheSeconds}` : 'no-store' },
+    headers: { 'Content-Type': 'application/json', 'Cache-Control': cacheSeconds ? `public, max-age=${cacheSeconds}, stale-while-revalidate=600` : 'no-store' },
     body: JSON.stringify(body)
   };
 }
