@@ -77,6 +77,12 @@
   background: #fff; color: var(--black); font-family: inherit;
 }
 .gallery-search:focus { outline: none; border-color: var(--brown-mid, #4a2f17); }
+.gallery-uploader {
+  padding: 0.6rem 0.9rem; border: 1px solid var(--border); border-radius: 999px;
+  background: #fff; font-size: 0.85rem; font-family: inherit; color: var(--black);
+  cursor: pointer; max-width: 220px;
+}
+.gallery-uploader:focus { outline: none; border-color: var(--brown-mid, #4a2f17); }
 .gallery-search-wrap > svg { position: absolute; left: 0.95rem; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--mid); pointer-events: none; }
 .gallery-tools-right { display: flex; align-items: center; gap: 1.1rem; }
 .gallery-count { font-size: 0.78rem; color: var(--mid); white-space: nowrap; }
@@ -228,6 +234,7 @@
   .upload-cta { flex-direction: column; align-items: flex-start; }
   .gallery-toolbar { flex-direction: column; align-items: stretch; }
   .gallery-search-wrap { max-width: none; }
+  .gallery-uploader { max-width: none; }
   .gallery-tools-right { justify-content: space-between; flex-wrap: wrap; }
   .gl-hide-sm { display: none; }
 }
@@ -314,6 +321,9 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input type="search" id="gallery-search" class="gallery-search" placeholder="Search photos &amp; videos by name…" aria-label="Search gallery">
     </div>
+    <select id="uploader-filter" class="gallery-uploader" aria-label="Filter by uploader">
+      <option value="">All uploaders</option>
+    </select>
     <div class="gallery-tools-right">
       <div class="view-toggle type-filter" role="group" aria-label="Filter by type">
         <button data-type="all" class="active" aria-pressed="true">All</button>
@@ -469,6 +479,7 @@ const filmSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stro
 let allItems = [];
 let view = 'grid';
 let typeFilter = 'all'; // all | photos | videos
+let uploaderFilter = ''; // '' = all uploaders
 let sortKey = 'modified', sortDir = -1; // newest first
 const selected = new Set();
 let lazyObserver = null;
@@ -481,12 +492,20 @@ function extOf(name) { const i = (name || '').lastIndexOf('.'); return i < 0 ? '
 function fmtSize(b) { if (b == null) return '—'; const u = ['B', 'KB', 'MB', 'GB']; let i = 0, n = b; while (n >= 1024 && i < u.length - 1) { n /= 1024; i++; } return (i === 0 ? n : n.toFixed(n < 10 ? 1 : 0)) + ' ' + u[i]; }
 function fmtDate(iso) { if (!iso) return '—'; const d = new Date(iso); return isNaN(d) ? '—' : d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }); }
 function fmtDuration(ms) { if (!ms) return ''; const s = Math.round(ms / 1000), m = Math.floor(s / 60); return m + ':' + String(s % 60).padStart(2, '0'); }
+// Uploaders embed their name in the filename, before "2026". Take that prefix
+// and tidy up separators/spacing for display and filtering.
+function uploaderOf(name) {
+  const i = (name || '').search(/2026/);
+  if (i <= 0) return '';
+  return name.slice(0, i).replace(/[._]+/g, ' ').replace(/[\s\-,]+$/g, '').replace(/^[\s\-,]+/g, '').replace(/\s+/g, ' ').trim();
+}
 
 // ── Data shaping ──
 function filtered() {
   const q = (document.getElementById('gallery-search').value || '').trim().toLowerCase();
   let list = q ? allItems.filter(it => (it.name || '').toLowerCase().includes(q) || (it.caption || '').toLowerCase().includes(q)) : allItems.slice();
   if (typeFilter !== 'all') { const want = typeFilter === 'photos' ? 'image' : 'video'; list = list.filter(it => it.type === want); }
+  if (uploaderFilter) list = list.filter(it => uploaderOf(it.name) === uploaderFilter);
   list.sort((a, b) => {
     let va, vb;
     if (sortKey === 'size') { va = a.size || 0; vb = b.size || 0; }
@@ -543,7 +562,7 @@ function listRow(it) {
     <td><span class="gl-type">${esc(extOf(it.name).toUpperCase() || (it.type === 'video' ? 'VIDEO' : 'IMG'))}</span></td>
     <td>${fmtSize(it.size)}</td>
     <td class="gl-hide-sm">${fmtDate(it.modified)}</td>
-    <td class="gl-hide-sm">—</td>
+    <td class="gl-hide-sm">${esc(uploaderOf(it.name)) || '—'}</td>
     <td><a class="gl-dl" href="${GALLERY_API}?download=${e}" aria-label="Download ${name}">${dlSVG}</a></td>
   </tr>`;
 }
@@ -638,7 +657,14 @@ async function loadGallery() {
   }
   allItems = items;
   document.getElementById('gallery-toolbar').style.display = items.length ? 'flex' : 'none';
+  populateUploaders();
   render();
+}
+
+function populateUploaders() {
+  const names = [...new Set(allItems.map(it => uploaderOf(it.name)).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+  const sel = document.getElementById('uploader-filter');
+  sel.innerHTML = '<option value="">All uploaders</option>' + names.map(n => `<option value="${esc(n)}">${esc(n)}</option>`).join('');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -656,8 +682,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target.closest('[data-check]')) { toggleSelect(row.dataset.id, row); return; }
     if (e.target.closest('[data-open]')) { const it = byId(row.dataset.id); if (it) openLightbox(it); }
   });
-  // Search + view toggle
+  // Search + uploader filter + view toggle
   document.getElementById('gallery-search').addEventListener('input', render);
+  document.getElementById('uploader-filter').addEventListener('change', e => { uploaderFilter = e.target.value; render(); });
   document.getElementById('view-grid').addEventListener('click', () => setView('grid'));
   document.getElementById('view-list').addEventListener('click', () => setView('list'));
   // Photos / Videos filter
