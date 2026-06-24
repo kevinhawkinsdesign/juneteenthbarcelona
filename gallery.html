@@ -25,6 +25,8 @@
   <link rel="canonical" href="https://juneteenth.es/gallery.html">
 <title>Gallery — Juneteenth Barcelona · Photos & Moments</title>
 <link rel="stylesheet" href="shared.css">
+<!-- Video posters & downloads are served from Dropbox's media host -->
+<link rel="preconnect" href="https://dl.dropboxusercontent.com">
 <style>
 body { overflow-x: hidden; }
 .page-top {
@@ -603,7 +605,7 @@ function gridTile(it) {
       + `<span class="gallery-play-center"><span>${playSVG}</span></span>`
       + `<span class="vbadge">${filmSVG} ${esc(meta)}</span>`;
   } else {
-    media = `<img src="${GALLERY_API}?thumb=${e}&rev=${esc(it.rev || '')}" alt="${cap}" loading="lazy">`;
+    media = `<img src="${GALLERY_API}?thumb=${e}&rev=${esc(it.rev || '')}" alt="${cap}" loading="lazy" decoding="async">`;
   }
   return `<div class="gallery-item${it.type === 'video' ? ' is-video' : ''}${sel}" data-id="${id}">${check}${dl}${media}<div class="gallery-overlay"><span class="gallery-caption">${cap || name}</span></div></div>`;
 }
@@ -614,7 +616,7 @@ function listRow(it) {
   const selCls = selected.has(it.id) ? ' class="selected"' : '';
   const thumb = it.type === 'video'
     ? `<span class="gl-thumb gl-video">${playSVG}</span>`
-    : `<img class="gl-thumb" src="${GALLERY_API}?thumb=${e}&rev=${esc(it.rev || '')}" loading="lazy" alt="">`;
+    : `<img class="gl-thumb" src="${GALLERY_API}?thumb=${e}&rev=${esc(it.rev || '')}" loading="lazy" decoding="async" alt="">`;
   return `<tr data-id="${id}"${selCls}>
     <td><input type="checkbox" class="gl-check" data-check="1"${checked} aria-label="Select ${name}"></td>
     <td><span class="gl-name" data-open="1">${thumb}<strong>${name}</strong></span></td>
@@ -726,7 +728,9 @@ function populateUploaders() {
   sel.innerHTML = '<option value="">All uploaders</option>' + names.map(n => `<option value="${esc(n)}">${esc(n)}</option>`).join('');
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+// This script sits at the end of <body>, so every element it wires is already
+// parsed — run immediately instead of waiting for DOMContentLoaded.
+(function init() {
   // Grid interactions (event-delegated)
   grid().addEventListener('click', e => {
     const item = e.target.closest('.gallery-item'); if (!item) return;
@@ -741,8 +745,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target.closest('[data-check]')) { toggleSelect(row.dataset.id, row); return; }
     if (e.target.closest('[data-open]')) { const it = byId(row.dataset.id); if (it) openLightbox(it); }
   });
-  // Search + uploader filter + view toggle
-  document.getElementById('gallery-search').addEventListener('input', applyFilters);
+  // Search (debounced) + uploader filter + view toggle
+  let searchTimer;
+  document.getElementById('gallery-search').addEventListener('input', () => { clearTimeout(searchTimer); searchTimer = setTimeout(applyFilters, 180); });
   document.getElementById('uploader-filter').addEventListener('change', e => { uploaderFilter = e.target.value; applyFilters(); });
   document.getElementById('view-grid').addEventListener('click', () => setView('grid'));
   document.getElementById('view-list').addEventListener('click', () => setView('list'));
@@ -777,7 +782,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
   loadGallery();
-});
+})();
 </script>
 <!-- Google Translate (hidden widget) -->
 <div id="google_translate_element"></div>
