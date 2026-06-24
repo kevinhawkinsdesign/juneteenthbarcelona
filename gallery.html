@@ -26,6 +26,7 @@
 <title>Gallery — Juneteenth Barcelona · Photos & Moments</title>
 <link rel="stylesheet" href="shared.css">
 <style>
+body { overflow-x: hidden; }
 .page-top {
   padding-top: calc(var(--nav-h) + var(--banner-h));
   border-bottom: 1px solid var(--border);
@@ -234,7 +235,7 @@
   .upload-cta { flex-direction: column; align-items: flex-start; }
   .gallery-toolbar { flex-direction: column; align-items: stretch; }
   .gallery-search-wrap { max-width: none; }
-  .gallery-uploader { max-width: none; }
+  .gallery-uploader { max-width: 100%; width: 100%; }
   .gallery-tools-right { justify-content: space-between; flex-wrap: wrap; }
   .gl-hide-sm { display: none; }
 }
@@ -492,12 +493,16 @@ function extOf(name) { const i = (name || '').lastIndexOf('.'); return i < 0 ? '
 function fmtSize(b) { if (b == null) return '—'; const u = ['B', 'KB', 'MB', 'GB']; let i = 0, n = b; while (n >= 1024 && i < u.length - 1) { n /= 1024; i++; } return (i === 0 ? n : n.toFixed(n < 10 ? 1 : 0)) + ' ' + u[i]; }
 function fmtDate(iso) { if (!iso) return '—'; const d = new Date(iso); return isNaN(d) ? '—' : d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }); }
 function fmtDuration(ms) { if (!ms) return ''; const s = Math.round(ms / 1000), m = Math.floor(s / 60); return m + ':' + String(s % 60).padStart(2, '0'); }
-// Uploaders embed their name in the filename, before "2026". Take that prefix
-// and tidy up separators/spacing for display and filtering.
+// Filenames vary in format but each begins with the uploader's name. Use the
+// first two words as the uploader, normalised to Title Case so case variants
+// group together (e.g. "teneia sanders" -> "Teneia Sanders").
+function titleCase(s) { return s.split(/\s+/).filter(Boolean).map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' '); }
 function uploaderOf(name) {
-  const i = (name || '').search(/2026/);
-  if (i <= 0) return '';
-  return name.slice(0, i).replace(/[._]+/g, ' ').replace(/[\s\-,]+$/g, '').replace(/^[\s\-,]+/g, '').replace(/\s+/g, ' ').trim();
+  if (!name) return '';
+  const base = name.replace(/\.[^.]+$/, '');
+  const words = base.trim().split(/[\s._\-]+/).filter(Boolean);
+  if (!words.length) return '';
+  return titleCase(words.slice(0, 2).join(' '));
 }
 
 // ── Data shaping ──
