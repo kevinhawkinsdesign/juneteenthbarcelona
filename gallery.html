@@ -150,6 +150,8 @@ body { overflow-x: hidden; }
 .gallery-play-center svg { width: 20px; height: 20px; margin-left: 2px; color: #2c1b0e; }
 .vbadge { position: absolute; bottom: 0.6rem; left: 0.6rem; z-index: 2; display: flex; align-items: center; gap: 0.3rem; background: rgba(0,0,0,0.6); color: #fff; font-size: 0.62rem; letter-spacing: 0.04em; padding: 0.2rem 0.45rem; border-radius: 4px; }
 .vbadge svg { width: 11px; height: 11px; }
+.gallery-item.is-video .video-card { width: 100%; aspect-ratio: 3 / 2; background: linear-gradient(135deg, #2c1b0e, #4a2f17); position: relative; }
+.video-name { position: absolute; left: 0; right: 0; top: 62%; text-align: center; padding: 0 1rem; font-size: 0.72rem; color: rgba(255,255,255,0.82); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .gl-thumb.gl-video { display: flex; align-items: center; justify-content: center; }
 .gl-thumb.gl-video svg { width: 16px; height: 16px; color: rgba(255,255,255,0.92); margin-left: 2px; }
 
@@ -467,7 +469,7 @@ body { overflow-x: hidden; }
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lightbox-close">✕</button>
   <img id="lightbox-img" src="" alt="" style="display:none">
-  <video id="lightbox-video" controls playsinline style="display:none"></video>
+  <video id="lightbox-video" controls playsinline preload="metadata" style="display:none"></video>
   <div class="lightbox-caption" id="lightbox-caption"></div>
   <a class="lightbox-dl" id="lightbox-dl" href="#" download>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -510,7 +512,6 @@ let sortKey = 'modified', sortDir = -1; // newest first
 let page = 1;
 const PER_PAGE = 60;
 const selected = new Set();
-let lazyObserver = null;
 
 const grid = () => document.getElementById('gallery-grid');
 const listBody = () => document.getElementById('gallery-list-body');
@@ -565,7 +566,6 @@ function render() {
   if (!has) { grid().innerHTML = ''; listBody().innerHTML = ''; renderPagination(1, 1); updateBar(); return; }
   if (view === 'grid') grid().innerHTML = pageItems.map(gridTile).join('');
   else listBody().innerHTML = pageItems.map(listRow).join('');
-  observeLazyVideos();
   renderPagination(page, totalPages);
   updateBar();
 }
@@ -601,9 +601,11 @@ function gridTile(it) {
   let media;
   if (it.type === 'video') {
     const meta = [extOf(it.name).toUpperCase() || 'VIDEO', it.duration ? fmtDuration(it.duration) : '', fmtSize(it.size)].filter(Boolean).join(' · ');
-    media = `<video class="gallery-thumb" muted playsinline preload="none" data-vsrc="${GALLERY_API}?file=${e}#t=0.5"></video>`
+    media = `<div class="video-card">`
       + `<span class="gallery-play-center"><span>${playSVG}</span></span>`
-      + `<span class="vbadge">${filmSVG} ${esc(meta)}</span>`;
+      + `<span class="video-name">${name}</span>`
+      + `<span class="vbadge">${filmSVG} ${esc(meta)}</span>`
+      + `</div>`;
   } else {
     media = `<img src="${GALLERY_API}?thumb=${e}&rev=${esc(it.rev || '')}" alt="${cap}" loading="lazy" decoding="async">`;
   }
@@ -628,23 +630,6 @@ function listRow(it) {
   </tr>`;
 }
 
-// Lazy-load video poster frames only as they approach the viewport.
-function observeLazyVideos() {
-  if (lazyObserver) lazyObserver.disconnect();
-  lazyObserver = new IntersectionObserver(entries => {
-    entries.forEach(en => {
-      if (!en.isIntersecting) return;
-      const v = en.target;
-      if (v.dataset.vsrc && !v.src) {
-        v.preload = 'metadata';
-        v.src = v.dataset.vsrc;
-        v.addEventListener('loadedmetadata', () => { try { if (v.currentTime < 0.1) v.currentTime = 0.5; } catch (e) {} }, { once: true });
-      }
-      lazyObserver.unobserve(v);
-    });
-  }, { rootMargin: '400px' });
-  document.querySelectorAll('video[data-vsrc]').forEach(v => lazyObserver.observe(v));
-}
 
 // ── Selection ──
 function toggleSelect(id, el) {
@@ -671,20 +656,28 @@ function downloadSelected() {
 }
 
 // ── Lightbox ──
-function openLightbox(it) {
+async function openLightbox(it) {
   const lb = document.getElementById('lightbox');
   const lbImg = document.getElementById('lightbox-img'), lbVid = document.getElementById('lightbox-video');
-  const src = GALLERY_API + '?file=' + enc(it.id);
   document.getElementById('lightbox-caption').textContent = it.caption || it.name || '';
   const lbDl = document.getElementById('lightbox-dl');
   lbDl.href = GALLERY_API + '?download=' + enc(it.id);
   lbDl.setAttribute('download', it.name || '');
   if (it.type === 'video') {
-    lbImg.style.display = 'none'; lbVid.style.display = 'block'; lbVid.src = src;
+    lbImg.style.display = 'none'; lbVid.style.display = 'block';
+    lbVid.removeAttribute('src'); lbVid.load();
+    lb.classList.add('open');
+    // Resolve a direct Dropbox URL so the player streams/seeks straight against
+    // their CDN. Fall back to the redirect endpoint if that lookup fails.
+    let url = GALLERY_API + '?file=' + enc(it.id);
+    try { const r = await fetch(GALLERY_API + '?link=' + enc(it.id)); if (r.ok) url = (await r.json()).url || url; } catch {}
+    if (!lb.classList.contains('open')) return; // closed while we were fetching
+    lbVid.src = url;
   } else {
-    lbVid.pause(); lbVid.style.display = 'none'; lbImg.style.display = 'block'; lbImg.src = src;
+    lbVid.pause(); lbVid.style.display = 'none';
+    lbImg.style.display = 'block'; lbImg.src = GALLERY_API + '?file=' + enc(it.id);
+    lb.classList.add('open');
   }
-  lb.classList.add('open');
 }
 function closeLightbox() {
   const lb = document.getElementById('lightbox'), lbVid = document.getElementById('lightbox-video');

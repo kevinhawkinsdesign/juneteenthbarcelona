@@ -173,6 +173,13 @@ exports.handler = async (event) => {
       return { statusCode: 302, headers: { Location: link.link, 'Cache-Control': 'private, max-age=3600' }, body: '' };
     }
 
+    // ── Direct streaming URL as JSON (lets the video player do byte-range
+    //    seeking straight against Dropbox instead of via a redirect each time) ──
+    if (qs.link) {
+      const link = await rpc(token, '/files/get_temporary_link', { path: qs.link });
+      return json(200, { url: link.link });
+    }
+
     // ── Forced download ──
     if (qs.download) {
       const link = await downloadUrl(token, qs.download);
