@@ -214,6 +214,19 @@
   display: flex; flex-direction: column; justify-content: flex-end;
   padding: 0 5vw 5rem;
 }
+.hero-thank {
+  font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  letter-spacing: -0.02em; color: var(--gold);
+  margin-bottom: 0.4rem;
+  opacity: 0; animation: fadeUp 0.7s 0.1s forwards;
+}
+.hero-thank-sub {
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 2rem;
+  opacity: 0; animation: fadeUp 0.7s 0.15s forwards;
+}
 .hero-eyebrow {
   display: inline-flex; align-items: center; gap: 0.6rem;
   font-size: clamp(1.6rem, 3.5vw, 2.8rem); font-weight: 800; letter-spacing: -0.02em; text-transform: none;
@@ -666,7 +679,8 @@ a.ticket-card:hover .ticket-btn { background: var(--red); opacity: 1; }
 <section class="hero" aria-label="Site hero">
   <div class="hero-bg"></div>
   <div class="hero-body">
-    <div class="hero-eyebrow" data-cms="hero_eyebrow">June 20, 2026</div>
+    <div class="hero-thank">Thank you, Barcelona ✊🏾</div>
+    <p class="hero-thank-sub">400+ of you joined our first-ever Juneteenth Barcelona</p>
     <h1 class="hero-h1" data-cms="hero_title">Juneteenth<br>Barcelona</h1>
   </div>
   <div class="hero-footer">
